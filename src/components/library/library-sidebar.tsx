@@ -1,0 +1,45 @@
+// @/components/library/library-sidebar.tsx
+"use client";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "@/components/ui/sidebar";
+import { BookOpen } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { LIBRARY_NAV_LINKS } from "@/app/lib/constants";
+
+export default function LibrarySidebar() {
+  const pathname = usePathname();
+
+  return (
+    <Sidebar>
+      <SidebarHeader>
+        <div className="flex items-center gap-2 p-2">
+          <BookOpen className="w-6 h-6 text-primary" />
+          <h1 className="text-lg font-semibold font-headline">LibMan</h1>
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenu>
+          {LIBRARY_NAV_LINKS.map((link) => (
+            <SidebarMenuItem key={link.href}>
+              <SidebarMenuButton
+                as="a"
+                href={link.href}
+                isActive={pathname === link.href}
+                tooltip={{ children: link.label }}
+              >
+                <link.icon />
+                <span>{link.label}</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarContent>
+    </Sidebar>
+  );
+}
