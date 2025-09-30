@@ -46,7 +46,6 @@ export default function SettingsPage() {
           <TabsTrigger value="profile">Profile</TabsTrigger>
           <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="appearance">Appearance</TabsTrigger>
-          <TabsTrigger value="billing">Billing</TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
@@ -167,35 +166,6 @@ export default function SettingsPage() {
           </Card>
         </TabsContent>
 
-        {/* Billing Tab */}
-        <TabsContent value="billing">
-           <Card>
-            <CardHeader>
-              <CardTitle>Billing Plan</CardTitle>
-              <CardDescription>
-                You are currently on the Enterprise plan.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-lg border bg-secondary p-4">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-lg font-semibold">Enterprise Plan</h3>
-                      <p className="text-muted-foreground">$1000 / month</p>
-                    </div>
-                     <Button variant="outline">Change Plan</Button>
-                  </div>
-              </div>
-               <div>
-                <h4 className="font-medium mb-2">Payment Method</h4>
-                <p className="text-sm text-muted-foreground">Visa ending in 1234</p>
-              </div>
-            </CardContent>
-            <CardFooter>
-               <Button variant="outline">Update Payment Method</Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
       </Tabs>
     </div>
   );
