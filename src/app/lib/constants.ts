@@ -6,7 +6,6 @@ import {
   CreditCard,
   LayoutGrid,
   Library,
-  MessageSquare,
   Receipt,
   Settings,
   User,
