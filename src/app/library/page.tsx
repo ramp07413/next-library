@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import {
   Card,
@@ -20,6 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LibraryCharts } from "@/components/library/library-charts";
+import Link from "next/link";
 
 export default function LibraryDashboard() {
   return (
@@ -74,7 +76,9 @@ export default function LibraryDashboard() {
                 ))}
               </TableBody>
             </Table>
-             <Button variant="outline" className="w-full mt-4">View All Students</Button>
+             <Button variant="outline" className="w-full mt-4" asChild>
+                <Link href="/library/students">View All Students</Link>
+             </Button>
           </CardContent>
         </Card>
         <div className="lg:col-span-3 space-y-4">
