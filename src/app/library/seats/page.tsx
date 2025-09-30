@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PlusCircle, Search, X, Armchair, Circle } from "lucide-react";
+import { MoreHorizontal, PlusCircle, Search, Armchair, Circle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,6 +41,17 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
 
 export default function SeatsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,9 +112,34 @@ export default function SeatsPage() {
             View, manage, and assign library seats.
           </p>
         </div>
-        <Button>
-            <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+                <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Add New Seat</DialogTitle>
+              <DialogDescription>
+                Enter the details for the new seat.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="seatNumber" className="text-right">
+                  Seat Number
+                </Label>
+                <Input id="seatNumber" placeholder="e.g., A-13" className="col-span-3" />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="submit">Save Seat</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Tabs defaultValue="grid">
@@ -305,5 +341,3 @@ export default function SeatsPage() {
 
 // Add Tooltip components as they were missing from the previous response
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-
-    
