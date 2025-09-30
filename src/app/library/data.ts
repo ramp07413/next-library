@@ -56,7 +56,7 @@ export const studentData = [
     email: "diana@example.com",
     seat: "A-02",
     paymentStatus: "Paid",
-    avatar: "https://picsum.photos/seed/user-avatar-4/40/40",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl,
   },
     {
     id: "5",
@@ -64,6 +64,6 @@ export const studentData = [
     email: "ethan@example.com",
     seat: "D-11",
     paymentStatus: "Overdue",
-    avatar: "https://picsum.photos/seed/user-avatar-5/40/40",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl,
   },
 ];
