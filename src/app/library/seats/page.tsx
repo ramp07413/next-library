@@ -119,8 +119,10 @@ export default function SeatsPage() {
             <TableBody>
               {filteredSeats.map((seat) => (
                 <TableRow key={seat.id}>
-                  <TableCell className="font-medium">
-                    {seat.seatNumber}
+                  <TableCell>
+                    <div className="w-fit rounded-md border bg-muted px-2 py-1 font-mono text-sm font-medium">
+                        {seat.seatNumber}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <Badge variant={getStatusBadgeVariant(seat.status)} className="capitalize">
