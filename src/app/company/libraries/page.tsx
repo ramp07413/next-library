@@ -83,7 +83,7 @@ export default function LibrariesPage() {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem>Edit</DropdownMenuItem>
                         <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
+                        <DropdownMenuItem>
                           Deactivate
                         </DropdownMenuItem>
                       </DropdownMenuContent>
