@@ -47,21 +47,20 @@ export function CompanyCharts() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[250px] w-full">
-            <BarChart
-              data={usersPerLibraryData}
-              layout="vertical"
-              margin={{ left: 12 }}
-            >
-              <CartesianGrid horizontal={false} />
-              <YAxis
+            <BarChart data={usersPerLibraryData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+              <CartesianGrid vertical={false} />
+              <XAxis
                 dataKey="name"
-                type="category"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                width={80}
               />
-              <XAxis type="number" hide />
+              <YAxis
+                tickFormatter={(value) => `${value}`}
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+              />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Bar dataKey="users" fill="var(--color-users)" radius={4} />
             </BarChart>
