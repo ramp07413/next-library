@@ -22,7 +22,6 @@ export const COMPANY_NAV_LINKS = [
   { href: "/company/payments", label: "Payments", icon: CreditCard },
   { href: "/company/expenses", label: "Expenses", icon: Wallet },
   { href: "/company/alerts", label: "Alerts", icon: Bell },
-  { href: "/company/messages", label: "Messages", icon: MessageSquare },
   { href: "/company/settings", label: "Settings", icon: Settings },
 ];
 
