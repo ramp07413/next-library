@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -21,7 +22,6 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LibraryCharts } from "@/components/library/library-charts";
-import Link from "next/link";
 
 export default function LibraryDashboard() {
   return (
