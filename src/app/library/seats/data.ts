@@ -11,7 +11,7 @@ export type Seat = {
 export const seats: Seat[] = [
   {
     id: '1',
-    seatNumber: 'A-01',
+    seatNumber: '101',
     status: 'full occupied',
     studentName: 'Alice Johnson',
     studentId: 'STU-001',
@@ -19,7 +19,7 @@ export const seats: Seat[] = [
   },
   {
     id: '2',
-    seatNumber: 'A-02',
+    seatNumber: '102',
     status: 'full occupied',
     studentName: 'Diana Prince',
     studentId: 'STU-004',
@@ -27,7 +27,7 @@ export const seats: Seat[] = [
   },
   {
     id: '3',
-    seatNumber: 'A-03',
+    seatNumber: '103',
     status: 'available',
     studentName: null,
     studentId: null,
@@ -35,7 +35,7 @@ export const seats: Seat[] = [
   },
   {
     id: '4',
-    seatNumber: 'B-05',
+    seatNumber: '205',
     status: 'full occupied',
     studentName: 'Bob Williams',
     studentId: 'STU-002',
@@ -43,7 +43,7 @@ export const seats: Seat[] = [
   },
     {
     id: '5',
-    seatNumber: 'B-06',
+    seatNumber: '206',
     status: 'maintenance',
     studentName: null,
     studentId: null,
@@ -51,7 +51,7 @@ export const seats: Seat[] = [
   },
   {
     id: '6',
-    seatNumber: 'C-21',
+    seatNumber: '321',
     status: 'half occupied',
     studentName: 'Charlie Brown',
     studentId: 'STU-003',
@@ -59,7 +59,7 @@ export const seats: Seat[] = [
   },
    {
     id: '7',
-    seatNumber: 'D-11',
+    seatNumber: '411',
     status: 'full occupied',
     studentName: 'Ethan Hunt',
     studentId: 'STU-005',
@@ -67,7 +67,7 @@ export const seats: Seat[] = [
   },
   {
     id: '8',
-    seatNumber: 'D-12',
+    seatNumber: '412',
     status: 'available',
     studentName: null,
     studentId: null,

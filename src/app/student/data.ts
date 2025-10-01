@@ -1,5 +1,5 @@
 export const seatDetails = {
-    seatNumber: "A-12",
+    seatNumber: "101",
     seatType: "Full-Time",
     libraryTiming: "9:00 AM - 9:00 PM",
     status: "Active",

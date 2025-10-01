@@ -125,7 +125,7 @@ export default function SeatsPage() {
                 <Label htmlFor="seatNumber" className="text-right">
                   Seat Number
                 </Label>
-                <Input id="seatNumber" placeholder="e.g., A-13" className="col-span-3" />
+                <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
               </div>
             </div>
             <DialogFooter>
