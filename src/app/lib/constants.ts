@@ -87,7 +87,7 @@ export const COMPANY_NAV_LINKS = [
     label: "Payments",
     icon: CreditCard,
     sub: [
-      { href: "/company/payments", label: "Transactions", icon: History },
+      { href: "/company/payments", label: "All Transactions", icon: History },
       { href: "/company/payments/pending", label: "Pending", icon: Hourglass },
       { href: "/company/payments/refunded", label: "Refunded", icon: Undo2 },
     ],
