@@ -18,26 +18,22 @@ export function ThemeSwitcher() {
     return null;
   }
   
-  const handleThemeChange = (newTheme: string, newMode: 'light' | 'dark') => {
-    const selectedTheme = themes.find(t => t.name === newTheme);
-    if (selectedTheme) {
-      document.body.classList.remove('theme-rose'); // Remove default if present
-      document.body.classList.remove(...themes.map(t => `theme-${t.name}`));
-      document.body.classList.add(`theme-${newTheme}`);
-
-      if (newMode === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
+  const handleThemeChange = (newThemeName: string) => {
+    const currentMode = theme?.endsWith('dark') ? 'dark' : 'light';
+    const newTheme = themes.find(t => t.name === newThemeName);
+    
+    if (newTheme) {
+      // remove all other theme classes
+      for (const t of themes) {
+        document.body.classList.remove(`theme-${t.name}`);
       }
       
-      const colors = newMode === 'dark' ? selectedTheme.dark : selectedTheme.light;
-      
-      Object.entries(colors).forEach(([key, value]) => {
-          document.documentElement.style.setProperty(`--${key}`, value);
-      });
-      
-      setTheme(`${newTheme}-${newMode}`);
+      // add the new theme class
+      if (newThemeName !== 'default') {
+        document.body.classList.add(`theme-${newThemeName}`);
+      }
+
+      setTheme(`${newThemeName}-${currentMode}`);
     }
   };
 
@@ -46,7 +42,7 @@ export function ThemeSwitcher() {
       {themes.map((t) => (
         <div key={t.name} className="space-y-2">
           <button
-            onClick={() => handleThemeChange(t.name, theme?.endsWith('dark') ? 'dark' : 'light')}
+            onClick={() => handleThemeChange(t.name)}
             className={cn(
               "relative w-full aspect-[4/3] rounded-lg border-2 flex items-center justify-center",
               theme?.startsWith(t.name) ? "border-primary" : "border-transparent"
