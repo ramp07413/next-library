@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -11,10 +12,10 @@ export function ThemeToggle() {
 
   const toggleTheme = () => {
     const isDark = theme?.includes('dark');
-    const baseTheme = theme?.replace('-dark', '').replace('light', 'default');
+    const baseTheme = theme?.replace('-dark', '').replace('light', 'default') || 'default';
     
     if (isDark) {
-        setTheme(baseTheme === 'default' ? 'light' : baseTheme || 'light');
+        setTheme(baseTheme === 'default' ? 'light' : baseTheme);
     } else {
         setTheme(baseTheme === 'default' ? 'dark' : `${baseTheme}-dark`);
     }
@@ -29,3 +30,5 @@ export function ThemeToggle() {
     </Button>
   )
 }
+
+    

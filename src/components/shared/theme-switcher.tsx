@@ -38,6 +38,9 @@ export function ThemeSwitcher() {
     <div className="grid grid-cols-4 gap-2 py-2">
       {themes.map((t) => {
         const isActive = getBaseTheme(activeTheme) === t.name;
+        const lightBg = t.name === 'default' ? '210 40% 98%' : t.light.background;
+        const lightPrimary = t.name === 'default' ? '224 100% 58%' : t.light.primary;
+
         return (
           <div key={t.name} className="space-y-1">
             <button
@@ -48,8 +51,8 @@ export function ThemeSwitcher() {
               )}
               aria-label={`Select ${t.name} theme`}
             >
-              <div className="w-full h-full rounded-sm overflow-hidden flex items-center justify-center" style={{ backgroundColor: `hsl(${t.light.background})` }}>
-                  <div className="h-3 w-3 rounded-full" style={{ backgroundColor: `hsl(${t.light.primary})` }}></div>
+              <div className="w-full h-full rounded-sm overflow-hidden flex items-center justify-center" style={{ backgroundColor: `hsl(${lightBg})` }}>
+                  <div className="h-3 w-3 rounded-full" style={{ backgroundColor: `hsl(${lightPrimary})` }}></div>
               </div>
               {isActive && (
                 <div className="absolute top-0.5 right-0.5 bg-primary text-primary-foreground rounded-full p-px">
@@ -64,3 +67,5 @@ export function ThemeSwitcher() {
     </div>
   );
 }
+
+    
