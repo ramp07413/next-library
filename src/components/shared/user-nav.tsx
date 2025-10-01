@@ -19,7 +19,7 @@ import {
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import Link from "next/link"
 import { useTheme } from "next-themes";
-import { Sun, Moon, Monitor, User, Lock, Palette, LogOut } from "lucide-react";
+import { Sun, Moon, Monitor, Palette } from "lucide-react";
 
 
 export function UserNav() {
@@ -48,10 +48,10 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/company/settings"><User className="mr-2 h-4 w-4" />Profile</Link>
+            <Link href="/company/settings">Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-             <Link href="/company/settings?tab=security"><Lock className="mr-2 h-4 w-4" />Change Password</Link>
+             <Link href="/company/settings?tab=security">Change Password</Link>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
@@ -78,7 +78,7 @@ export function UserNav() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/"><LogOut className="mr-2 h-4 w-4" />Log out</Link>
+          <Link href="/">Log out</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
