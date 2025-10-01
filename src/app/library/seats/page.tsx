@@ -58,11 +58,13 @@ export default function SeatsPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedSeat, setSelectedSeat] = useState<Seat | null>(null);
 
-  const getStatusBadgeVariant = (status: string) => {
+  const getStatusBadgeVariant = (status: Seat['status']) => {
     switch (status) {
-      case 'occupied':
+      case 'full occupied':
         return 'default';
-      case 'free':
+      case 'half occupied':
+        return 'outline';
+      case 'available':
         return 'secondary';
       case 'maintenance':
         return 'destructive';
@@ -73,9 +75,11 @@ export default function SeatsPage() {
 
   const getStatusSeatColor = (status: Seat['status']) => {
     switch (status) {
-      case 'occupied':
+      case 'full occupied':
         return 'text-foreground/50';
-      case 'free':
+      case 'half occupied':
+        return 'text-yellow-500';
+      case 'available':
         return 'text-primary';
       case 'maintenance':
         return 'text-destructive';
@@ -165,8 +169,9 @@ export default function SeatsPage() {
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="all">All Statuses</SelectItem>
-                    <SelectItem value="free">Free</SelectItem>
-                    <SelectItem value="occupied">Occupied</SelectItem>
+                    <SelectItem value="available">Available</SelectItem>
+                    <SelectItem value="half occupied">Half Occupied</SelectItem>
+                    <SelectItem value="full occupied">Full Occupied</SelectItem>
                     <SelectItem value="maintenance">Maintenance</SelectItem>
                 </SelectContent>
                 </Select>
@@ -181,8 +186,9 @@ export default function SeatsPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-center gap-6 mb-8 text-sm">
-                        <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-primary" fill="currentColor"/> Free</div>
-                        <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-foreground/50" fill="currentColor"/> Occupied</div>
+                        <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-primary" fill="currentColor"/> Available</div>
+                        <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-yellow-500" fill="currentColor"/> Half Occupied</div>
+                        <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-foreground/50" fill="currentColor"/> Full Occupied</div>
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-destructive" fill="currentColor"/> Maintenance</div>
                     </div>
                     <div className="space-y-6">
@@ -278,11 +284,11 @@ export default function SeatsPage() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                {seat.status === 'free' && <DropdownMenuItem>Assign Student</DropdownMenuItem>}
-                                {seat.status === 'occupied' && <DropdownMenuItem>Vacate Seat</DropdownMenuItem>}
+                                {seat.status === 'available' && <DropdownMenuItem>Assign Student</DropdownMenuItem>}
+                                {(seat.status === 'full occupied' || seat.status === 'half occupied') && <DropdownMenuItem>Vacate Seat</DropdownMenuItem>}
                                 <DropdownMenuItem>View History</DropdownMenuItem>
                                 {seat.status !== 'maintenance' && <DropdownMenuItem>Mark for Maintenance</DropdownMenuItem>}
-                                {seat.status === 'maintenance' && <DropdownMenuItem>Mark as Free</DropdownMenuItem>}
+                                {seat.status === 'maintenance' && <DropdownMenuItem>Mark as Available</DropdownMenuItem>}
                             </DropdownMenuContent>
                             </DropdownMenu>
                         </TableCell>
@@ -325,10 +331,10 @@ export default function SeatsPage() {
                 </div>
                  <div className="mt-6 space-y-2">
                     <p className="font-semibold">Actions</p>
-                    {selectedSeat.status === 'free' && <Button className="w-full">Assign Student</Button>}
-                    {selectedSeat.status === 'occupied' && <Button variant="destructive" className="w-full">Vacate Seat</Button>}
+                    {selectedSeat.status === 'available' && <Button className="w-full">Assign Student</Button>}
+                    {(selectedSeat.status === 'full occupied' || selectedSeat.status === 'half occupied') && <Button variant="destructive" className="w-full">Vacate Seat</Button>}
                     {selectedSeat.status !== 'maintenance' && <Button variant="outline" className="w-full">Mark for Maintenance</Button>}
-                    {selectedSeat.status === 'maintenance' && <Button variant="secondary" className="w-full">Mark as Free</Button>}
+                    {selectedSeat.status === 'maintenance' && <Button variant="secondary" className="w-full">Mark as Available</Button>}
                     <Button variant="ghost" className="w-full justify-start">View Seat History</Button>
                 </div>
                 </>
