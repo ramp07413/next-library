@@ -1,3 +1,4 @@
+
 // @/app/company/alerts/page.tsx
 "use client";
 
@@ -96,7 +97,7 @@ export default function AlertsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Prioritized Alerts</CardTitle>
+          <CardTitle>All Alerts</CardTitle>
           <CardDescription>
             {loading
               ? "Loading alerts..."

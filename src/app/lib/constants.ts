@@ -28,6 +28,10 @@ import {
   FileCheck,
   FileX,
   LifeBuoy,
+  Mails,
+  Star,
+  CheckCircle,
+  BellRing,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -136,7 +140,16 @@ export const COMPANY_NAV_LINKS = [
         { href: "/company/messages/support", label: "Support Tickets", icon: LifeBuoy },
     ]
   },
-  { href: "/company/alerts", label: "Alerts", icon: Bell },
+  {
+    label: "Alerts",
+    icon: Bell,
+    sub: [
+      { href: "/company/alerts", label: "All Alerts", icon: BellRing },
+      { href: "/company/alerts/unread", label: "Unread", icon: Mails },
+      { href: "/company/alerts/starred", label: "Starred", icon: Star },
+      { href: "/company/alerts/read", label: "Read", icon: CheckCircle },
+    ],
+  },
   { href: "/company/settings", label: "Settings", icon: Settings },
   { href: "/company/api-keys", label: "API Keys", icon: Key },
 ];
