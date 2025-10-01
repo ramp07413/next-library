@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BellRing, Check, Bell } from "lucide-react";
+import { BellRing, Check, Bell, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -61,6 +61,13 @@ export default function AlertsPage() {
     }
     fetchAlerts();
   }, []);
+
+  const toggleStar = (id: string) => {
+    setAlerts(alerts.map(alert => 
+      alert.id === id ? { ...alert, starred: !alert.starred } : alert
+    ));
+  };
+
 
   const filteredAlerts = alerts.filter(
     (alert) => filter === "all" || alert.severity === filter
@@ -134,9 +141,14 @@ export default function AlertsPage() {
                   <div className="flex-grow">
                     <div className="flex items-center justify-between">
                       <p className="font-semibold">{alert.message}</p>
-                      <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
-                        {alert.severity}
-                      </Badge>
+                       <div className="flex items-center gap-2">
+                         <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
+                          {alert.severity}
+                        </Badge>
+                         <Button variant="ghost" size="icon" onClick={() => toggleStar(alert.id)}>
+                            <Star className={cn("h-4 w-4", alert.starred ? "fill-primary text-primary" : "text-muted-foreground")} />
+                        </Button>
+                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
                       {new Date(alert.timestamp).toLocaleString()} -{" "}

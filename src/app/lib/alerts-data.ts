@@ -12,6 +12,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
       category: "payment",
       severity: "low",
+      status: "read",
+      starred: false,
     },
     {
       id: "comp-2",
@@ -19,6 +21,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
       category: "system",
       severity: "medium",
+      status: "read",
+      starred: true,
     },
     {
       id: "comp-3",
@@ -26,6 +30,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date().toISOString(),
       category: "payment",
       severity: "high",
+      status: "unread",
+      starred: true,
     },
   ],
   library: [
@@ -35,6 +41,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
       category: "payment",
       severity: "low",
+      status: "read",
+      starred: false,
     },
     {
       id: "lib-2",
@@ -42,6 +50,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       category: "announcement",
       severity: "medium",
+      status: "read",
+      starred: false,
     },
     {
       id: "lib-3",
@@ -49,6 +59,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date().toISOString(),
       category: "system",
       severity: "high",
+      status: "unread",
+      starred: true,
     },
     {
       id: "lib-4",
@@ -56,6 +68,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
       category: "payment",
       severity: "high",
+      status: "unread",
+      starred: false,
     },
   ],
   student: [
@@ -65,6 +79,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
       category: "payment",
       severity: "low",
+      status: "read",
+      starred: false,
     },
     {
       id: "stu-2",
@@ -72,6 +88,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       category: "announcement",
       severity: "medium",
+      status: "read",
+      starred: false,
     },
     {
       id: "stu-3",
@@ -79,6 +97,8 @@ export const mockAlerts: MockData = {
       timestamp: new Date().toISOString(),
       category: "payment",
       severity: "high",
+      status: "unread",
+      starred: true,
     },
   ],
 };

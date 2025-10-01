@@ -18,6 +18,8 @@ const AlertSchema = z.object({
   timestamp: z.string().describe('The timestamp of when the alert was generated (ISO format).'),
   category: z.string().describe('Category of the alert (e.g., payment, system, announcement).'),
   severity: z.enum(['high', 'medium', 'low']).describe('Severity level of the alert.'),
+  status: z.enum(['read', 'unread']).describe('The read status of the alert.'),
+  starred: z.boolean().describe('Whether the alert is starred or not.'),
 });
 
 export type Alert = z.infer<typeof AlertSchema>;
@@ -58,7 +60,7 @@ Consider the following factors when prioritizing:
 
 Alerts:
 {{#each alerts}}
-  - ID: {{this.id}}, Message: {{this.message}}, Timestamp: {{this.timestamp}}, Category: {{this.category}}, Severity: {{this.severity}}
+  - ID: {{this.id}}, Message: {{this.message}}, Timestamp: {{this.timestamp}}, Category: {{this.category}}, Severity: {{this.severity}}, Status: {{this.status}}, Starred: {{this.starred}}
 {{/each}}
 
 User Context: {{{userContext}}}
