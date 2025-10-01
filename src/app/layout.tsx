@@ -27,7 +27,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem
-          themes={themes.map(t => t.name)}
+          themes={['light', 'dark', ...themes.flatMap(t => [t.name, `${t.name}-dark`])]}
         >
           {children}
           <Toaster />

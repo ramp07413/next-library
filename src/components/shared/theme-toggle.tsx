@@ -11,12 +11,12 @@ export function ThemeToggle() {
 
   const toggleTheme = () => {
     const isDark = theme?.includes('dark');
-    const baseTheme = theme?.replace('-dark', '') || 'default';
+    const baseTheme = theme?.replace('-dark', '').replace('light', 'default');
     
     if (isDark) {
-        setTheme(baseTheme === 'default' ? 'light' : baseTheme);
+        setTheme(baseTheme === 'default' ? 'light' : baseTheme || 'light');
     } else {
-        setTheme(baseTheme === 'light' ? 'dark' : `${baseTheme}-dark`);
+        setTheme(baseTheme === 'default' ? 'dark' : `${baseTheme}-dark`);
     }
   };
 
