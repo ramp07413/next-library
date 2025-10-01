@@ -47,12 +47,6 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link href="/company/settings">Profile</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-             <Link href="/company/settings?tab=security">Change Password</Link>
-          </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <Palette className="mr-2 h-4 w-4" />
