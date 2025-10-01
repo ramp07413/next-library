@@ -6,6 +6,9 @@ import {
   CreditCard,
   LayoutGrid,
   Library,
+  MessageSquare,
+  FileText,
+  Key,
   Receipt,
   Settings,
   User,
@@ -20,8 +23,11 @@ export const COMPANY_NAV_LINKS = [
   { href: "/company/users", label: "Users", icon: Users },
   { href: "/company/payments", label: "Payments", icon: CreditCard },
   { href: "/company/expenses", label: "Expenses", icon: Wallet },
+  { href: "/company/reports", label: "Reports", icon: FileText },
+  { href: "/company/messages", label: "Messages", icon: MessageSquare },
   { href: "/company/alerts", label: "Alerts", icon: Bell },
   { href: "/company/settings", label: "Settings", icon: Settings },
+  { href: "/company/api-keys", label: "API Keys", icon: Key },
 ];
 
 export const LIBRARY_NAV_LINKS = [

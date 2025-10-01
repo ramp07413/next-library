@@ -7,6 +7,9 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  Pie,
+  PieChart,
+  Cell,
   XAxis,
   YAxis,
 } from "recharts";
@@ -21,8 +24,10 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
 } from "@/components/ui/chart";
-import { revenueData, usersPerLibraryData } from "@/app/company/data";
+import { revenueData, usersPerLibraryData, expensesVsIncomeData } from "@/app/company/data";
 
 export function CompanyCharts() {
   const chartConfig = {
@@ -34,10 +39,54 @@ export function CompanyCharts() {
       label: "Users",
       color: "hsl(var(--accent))",
     },
+    income: {
+        label: "Income",
+        color: "hsl(var(--chart-2))",
+    },
+    expenses: {
+        label: "Expenses",
+        color: "hsl(var(--chart-5))",
+    }
   };
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+        <Card className="lg:col-span-2">
+            <CardHeader>
+                <CardTitle>Expenses vs. Income</CardTitle>
+                <CardDescription>
+                    A comparison of total income and expenses this month.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                 <ChartContainer
+                    config={chartConfig}
+                    className="mx-auto aspect-square h-[200px]"
+                >
+                    <PieChart>
+                        <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent hideLabel />}
+                        />
+                        <Pie
+                            data={expensesVsIncomeData}
+                            dataKey="value"
+                            nameKey="name"
+                            innerRadius={60}
+                            strokeWidth={5}
+                        >
+                            {expensesVsIncomeData.map((entry) => (
+                                <Cell key={entry.name} fill={entry.fill} />
+                            ))}
+                        </Pie>
+                        <ChartLegend
+                            content={<ChartLegendContent nameKey="name" />}
+                            className="-mt-2"
+                        />
+                    </PieChart>
+                </ChartContainer>
+            </CardContent>
+        </Card>
       <Card className="lg:col-span-3">
         <CardHeader>
           <CardTitle>Active Users per Library</CardTitle>
@@ -46,7 +95,7 @@ export function CompanyCharts() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={chartConfig} className="h-[250px] w-full">
+          <ChartContainer config={chartConfig} className="h-[200px] w-full">
             <BarChart data={usersPerLibraryData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
               <CartesianGrid vertical={false} />
               <XAxis
@@ -54,12 +103,14 @@ export function CompanyCharts() {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
+                fontSize={12}
               />
               <YAxis
                 tickFormatter={(value) => `${value}`}
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
+                 fontSize={12}
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Bar dataKey="users" fill="var(--color-users)" radius={4} />
@@ -67,7 +118,7 @@ export function CompanyCharts() {
           </ChartContainer>
         </CardContent>
       </Card>
-      <Card className="lg:col-span-4">
+      <Card className="lg:col-span-2">
         <CardHeader>
           <CardTitle>Revenue Trends</CardTitle>
           <CardDescription>
@@ -75,20 +126,22 @@ export function CompanyCharts() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={chartConfig} className="h-[250px] w-full">
-            <LineChart data={revenueData} margin={{ left: 12, right: 12 }}>
+          <ChartContainer config={chartConfig} className="h-[200px] w-full">
+            <LineChart data={revenueData} margin={{ left: 0, right: 12 }}>
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="month"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
+                fontSize={12}
               />
               <YAxis
                 tickFormatter={(value) => `$${value / 1000}k`}
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
+                fontSize={12}
               />
               <ChartTooltip
                 cursor={false}
