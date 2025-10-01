@@ -1,4 +1,164 @@
 
-export default function Page() {
-  return <h1 className="text-3xl font-bold">Library Status</h1>;
+"use client";
+
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Building, CheckCircle, XCircle } from "lucide-react";
+import { libraries, type Library } from "../data";
+import { LibraryStatusChart } from "@/components/company/library-status-chart";
+
+export default function LibraryStatusPage() {
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  const totalLibraries = libraries.length;
+  const activeLibraries = libraries.filter((lib) => lib.isActive).length;
+  const inactiveLibraries = totalLibraries - activeLibraries;
+
+  const statusData = [
+    { name: "Active", value: activeLibraries, fill: "hsl(var(--chart-2))" },
+    { name: "Inactive", value: inactiveLibraries, fill: "hsl(var(--chart-5))" },
+  ];
+
+  const filteredLibraries = libraries.filter((library) => {
+    if (statusFilter === "all") return true;
+    return statusFilter === "active" ? library.isActive : !library.isActive;
+  });
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight font-headline">
+          Library Status
+        </h1>
+        <p className="text-muted-foreground">
+          Monitor the operational status of all libraries in your network.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <KpiCard
+          title="Total Libraries"
+          value={totalLibraries.toString()}
+          icon={<Building className="h-6 w-6 text-muted-foreground" />}
+        />
+        <KpiCard
+          title="Active Libraries"
+          value={activeLibraries.toString()}
+          icon={<CheckCircle className="h-6 w-6 text-green-500" />}
+        />
+        <KpiCard
+          title="Inactive Libraries"
+          value={inactiveLibraries.toString()}
+          icon={<XCircle className="h-6 w-6 text-destructive" />}
+        />
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-3">
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle>Status Distribution</CardTitle>
+            <CardDescription>
+              A visual breakdown of active vs. inactive libraries.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <LibraryStatusChart data={statusData} />
+          </CardContent>
+        </Card>
+
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>Library Status List</CardTitle>
+                <CardDescription>
+                  Detailed status for each library.
+                </CardDescription>
+              </div>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="inactive">Inactive</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Library Name</TableHead>
+                  <TableHead>Contact</TableHead>
+                  <TableHead className="text-right">Status</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredLibraries.map((library) => (
+                  <TableRow key={library.id}>
+                    <TableCell className="font-medium">
+                      {library.libraryName}
+                    </TableCell>
+                    <TableCell>{library.libraryEmail}</TableCell>
+                    <TableCell className="text-right">
+                      <Badge
+                        variant={library.isActive ? "secondary" : "outline"}
+                      >
+                        {library.isActive ? "Active" : "Inactive"}
+                      </Badge>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+interface KpiCardProps {
+  title: string;
+  value: string;
+  icon: React.ReactNode;
+}
+
+function KpiCard({ title, value, icon }: KpiCardProps) {
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        {icon}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value}</div>
+      </CardContent>
+    </Card>
+  );
 }
