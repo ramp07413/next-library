@@ -1,6 +1,8 @@
 
 "use client";
 
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,11 +26,20 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { Moon, Sun, Monitor, User, Shield, Palette } from "lucide-react";
 
 export default function SettingsPage() {
   const { setTheme } = useTheme();
   const userAvatar = PlaceHolderImages.find((p) => p.id === "user-avatar-1");
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = React.useState("profile");
+
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
 
   return (
     <div className="space-y-8">
@@ -41,11 +52,11 @@ export default function SettingsPage() {
         </p>
       </div>
 
-      <Tabs defaultValue="profile" className="space-y-4">
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList>
-          <TabsTrigger value="profile">Profile</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-          <TabsTrigger value="appearance">Appearance</TabsTrigger>
+          <TabsTrigger value="profile"><User className="mr-2" /> Profile</TabsTrigger>
+          <TabsTrigger value="security"><Shield className="mr-2" />Security</TabsTrigger>
+          <TabsTrigger value="appearance"><Palette className="mr-2" />Appearance</TabsTrigger>
         </TabsList>
 
         {/* Profile Tab */}
