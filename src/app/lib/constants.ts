@@ -51,6 +51,27 @@ export const COMPANY_NAV_LINKS = [
     ],
   },
   {
+    label: "Libraries",
+    icon: Building,
+    sub: [
+      {
+        href: "/company/libraries",
+        label: "Library List",
+        icon: List,
+      },
+      {
+        href: "/company/libraries/register",
+        label: "Register Library",
+        icon: PlusSquare,
+      },
+      {
+        href: "/company/libraries/status",
+        label: "Status",
+        icon: Activity,
+      },
+    ],
+  },
+  {
     label: "Users",
     icon: UserCog,
     sub: [
@@ -107,27 +128,6 @@ export const COMPANY_NAV_LINKS = [
     label: "Settings",
     icon: Settings,
     sub: [{ href: "/company/settings", label: "Settings", icon: Settings }],
-  },
-  {
-    label: "Libraries",
-    icon: Building,
-    sub: [
-      {
-        href: "/company/libraries",
-        label: "Library List",
-        icon: List,
-      },
-      {
-        href: "/company/libraries/register",
-        label: "Register Library",
-        icon: PlusSquare,
-      },
-      {
-        href: "/company/libraries/status",
-        label: "Status",
-        icon: Activity,
-      },
-    ],
   },
 ];
 
