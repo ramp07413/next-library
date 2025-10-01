@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function CompanyDashboard() {
   return (
@@ -83,6 +85,7 @@ export default function CompanyDashboard() {
                 <TableHead className="text-right">Revenue</TableHead>
                 <TableHead className="text-right">Students</TableHead>
                 <TableHead className="text-right">Revenue Growth</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -96,6 +99,11 @@ export default function CompanyDashboard() {
                       <span className="mr-2">{library.growth}%</span>
                       <Progress value={library.growth} className="w-24" />
                     </div>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button asChild variant="outline" size="sm">
+                        <Link href={`/library/${library.id}`}>View Dashboard</Link>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
