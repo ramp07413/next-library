@@ -32,50 +32,78 @@ import {
   Star,
   CheckCircle,
   BellRing,
+  FileWarning,
+  Archive,
+  UserPlus,
+  UserCog2,
+  Mailbox,
+  StarHalf,
+  Check,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
   {
-    label: "Company",
-    icon: Briefcase,
+    label: "Dashboard",
+    icon: LayoutGrid,
+    sub: [{ href: "/company", label: "Dashboard", icon: LayoutGrid }],
+  },
+  {
+    label: "Users",
+    icon: UserCog,
     sub: [
-      { href: "/company", label: "Dashboard", icon: LayoutGrid },
-      {
-        href: "/company/users",
-        label: "Users",
-        icon: UserCog,
-      },
-      {
-        href: "/company/payments",
-        label: "Payments",
-        icon: CreditCard,
-      },
-      {
-        href: "/company/expenses",
-        label: "Expenses",
-        icon: Wallet,
-      },
-      {
-        href: "/company/reports/open",
-        label: "Reports",
-        icon: FileText,
-      },
-      { 
-        href: "/company/messages", 
-        label: "Messages", 
-        icon: MessageSquare,
-      },
-      {
-        href: "/company/alerts", 
-        label: "Alerts", 
-        icon: Bell,
-      },
-      { 
-        href: "/company/settings", 
-        label: "Settings", 
-        icon: Settings 
-      },
+      { href: "/company/users", label: "User List", icon: Users2 },
+      { href: "/company/users/register", label: "Register User", icon: UserPlus },
+      { href: "/company/users/permissions", label: "Roles & Permissions", icon: Shield },
     ],
+  },
+  {
+    label: "Payments",
+    icon: CreditCard,
+    sub: [
+      { href: "/company/payments", label: "Transactions", icon: History },
+      { href: "/company/payments/pending", label: "Pending", icon: Hourglass },
+      { href: "/company/payments/refunded", label: "Refunded", icon: Undo2 },
+    ],
+  },
+  {
+    label: "Expenses",
+    icon: Wallet,
+    sub: [
+      { href: "/company/expenses", label: "Company", icon: Briefcase },
+      { href: "/company/expenses/staff", label: "Staff", icon: Users },
+    ],
+  },
+  {
+    label: "Reports",
+    icon: FileText,
+    sub: [
+      { href: "/company/reports/open", label: "Open Reports", icon: FileCheck },
+      { href: "/company/reports/closed", label: "Closed Reports", icon: FileX },
+    ],
+  },
+  {
+    label: "Messages",
+    icon: MessageSquare,
+    sub: [
+      { href: "/company/messages", label: "All Messages", icon: Mails },
+      { href: "/company/messages/library", label: "Library Comms", icon: Mailbox },
+      { href: "/company/messages/support", label: "Support Tickets", icon: LifeBuoy },
+    ],
+  },
+  {
+    label: "Alerts",
+    icon: Bell,
+    sub: [
+      { href: "/company/alerts", label: "All Alerts", icon: BellRing },
+      { href: "/company/alerts/unread", label: "Unread", icon: Mailbox },
+      { href: "/company/alerts/starred", label: "Starred", icon: Star },
+      { href: "/company/alerts/read", label: "Read", icon: Check },
+    ],
+  },
+  {
+    label: "Settings",
+    icon: Settings,
+    sub: [{ href: "/company/settings", label: "Settings", icon: Settings }],
   },
   {
     label: "Libraries",

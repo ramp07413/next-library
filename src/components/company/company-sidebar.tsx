@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuSub,
   SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -67,8 +68,8 @@ export default function CompanySidebar() {
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {link.sub.map((subLink) => (
-                    <SidebarMenuItem key={subLink.href}>
-                      <Link href={subLink.href} passHref legacyBehavior>
+                    <SidebarMenuSubItem key={subLink.href}>
+                       <Link href={subLink.href} passHref legacyBehavior>
                         <SidebarMenuSubButton
                           as="a"
                           isActive={isLinkActive(subLink.href)}
@@ -77,7 +78,7 @@ export default function CompanySidebar() {
                           <span>{subLink.label}</span>
                         </SidebarMenuSubButton>
                       </Link>
-                    </SidebarMenuItem>
+                    </SidebarMenuSubItem>
                   ))}
                 </SidebarMenuSub>
               </CollapsibleContent>
