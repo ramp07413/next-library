@@ -11,6 +11,7 @@ import {
 import { BookOpen } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { LIBRARY_NAV_LINKS } from "@/app/lib/constants";
+import Link from "next/link";
 
 export default function LibrarySidebar() {
   const pathname = usePathname();
@@ -27,15 +28,15 @@ export default function LibrarySidebar() {
         <SidebarMenu>
           {LIBRARY_NAV_LINKS.map((link) => (
             <SidebarMenuItem key={link.href}>
-              <SidebarMenuButton
-                as="a"
-                href={link.href}
-                isActive={pathname === link.href}
-                tooltip={{ children: link.label }}
-              >
-                <link.icon />
-                <span>{link.label}</span>
-              </SidebarMenuButton>
+              <Link href={link.href}>
+                <SidebarMenuButton
+                  isActive={pathname === link.href}
+                  tooltip={{ children: link.label }}
+                >
+                  <link.icon />
+                  <span>{link.label}</span>
+                </SidebarMenuButton>
+              </Link>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
