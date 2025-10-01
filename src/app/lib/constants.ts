@@ -151,7 +151,6 @@ export const COMPANY_NAV_LINKS = [
     ],
   },
   { href: "/company/settings", label: "Settings", icon: Settings },
-  { href: "/company/api-keys", label: "API Keys", icon: Key },
 ];
 
 export const LIBRARY_NAV_LINKS = [

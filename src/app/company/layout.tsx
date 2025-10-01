@@ -13,7 +13,7 @@ export default function CompanyLayout({
       <SidebarInset>
         <div className="flex flex-col">
           <MainNav role="company" />
-          <main className="flex-1 p-4 md:p-8 lg:p-10">{children}</main>
+          <main className="flex-1 pt-6 p-4 md:p-8 lg:p-10">{children}</main>
         </div>
       </SidebarInset>
     </SidebarProvider>
