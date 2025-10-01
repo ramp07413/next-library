@@ -1,7 +1,6 @@
 
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -16,15 +15,12 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
-import { PlaceHolderImages } from "@/lib/placeholder-images"
 import Link from "next/link"
-import { useTheme } from "next-themes";
-import { Sun, Moon, Monitor, Palette, BookOpen } from "lucide-react";
+import { Palette, BookOpen } from "lucide-react";
 import { ThemeSwitcher } from "./theme-switcher";
 
 
 export function UserNav() {
-  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -53,17 +49,6 @@ export function UserNav() {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent className="p-2">
-                <div className="flex justify-around">
-                  <Button variant="outline" size="sm" onClick={() => setTheme("light")}>
-                    <Sun className="mr-2 h-4 w-4" />
-                    <span>Light</span>
-                  </Button>
-                  <Button variant="outline" size="sm" onClick={() => setTheme("dark")}>
-                    <Moon className="mr-2 h-4 w-4" />
-                    <span>Dark</span>
-                  </Button>
-                </div>
-                <DropdownMenuSeparator />
                 <ThemeSwitcher />
               </DropdownMenuSubContent>
             </DropdownMenuPortal>

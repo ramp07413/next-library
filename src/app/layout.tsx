@@ -25,9 +25,8 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
-          themes={themes.map(t => t.name).concat(themes.flatMap(t => [`${t.name}-light`, `${t.name}-dark`]))}
+          defaultTheme="default"
+          themes={themes.map(t => t.name)}
         >
           {children}
           <Toaster />
