@@ -27,6 +27,14 @@ import React from "react";
 export default function CompanySidebar() {
   const pathname = usePathname();
 
+  const isLinkActive = (href: string) => {
+    return pathname === href;
+  };
+
+  const isSubLinkActive = (subLinks: any[]) => {
+    return subLinks.some((subLink) => pathname.startsWith(subLink.href));
+  }
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -39,13 +47,16 @@ export default function CompanySidebar() {
         <SidebarMenu>
           {COMPANY_NAV_LINKS.map((link, index) =>
             link.sub ? (
-              <Collapsible key={index} className="w-full"
-                defaultOpen={link.sub.some(subLink => pathname.startsWith(subLink.href))}
+              <Collapsible
+                key={index}
+                className="w-full"
+                defaultOpen={isSubLinkActive(link.sub)}
               >
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton
                     variant="ghost"
                     className="w-full justify-start group"
+                    isActive={!link.sub.some(l => l.href !== '/company') && isSubLinkActive(link.sub)}
                   >
                     <link.icon />
                     <span>{link.label}</span>
@@ -56,10 +67,10 @@ export default function CompanySidebar() {
                   <SidebarMenuSub>
                     {link.sub.map((subLink) => (
                       <SidebarMenuSubItem key={subLink.href}>
-                         <Link href={subLink.href} passHref legacyBehavior>
-                          <SidebarMenuSubButton
+                        <Link href={subLink.href} passHref legacyBehavior>
+                           <SidebarMenuSubButton
                             as="a"
-                            isActive={pathname === subLink.href}
+                            isActive={isLinkActive(subLink.href)}
                           >
                             <subLink.icon />
                             <span>{subLink.label}</span>
@@ -72,15 +83,16 @@ export default function CompanySidebar() {
               </Collapsible>
             ) : (
               <SidebarMenuItem key={link.href}>
-                <SidebarMenuButton
-                  as="a"
-                  href={link.href}
-                  isActive={pathname === link.href}
-                  tooltip={{ children: link.label }}
-                >
-                  <link.icon />
-                  <span>{link.label}</span>
-                </SidebarMenuButton>
+                 <Link href={link.href} passHref legacyBehavior>
+                    <SidebarMenuButton
+                        as="a"
+                        isActive={isLinkActive(link.href)}
+                        tooltip={{ children: link.label }}
+                    >
+                        <link.icon />
+                        <span>{link.label}</span>
+                    </SidebarMenuButton>
+                 </Link>
               </SidebarMenuItem>
             )
           )}

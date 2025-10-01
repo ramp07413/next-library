@@ -35,7 +35,11 @@ import {
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
-  { href: "/company", label: "Dashboard", icon: LayoutGrid },
+  {
+    label: "Dashboard",
+    icon: LayoutGrid,
+    sub: [{ href: "/company", label: "Dashboard", icon: LayoutGrid }],
+  },
   {
     label: "Libraries",
     icon: Building,
@@ -150,7 +154,11 @@ export const COMPANY_NAV_LINKS = [
       { href: "/company/alerts/read", label: "Read", icon: CheckCircle },
     ],
   },
-  { href: "/company/settings", label: "Settings", icon: Settings },
+  {
+    label: "Settings",
+    icon: Settings,
+    sub: [{ href: "/company/settings", label: "Settings", icon: Settings }],
+  },
 ];
 
 export const LIBRARY_NAV_LINKS = [
