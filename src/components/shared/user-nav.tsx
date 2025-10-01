@@ -16,11 +16,13 @@ import {
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { Palette, BookOpen } from "lucide-react";
+import { Palette, BookOpen, Sun, Moon } from "lucide-react";
 import { ThemeSwitcher } from "./theme-switcher";
+import { useTheme } from "next-themes";
 
 
 export function UserNav() {
+  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
@@ -49,6 +51,11 @@ export function UserNav() {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent className="p-2">
+                <div className="flex justify-around mb-2">
+                  <Button variant="outline" size="sm" onClick={() => setTheme('light')}><Sun className="mr-2"/> Light</Button>
+                  <Button variant="outline" size="sm" onClick={() => setTheme('dark')}><Moon className="mr-2"/> Dark</Button>
+                </div>
+                <DropdownMenuSeparator />
                 <ThemeSwitcher />
               </DropdownMenuSubContent>
             </DropdownMenuPortal>

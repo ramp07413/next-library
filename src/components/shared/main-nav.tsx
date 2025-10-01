@@ -2,6 +2,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { UserNav } from "./user-nav";
 import { AlertsDropdown } from "./alerts-dropdown";
 import { SettingsDropdown } from "./settings-dropdown";
+import { ThemeToggle } from "./theme-toggle";
 
 interface MainNavProps {
   role: "company" | "library" | "student";
@@ -13,6 +14,7 @@ export default function MainNav({ role }: MainNavProps) {
       <SidebarTrigger className="sm:hidden" />
       <div className="ml-auto flex items-center gap-2">
         <AlertsDropdown role={role} />
+        <ThemeToggle />
         <SettingsDropdown />
         <UserNav />
       </div>

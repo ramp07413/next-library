@@ -20,13 +20,18 @@ export function ThemeSwitcher() {
   }
   
   const handleThemeChange = (newThemeName: string) => {
-    setTheme(newThemeName);
+    const isDark = activeTheme?.includes('dark');
+    setTheme(isDark ? `${newThemeName}-dark` : newThemeName);
   };
+
+  const getBaseTheme = (theme: string | undefined) => {
+    return theme?.split('-')[0] || 'default';
+  }
 
   return (
     <div className="grid grid-cols-4 gap-2 py-2">
       {themes.map((t) => {
-        const isActive = activeTheme === t.name;
+        const isActive = getBaseTheme(activeTheme) === t.name;
         return (
           <div key={t.name} className="space-y-1">
             <button
