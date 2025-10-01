@@ -41,6 +41,7 @@ import {
   Check,
   ShieldCheck,
   Lock,
+  Clock,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -87,7 +88,8 @@ export const COMPANY_NAV_LINKS = [
     label: "Payments",
     icon: CreditCard,
     sub: [
-      { href: "/company/payments", label: "All Transactions", icon: History },
+      { href: "/company/payments", label: "History", icon: History },
+      { href: "/company/payments/recent", label: "Recent", icon: Clock },
       { href: "/company/payments/pending", label: "Pending", icon: Hourglass },
       { href: "/company/payments/refunded", label: "Refunded", icon: Undo2 },
     ],

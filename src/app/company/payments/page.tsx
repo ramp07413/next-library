@@ -47,7 +47,7 @@ export default function PaymentsPage() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold tracking-tight font-headline">
-          All Transactions
+          Payment History
         </h1>
         <p className="text-muted-foreground">
           Track and manage all library subscription payments.
