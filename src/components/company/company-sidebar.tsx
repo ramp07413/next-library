@@ -56,8 +56,9 @@ export default function CompanySidebar() {
                   <SidebarMenuSub>
                     {link.sub.map((subLink) => (
                       <SidebarMenuSubItem key={subLink.href}>
-                         <Link href={subLink.href} passHref>
+                         <Link href={subLink.href} passHref legacyBehavior>
                           <SidebarMenuSubButton
+                            as="a"
                             isActive={pathname === subLink.href}
                           >
                             <subLink.icon />
