@@ -95,15 +95,6 @@ export default function SeatsPage() {
       seat.studentName?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-  const groupedSeats = filteredSeats.reduce((acc, seat) => {
-    const row = seat.seatNumber.split('-')[0];
-    if (!acc[row]) {
-      acc[row] = [];
-    }
-    acc[row].push(seat);
-    return acc;
-  }, {} as Record<string, Seat[]>);
-
 
   return (
     <div className="space-y-8">
@@ -191,32 +182,26 @@ export default function SeatsPage() {
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-foreground/50" fill="currentColor"/> Full Occupied</div>
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-destructive" fill="currentColor"/> Maintenance</div>
                     </div>
-                    <div className="space-y-6">
-                        {Object.entries(groupedSeats).map(([row, seatsInRow]) => (
-                            <div key={row} className="flex items-center gap-4">
-                                <div className="grid grid-cols-10 md:grid-cols-12 lg:grid-cols-16 gap-2 flex-1 justify-center">
-                                    {seatsInRow.map((seat) => (
-                                        <TooltipProvider key={seat.id}>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <button onClick={() => setSelectedSeat(seat)} className={cn("flex flex-col items-center justify-center p-1 rounded-md aspect-square transition-colors", getStatusSeatColor(seat.status), 'hover:bg-accent')}>
-                                                        <Armchair className="w-6 h-6" />
-                                                        <span className="text-xs font-mono">{seat.seatNumber.split('-')[1]}</span>
-                                                    </button>
-                                                </TooltipTrigger>
-                                                <TooltipContent>
-                                                    <p>{seat.seatNumber}</p>
-                                                    <p className="capitalize">Status: {seat.status}</p>
-                                                    {seat.studentName && <p>Occupied by: {seat.studentName}</p>}
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                    ))}
-                                </div>
-                            </div>
+                    <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
+                        {filteredSeats.map((seat) => (
+                            <TooltipProvider key={seat.id}>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <button onClick={() => setSelectedSeat(seat)} className={cn("flex flex-col items-center justify-center p-1 rounded-md aspect-square transition-colors", getStatusSeatColor(seat.status), 'hover:bg-accent')}>
+                                            <Armchair className="w-6 h-6" />
+                                            <span className="text-xs font-mono">{seat.seatNumber}</span>
+                                        </button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>{seat.seatNumber}</p>
+                                        <p className="capitalize">Status: {seat.status}</p>
+                                        {seat.studentName && <p>Occupied by: {seat.studentName}</p>}
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         ))}
                          {filteredSeats.length === 0 && (
-                            <div className="text-center text-muted-foreground py-10">
+                            <div className="col-span-full text-center text-muted-foreground py-10">
                                 No seats match the current filter.
                             </div>
                         )}
