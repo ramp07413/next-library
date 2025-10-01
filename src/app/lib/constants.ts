@@ -127,11 +127,6 @@ export const COMPANY_NAV_LINKS = [
       { href: "/company/alerts/starred", label: "Starred", icon: Star },
     ],
   },
-  {
-    label: "Settings",
-    icon: Settings,
-    sub: [{ href: "/company/settings", label: "Settings", icon: Settings }],
-  },
 ];
 
 
