@@ -25,6 +25,8 @@ import {
   Undo2,
   Briefcase,
   Users2,
+  FileCheck,
+  FileX,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -108,7 +110,22 @@ export const COMPANY_NAV_LINKS = [
       },
     ]
   },
-  { href: "/company/reports", label: "Reports", icon: FileText },
+  {
+    label: "Reports",
+    icon: FileText,
+    sub: [
+      {
+        href: "/company/reports/open",
+        label: "Open Reports",
+        icon: FileCheck,
+      },
+      {
+        href: "/company/reports/closed",
+        label: "Closed Reports",
+        icon: FileX,
+      },
+    ]
+  },
   { href: "/company/messages", label: "Messages", icon: MessageSquare },
   { href: "/company/alerts", label: "Alerts", icon: Bell },
   { href: "/company/settings", label: "Settings", icon: Settings },
