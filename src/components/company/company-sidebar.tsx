@@ -1,4 +1,3 @@
-
 // @/components/company/company-sidebar.tsx
 "use client";
 import {
@@ -10,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -69,7 +67,7 @@ export default function CompanySidebar() {
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {link.sub.map((subLink) => (
-                    <SidebarMenuSubItem key={subLink.href}>
+                    <SidebarMenuItem key={subLink.href}>
                       <Link href={subLink.href} passHref legacyBehavior>
                         <SidebarMenuSubButton
                           as="a"
@@ -79,7 +77,7 @@ export default function CompanySidebar() {
                           <span>{subLink.label}</span>
                         </SidebarMenuSubButton>
                       </Link>
-                    </SidebarMenuSubItem>
+                    </SidebarMenuItem>
                   ))}
                 </SidebarMenuSub>
               </CollapsibleContent>
