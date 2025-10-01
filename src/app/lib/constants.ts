@@ -18,6 +18,8 @@ import {
   PlusSquare,
   List,
   Activity,
+  UserCheck,
+  Shield,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -43,7 +45,27 @@ export const COMPANY_NAV_LINKS = [
       },
     ],
   },
-  { href: "/company/users", label: "Users", icon: Users },
+  {
+    label: "Users",
+    icon: UserCog,
+    sub: [
+      {
+        href: "/company/users",
+        label: "User List",
+        icon: Users,
+      },
+      {
+        href: "/company/users/permissions",
+        label: "Roles & Permissions",
+        icon: Shield,
+      },
+      {
+        href: "/company/users/register",
+        label: "Register User",
+        icon: UserCheck,
+      },
+    ],
+  },
   { href: "/company/payments", label: "Payments", icon: CreditCard },
   { href: "/company/expenses", label: "Expenses", icon: Wallet },
   { href: "/company/reports", label: "Reports", icon: FileText },
