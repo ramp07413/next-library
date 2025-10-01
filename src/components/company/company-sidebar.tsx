@@ -39,11 +39,13 @@ export default function CompanySidebar() {
         <SidebarMenu>
           {COMPANY_NAV_LINKS.map((link, index) =>
             link.sub ? (
-              <Collapsible key={index} className="w-full">
+              <Collapsible key={index} className="w-full"
+                defaultOpen={link.sub.some(subLink => pathname.startsWith(subLink.href))}
+              >
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton
                     variant="ghost"
-                    className="w-full justify-start"
+                    className="w-full justify-start group"
                   >
                     <link.icon />
                     <span>{link.label}</span>
