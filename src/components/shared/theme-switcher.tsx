@@ -37,7 +37,7 @@ export function ThemeSwitcher() {
   return (
     <div className="grid grid-cols-4 gap-2 py-2">
       {themes.map((t) => {
-        const isActive = getBaseFasle(activeTheme) === t.name;
+        const isActive = getBaseTheme(activeTheme) === t.name;
         return (
           <div key={t.name} className="space-y-1">
             <button
