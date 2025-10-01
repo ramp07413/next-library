@@ -20,6 +20,9 @@ import {
   Activity,
   UserCheck,
   Shield,
+  History,
+  Hourglass,
+  Undo2,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -66,7 +69,27 @@ export const COMPANY_NAV_LINKS = [
       },
     ],
   },
-  { href: "/company/payments", label: "Payments", icon: CreditCard },
+  {
+    label: "Payments",
+    icon: CreditCard,
+    sub: [
+      {
+        href: "/company/payments",
+        label: "Payment History",
+        icon: History,
+      },
+      {
+        href: "/company/payments/pending",
+        label: "Pending",
+        icon: Hourglass,
+      },
+      {
+        href: "/company/payments/refunded",
+        label: "Refunded",
+        icon: Undo2,
+      },
+    ],
+  },
   { href: "/company/expenses", label: "Expenses", icon: Wallet },
   { href: "/company/reports", label: "Reports", icon: FileText },
   { href: "/company/messages", label: "Messages", icon: MessageSquare },
