@@ -3,6 +3,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { themes } from './lib/themes';
 
 export const metadata: Metadata = {
   title: 'LibMan Platform',
@@ -26,6 +27,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem
+          themes={themes.map(t => t.name).concat(themes.flatMap(t => [`${t.name}-light`, `${t.name}-dark`]))}
         >
           {children}
           <Toaster />
