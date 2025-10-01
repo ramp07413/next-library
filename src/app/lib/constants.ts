@@ -36,9 +36,46 @@ import {
 
 export const COMPANY_NAV_LINKS = [
   {
-    label: "Dashboard",
-    icon: LayoutGrid,
-    sub: [{ href: "/company", label: "Dashboard", icon: LayoutGrid }],
+    label: "Company",
+    icon: Briefcase,
+    sub: [
+      { href: "/company", label: "Dashboard", icon: LayoutGrid },
+      {
+        href: "/company/users",
+        label: "Users",
+        icon: UserCog,
+      },
+      {
+        href: "/company/payments",
+        label: "Payments",
+        icon: CreditCard,
+      },
+      {
+        href: "/company/expenses",
+        label: "Expenses",
+        icon: Wallet,
+      },
+      {
+        href: "/company/reports/open",
+        label: "Reports",
+        icon: FileText,
+      },
+      { 
+        href: "/company/messages", 
+        label: "Messages", 
+        icon: MessageSquare,
+      },
+      {
+        href: "/company/alerts", 
+        label: "Alerts", 
+        icon: Bell,
+      },
+      { 
+        href: "/company/settings", 
+        label: "Settings", 
+        icon: Settings 
+      },
+    ],
   },
   {
     label: "Libraries",
@@ -61,105 +98,8 @@ export const COMPANY_NAV_LINKS = [
       },
     ],
   },
-  {
-    label: "Users",
-    icon: UserCog,
-    sub: [
-      {
-        href: "/company/users",
-        label: "User List",
-        icon: Users,
-      },
-      {
-        href: "/company/users/permissions",
-        label: "Roles & Permissions",
-        icon: Shield,
-      },
-      {
-        href: "/company/users/register",
-        label: "Register User",
-        icon: UserCheck,
-      },
-    ],
-  },
-  {
-    label: "Payments",
-    icon: CreditCard,
-    sub: [
-      {
-        href: "/company/payments",
-        label: "Payment History",
-        icon: History,
-      },
-      {
-        href: "/company/payments/pending",
-        label: "Pending",
-        icon: Hourglass,
-      },
-      {
-        href: "/company/payments/refunded",
-        label: "Refunded",
-        icon: Undo2,
-      },
-    ],
-  },
-  {
-    label: "Expenses",
-    icon: Wallet,
-    sub: [
-       {
-        href: "/company/expenses",
-        label: "Company Expenses",
-        icon: Briefcase,
-      },
-       {
-        href: "/company/expenses/staff",
-        label: "Staff Expenses",
-        icon: Users2,
-      },
-    ]
-  },
-  {
-    label: "Reports",
-    icon: FileText,
-    sub: [
-      {
-        href: "/company/reports/open",
-        label: "Open Reports",
-        icon: FileCheck,
-      },
-      {
-        href: "/company/reports/closed",
-        label: "Closed Reports",
-        icon: FileX,
-      },
-    ]
-  },
-  { 
-    label: "Messages", 
-    icon: MessageSquare,
-    sub: [
-        { href: "/company/messages", label: "All Messages", icon: MessageSquare },
-        { href: "/company/messages/library", label: "Library Comms", icon: Library },
-        { href: "/company/messages/support", label: "Support Tickets", icon: LifeBuoy },
-    ]
-  },
-  {
-    label: "Alerts",
-    icon: Bell,
-    sub: [
-      { href: "/company/alerts", label: "All Alerts", icon: BellRing },
-      { href: "/company/alerts/unread", label: "Unread", icon: Mails },
-      { href: "/company/alerts/starred", label: "Starred", icon: Star },
-      { href: "/company/alerts/read", label: "Read", icon: CheckCircle },
-    ],
-  },
-  {
-    label: "Settings",
-    icon: Settings,
-    sub: [{ href: "/company/settings", label: "Settings", icon: Settings }],
-  },
 ];
+
 
 export const LIBRARY_NAV_LINKS = [
   { href: "/library", label: "Dashboard", icon: LayoutGrid },
