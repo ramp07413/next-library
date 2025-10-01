@@ -23,6 +23,8 @@ import {
   History,
   Hourglass,
   Undo2,
+  Briefcase,
+  Users2,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -90,7 +92,22 @@ export const COMPANY_NAV_LINKS = [
       },
     ],
   },
-  { href: "/company/expenses", label: "Expenses", icon: Wallet },
+  {
+    label: "Expenses",
+    icon: Wallet,
+    sub: [
+       {
+        href: "/company/expenses",
+        label: "Company Expenses",
+        icon: Briefcase,
+      },
+       {
+        href: "/company/expenses/staff",
+        label: "Staff Expenses",
+        icon: Users2,
+      },
+    ]
+  },
   { href: "/company/reports", label: "Reports", icon: FileText },
   { href: "/company/messages", label: "Messages", icon: MessageSquare },
   { href: "/company/alerts", label: "Alerts", icon: Bell },
