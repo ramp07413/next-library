@@ -39,6 +39,8 @@ import {
   Mailbox,
   StarHalf,
   Check,
+  ShieldCheck,
+  Lock,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -77,7 +79,8 @@ export const COMPANY_NAV_LINKS = [
     sub: [
       { href: "/company/users", label: "User List", icon: Users2 },
       { href: "/company/users/register", label: "Register User", icon: UserPlus },
-      { href: "/company/users/permissions", label: "Roles & Permissions", icon: Shield },
+      { href: "/company/users/roles", label: "Roles", icon: ShieldCheck },
+      { href: "/company/users/permissions", label: "Permissions", icon: Lock },
     ],
   },
   {

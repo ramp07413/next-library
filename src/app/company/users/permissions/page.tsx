@@ -1,4 +1,4 @@
 
 export default function Page() {
-  return <h1 className="text-3xl font-bold">Roles & Permissions</h1>;
+  return <h1 className="text-3xl font-bold">Permissions</h1>;
 }
