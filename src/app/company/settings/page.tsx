@@ -24,9 +24,9 @@ import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Switch } from "@/components/ui/switch";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
-import { Moon, Sun, Monitor, User, Shield, Palette } from "lucide-react";
+import { User, Shield, Palette } from "lucide-react";
+import { ThemeSwitcher } from '@/components/shared/theme-switcher';
 
 export default function SettingsPage() {
   const { setTheme } = useTheme();
@@ -151,28 +151,7 @@ export default function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Label className="mb-4 block">Theme</Label>
-              <RadioGroup
-                defaultValue="system"
-                className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-                onValueChange={setTheme}
-              >
-                <Label className="cursor-pointer rounded-md border p-4 flex flex-col items-center gap-2 [&:has([data-state=checked])]:border-primary">
-                  <RadioGroupItem value="light" className="sr-only" />
-                  <Sun className="h-6 w-6" />
-                  <span>Light</span>
-                </Label>
-                <Label className="cursor-pointer rounded-md border p-4 flex flex-col items-center gap-2 [&:has([data-state=checked])]:border-primary">
-                  <RadioGroupItem value="dark" className="sr-only" />
-                  <Moon className="h-6 w-6" />
-                  <span>Dark</span>
-                </Label>
-                <Label className="cursor-pointer rounded-md border p-4 flex flex-col items-center gap-2 [&:has([data-state=checked])]:border-primary">
-                  <RadioGroupItem value="system" className="sr-only" />
-                  <Monitor className="h-6 w-6" />
-                  <span>System</span>
-                </Label>
-              </RadioGroup>
+              <ThemeSwitcher />
             </CardContent>
           </Card>
         </TabsContent>

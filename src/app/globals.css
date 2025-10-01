@@ -76,6 +76,16 @@ body {
     --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 224 100% 58%;
   }
+
+  .theme-rose {
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+  }
+
+  .dark.theme-rose {
+      --primary: 346.8 77.2% 49.8%;
+      --primary-foreground: 355.7 100% 97.3%;
+  }
 }
 
 @layer base {
