@@ -123,8 +123,8 @@ export const COMPANY_NAV_LINKS = [
     sub: [
       { href: "/company/alerts", label: "All Alerts", icon: BellRing },
       { href: "/company/alerts/unread", label: "Unread", icon: Mailbox },
-      { href: "/company/alerts/starred", label: "Starred", icon: Star },
       { href: "/company/alerts/read", label: "Read", icon: Check },
+      { href: "/company/alerts/starred", label: "Starred", icon: Star },
     ],
   },
   {
