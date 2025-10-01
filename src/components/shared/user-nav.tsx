@@ -19,22 +19,20 @@ import {
 import { PlaceHolderImages } from "@/lib/placeholder-images"
 import Link from "next/link"
 import { useTheme } from "next-themes";
-import { Sun, Moon, Monitor, Palette } from "lucide-react";
+import { Sun, Moon, Monitor, Palette, BookOpen } from "lucide-react";
 import { ThemeSwitcher } from "./theme-switcher";
 
 
 export function UserNav() {
-  const userAvatar = PlaceHolderImages.find(p => p.id === 'user-avatar-1');
   const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-9 w-9">
-            {userAvatar && <AvatarImage src={userAvatar.imageUrl} alt="User Avatar" data-ai-hint={userAvatar.imageHint}/>}
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+              <BookOpen className="h-5 w-5" />
+            </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64" align="end" forceMount>
