@@ -45,7 +45,10 @@ export const COMPANY_NAV_LINKS = [
   {
     label: "Dashboard",
     icon: LayoutGrid,
-    sub: [{ href: "/company", label: "Dashboard", icon: LayoutGrid }],
+    sub: [
+      { href: "/company", label: "Company Dashboard", icon: LayoutGrid },
+      { href: "/library", label: "Library Dashboard", icon: Library },
+    ],
   },
   {
     label: "Users",
