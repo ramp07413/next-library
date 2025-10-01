@@ -187,9 +187,9 @@ export default function SeatsPage() {
                             <TooltipProvider key={seat.id}>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <button onClick={() => setSelectedSeat(seat)} className={cn("flex flex-col items-center justify-center p-1 rounded-md aspect-square transition-colors", getStatusSeatColor(seat.status), 'hover:bg-accent')}>
-                                            <Armchair className="w-6 h-6" />
-                                            <span className="text-xs font-mono">{seat.seatNumber}</span>
+                                        <button onClick={() => setSelectedSeat(seat)} className={cn("flex flex-col items-center justify-center p-2 rounded-md aspect-square transition-colors", getStatusSeatColor(seat.status), 'hover:bg-accent')}>
+                                            <Armchair className="w-8 h-8" />
+                                            <span className="text-sm font-mono">{seat.seatNumber}</span>
                                         </button>
                                     </TooltipTrigger>
                                     <TooltipContent>
