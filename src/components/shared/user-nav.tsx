@@ -20,6 +20,7 @@ import { PlaceHolderImages } from "@/lib/placeholder-images"
 import Link from "next/link"
 import { useTheme } from "next-themes";
 import { Sun, Moon, Monitor, Palette } from "lucide-react";
+import { ThemeSwitcher } from "./theme-switcher";
 
 
 export function UserNav() {
@@ -36,7 +37,7 @@ export function UserNav() {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent className="w-64" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">Admin</p>
@@ -53,7 +54,7 @@ export function UserNav() {
               <span>Theme</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
-              <DropdownMenuSubContent>
+              <DropdownMenuSubContent className="p-2">
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                   <Sun className="mr-2 h-4 w-4" />
                   <span>Light</span>
@@ -66,6 +67,8 @@ export function UserNav() {
                   <Monitor className="mr-2 h-4 w-4" />
                   <span>System</span>
                 </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <ThemeSwitcher />
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
