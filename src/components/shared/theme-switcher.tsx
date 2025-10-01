@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
 export function ThemeSwitcher() {
-  const { theme: activeTheme, setTheme } = useTheme();
+  const { theme: activeTheme, setTheme, themes: availableThemes } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -21,25 +21,25 @@ export function ThemeSwitcher() {
   
   const handleThemeChange = (newThemeName: string) => {
     const isDark = activeTheme?.includes('dark');
-    if (newThemeName === 'default') {
+    if (newThemeName === 'default' || newThemeName === 'light' || newThemeName === 'dark') {
       setTheme(isDark ? 'dark' : 'light');
     } else {
-      setTheme(isDark ? `${newThemeName}-dark` : newThemeName);
+      setTheme(newThemeName);
     }
   };
 
   const getBaseTheme = (theme: string | undefined) => {
     if (!theme) return 'default';
     if (theme === 'light' || theme === 'dark') return 'default';
-    return theme.replace('-dark', '');
+    return theme;
   }
 
   return (
     <div className="grid grid-cols-4 gap-2 py-2">
       {themes.map((t) => {
         const isActive = getBaseTheme(activeTheme) === t.name;
-        const lightBg = t.name === 'default' ? '210 40% 98%' : t.light.background;
-        const lightPrimary = t.name === 'default' ? '224 100% 58%' : t.light.primary;
+        const lightBg = t.light.background;
+        const lightPrimary = t.light.primary;
 
         return (
           <div key={t.name} className="space-y-1">
@@ -67,5 +67,3 @@ export function ThemeSwitcher() {
     </div>
   );
 }
-
-    
