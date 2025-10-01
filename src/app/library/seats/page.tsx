@@ -193,9 +193,8 @@ export default function SeatsPage() {
                     </div>
                     <div className="space-y-6">
                         {Object.entries(groupedSeats).map(([row, seatsInRow]) => (
-                            <div key={row} className="flex items-center gap-8">
-                                <div className="text-lg font-bold w-4 text-center">{row}</div>
-                                <div className="grid grid-cols-10 md:grid-cols-12 lg:grid-cols-16 gap-2 flex-1">
+                            <div key={row} className="flex items-center gap-4">
+                                <div className="grid grid-cols-10 md:grid-cols-12 lg:grid-cols-16 gap-2 flex-1 justify-center">
                                     {seatsInRow.map((seat) => (
                                         <TooltipProvider key={seat.id}>
                                             <Tooltip>
