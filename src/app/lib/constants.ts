@@ -15,11 +15,34 @@ import {
   UserCog,
   Users,
   Wallet,
+  PlusSquare,
+  List,
+  Activity,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
   { href: "/company", label: "Dashboard", icon: LayoutGrid },
-  { href: "/company/libraries", label: "Libraries", icon: Library },
+  {
+    label: "Libraries",
+    icon: Library,
+    sub: [
+      {
+        href: "/company/libraries",
+        label: "Library List",
+        icon: List,
+      },
+      {
+        href: "/company/libraries/register",
+        label: "Register Library",
+        icon: PlusSquare,
+      },
+      {
+        href: "/company/libraries/status",
+        label: "Status",
+        icon: Activity,
+      },
+    ],
+  },
   { href: "/company/users", label: "Users", icon: Users },
   { href: "/company/payments", label: "Payments", icon: CreditCard },
   { href: "/company/expenses", label: "Expenses", icon: Wallet },
