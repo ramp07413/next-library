@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { Eye, FilePenLine, MoreHorizontal, Trash2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function ExpensesPage() {
    const getCategoryBadgeVariant = (category: string) => {
@@ -90,7 +91,7 @@ export default function ExpensesPage() {
                 <TableHead>Category</TableHead>
                 <TableHead>Amount</TableHead>
                 <TableHead>Date</TableHead>
-                <TableHead>Type</TableHead>
+                <TableHead className="text-center">Type</TableHead>
                 <TableHead>
                   <span className="sr-only">Actions</span>
                 </TableHead>
@@ -113,28 +114,43 @@ export default function ExpensesPage() {
                   <TableCell>
                     {format(new Date(expense.date), "PP")}
                   </TableCell>
-                   <TableCell>
-                    <Badge variant={expense.type === 'recurring' ? "secondary" : "outline"} className="capitalize">
+                   <TableCell className="text-center">
+                    <Badge variant={expense.type === 'recurring' ? "secondary" : "outline"} className="capitalize whitespace-nowrap">
                       {expense.type}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit Expense</DropdownMenuItem>
-                        <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <TooltipProvider>
+                      <div className="flex items-center justify-start gap-2">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button aria-haspopup="true" size="icon" variant="ghost">
+                              <FilePenLine className="h-4 w-4" />
+                              <span className="sr-only">Edit Expense</span>
+                            </Button>
+                          </TooltipTrigger>
+                           <TooltipContent>Edit Expense</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                           <TooltipTrigger asChild>
+                            <Button aria-haspopup="true" size="icon" variant="ghost">
+                              <Eye className="h-4 w-4" />
+                              <span className="sr-only">View Details</span>
+                            </Button>
+                          </TooltipTrigger>
+                           <TooltipContent>View Details</TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                           <TooltipTrigger asChild>
+                            <Button aria-haspopup="true" size="icon" variant="ghost" className="text-destructive">
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete Expense</span>
+                            </Button>
+                          </TooltipTrigger>
+                           <TooltipContent>Delete</TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TooltipProvider>
                   </TableCell>
                 </TableRow>
               ))}
