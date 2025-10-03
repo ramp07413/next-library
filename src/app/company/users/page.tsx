@@ -76,7 +76,7 @@ export default function UsersPage() {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
-                    <Badge variant={user.isActive ? "secondary" : "outline"}>
+                    <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
                       {user.isActive ? "Active" : "Inactive"}
                     </Badge>
                   </TableCell>
