@@ -6,7 +6,8 @@ export type Payment = {
   amount: number;
   dueDate: string;
   paidDate: string | null;
-  status: 'Paid' | 'Pending' | 'Overdue';
+  refundedDate?: string | null;
+  status: 'Paid' | 'Pending' | 'Overdue' | 'Refunded';
   subscriptionPlan: 'Basic' | 'Pro' | 'Enterprise';
 };
 
@@ -60,5 +61,16 @@ export const payments: Payment[] = [
     paidDate: null,
     status: 'Pending',
     subscriptionPlan: 'Basic',
+  },
+   {
+    id: 'PAY-006',
+    libraryName: 'Tech Park Library',
+    libraryId: '2',
+    amount: 1000,
+    dueDate: new Date(new Date().getFullYear(), new Date().getMonth() - 2, 15).toISOString(),
+    paidDate: new Date(new Date().getFullYear(), new Date().getMonth() - 2, 14).toISOString(),
+    status: 'Refunded',
+    subscriptionPlan: 'Enterprise',
+    refundedDate: new Date(new Date().getFullYear(), new Date().getMonth() -1, 1).toISOString()
   },
 ];
