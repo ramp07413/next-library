@@ -48,7 +48,7 @@ export default function LibrariesPage() {
                 <TableHead>Contact</TableHead>
                 <TableHead>Address</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -69,9 +69,9 @@ export default function LibrariesPage() {
                       {library.isActive ? "Active" : "Inactive"}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell>
                     <TooltipProvider>
-                      <div className="flex items-center justify-end gap-2">
+                      <div className="flex items-center justify-start gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button size="icon" variant="ghost">
