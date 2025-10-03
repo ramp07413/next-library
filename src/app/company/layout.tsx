@@ -1,3 +1,4 @@
+
 import CompanySidebar from "@/components/company/company-sidebar";
 import MainNav from "@/components/shared/main-nav";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
@@ -11,9 +12,11 @@ export default function CompanyLayout({
     <SidebarProvider>
       <CompanySidebar />
       <SidebarInset>
-        <div className="flex flex-col">
+        <div className="flex flex-col h-screen">
           <MainNav role="company" />
-          <main className="flex-1 pt-6 p-4 md:p-8 lg:p-10">{children}</main>
+          <div className="flex-1 overflow-auto">
+            <main className="flex-1 pt-6 p-4 md:p-8 lg:p-10">{children}</main>
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>
