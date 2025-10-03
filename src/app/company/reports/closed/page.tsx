@@ -11,18 +11,12 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, FileX } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Eye, FileUp, FileX } from "lucide-react";
 import { reports } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function ClosedReportsPage() {
   const [closedReports] = useState(
@@ -68,40 +62,47 @@ export default function ClosedReportsPage() {
                   <TableHead>Library</TableHead>
                   <TableHead>Category</TableHead>
                   <TableHead>Date Submitted</TableHead>
-                  <TableHead>
-                    <span className="sr-only">Actions</span>
-                  </TableHead>
+                  <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {closedReports.map((report) => (
                   <TableRow key={report.id}>
-                    <TableCell className="font-medium">
+                    <TableCell className="font-medium whitespace-nowrap">
                       {report.title}
                     </TableCell>
-                     <TableCell>
+                     <TableCell className="whitespace-nowrap">
                       {report.libraryName}
                     </TableCell>
                      <TableCell>
                       <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="whitespace-nowrap">
                       {format(new Date(report.date), "PP")}
                     </TableCell>
                     <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button aria-haspopup="true" size="icon" variant="ghost">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>View Details</DropdownMenuItem>
-                          <DropdownMenuItem>Re-open Report</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <TooltipProvider>
+                        <div className="flex items-center justify-center gap-2">
+                           <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button aria-haspopup="true" size="icon" variant="ghost">
+                                <Eye className="h-4 w-4" />
+                                <span className="sr-only">View Details</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button aria-haspopup="true" size="icon" variant="ghost">
+                                <FileUp className="h-4 w-4" />
+                                <span className="sr-only">Re-open Report</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Re-open Report</TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
