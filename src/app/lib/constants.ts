@@ -110,12 +110,10 @@ export const COMPANY_NAV_LINKS = [
     ],
   },
   {
-    label: "Messages",
-    icon: MessageSquare,
+    label: "Support Tickets",
+    icon: LifeBuoy,
     sub: [
-      { href: "/company/messages", label: "All Messages", icon: Mails },
-      { href: "/company/messages/library", label: "Library Comms", icon: Mailbox },
-      { href: "/company/messages/support", label: "Support Tickets", icon: LifeBuoy },
+      { href: "/company/messages", label: "Support Tickets", icon: LifeBuoy },
     ],
   },
   {
