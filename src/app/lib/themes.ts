@@ -143,15 +143,15 @@ export const themes: Theme[] = [
   {
     name: 'stone',
     light: {
-      background: '40 10% 97%',
-      foreground: '30 10% 10%',
-      primary: '30 6% 45%',
+      background: '180 5% 85%',
+      foreground: '240 6% 22%',
+      primary: '0 13% 40%',
       'primary-foreground': '40 10% 98%',
     },
     dark: {
-      background: '30 10% 10%',
-      foreground: '40 10% 97%',
-      primary: '40 5% 65%',
+      background: '240 4% 20%',
+      foreground: '180 5% 85%',
+      primary: '0 13% 50%',
       'primary-foreground': '30 10% 15%',
     },
   },
