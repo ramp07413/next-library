@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Search, Inbox, Archive } from "lucide-react";
+import { MoreHorizontal, Search, Inbox, LifeBuoy, Eye, CheckCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,58 +23,38 @@ import {
 import { messages, type Message } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDistanceToNow } from "date-fns";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function AllMessagesPage() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+  const supportTickets = messages.filter((m) => m.type === "support_ticket");
 
-  const getTypeBadgeVariant = (type: Message['type']) => {
-    switch (type) {
-      case 'library_comm':
-        return 'secondary';
-      case 'support_ticket':
-        return 'destructive';
-      case 'announcement':
-        return 'default';
-      default:
-        return 'outline';
-    }
-  };
-
-  const filteredMessages = messages
-    .filter(message => typeFilter === 'all' || message.type === typeFilter)
-    .filter(message => 
-      message.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      message.sender.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  const filteredTickets = supportTickets.filter(
+    (ticket) =>
+      ticket.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ticket.sender.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="space-y-8">
        <div className="flex items-center justify-between">
         <div>
             <h1 className="text-3xl font-bold tracking-tight font-headline">
-                All Messages
+                Support Tickets
             </h1>
             <p className="text-muted-foreground">
-                View and manage all communications from a single inbox.
+                Manage and respond to all incoming support requests.
             </p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Inbox</CardTitle>
+          <CardTitle>Active Tickets</CardTitle>
           <CardDescription>
-            Showing {filteredMessages.length} of {messages.length} messages.
+            Showing {filteredTickets.length} of {supportTickets.length} support tickets.
           </CardDescription>
           <div className="flex items-center gap-2 pt-4">
             <div className="relative flex-1 md:grow-0">
@@ -87,82 +67,79 @@ export default function AllMessagesPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Filter by type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="library_comm">Library Comm</SelectItem>
-                <SelectItem value="support_ticket">Support Ticket</SelectItem>
-                <SelectItem value="announcement">Announcement</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
         </CardHeader>
         <CardContent>
-          {filteredMessages.length > 0 ? (
+          {filteredTickets.length > 0 ? (
+            <TooltipProvider>
             <Table>
                 <TableHeader>
                 <TableRow>
-                    <TableHead>Sender</TableHead>
+                    <TableHead>From</TableHead>
                     <TableHead>Subject</TableHead>
-                    <TableHead>Type</TableHead>
+                    <TableHead>Status</TableHead>
                     <TableHead>Date</TableHead>
-                    <TableHead>
-                    <span className="sr-only">Actions</span>
-                    </TableHead>
+                    <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
                 </TableHeader>
                 <TableBody>
-                {filteredMessages.map((message) => (
-                    <TableRow key={message.id} className={message.status === 'unread' ? 'font-bold' : ''}>
+                {filteredTickets.map((ticket) => (
+                    <TableRow key={ticket.id} className={ticket.status === 'unread' ? 'font-bold' : ''}>
                     <TableCell>
                         <div className="flex items-center gap-3">
                             <Avatar className="h-9 w-9">
-                                <AvatarImage src={message.senderAvatar} alt={message.sender} data-ai-hint="person portrait" />
-                                <AvatarFallback>{message.sender.charAt(0)}</AvatarFallback>
+                                <AvatarImage src={ticket.senderAvatar} alt={ticket.sender} data-ai-hint="person portrait" />
+                                <AvatarFallback>{ticket.sender.charAt(0)}</AvatarFallback>
                             </Avatar>
-                            {message.sender}
+                            {ticket.sender}
                         </div>
                     </TableCell>
                     <TableCell>
-                        {message.subject}
-                        <p className="font-normal text-sm text-muted-foreground truncate max-w-xs">{message.content}</p>
+                        {ticket.subject}
+                        <p className="font-normal text-sm text-muted-foreground truncate max-w-xs">{ticket.content}</p>
                     </TableCell>
                     <TableCell>
-                        <Badge variant={getTypeBadgeVariant(message.type)} className="capitalize">
-                            {message.type.replace('_', ' ')}
+                        <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
+                          {ticket.status === 'unread' ? 'Open' : 'Resolved'}
                         </Badge>
                     </TableCell>
                     <TableCell>
-                        {formatDistanceToNow(new Date(message.date), { addSuffix: true })}
+                        {formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}
                     </TableCell>
                     <TableCell>
-                        <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
+                      <div className="flex items-center justify-center gap-2">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                             <Button aria-haspopup="true" size="icon" variant="ghost">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
+                              <Eye className="h-4 w-4" />
+                              <span className="sr-only">View Ticket</span>
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>View Message</DropdownMenuItem>
-                            {message.status === 'unread' && <DropdownMenuItem>Mark as Read</DropdownMenuItem>}
-                            <DropdownMenuItem>Archive</DropdownMenuItem>
-                        </DropdownMenuContent>
-                        </DropdownMenu>
+                          </TooltipTrigger>
+                          <TooltipContent>View Ticket</TooltipContent>
+                        </Tooltip>
+                        {ticket.status === 'unread' && (
+                           <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button aria-haspopup="true" size="icon" variant="ghost" className="text-green-600">
+                                  <CheckCircle className="h-4 w-4" />
+                                  <span className="sr-only">Mark as Resolved</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>Mark as Resolved</TooltipContent>
+                            </Tooltip>
+                        )}
+                      </div>
                     </TableCell>
                     </TableRow>
                 ))}
                 </TableBody>
             </Table>
+            </TooltipProvider>
             ) : (
                 <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                    <Inbox className="h-12 w-12 mb-4" />
-                    <h3 className="text-lg font-semibold">No Messages Found</h3>
-                    <p>There are no messages matching your search or filter.</p>
+                    <LifeBuoy className="h-12 w-12 mb-4" />
+                    <h3 className="text-lg font-semibold">No Open Tickets</h3>
+                    <p>There are no active support tickets at the moment.</p>
                 </div>
             )}
         </CardContent>
