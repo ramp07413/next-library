@@ -11,14 +11,13 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, CheckCircle } from "lucide-react";
+import { Eye, Download } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { payments } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
@@ -54,9 +53,7 @@ export default function RecentPaymentsPage() {
                   <TableHead>Amount</TableHead>
                   <TableHead>Paid On</TableHead>
                   <TableHead>Subscription</TableHead>
-                  <TableHead>
-                    <span className="sr-only">Actions</span>
-                  </TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -75,19 +72,28 @@ export default function RecentPaymentsPage() {
                        <Badge variant="outline">{payment.subscriptionPlan}</Badge>
                     </TableCell>
                     <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button aria-haspopup="true" size="icon" variant="ghost">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>View Details</DropdownMenuItem>
-                          <DropdownMenuItem>Download Receipt</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <TooltipProvider>
+                        <div className="flex items-center justify-start gap-2">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button size="icon" variant="ghost">
+                                <Eye className="h-4 w-4" />
+                                <span className="sr-only">View Details</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button size="icon" variant="ghost">
+                                <Download className="h-4 w-4" />
+                                <span className="sr-only">Download Receipt</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Download Receipt</TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -95,7 +101,7 @@ export default function RecentPaymentsPage() {
             </Table>
           ) : (
              <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                <CheckCircle className="h-12 w-12 mb-4" />
+                <Download className="h-12 w-12 mb-4" />
                 <h3 className="text-lg font-semibold">No Recent Payments</h3>
                 <p>There are no recently paid transactions to show.</p>
             </div>
