@@ -26,47 +26,42 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { BookOpen } from "lucide-react";
 
-const loginFormSchema = z.object({
+const forgotPasswordFormSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  password: z.string().min(1, {
-    message: "Password is required.",
-  }),
 });
 
-type LoginFormValues = z.infer<typeof loginFormSchema>;
+type ForgotPasswordFormValues = z.infer<typeof forgotPasswordFormSchema>;
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   const { toast } = useToast();
   const auth = useAuth();
   const router = useRouter();
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginFormSchema),
+  const form = useForm<ForgotPasswordFormValues>({
+    resolver: zodResolver(forgotPasswordFormSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  async function onSubmit(data: LoginFormValues) {
+  async function onSubmit(data: ForgotPasswordFormValues) {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await sendPasswordResetEmail(auth, data.email);
       toast({
-        title: "Login Successful",
-        description: "Welcome back! Redirecting you to your dashboard.",
+        title: "Password Reset Email Sent",
+        description: "Please check your inbox for instructions to reset your password.",
       });
-      // Redirect to a default dashboard after login
-      router.push("/company");
+      router.push("/login");
     } catch (error: any) {
-      console.error("Login failed:", error);
+      console.error("Password reset failed:", error);
       toast({
         variant: "destructive",
-        title: "Login Failed",
+        title: "Error",
         description: error.message || "An unexpected error occurred. Please try again.",
       });
     }
@@ -74,15 +69,15 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/40">
-       <Link href="/" className="absolute top-8 left-8 flex items-center gap-2">
-            <BookOpen className="w-6 h-6 text-primary" />
-            <span className="text-xl font-bold text-primary font-headline">LibMan</span>
-        </Link>
+      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2">
+        <BookOpen className="w-6 h-6 text-primary" />
+        <span className="text-xl font-bold text-primary font-headline">LibMan</span>
+      </Link>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Forgot Password</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account.
+            Enter your email and we'll send you a link to reset your password.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -105,36 +100,15 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
-                        <Link
-                            href="/forgot-password"
-                            className="ml-auto inline-block text-sm underline"
-                        >
-                            Forgot your password?
-                        </Link>
-                    </div>
-                    <FormControl>
-                      <Input type="password" placeholder="••••••••" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Logging in..." : "Log In"}
+                {form.formState.isSubmitting ? "Sending..." : "Send Reset Link"}
               </Button>
             </form>
           </Form>
           <div className="mt-4 text-center text-sm">
-            Don't have an account?{" "}
-            <Link href="/signup" className="underline">
-              Sign up
+            Remember your password?{" "}
+            <Link href="/login" className="underline">
+              Log in
             </Link>
           </div>
         </CardContent>
