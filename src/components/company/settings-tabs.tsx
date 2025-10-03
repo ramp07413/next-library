@@ -2,7 +2,7 @@
 "use client";
 
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -31,14 +31,14 @@ import { ThemeToggle } from '../shared/theme-toggle';
 export function SettingsTabs() {
   const userAvatar = PlaceHolderImages.find((p) => p.id === "user-avatar-1");
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = React.useState("profile");
+  const tab = searchParams.get('tab');
+  const [activeTab, setActiveTab] = React.useState(tab || "profile");
 
-  useEffect(() => {
-    const tab = searchParams.get('tab');
+  React.useEffect(() => {
     if (tab) {
       setActiveTab(tab);
     }
-  }, [searchParams]);
+  }, [tab]);
 
   return (
     <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
