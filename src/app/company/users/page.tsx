@@ -59,9 +59,9 @@ export default function UsersPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Email</TableHead>
-                <TableHead>Role</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Date Added</TableHead>
+                <TableHead className="text-center">Role</TableHead>
+                <TableHead className="text-center">Status</TableHead>
+                <TableHead className="text-center">Date Added</TableHead>
                 <TableHead>
                   <span className="sr-only">Actions</span>
                 </TableHead>
@@ -73,17 +73,17 @@ export default function UsersPage() {
                   <TableCell className="font-medium">
                     {user.email}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                      <Badge variant={getRoleBadgeVariant(user.role)}>
                       {user.role.replace('_', ' ')}
                     </Badge>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     <Badge variant={user.isActive ? "secondary" : "outline"}>
                       {user.isActive ? "Active" : "Inactive"}
                     </Badge>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="text-center">
                     {format(new Date(user.createdAt), "PP")}
                   </TableCell>
                   <TableCell>
