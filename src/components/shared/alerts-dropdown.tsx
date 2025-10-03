@@ -68,22 +68,16 @@ export function AlertsDropdown({ role }: AlertsDropdownProps) {
               <DropdownMenuItem
                 key={alert.id}
                 className={cn(
-                  "flex flex-col items-start gap-1 p-2 focus:bg-[hsl(var(--chart-2))] focus:text-accent-foreground",
+                  "p-2 focus:bg-[hsl(var(--chart-2))] focus:text-accent-foreground",
                   alert.status === "unread" && "font-semibold"
                 )}
               >
-                <p className="text-sm whitespace-normal">{alert.message}</p>
-                <p
-                  className={cn(
-                    "text-xs",
-                    alert.status === "unread"
-                      ? "text-muted-foreground"
-                      : "text-muted-foreground/80"
-                  )}
-                >
-                  {new Date(alert.timestamp).toLocaleString()} -{" "}
-                  <span className="capitalize">{alert.category}</span>
-                </p>
+                <div className="flex items-center justify-between w-full gap-4">
+                  <p className="text-sm truncate flex-1">{alert.message}</p>
+                  <p className="text-xs text-muted-foreground whitespace-nowrap">
+                    {new Date(alert.timestamp).toLocaleDateString()}
+                  </p>
+                </div>
               </DropdownMenuItem>
             ))
           ) : (
