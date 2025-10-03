@@ -71,7 +71,7 @@ export default function UsersPage() {
                     {user.email}
                   </TableCell>
                   <TableCell className="text-center">
-                     <Badge variant={getRoleBadgeVariant(user.role)}>
+                     <Badge variant={getRoleBadgeVariant(user.role)} className="whitespace-nowrap">
                       {user.role.replace('_', ' ')}
                     </Badge>
                   </TableCell>
