@@ -9,17 +9,16 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { FilePenLine, ShieldCheck, UserCheck, UserX } from "lucide-react";
 import { users } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function UsersPage() {
   const getRoleBadgeVariant = (role: string) => {
@@ -62,9 +61,7 @@ export default function UsersPage() {
                 <TableHead className="text-center">Role</TableHead>
                 <TableHead className="text-center">Status</TableHead>
                 <TableHead className="text-center">Date Added</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -87,22 +84,37 @@ export default function UsersPage() {
                     {format(new Date(user.createdAt), "PP")}
                   </TableCell>
                   <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit User</DropdownMenuItem>
-                        <DropdownMenuItem>View Permissions</DropdownMenuItem>
-                        <DropdownMenuItem>
-                          {user.isActive ? 'Deactivate' : 'Activate'}
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                     <TooltipProvider>
+                      <div className="flex items-center justify-start gap-2">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost">
+                              <FilePenLine className="h-4 w-4" />
+                              <span className="sr-only">Edit User</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Edit User</TooltipContent>
+                        </Tooltip>
+                         <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost">
+                              <ShieldCheck className="h-4 w-4" />
+                              <span className="sr-only">View Permissions</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>View Permissions</TooltipContent>
+                        </Tooltip>
+                         <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost" className={user.isActive ? "text-destructive" : "text-green-600"}>
+                              {user.isActive ? <UserX className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
+                              <span className="sr-only">{user.isActive ? 'Deactivate User' : 'Activate User'}</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>{user.isActive ? 'Deactivate User' : 'Activate User'}</TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TooltipProvider>
                   </TableCell>
                 </TableRow>
               ))}
