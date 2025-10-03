@@ -53,7 +53,7 @@ export default function RecentPaymentsPage() {
                   <TableHead>Amount</TableHead>
                   <TableHead>Paid On</TableHead>
                   <TableHead>Subscription</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -73,7 +73,7 @@ export default function RecentPaymentsPage() {
                     </TableCell>
                     <TableCell>
                       <TooltipProvider>
-                        <div className="flex items-center justify-start gap-2">
+                        <div className="flex items-center justify-center gap-2">
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Button size="icon" variant="ghost">
