@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -17,13 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -50,6 +44,14 @@ export default function ForgotPasswordPage() {
   });
 
   async function onSubmit(data: ForgotPasswordFormValues) {
+    if (!auth) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Firebase Auth is not initialized. Please try again later.",
+      });
+      return;
+    }
     try {
       await sendPasswordResetEmail(auth, data.email);
       toast({
@@ -68,21 +70,31 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40">
-      <Link href="/" className="absolute top-8 left-8 flex items-center gap-2">
-        <BookOpen className="w-6 h-6 text-primary" />
-        <span className="text-xl font-bold text-primary font-headline">LibMan</span>
-      </Link>
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Forgot Password</CardTitle>
-          <CardDescription>
-            Enter your email and we'll send you a link to reset your password.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2">
+       <div className="hidden bg-muted lg:block">
+        <Image
+          src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsaWJyYXJ5fGVufDB8fHx8MTc1OTQ4NDY2NHww&ixlib=rb-4.1.0&q=80&w=1080"
+          alt="Library"
+          width="1920"
+          height="1080"
+          className="h-full w-full object-cover"
+          data-ai-hint="library"
+        />
+      </div>
+      <div className="flex items-center justify-center py-12">
+        <div className="mx-auto grid w-[350px] gap-6">
+           <div className="grid gap-2 text-center">
+             <Link href="/" className="flex items-center gap-2 justify-center text-primary font-headline font-bold text-2xl">
+                <BookOpen className="w-8 h-8" />
+                <span>LibMan</span>
+            </Link>
+            <h1 className="text-3xl font-bold mt-4">Forgot Password?</h1>
+            <p className="text-balance text-muted-foreground">
+              Enter your email and we'll send you a link to reset your password.
+            </p>
+          </div>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
               <FormField
                 control={form.control}
                 name="email"
@@ -111,8 +123,8 @@ export default function ForgotPasswordPage() {
               Log in
             </Link>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
