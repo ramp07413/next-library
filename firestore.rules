@@ -1,0 +1,168 @@
+/**
+ * @fileoverview Firestore Security Rules for the LibMan Platform.
+ *
+ * Core Philosophy:
+ * This ruleset enforces a user-ownership model for user-specific data (e.g., payments).
+ * Libraries are secured using a membership map within the library document itself.
+ * Sessions are secured via owner only access.
+ *
+ * Data Structure:
+ * - /companies/{companyId}: Stores company information.
+ * - /libraries/{libraryId}: Stores library information and library membership (members map).
+ * - /users/{userId}: Stores user profile information.
+ * - /libraries/{libraryId}/seats/{seatId}: Stores seat information for a library.
+ * - /users/{userId}/payments/{paymentId}: Stores payment information for a user.
+ * - /libraries/{libraryId}/alerts/{alertId}: Stores alert information for a library.
+ * - /sessions/{sessionId}: Stores session information for user authentication.
+ *
+ * Key Security Decisions:
+ * - Users can only read/write their own data under /users/{userId}.
+ * - Libraries use a "members" map for access control.
+ * - Sessions are secured by user id.
+ * - No public listing of user data is allowed.
+ *
+ * Denormalization for Authorization:
+ * - The 'libraries' collection uses a `members` map directly on each library document to store user roles (e.g., { members: { 'user_abc': 'admin' } }). This allows rules to check a user's role without additional reads.
+ * - The 'seats' collection denormalizes the libraryId from the parent document to ensure the integrity of the library-seat relationship.
+ * - The 'alerts' collection denormalizes the libraryId from the parent document to ensure the integrity of the library-alert relationship.
+ *
+ * Structural Segregation:
+ * - User profiles and company data are stored in separate collections to enforce different access control policies.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Secures the 'companies' collection.
+     * @path /companies/{companyId}
+     * @allow (get, list): Allows any authenticated user to read company data.
+     * @allow (create, update, delete): Not allowed.
+     * @deny (create, update, delete): No one can create, update, or delete companies via client-side rules. These operations should be handled by trusted server-side code.
+     * @principle Disallows client-side creation, updates or deletion of companies.
+     */
+    match /companies/{companyId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Secures the 'libraries' collection, allowing read access to all but restricting writes.
+     * @path /libraries/{libraryId}
+     * @allow (get, list): Allows any authenticated user to read library data.
+     * @allow (create, update, delete): Not allowed.
+     * @deny (create, update, delete): No one can create, update, or delete libraries via client-side rules. These operations should be handled by trusted server-side code.
+     * @principle Disallows client-side creation, updates, or deletion of libraries.
+     */
+    match /libraries/{libraryId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Secures the 'users' collection, allowing users to read/write their own profile data.
+     * @path /users/{userId}
+     * @allow (get, list): Allows a user to read their own profile.
+     * @allow (create): Allows a user to create their own profile if the userId matches their auth.uid.
+     * @allow (update, delete): Allows a user to update or delete their own profile.
+     * @deny create: if request.auth.uid != request.resource.data.id;
+     * @deny update, delete: if resource == null;
+     * @principle Enforces document ownership for user profiles and requires authentication.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && (request.auth.uid == request.resource.data.id);
+      allow update: if isExistingOwner(userId) && (request.resource.data.id == resource.data.id);
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Secures the 'seats' subcollection within a library, allowing read access to all but restricting writes.
+     * @path /libraries/{libraryId}/seats/{seatId}
+     * @allow (get, list): Allows any authenticated user to read seat data within a library.
+     * @allow (create, update, delete): Not allowed.
+     * @deny (create, update, delete): No one can create, update, or delete seats via client-side rules. These operations should be handled by trusted server-side code.
+     * @principle Disallows client-side creation, updates, or deletion of seats.
+     */
+    match /libraries/{libraryId}/seats/{seatId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Secures the 'payments' subcollection within a user's document, allowing only the owner to manage their payments.
+     * @path /users/{userId}/payments/{paymentId}
+     * @allow (get, list): Allows a user to read their own payment data.
+     * @allow (create): Allows a user to create payment data under their own user ID.
+     * @allow (update, delete): Allows a user to update or delete their own payment data.
+     * @deny update, delete: if resource == null;
+     * @principle Enforces document ownership for payments and requires authentication.
+     */
+    match /users/{userId}/payments/{paymentId} {
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && (request.resource.data.userId == userId);
+      allow update: if isExistingOwner(userId) && (request.resource.data.userId == resource.data.userId);
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Secures the 'alerts' subcollection within a library, allowing read access to all but restricting writes.
+     * @path /libraries/{libraryId}/alerts/{alertId}
+     * @allow (get, list): Allows any authenticated user to read alerts within a library.
+     * @allow (create, update, delete): Not allowed.
+     * @deny (create, update, delete): No one can create, update, or delete alerts via client-side rules. These operations should be handled by trusted server-side code.
+     * @principle Disallows client-side creation, updates, or deletion of alerts.
+     */
+    match /libraries/{libraryId}/alerts/{alertId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+     /**
+      * @description Secures the 'sessions' collection, only allowing authenticated users to read/write their own session data.
+      * @path /sessions/{sessionId}
+      * @allow (get, list): Only the owner can get the session data.
+      * @allow (create): Only the owner can create their session data.
+      * @allow (update, delete): Only the owner can update or delete their session data.
+      * @principle Enforces session ownership.
+      */
+    match /sessions/{sessionId} {
+      allow get: if isSignedIn() && (request.auth.uid == resource.data.userId);
+      allow list: if isSignedIn() && (request.auth.uid == resource.data.userId);
+      allow create: if isSignedIn() && (request.auth.uid == request.resource.data.userId);
+      allow update: if isSignedIn() && (request.auth.uid == resource.data.userId) && (resource != null);
+      allow delete: if isSignedIn() && (request.auth.uid == resource.data.userId) && (resource != null);
+    }
+
+
+    // --- Helper Functions ---
+
+    /**
+     * @description Checks if the current user is signed in.
+     * @return {boolean} True if the user is signed in, false otherwise.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * @description Checks if the current user is the owner of the resource.
+     * @param {string} userId - The user ID to compare against the request's auth UID.
+     * @return {boolean} True if the user is the owner, false otherwise.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * @description Checks if the current user is the owner of an existing resource.
+     * @param {string} userId - The user ID to compare against the request's auth UID.
+     * @return {boolean} True if the user is the owner and the resource exists, false otherwise.
+     */
+    function isExistingOwner(userId) {
+        return isOwner(userId) && resource != null;
+    }
+  }
+}

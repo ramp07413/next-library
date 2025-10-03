@@ -1,0 +1,450 @@
+{
+  "entities": {
+    "Company": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Company",
+      "type": "object",
+      "description": "Represents the company or organization that owns the SaaS platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Company entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the company."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the company."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the company was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the company was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "Library": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Library",
+      "type": "object",
+      "description": "Represents a library managed within the platform.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Library entity."
+        },
+        "companyId": {
+          "type": "string",
+          "description": "Reference to Company. (Relationship: Company 1:N Library)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of the library."
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "Contact email for the library.",
+          "format": "email"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the library was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the library was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "companyId",
+        "name"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the platform (company admin, library admin, or student).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "companyId": {
+          "type": "string",
+          "description": "Reference to Company. (Relationship: Company 1:N User)"
+        },
+        "libraryId": {
+          "type": "string",
+          "description": "Reference to Library. (Relationship: Library 1:N User) Nullable if the user is a company admin."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the user.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the user (e.g., company_admin, library_admin, student)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the user was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the user was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "companyId",
+        "firstName",
+        "lastName",
+        "email",
+        "role"
+      ]
+    },
+    "Seat": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Seat",
+      "type": "object",
+      "description": "Represents a seat in a library.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Seat entity."
+        },
+        "libraryId": {
+          "type": "string",
+          "description": "Reference to Library. (Relationship: Library 1:N Seat)"
+        },
+        "seatNumber": {
+          "type": "string",
+          "description": "Seat number or identifier within the library."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of seat (e.g., full-time, half-time)."
+        },
+        "availabilityStatus": {
+          "type": "string",
+          "description": "Current availability status of the seat (e.g., available, occupied, reserved)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the seat was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the seat was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "libraryId",
+        "seatNumber",
+        "type",
+        "availabilityStatus"
+      ]
+    },
+    "Payment": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Payment",
+      "type": "object",
+      "description": "Represents a payment made by a student.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Payment entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User (student). (Relationship: User 1:N Payment)"
+        },
+        "libraryId": {
+          "type": "string",
+          "description": "Reference to Library. (Relationship: Library 1:N Payment)"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount paid."
+        },
+        "paymentDate": {
+          "type": "string",
+          "description": "Date of the payment.",
+          "format": "date-time"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment method used (e.g., credit card, cash)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the payment record was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the payment record was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "libraryId",
+        "amount",
+        "paymentDate",
+        "paymentMethod"
+      ]
+    },
+    "Alert": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Alert",
+      "type": "object",
+      "description": "Represents an alert or notification for a user.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Alert entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Alert)"
+        },
+        "libraryId": {
+          "type": "string",
+          "description": "Reference to Library. (Relationship: Library 1:N Alert)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Content of the alert message."
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority of the alert (e.g., high, medium, low)."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the alert was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Date and time when the alert was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "libraryId",
+        "message",
+        "priority"
+      ]
+    },
+    "Session": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Session",
+      "type": "object",
+      "description": "Represents a user session for authentication.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the session."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User entity."
+        },
+        "token": {
+          "type": "string",
+          "description": "Session token for authentication."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Date and time when the session was created.",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "description": "Date and time when the session expires.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "token",
+        "createdAt",
+        "expiresAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/companies/{companyId}",
+        "definition": {
+          "entityName": "Company",
+          "schema": {
+            "$ref": "#/backend/entities/Company"
+          },
+          "description": "Stores company information.",
+          "params": [
+            {
+              "name": "companyId",
+              "description": "The unique identifier for the company."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/libraries/{libraryId}",
+        "definition": {
+          "entityName": "Library",
+          "schema": {
+            "$ref": "#/backend/entities/Library"
+          },
+          "description": "Stores library information. Includes denormalized 'members' map for authorization independence.",
+          "params": [
+            {
+              "name": "libraryId",
+              "description": "The unique identifier for the library."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profile information.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/libraries/{libraryId}/seats/{seatId}",
+        "definition": {
+          "entityName": "Seat",
+          "schema": {
+            "$ref": "#/backend/entities/Seat"
+          },
+          "description": "Stores seat information for a specific library. Includes denormalized 'libraryId' from parent document for QAPs",
+          "params": [
+            {
+              "name": "libraryId",
+              "description": "The unique identifier for the library."
+            },
+            {
+              "name": "seatId",
+              "description": "The unique identifier for the seat."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/payments/{paymentId}",
+        "definition": {
+          "entityName": "Payment",
+          "schema": {
+            "$ref": "#/backend/entities/Payment"
+          },
+          "description": "Stores payment information for a specific user.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "paymentId",
+              "description": "The unique identifier for the payment."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/libraries/{libraryId}/alerts/{alertId}",
+        "definition": {
+          "entityName": "Alert",
+          "schema": {
+            "$ref": "#/backend/entities/Alert"
+          },
+          "description": "Stores alert information for a specific library.",
+          "params": [
+            {
+              "name": "libraryId",
+              "description": "The unique identifier for the library."
+            },
+            {
+              "name": "alertId",
+              "description": "The unique identifier for the alert."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/sessions/{sessionId}",
+        "definition": {
+          "entityName": "Session",
+          "schema": {
+            "$ref": "#/backend/entities/Session"
+          },
+          "description": "Stores session information for user authentication.",
+          "params": [
+            {
+              "name": "sessionId",
+              "description": "The unique identifier for the session."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure is designed to support the LibMan Platform, a SaaS web application for library management. The structure prioritizes security, scalability, and debuggability by adhering to the principles of Authorization Independence, Structural Segregation, Access Modeling, and Data Clarity. Each collection is designed to have a homogeneous security posture, simplifying security rules.\n\n**Authorization Independence:**\n\n*   Ownership is explicitly defined using path-based ownership for user-related data (e.g., `/users/{userId}/payments/{paymentId}`).\n\n*   For collaborative data scenarios, such as library membership, the structure uses a membership map (`members`) within the library documents, enabling direct authorization checks without the need for `get()` calls. Any subcollections of the library will need to denormalize relevant authorization data from the parent. For example, the `alerts` collection denormalizes the library ID.\n\n**Structural Segregation:**\n\n*   Data with different access requirements is segregated into separate collections. For instance, user profiles are stored under `/users/{userId}`, and company data is stored under `/companies/{companyId}`. This ensures that security rules can be applied consistently to each collection.\n\n**Access Modeling:**\n\n*   **Path-Based Ownership:** The `/users/{userId}` collection and its subcollections (e.g., `/users/{userId}/payments`) follow the path-based ownership model, making it easy to define rules based on the authenticated user's ID.\n\n*   **Membership Map:** The structure uses the membership map pattern for managing library access. This allows for flexible role-based access control, where different users can have different roles (e.g., admin, student) within a library.\n\n**QAPs (Rules are not Filters):**\n\n*   The structure enables secure `list` operations by ensuring that each collection has a clear and consistent security posture. For example, listing documents in `/users/{userId}/payments` can be secured by checking if the `request.auth.uid` matches the `userId` parameter in the path.\n\n**Invariants:**\n\n*   The structure supports the integrity of ownership by using path-based ownership and membership maps. Timestamps (e.g., `createdAt`, `updatedAt`) can be enforced using security rules to ensure that they are set correctly when documents are created or updated.\n\n**Home/Login/Signup pages**\n\nBecause the instruction specified these pages, the sessions collection is added."
+  }
+}
