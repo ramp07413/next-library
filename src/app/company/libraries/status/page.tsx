@@ -28,6 +28,8 @@ import {
 import { Building, CheckCircle, XCircle } from "lucide-react";
 import { libraries, type Library } from "../data";
 import { LibraryStatusChart } from "@/components/company/library-status-chart";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function LibraryStatusPage() {
   const [statusFilter, setStatusFilter] = useState("all");
@@ -115,7 +117,8 @@ export default function LibraryStatusPage() {
                 <TableRow>
                   <TableHead>Library Name</TableHead>
                   <TableHead>Contact</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -125,12 +128,17 @@ export default function LibraryStatusPage() {
                       {library.libraryName}
                     </TableCell>
                     <TableCell>{library.libraryEmail}</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell>
                       <Badge
                         variant={library.isActive ? "secondary" : "outline"}
                       >
                         {library.isActive ? "Active" : "Inactive"}
                       </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Button asChild variant="outline" size="sm">
+                        <Link href={`/library/${library.id}`}>View Library</Link>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
