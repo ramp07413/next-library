@@ -28,10 +28,13 @@ export function SettingsDropdown() {
         <DropdownMenuLabel>Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-            <Link href="/company/settings">Profile</Link>
+            <Link href="/company/settings?tab=profile">Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-            <Link href="/company/settings?tab=security">Change Password</Link>
+            <Link href="/company/settings?tab=security">Security</Link>
+        </DropdownMenuItem>
+         <DropdownMenuItem asChild>
+            <Link href="/company/settings?tab=appearance">Appearance</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
