@@ -76,7 +76,7 @@ export default function SupportTicketsPage() {
                 <TableBody>
                   {filteredTickets.map((ticket) => (
                     <TableRow key={ticket.id} className={ticket.status === 'unread' ? 'font-bold' : ''}>
-                      <TableCell>
+                      <TableCell className="whitespace-nowrap">
                         <div className="flex items-center gap-3">
                           <Avatar className="h-9 w-9">
                             <AvatarImage src={ticket.senderAvatar} alt={ticket.sender} data-ai-hint="person portrait" />
@@ -85,7 +85,7 @@ export default function SupportTicketsPage() {
                           {ticket.sender}
                         </div>
                       </TableCell>
-                      <TableCell>{ticket.subject}</TableCell>
+                      <TableCell className="whitespace-nowrap">{ticket.subject}</TableCell>
                       <TableCell className="text-center">
                         <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
                           {ticket.status === 'unread' ? 'Open' : 'Resolved'}
