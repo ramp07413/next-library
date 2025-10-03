@@ -91,7 +91,7 @@ export default function SupportTicketsPage() {
                           {ticket.status === 'unread' ? 'Open' : 'Resolved'}
                         </Badge>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="whitespace-nowrap">
                         {formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}
                       </TableCell>
                       <TableCell>
