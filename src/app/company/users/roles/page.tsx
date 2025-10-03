@@ -61,7 +61,7 @@ export default function RolesPage() {
               <TableRow>
                 <TableHead>Role</TableHead>
                 <TableHead>Description</TableHead>
-                <TableHead>Users</TableHead>
+                <TableHead className="text-center">Users</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -74,7 +74,7 @@ export default function RolesPage() {
                     </Badge>
                   </TableCell>
                    <TableCell>{role.description}</TableCell>
-                   <TableCell>{role.userCount}</TableCell>
+                   <TableCell className="text-center">{role.userCount}</TableCell>
                   <TableCell>
                     <TooltipProvider>
                       <div className="flex items-center justify-start gap-2">
