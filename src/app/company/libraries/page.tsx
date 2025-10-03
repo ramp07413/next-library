@@ -18,6 +18,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Link from "next/link";
 
 
 export default function LibrariesPage() {
@@ -32,7 +33,9 @@ export default function LibrariesPage() {
             Manage all the libraries in your network.
           </p>
         </div>
-        <Button>Add New Library</Button>
+        <Button asChild>
+          <Link href="/company/libraries/register">Add New Library</Link>
+        </Button>
       </div>
 
       <Card>
