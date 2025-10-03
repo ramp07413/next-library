@@ -42,6 +42,7 @@ import {
   ShieldCheck,
   Lock,
   Clock,
+  Palette,
 } from "lucide-react";
 
 export const COMPANY_NAV_LINKS = [
@@ -130,7 +131,9 @@ export const COMPANY_NAV_LINKS = [
     label: "Settings",
     icon: Settings,
     sub: [
-        { href: "/company/settings", label: "Settings", icon: Settings },
+        { href: "/company/settings?tab=profile", label: "Profile", icon: User },
+        { href: "/company/settings?tab=security", label: "Security", icon: Shield },
+        { href: "/company/settings?tab=appearance", label: "Appearance", icon: Palette },
     ],
   },
 ];
