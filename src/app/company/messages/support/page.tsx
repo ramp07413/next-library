@@ -68,7 +68,7 @@ export default function SupportTicketsPage() {
                   <TableRow>
                     <TableHead>From</TableHead>
                     <TableHead>Subject</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead className="text-center">Status</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead className="text-center">Actions</TableHead>
                   </TableRow>
@@ -86,7 +86,7 @@ export default function SupportTicketsPage() {
                         </div>
                       </TableCell>
                       <TableCell>{ticket.subject}</TableCell>
-                      <TableCell>
+                      <TableCell className="text-center">
                         <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
                           {ticket.status === 'unread' ? 'Open' : 'Resolved'}
                         </Badge>
