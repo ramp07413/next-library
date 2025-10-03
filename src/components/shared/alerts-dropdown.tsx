@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Bell, BellRing } from "lucide-react";
@@ -17,12 +18,6 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-const SEVERITY_STYLES = {
-  high: "border-l-destructive",
-  medium: "border-l-yellow-500",
-  low: "border-l-blue-500",
-};
-
 interface AlertsDropdownProps {
   role: "company" | "library" | "student";
 }
@@ -41,14 +36,14 @@ export function AlertsDropdown({ role }: AlertsDropdownProps) {
     fetchAlerts();
   }, [role]);
 
-  const hasHighPriority = alerts.some((alert) => alert.severity === "high");
+  const hasUnread = alerts.some((alert) => alert.status === "unread");
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-[1.2rem] w-[1.2rem]" />
-          {hasHighPriority && !loading && (
+          {hasUnread && !loading && (
             <span className="absolute top-1.5 right-1.5 flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-destructive"></span>
@@ -70,19 +65,25 @@ export function AlertsDropdown({ role }: AlertsDropdownProps) {
             ))
           ) : alerts.length > 0 ? (
             alerts.map((alert) => (
-              <DropdownMenuItem key={alert.id} asChild>
-                <div
+              <DropdownMenuItem
+                key={alert.id}
+                className={cn(
+                  "flex flex-col items-start gap-1 p-2 focus:bg-[hsl(var(--chart-2))] focus:text-accent-foreground",
+                  alert.status === "unread" && "font-semibold"
+                )}
+              >
+                <p className="text-sm whitespace-normal">{alert.message}</p>
+                <p
                   className={cn(
-                    "flex flex-col items-start gap-1 p-2 border-l-4",
-                    SEVERITY_STYLES[alert.severity]
+                    "text-xs",
+                    alert.status === "unread"
+                      ? "text-muted-foreground"
+                      : "text-muted-foreground/80"
                   )}
                 >
-                  <p className="text-sm font-medium">{alert.message}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {new Date(alert.timestamp).toLocaleString()} -{" "}
-                    <span className="capitalize">{alert.category}</span>
-                  </p>
-                </div>
+                  {new Date(alert.timestamp).toLocaleString()} -{" "}
+                  <span className="capitalize">{alert.category}</span>
+                </p>
               </DropdownMenuItem>
             ))
           ) : (
