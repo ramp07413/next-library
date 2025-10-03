@@ -9,16 +9,15 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PlusCircle } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { PlusCircle, FilePenLine, ShieldCheck, Trash2 } from "lucide-react";
 import { roles } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function RolesPage() {
 
@@ -63,38 +62,51 @@ export default function RolesPage() {
                 <TableHead>Role</TableHead>
                 <TableHead>Description</TableHead>
                 <TableHead>Users</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {roles.map((role) => (
                 <TableRow key={role.name}>
                   <TableCell className="font-medium">
-                     <Badge variant={getRoleBadgeVariant(role.name)} className="capitalize">
+                     <Badge variant={getRoleBadgeVariant(role.name)} className="capitalize whitespace-nowrap">
                       {role.name.replace('_', ' ')}
                     </Badge>
                   </TableCell>
                    <TableCell>{role.description}</TableCell>
                    <TableCell>{role.userCount}</TableCell>
                   <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit Role</DropdownMenuItem>
-                        <DropdownMenuItem>View Permissions</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
-                          Delete Role
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <TooltipProvider>
+                      <div className="flex items-center justify-start gap-2">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost">
+                              <FilePenLine className="h-4 w-4" />
+                              <span className="sr-only">Edit Role</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Edit Role</TooltipContent>
+                        </Tooltip>
+                         <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost">
+                              <ShieldCheck className="h-4 w-4" />
+                              <span className="sr-only">View Permissions</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>View Permissions</TooltipContent>
+                        </Tooltip>
+                         <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button size="icon" variant="ghost" className="text-destructive">
+                              <Trash2 className="h-4 w-4" />
+                              <span className="sr-only">Delete Role</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Delete Role</TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TooltipProvider>
                   </TableCell>
                 </TableRow>
               ))}
