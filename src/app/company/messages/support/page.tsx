@@ -12,19 +12,13 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, LifeBuoy, Search } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { LifeBuoy, Search, Eye, CheckCircle } from "lucide-react";
 import { messages } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDistanceToNow } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function SupportTicketsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,58 +62,67 @@ export default function SupportTicketsPage() {
         </CardHeader>
         <CardContent>
           {filteredTickets.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>From</TableHead>
-                  <TableHead>Subject</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>
-                    <span className="sr-only">Actions</span>
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredTickets.map((ticket) => (
-                  <TableRow key={ticket.id} className={ticket.status === 'unread' ? 'font-bold' : ''}>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-9 w-9">
-                          <AvatarImage src={ticket.senderAvatar} alt={ticket.sender} data-ai-hint="person portrait" />
-                          <AvatarFallback>{ticket.sender.charAt(0)}</AvatarFallback>
-                        </Avatar>
-                        {ticket.sender}
-                      </div>
-                    </TableCell>
-                    <TableCell>{ticket.subject}</TableCell>
-                    <TableCell>
-                      <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
-                        {ticket.status === 'unread' ? 'Open' : 'Resolved'}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      {formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button aria-haspopup="true" size="icon" variant="ghost">
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>View Ticket</DropdownMenuItem>
-                          <DropdownMenuItem>Mark as Resolved</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
+            <TooltipProvider>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>From</TableHead>
+                    <TableHead>Subject</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead className="text-center">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {filteredTickets.map((ticket) => (
+                    <TableRow key={ticket.id} className={ticket.status === 'unread' ? 'font-bold' : ''}>
+                      <TableCell>
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-9 w-9">
+                            <AvatarImage src={ticket.senderAvatar} alt={ticket.sender} data-ai-hint="person portrait" />
+                            <AvatarFallback>{ticket.sender.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                          {ticket.sender}
+                        </div>
+                      </TableCell>
+                      <TableCell>{ticket.subject}</TableCell>
+                      <TableCell>
+                        <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
+                          {ticket.status === 'unread' ? 'Open' : 'Resolved'}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        {formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center justify-center gap-2">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button aria-haspopup="true" size="icon" variant="ghost">
+                                <Eye className="h-4 w-4" />
+                                <span className="sr-only">View Ticket</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>View Ticket</TooltipContent>
+                          </Tooltip>
+                          {ticket.status === 'unread' && (
+                             <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost" className="text-green-600">
+                                    <CheckCircle className="h-4 w-4" />
+                                    <span className="sr-only">Mark as Resolved</span>
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Mark as Resolved</TooltipContent>
+                              </Tooltip>
+                          )}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TooltipProvider>
           ) : (
             <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
               <LifeBuoy className="h-12 w-12 mb-4" />
