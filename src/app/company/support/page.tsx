@@ -12,14 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Search, Inbox, LifeBuoy, Eye, CheckCircle } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Search, LifeBuoy, Eye, CheckCircle } from "lucide-react";
 import { messages, type Message } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDistanceToNow } from "date-fns";
@@ -77,7 +70,7 @@ export default function AllMessagesPage() {
                 <TableRow>
                     <TableHead>From</TableHead>
                     <TableHead>Subject</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead className="text-center">Status</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
@@ -85,7 +78,7 @@ export default function AllMessagesPage() {
                 <TableBody>
                 {filteredTickets.map((ticket) => (
                     <TableRow key={ticket.id} className={ticket.status === 'unread' ? 'font-bold' : ''}>
-                    <TableCell>
+                    <TableCell className="whitespace-nowrap">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-9 w-9">
                                 <AvatarImage src={ticket.senderAvatar} alt={ticket.sender} data-ai-hint="person portrait" />
@@ -94,16 +87,16 @@ export default function AllMessagesPage() {
                             {ticket.sender}
                         </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="whitespace-nowrap">
                         {ticket.subject}
                         <p className="font-normal text-sm text-muted-foreground truncate max-w-xs">{ticket.content}</p>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="text-center">
                         <Badge variant={ticket.status === 'unread' ? 'destructive' : 'outline'}>
                           {ticket.status === 'unread' ? 'Open' : 'Resolved'}
                         </Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="whitespace-nowrap">
                         {formatDistanceToNow(new Date(ticket.date), { addSuffix: true })}
                     </TableCell>
                     <TableCell>
