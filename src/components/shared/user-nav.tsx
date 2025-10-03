@@ -16,22 +16,20 @@ import {
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { Palette, BookOpen, Sun, Moon } from "lucide-react";
+import { Palette } from "lucide-react";
 import { ThemeSwitcher } from "./theme-switcher";
-import { useTheme } from "next-themes";
-import { ThemeToggle } from "./theme-toggle";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 
 
 export function UserNav() {
-  const { setTheme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
-              <BookOpen className="h-5 w-5" />
-            </div>
+           <Avatar className="h-8 w-8">
+              <AvatarFallback>A</AvatarFallback>
+            </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64" align="end" forceMount>
