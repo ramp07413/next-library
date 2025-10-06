@@ -26,13 +26,6 @@ import {
 import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
@@ -304,16 +297,16 @@ export default function SeatsPage() {
         </TabsContent>
       </Tabs>
       
-      <Sheet open={!!selectedSeat} onOpenChange={(open) => !open && setSelectedSeat(null)}>
-        <SheetContent>
+      <Dialog open={!!selectedSeat} onOpenChange={(open) => !open && setSelectedSeat(null)}>
+        <DialogContent className="sm:max-w-md">
             {selectedSeat && (
                 <>
-                <SheetHeader>
-                    <SheetTitle>Seat {selectedSeat.seatNumber}</SheetTitle>
-                    <SheetDescription>
+                <DialogHeader>
+                    <DialogTitle>Seat {selectedSeat.seatNumber}</DialogTitle>
+                    <DialogDescription>
                         Details and actions for this seat.
-                    </SheetDescription>
-                </SheetHeader>
+                    </DialogDescription>
+                </DialogHeader>
                 <div className="py-4 space-y-4">
                     <div className="flex justify-between items-center">
                         <span className="text-muted-foreground">Status</span>
@@ -332,18 +325,19 @@ export default function SeatsPage() {
                         <span>{selectedSeat.dateAssigned ? format(new Date(selectedSeat.dateAssigned), "PP") : 'N/A'}</span>
                     </div>
                 </div>
-                 <div className="mt-6 space-y-2">
-                    <p className="font-semibold">Actions</p>
+                 <DialogFooter className="mt-6 flex-col sm:flex-col sm:space-x-0 space-y-2">
+                    <p className="font-semibold text-left">Actions</p>
                     {selectedSeat.status === 'available' && <Button className="w-full">Assign Student</Button>}
                     {(selectedSeat.status === 'full occupied' || selectedSeat.status === 'half occupied') && <Button variant="destructive" className="w-full">Vacate Seat</Button>}
                     {selectedSeat.status !== 'maintenance' && <Button variant="outline" className="w-full">Mark for Maintenance</Button>}
                     {selectedSeat.status === 'maintenance' && <Button variant="secondary" className="w-full">Mark as Available</Button>}
                     <Button variant="ghost" className="w-full justify-start">View Seat History</Button>
-                </div>
+                </DialogFooter>
                 </>
             )}
-        </SheetContent>
-      </Sheet>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
+
