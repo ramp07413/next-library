@@ -139,7 +139,7 @@ export default function Home() {
         </section>
         <Separator className="my-0 bg-white/10" />
       </main>
-      <footer className="bg-background border-t">
+      <footer className="bg-muted">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
@@ -152,7 +152,7 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider text-foreground">Quick Links</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li><Link href="#" className="hover:text-primary transition-colors">Features</Link></li>
                 <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
@@ -161,7 +161,7 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider text-foreground">Follow Us</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Follow Us</h4>
               <div className="flex mt-4 space-x-4">
                 <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter /></Link>
                 <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Facebook /></Link>
