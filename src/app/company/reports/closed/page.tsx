@@ -17,6 +17,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { format } from "date-fns";
 import { useState } from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function ClosedReportsPage() {
   const [closedReports] = useState(
@@ -66,46 +85,79 @@ export default function ClosedReportsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {closedReports.map((report) => (
-                  <TableRow key={report.id}>
-                    <TableCell className="font-medium whitespace-nowrap">
-                      {report.title}
-                    </TableCell>
-                     <TableCell className="whitespace-nowrap">
-                      {report.libraryName}
-                    </TableCell>
-                     <TableCell>
-                      <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge>
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {format(new Date(report.date), "PP")}
-                    </TableCell>
-                    <TableCell>
-                      <TooltipProvider>
+                <TooltipProvider>
+                  {closedReports.map((report) => (
+                    <TableRow key={report.id}>
+                      <TableCell className="font-medium whitespace-nowrap">
+                        {report.title}
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {report.libraryName}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge>
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {format(new Date(report.date), "PP")}
+                      </TableCell>
+                      <TableCell>
                         <div className="flex items-center justify-center gap-2">
-                           <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button aria-haspopup="true" size="icon" variant="ghost">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Details</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button aria-haspopup="true" size="icon" variant="ghost">
-                                <FileUp className="h-4 w-4" />
-                                <span className="sr-only">Re-open Report</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Re-open Report</TooltipContent>
-                          </Tooltip>
+                           <Dialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <DialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                                    <Eye className="h-4 w-4" />
+                                  </Button>
+                                </DialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                            </Tooltip>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>{report.title}</DialogTitle>
+                                <DialogDescription>
+                                  Report ID: {report.id}
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="py-4 space-y-2">
+                                <p><strong>Library:</strong> {report.libraryName}</p>
+                                <p><strong>Submitted By:</strong> {report.submittedBy}</p>
+                                <p><strong>Date:</strong> {format(new Date(report.date), "PPP")}</p>
+                                <p><strong>Status:</strong> <Badge variant="outline" className="capitalize">{report.status}</Badge></p>
+                                <p><strong>Category:</strong> <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge></p>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          <AlertDialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <AlertDialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                                    <FileUp className="h-4 w-4" />
+                                  </Button>
+                                </AlertDialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>Re-open Report</TooltipContent>
+                            </Tooltip>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure you want to re-open this report?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will mark "{report.title}" as open and it will appear in the open reports list.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction>Re-open</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </div>
-                      </TooltipProvider>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TooltipProvider>
               </TableBody>
             </Table>
           ) : (

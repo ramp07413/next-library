@@ -37,6 +37,17 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -248,42 +259,116 @@ export default function SeatsPage() {
                         <TableCell>
                           <div className="flex items-center justify-center gap-2">
                             {seat.status === 'available' && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost" size="icon"><UserPlus className="h-4 w-4" /></Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Assign Student</TooltipContent>
-                              </Tooltip>
+                              <Dialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <DialogTrigger asChild>
+                                      <Button variant="ghost" size="icon"><UserPlus className="h-4 w-4" /></Button>
+                                    </DialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Assign Student</TooltipContent>
+                                </Tooltip>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Assign Seat {seat.seatNumber}</DialogTitle>
+                                  </DialogHeader>
+                                  <div className="grid gap-4 py-4">
+                                    <Label htmlFor="student-id">Student ID</Label>
+                                    <Input id="student-id" placeholder="Enter student ID"/>
+                                  </div>
+                                  <DialogFooter>
+                                    <DialogClose asChild><Button type="submit">Assign</Button></DialogClose>
+                                  </DialogFooter>
+                                </DialogContent>
+                              </Dialog>
                             )}
                             {(seat.status === 'full occupied' || seat.status === 'half occupied') && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost" size="icon"><UserMinus className="h-4 w-4" /></Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Vacate Seat</TooltipContent>
-                              </Tooltip>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AlertDialogTrigger asChild>
+                                      <Button variant="ghost" size="icon"><UserMinus className="h-4 w-4" /></Button>
+                                    </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Vacate Seat</TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Vacate Seat?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Are you sure you want to vacate seat {seat.seatNumber} occupied by {seat.studentName}?
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction>Vacate</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
                             )}
-                             <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost" size="icon"><History className="h-4 w-4" /></Button>
-                                </TooltipTrigger>
-                                <TooltipContent>View History</TooltipContent>
-                              </Tooltip>
+                             <Dialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <DialogTrigger asChild>
+                                      <Button variant="ghost" size="icon"><History className="h-4 w-4" /></Button>
+                                    </DialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>View History</TooltipContent>
+                                </Tooltip>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>History for Seat {seat.seatNumber}</DialogTitle>
+                                  </DialogHeader>
+                                  <p className="text-center p-4">No history available.</p>
+                                </DialogContent>
+                              </Dialog>
                             {seat.status !== 'maintenance' && (
-                               <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost" size="icon"><Wrench className="h-4 w-4" /></Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Mark for Maintenance</TooltipContent>
-                              </Tooltip>
+                               <AlertDialog>
+                                 <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <AlertDialogTrigger asChild>
+                                        <Button variant="ghost" size="icon"><Wrench className="h-4 w-4" /></Button>
+                                      </AlertDialogTrigger>
+                                    </TooltipTrigger>
+                                    <TooltipContent>Mark for Maintenance</TooltipContent>
+                                  </Tooltip>
+                                 <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                      <AlertDialogTitle>Mark for Maintenance?</AlertDialogTitle>
+                                      <AlertDialogDescription>
+                                        This will mark seat {seat.seatNumber} as unavailable for students.
+                                      </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                      <AlertDialogAction>Confirm</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                  </AlertDialogContent>
+                                </AlertDialog>
                             )}
                             {seat.status === 'maintenance' && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <Button variant="ghost" size="icon"><CheckCircle className="h-4 w-4 text-green-600" /></Button>
-                                </TooltipTrigger>
-                                <TooltipContent>Mark as Available</TooltipContent>
-                              </Tooltip>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AlertDialogTrigger asChild>
+                                      <Button variant="ghost" size="icon"><CheckCircle className="h-4 w-4 text-green-600" /></Button>
+                                    </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>Mark as Available</TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Mark as Available?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      This will make seat {seat.seatNumber} available for assignment.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction>Mark as Available</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
                             )}
                           </div>
                         </TableCell>
@@ -340,4 +425,3 @@ export default function SeatsPage() {
     </div>
   );
 }
-

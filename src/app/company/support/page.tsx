@@ -19,6 +19,25 @@ import { formatDistanceToNow } from "date-fns";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function AllMessagesPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,25 +120,52 @@ export default function AllMessagesPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-center gap-2">
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button aria-haspopup="true" size="icon" variant="ghost">
-                              <Eye className="h-4 w-4" />
-                              <span className="sr-only">View Ticket</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>View Ticket</TooltipContent>
-                        </Tooltip>
-                        {ticket.status === 'unread' && (
-                           <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button aria-haspopup="true" size="icon" variant="ghost" className="text-green-600">
-                                  <CheckCircle className="h-4 w-4" />
-                                  <span className="sr-only">Mark as Resolved</span>
+                        <Dialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                               <DialogTrigger asChild>
+                                <Button aria-haspopup="true" size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
                                 </Button>
+                              </DialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>View Ticket</TooltipContent>
+                          </Tooltip>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>{ticket.subject}</DialogTitle>
+                              <DialogDescription>From: {ticket.sender}</DialogDescription>
+                            </DialogHeader>
+                            <div className="py-4">
+                              <p>{ticket.content}</p>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        {ticket.status === 'unread' && (
+                           <AlertDialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <AlertDialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost" className="text-green-600">
+                                    <CheckCircle className="h-4 w-4" />
+                                  </Button>
+                                </AlertDialogTrigger>
                               </TooltipTrigger>
                               <TooltipContent>Mark as Resolved</TooltipContent>
                             </Tooltip>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will mark the ticket "{ticket.subject}" as resolved.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction>Mark as Resolved</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         )}
                       </div>
                     </TableCell>
