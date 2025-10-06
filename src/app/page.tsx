@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, Building, Library, User, CheckCircle, Twitter, Fa
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { Separator } from "@/components/ui/separator";
 
 
 export default function Home() {
@@ -60,6 +61,8 @@ export default function Home() {
           </div>
         </section>
 
+        <Separator className="my-0 bg-white/10" />
+
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
@@ -89,6 +92,8 @@ export default function Home() {
             </div>
         </section>
 
+        <Separator className="my-0 bg-white/10" />
+
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
@@ -113,6 +118,8 @@ export default function Home() {
                 </div>
             </div>
         </section>
+        
+        <Separator className="my-0 bg-white/10" />
 
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
