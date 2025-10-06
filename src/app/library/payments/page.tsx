@@ -12,15 +12,8 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Search, Eye, Mail, CheckCircle } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { payments } from "./data";
+import { Search, Eye, Mail, CheckCircle } from "lucide-react";
+import { payments, LibraryPayment } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import {
@@ -33,6 +26,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 
 export default function LibraryPaymentsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -140,26 +153,75 @@ export default function LibraryPaymentsPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-start gap-1 sm:gap-2">
-                          <Tooltip>
-                              <TooltipTrigger asChild>
-                                  <Button size="icon" variant="ghost"><Eye className="h-4 w-4" /></Button>
-                              </TooltipTrigger>
-                              <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
+                          <Dialog>
+                            <Tooltip>
+                                <DialogTrigger asChild>
+                                    <TooltipTrigger asChild>
+                                        <Button size="icon" variant="ghost"><Eye className="h-4 w-4" /></Button>
+                                    </TooltipTrigger>
+                                </DialogTrigger>
+                                <TooltipContent>View Details</TooltipContent>
+                            </Tooltip>
+                             <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Payment Details</DialogTitle>
+                                    <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
+                                </DialogHeader>
+                                <div className="space-y-2 py-4 text-sm">
+                                    <p><span className="font-semibold">Student:</span> {payment.studentName}</p>
+                                    <p><span className="font-semibold">Amount:</span> ${payment.amount.toFixed(2)}</p>
+                                    <p><span className="font-semibold">Due Date:</span> {format(new Date(payment.dueDate), "PPP")}</p>
+                                    <p><span className="font-semibold">Paid On:</span> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</p>
+                                    <p><span className="font-semibold">Status:</span> <Badge variant={getStatusBadgeVariant(payment.status)}>{payment.status}</Badge></p>
+                                </div>
+                            </DialogContent>
+                          </Dialog>
                           {payment.status !== 'Paid' && (
                               <>
-                                  <Tooltip>
-                                      <TooltipTrigger asChild>
-                                          <Button size="icon" variant="ghost"><Mail className="h-4 w-4" /></Button>
-                                      </TooltipTrigger>
-                                      <TooltipContent>Send Reminder</TooltipContent>
-                                  </Tooltip>
-                                  <Tooltip>
-                                      <TooltipTrigger asChild>
-                                          <Button size="icon" variant="ghost" className="text-green-600"><CheckCircle className="h-4 w-4" /></Button>
-                                      </TooltipTrigger>
-                                      <TooltipContent>Mark as Paid</TooltipContent>
-                                  </Tooltip>
+                                  <AlertDialog>
+                                    <Tooltip>
+                                        <AlertDialogTrigger asChild>
+                                            <TooltipTrigger asChild>
+                                                <Button size="icon" variant="ghost"><Mail className="h-4 w-4" /></Button>
+                                            </TooltipTrigger>
+                                        </AlertDialogTrigger>
+                                        <TooltipContent>Send Reminder</TooltipContent>
+                                    </Tooltip>
+                                     <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Send Payment Reminder?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This will send an email reminder to {payment.studentName} for the payment of ${payment.amount.toFixed(2)}.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction>Send Reminder</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                  </AlertDialog>
+                                  <AlertDialog>
+                                    <Tooltip>
+                                        <AlertDialogTrigger asChild>
+                                            <TooltipTrigger asChild>
+                                                 <Button size="icon" variant="ghost" className="text-green-600"><CheckCircle className="h-4 w-4" /></Button>
+                                            </TooltipTrigger>
+                                        </AlertDialogTrigger>
+                                        <TooltipContent>Mark as Paid</TooltipContent>
+                                    </Tooltip>
+                                     <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Mark as Paid?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                Are you sure you want to mark this payment of ${payment.amount.toFixed(2)} from {payment.studentName} as paid?
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction>Confirm</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                  </AlertDialog>
                               </>
                           )}
                       </div>
