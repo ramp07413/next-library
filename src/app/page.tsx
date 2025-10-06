@@ -32,7 +32,7 @@ export default function Home() {
             </Button>
         </div>
       </header>
-      <main className="flex-grow">
+      <main className="flex-grow bg-muted">
         <section className="relative h-[70vh] flex items-center justify-center text-center text-white">
           <Image
             src="https://images.pexels.com/photos/12064/pexels-photo-12064.jpeg"
@@ -60,7 +60,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-muted py-20 lg:py-24">
+        <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h3 className="text-3xl font-bold font-headline">A Unified Platform for Everyone</h3>
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
         </section>
 
-        <section className="bg-muted py-20 lg:py-24">
+        <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                  <h3 className="text-3xl font-bold font-headline">Features at a Glance</h3>
                  <p className="mt-2 text-muted-foreground max-w-2xl mx-auto mb-12">Everything you need to run a modern library, and more.</p>
@@ -181,7 +181,7 @@ interface DashboardCardProps {
 
 function DashboardCard({ title, description, icon, href }: DashboardCardProps) {
   return (
-    <Card className="flex flex-col text-center items-center hover:shadow-lg transition-shadow duration-300">
+    <Card className="flex flex-col text-center items-center hover:shadow-lg transition-shadow duration-300 bg-card">
       <CardHeader className="flex flex-col items-center gap-4 space-y-0 pb-2">
         <div className="bg-primary/10 p-4 rounded-full">
           {icon}
@@ -210,6 +210,7 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
 }
 
     
+
 
 
 
