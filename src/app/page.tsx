@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-row justify-between items-center gap-4">
+      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-row justify-between items-center gap-4 bg-muted">
         <div className="flex items-center gap-2">
             <BookOpen className="w-8 h-8 text-primary" />
             <h1 className="text-2xl font-bold text-primary font-headline">LibMan</h1>
@@ -131,7 +131,7 @@ export default function Home() {
             </div>
         </section>
       </main>
-      <footer className="bg-background border-t">
+      <footer className="bg-muted border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
@@ -208,9 +208,3 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
         </div>
     )
 }
-
-    
-
-
-
-
