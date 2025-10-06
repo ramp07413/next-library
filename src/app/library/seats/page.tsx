@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PlusCircle, Search, Armchair, Circle, UserPlus, UserMinus, Wrench, CheckCircle, History } from "lucide-react";
+import { PlusCircle, Search, Armchair, Circle, UserPlus, UserMinus, Wrench, CheckCircle, History, Trash2 } from "lucide-react";
 import { seats, type Seat } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -106,34 +106,39 @@ export default function SeatsPage() {
             View, manage, and assign library seats.
           </p>
         </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>
-                <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+        <div className="flex items-center gap-2">
+            <Dialog>
+            <DialogTrigger asChild>
+                <Button>
+                    <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                <DialogTitle>Add New Seat</DialogTitle>
+                <DialogDescription>
+                    Enter the details for the new seat.
+                </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="seatNumber" className="text-right">
+                    Seat Number
+                    </Label>
+                    <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
+                </div>
+                </div>
+                <DialogFooter>
+                <DialogClose asChild>
+                    <Button type="submit">Save Seat</Button>
+                </DialogClose>
+                </DialogFooter>
+            </DialogContent>
+            </Dialog>
+             <Button variant="destructive">
+                <Trash2 className="mr-2 h-4 w-4" /> Delete Seats
             </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Add New Seat</DialogTitle>
-              <DialogDescription>
-                Enter the details for the new seat.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="seatNumber" className="text-right">
-                  Seat Number
-                </Label>
-                <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="submit">Save Seat</Button>
-              </DialogClose>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+        </div>
       </div>
 
       <Tabs defaultValue="grid">
