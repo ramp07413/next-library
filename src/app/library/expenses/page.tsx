@@ -12,14 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PlusCircle, Search } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Search, FilePenLine, Eye, Trash2, PlusCircle } from "lucide-react";
 import { expenses, type LibraryExpense } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
@@ -31,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function LibraryExpensesPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -115,53 +109,57 @@ export default function LibraryExpensesPage() {
                 <TableHead>Amount</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead>Type</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredExpenses.map((expense) => (
-                <TableRow key={expense.id}>
-                  <TableCell className="font-medium">
-                    {expense.description}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={getCategoryBadgeVariant(expense.category)} className="capitalize">
-                      {expense.category}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    ${expense.amount.toFixed(2)}
-                  </TableCell>
-                  <TableCell>
-                    {format(new Date(expense.date), "PP")}
-                  </TableCell>
-                   <TableCell>
-                    <Badge variant={expense.type === 'recurring' ? "secondary" : "outline"} className="capitalize">
-                      {expense.type}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Edit Expense</DropdownMenuItem>
-                        <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
+              <TooltipProvider>
+                {filteredExpenses.map((expense) => (
+                  <TableRow key={expense.id}>
+                    <TableCell className="font-medium">
+                      {expense.description}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={getCategoryBadgeVariant(expense.category)} className="capitalize">
+                        {expense.category}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      ${expense.amount.toFixed(2)}
+                    </TableCell>
+                    <TableCell>
+                      {format(new Date(expense.date), "PP")}
+                    </TableCell>
+                     <TableCell>
+                      <Badge variant={expense.type === 'recurring' ? "secondary" : "outline"} className="capitalize">
+                        {expense.type}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                       <div className="flex items-center justify-start gap-1 sm:gap-2">
+                           <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost"><FilePenLine className="h-4 w-4" /></Button>
+                              </TooltipTrigger>
+                              <TooltipContent>Edit Expense</TooltipContent>
+                           </Tooltip>
+                           <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost"><Eye className="h-4 w-4" /></Button>
+                              </TooltipTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                           </Tooltip>
+                           <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost" className="text-destructive"><Trash2 className="h-4 w-4" /></Button>
+                              </TooltipTrigger>
+                              <TooltipContent>Delete Expense</TooltipContent>
+                           </Tooltip>
+                       </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TooltipProvider>
             </TableBody>
           </Table>
         </CardContent>

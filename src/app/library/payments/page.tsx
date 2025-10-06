@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, Search } from "lucide-react";
+import { MoreHorizontal, Search, Eye, Mail, CheckCircle } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function LibraryPaymentsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -104,58 +105,68 @@ export default function LibraryPaymentsPage() {
                 <TableHead>Due Date</TableHead>
                 <TableHead>Paid On</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredPayments.map((payment) => (
-                <TableRow key={payment.id}>
-                  <TableCell className="font-medium">
-                     <div className="flex items-center gap-3">
-                      <Avatar className="h-9 w-9">
-                        <AvatarImage src={payment.studentAvatar} alt={payment.studentName} data-ai-hint="person portrait" />
-                        <AvatarFallback>{payment.studentName.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium">{payment.studentName}</p>
-                        <p className="text-sm text-muted-foreground">ID: {payment.studentId}</p>
+              <TooltipProvider>
+                {filteredPayments.map((payment) => (
+                  <TableRow key={payment.id}>
+                    <TableCell className="font-medium">
+                       <div className="flex items-center gap-3">
+                        <Avatar className="h-9 w-9">
+                          <AvatarImage src={payment.studentAvatar} alt={payment.studentName} data-ai-hint="person portrait" />
+                          <AvatarFallback>{payment.studentName.charAt(0)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-medium">{payment.studentName}</p>
+                          <p className="text-sm text-muted-foreground">ID: {payment.studentId}</p>
+                        </div>
                       </div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    ${payment.amount.toFixed(2)}
-                  </TableCell>
-                  <TableCell>
-                    {format(new Date(payment.dueDate), "PP")}
-                  </TableCell>
-                  <TableCell>
-                    {payment.paidDate ? format(new Date(payment.paidDate), "PP") : <span className="text-muted-foreground">N/A</span>}
-                  </TableCell>
-                   <TableCell>
-                    <Badge variant={getStatusBadgeVariant(payment.status)}>
-                      {payment.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button aria-haspopup="true" size="icon" variant="ghost">
-                          <MoreHorizontal className="h-4 w-4" />
-                          <span className="sr-only">Toggle menu</span>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>View Student Details</DropdownMenuItem>
-                        {payment.status !== 'Paid' && <DropdownMenuItem>Send Reminder</DropdownMenuItem>}
-                        {payment.status !== 'Paid' && <DropdownMenuItem>Mark as Paid</DropdownMenuItem>}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                    <TableCell>
+                      ${payment.amount.toFixed(2)}
+                    </TableCell>
+                    <TableCell>
+                      {format(new Date(payment.dueDate), "PP")}
+                    </TableCell>
+                    <TableCell>
+                      {payment.paidDate ? format(new Date(payment.paidDate), "PP") : <span className="text-muted-foreground">N/A</span>}
+                    </TableCell>
+                     <TableCell>
+                      <Badge variant={getStatusBadgeVariant(payment.status)}>
+                        {payment.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center justify-start gap-1 sm:gap-2">
+                          <Tooltip>
+                              <TooltipTrigger asChild>
+                                  <Button size="icon" variant="ghost"><Eye className="h-4 w-4" /></Button>
+                              </TooltipTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                          {payment.status !== 'Paid' && (
+                              <>
+                                  <Tooltip>
+                                      <TooltipTrigger asChild>
+                                          <Button size="icon" variant="ghost"><Mail className="h-4 w-4" /></Button>
+                                      </TooltipTrigger>
+                                      <TooltipContent>Send Reminder</TooltipContent>
+                                  </Tooltip>
+                                  <Tooltip>
+                                      <TooltipTrigger asChild>
+                                          <Button size="icon" variant="ghost" className="text-green-600"><CheckCircle className="h-4 w-4" /></Button>
+                                      </TooltipTrigger>
+                                      <TooltipContent>Mark as Paid</TooltipContent>
+                                  </Tooltip>
+                              </>
+                          )}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TooltipProvider>
             </TableBody>
           </Table>
         </CardContent>
