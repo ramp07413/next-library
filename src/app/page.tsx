@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-2">
             <BookOpen className="w-8 h-8 text-primary" />
             <h1 className="text-2xl font-bold text-primary font-headline">LibMan</h1>
@@ -43,13 +43,13 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-4xl lg:text-6xl font-extrabold tracking-tight font-headline">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight font-headline">
               The Modern Solution for Library Management
             </h2>
             <p className="mt-4 max-w-3xl mx-auto text-lg text-white/80">
               Streamline operations, enhance student experience, and gain valuable insights with our all-in-one platform. Built for companies, libraries, and students.
             </p>
-            <div className="mt-8 flex justify-center gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                 <Button size="lg" asChild>
                     <Link href="/signup">Get Started For Free <ArrowRight className="ml-2" /></Link>
                 </Button>
@@ -118,7 +118,7 @@ export default function Home() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                  <h3 className="text-3xl font-bold font-headline">Features at a Glance</h3>
                  <p className="mt-2 text-muted-foreground max-w-2xl mx-auto mb-12">Everything you need to run a modern library, and more.</p>
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left max-w-5xl mx-auto">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-left max-w-5xl mx-auto">
                     <FeatureItem>Multi-library Management</FeatureItem>
                     <FeatureItem>Student & Seat Administration</FeatureItem>
                     <FeatureItem>Billing & Payment Processing</FeatureItem>
@@ -210,3 +210,4 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
 }
 
     
+
