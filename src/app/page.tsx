@@ -33,7 +33,7 @@ export default function Home() {
             </Button>
         </div>
       </header>
-      <main className="flex-grow bg-muted">
+      <main className="flex-grow">
         <section className="relative h-[70vh] flex items-center justify-center text-center text-white">
           <Image
             src="https://images.pexels.com/photos/12064/pexels-photo-12064.jpeg"
@@ -61,7 +61,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Separator className="my-0 bg-white/10" />
+        <Separator className="my-0" />
 
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +92,7 @@ export default function Home() {
             </div>
         </section>
 
-        <Separator className="my-0 bg-white/10" />
+        <Separator className="my-0" />
 
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,7 +119,7 @@ export default function Home() {
             </div>
         </section>
         
-        <Separator className="my-0 bg-white/10" />
+        <Separator className="my-0" />
 
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -137,7 +137,7 @@ export default function Home() {
                  </div>
             </div>
         </section>
-        <Separator className="my-0 bg-white/10" />
+        <Separator className="my-0" />
       </main>
       <footer className="bg-zinc-800 text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
