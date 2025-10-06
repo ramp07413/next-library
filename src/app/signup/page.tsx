@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
 import { BookOpen, Github } from "lucide-react";
 
 const signupFormSchema = z.object({
@@ -51,7 +51,7 @@ export default function SignupPage() {
 
   async function onSubmit(data: SignupFormValues) {
     try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      await signInAnonymously(auth);
       toast({
         title: "Account Created",
         description: "Your account has been successfully created. Redirecting...",

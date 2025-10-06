@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInAnonymously } from "firebase/auth";
 import { BookOpen, Github } from "lucide-react";
 
 const loginFormSchema = z.object({
@@ -42,14 +42,14 @@ export default function LoginPage() {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "demo@example.com",
+      password: "password",
     },
   });
 
   async function onSubmit(data: LoginFormValues) {
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      await signInAnonymously(auth);
       toast({
         title: "Login Successful",
         description: "Welcome back! Redirecting you to your dashboard.",
