@@ -33,19 +33,27 @@ export default function Home() {
         </div>
       </header>
       <main className="flex-grow">
-        <section className="text-center py-20 lg:py-32">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative h-[60vh] flex items-center justify-center text-center text-white">
+          <Image
+            src="https://images.unsplash.com/photo-1529142893173-6659d1a21a86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaWJyYXJ5JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3NTk3NDYzMjR8MA&ixlib=rb-4.1.0&q=80&w=1920"
+            alt="Library background"
+            fill
+            className="object-cover"
+            data-ai-hint="library background"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-4xl lg:text-6xl font-extrabold tracking-tight font-headline">
               The Modern Solution for Library Management
             </h2>
-            <p className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground">
+            <p className="mt-4 max-w-3xl mx-auto text-lg text-white/80">
               Streamline operations, enhance student experience, and gain valuable insights with our all-in-one platform. Built for companies, libraries, and students.
             </p>
             <div className="mt-8 flex justify-center gap-4">
                 <Button size="lg" asChild>
                     <Link href="/signup">Get Started For Free <ArrowRight className="ml-2" /></Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="secondary" asChild>
                     <Link href="/company">View Company Demo</Link>
                 </Button>
             </div>
