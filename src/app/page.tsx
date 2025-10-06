@@ -131,7 +131,7 @@ export default function Home() {
             </div>
         </section>
       </main>
-      <footer className="bg-secondary text-secondary-foreground">
+      <footer className="bg-background border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
@@ -139,13 +139,13 @@ export default function Home() {
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-bold font-headline">LibMan</h3>
               </div>
-              <p className="mt-4 text-sm text-secondary-foreground/80">
+              <p className="mt-4 text-sm text-muted-foreground">
                 The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider">Quick Links</h4>
-              <ul className="mt-4 space-y-2 text-sm">
+              <h4 className="font-semibold uppercase tracking-wider text-foreground">Quick Links</h4>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li><Link href="#" className="hover:text-primary transition-colors">Features</Link></li>
                 <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
                 <li><Link href="/login" className="hover:text-primary transition-colors">Login</Link></li>
@@ -153,17 +153,17 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider">Follow Us</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-foreground">Follow Us</h4>
               <div className="flex mt-4 space-x-4">
-                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Twitter /></Link>
-                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Facebook /></Link>
-                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Instagram /></Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter /></Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Facebook /></Link>
+                <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Instagram /></Link>
               </div>
             </div>
           </div>
         </div>
-        <div className="py-6 border-t border-secondary-foreground/10">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-secondary-foreground/60">
+        <div className="py-6 border-t">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>
         </div>
@@ -210,5 +210,6 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
 }
 
     
+
 
 
