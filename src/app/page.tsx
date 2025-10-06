@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       </header>
       <main className="flex-grow">
-        <section className="relative h-[60vh] flex items-center justify-center text-center text-white">
+        <section className="relative h-[70vh] flex items-center justify-center text-center text-white">
           <Image
             src="https://images.pexels.com/photos/12064/pexels-photo-12064.jpeg"
             alt="Library background"
