@@ -108,36 +108,52 @@ export default function SeatsPage() {
         </div>
         <div className="flex items-center gap-2">
             <Dialog>
-            <DialogTrigger asChild>
-                <Button>
-                    <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                <DialogTitle>Add New Seat</DialogTitle>
-                <DialogDescription>
-                    Enter the details for the new seat.
-                </DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="seatNumber" className="text-right">
-                    Seat Number
-                    </Label>
-                    <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
-                </div>
-                </div>
-                <DialogFooter>
-                <DialogClose asChild>
-                    <Button type="submit">Save Seat</Button>
-                </DialogClose>
-                </DialogFooter>
-            </DialogContent>
+              <DialogTrigger asChild>
+                  <Button>
+                      <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+                  </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                  <DialogTitle>Add New Seat</DialogTitle>
+                  <DialogDescription>
+                      Enter the details for the new seat.
+                  </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="seatNumber" className="text-right">
+                      Seat Number
+                      </Label>
+                      <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
+                  </div>
+                  </div>
+                  <DialogFooter>
+                  <DialogClose asChild>
+                      <Button type="submit">Save Seat</Button>
+                  </DialogClose>
+                  </DialogFooter>
+              </DialogContent>
             </Dialog>
-             <Button variant="destructive">
-                <Trash2 className="mr-2 h-4 w-4" /> Delete Seats
-            </Button>
+             <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <Button variant="destructive">
+                        <Trash2 className="mr-2 h-4 w-4" /> Delete Seats
+                    </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete the selected seats.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction>Delete</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
       </div>
 
@@ -430,3 +446,4 @@ export default function SeatsPage() {
     </div>
   );
 }
+
