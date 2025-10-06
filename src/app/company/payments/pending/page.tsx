@@ -68,6 +68,7 @@ export default function PendingPaymentsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                <TooltipProvider>
                 {pendingPayments.map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell className="font-medium">
@@ -85,7 +86,6 @@ export default function PendingPaymentsPage() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <TooltipProvider>
                         <div className="flex items-center justify-center gap-2">
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -94,7 +94,9 @@ export default function PendingPaymentsPage() {
                                 <span className="sr-only">View Details</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
+                            <TooltipContent>
+                              <p>View Details</p>
+                            </TooltipContent>
                           </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -103,7 +105,9 @@ export default function PendingPaymentsPage() {
                                 <span className="sr-only">Send Reminder</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Send Reminder</TooltipContent>
+                            <TooltipContent>
+                              <p>Send Reminder</p>
+                            </TooltipContent>
                           </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -112,13 +116,15 @@ export default function PendingPaymentsPage() {
                                 <span className="sr-only">Mark as Paid</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Mark as Paid</TooltipContent>
+                            <TooltipContent>
+                              <p>Mark as Paid</p>
+                            </TooltipContent>
                           </Tooltip>
                         </div>
-                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
+              </TooltipProvider>
               </TableBody>
             </Table>
           ) : (

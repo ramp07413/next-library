@@ -57,6 +57,7 @@ export default function RecentPaymentsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                <TooltipProvider>
                 {recentPayments.map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell className="font-medium">
@@ -72,7 +73,6 @@ export default function RecentPaymentsPage() {
                        <Badge variant="outline">{payment.subscriptionPlan}</Badge>
                     </TableCell>
                     <TableCell>
-                      <TooltipProvider>
                         <div className="flex items-center justify-center gap-2">
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -81,7 +81,9 @@ export default function RecentPaymentsPage() {
                                 <span className="sr-only">View Details</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
+                            <TooltipContent>
+                              <p>View Details</p>
+                            </TooltipContent>
                           </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -90,13 +92,15 @@ export default function RecentPaymentsPage() {
                                 <span className="sr-only">Download Receipt</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Download Receipt</TooltipContent>
+                            <TooltipContent>
+                              <p>Download Receipt</p>
+                            </TooltipContent>
                           </Tooltip>
                         </div>
-                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
+              </TooltipProvider>
               </TableBody>
             </Table>
           ) : (

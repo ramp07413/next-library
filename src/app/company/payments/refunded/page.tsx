@@ -57,6 +57,7 @@ export default function RefundedPaymentsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
+                <TooltipProvider>
                 {refundedPayments.map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell className="font-medium">
@@ -72,7 +73,6 @@ export default function RefundedPaymentsPage() {
                       {payment.refundedDate ? format(new Date(payment.refundedDate), "PP") : "N/A"}
                     </TableCell>
                     <TableCell>
-                       <TooltipProvider>
                         <div className="flex items-center justify-center gap-2">
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -81,7 +81,9 @@ export default function RefundedPaymentsPage() {
                                 <span className="sr-only">View Details</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
+                            <TooltipContent>
+                              <p>View Details</p>
+                            </TooltipContent>
                           </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -90,13 +92,15 @@ export default function RefundedPaymentsPage() {
                                 <span className="sr-only">Download Credit Note</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Download Credit Note</TooltipContent>
+                            <TooltipContent>
+                              <p>Download Credit Note</p>
+                            </TooltipContent>
                           </Tooltip>
                         </div>
-                      </TooltipProvider>
                     </TableCell>
                   </TableRow>
                 ))}
+              </TooltipProvider>
               </TableBody>
             </Table>
           ) : (
