@@ -56,6 +56,7 @@ export default function SeatsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedSeat, setSelectedSeat] = useState<Seat | null>(null);
+  const [seatToDelete, setSeatToDelete] = useState("");
 
   const getStatusBadgeVariant = (status: Seat['status']) => {
     switch (status) {
@@ -135,25 +136,54 @@ export default function SeatsPage() {
                   </DialogFooter>
               </DialogContent>
             </Dialog>
-             <AlertDialog>
-                <AlertDialogTrigger asChild>
-                    <Button variant="destructive">
-                        <Trash2 className="mr-2 h-4 w-4" /> Delete Seats
-                    </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive">
+                  <Trash2 className="mr-2 h-4 w-4" /> Delete Seat
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Delete Seat</DialogTitle>
+                  <DialogDescription>
+                    Enter the seat number you want to permanently delete.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="seat-to-delete" className="text-right">
+                      Seat Number
+                    </Label>
+                    <Input
+                      id="seat-to-delete"
+                      placeholder="e.g., 102"
+                      className="col-span-3"
+                      value={seatToDelete}
+                      onChange={(e) => setSeatToDelete(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="destructive" disabled={!seatToDelete}>Delete Seat</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete the selected seats.
+                          This action cannot be undone. This will permanently delete seat <strong>{seatToDelete}</strong>.
                         </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction>Delete</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+                        <AlertDialogAction>Confirm Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
         </div>
       </div>
 
@@ -446,4 +476,3 @@ export default function SeatsPage() {
     </div>
   );
 }
-
