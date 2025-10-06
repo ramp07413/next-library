@@ -24,7 +24,7 @@ import Link from "next/link";
 export default function LibrariesPage() {
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Libraries
@@ -48,8 +48,8 @@ export default function LibrariesPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Library Name</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Address</TableHead>
+                <TableHead className="hidden md:table-cell">Contact</TableHead>
+                <TableHead className="hidden lg:table-cell">Address</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -60,11 +60,11 @@ export default function LibrariesPage() {
                   <TableCell className="font-medium">
                     {library.libraryName}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">
                     <div>{library.libraryEmail}</div>
                     <div className="text-muted-foreground text-sm">{library.libraryContact}</div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden lg:table-cell">
                     {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}
                   </TableCell>
                   <TableCell>
@@ -74,7 +74,7 @@ export default function LibrariesPage() {
                   </TableCell>
                   <TableCell>
                     <TooltipProvider>
-                      <div className="flex items-center justify-start gap-2">
+                      <div className="flex items-center justify-start gap-1 sm:gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button size="icon" variant="ghost">

@@ -36,7 +36,7 @@ export default function UsersPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Users
@@ -59,8 +59,8 @@ export default function UsersPage() {
               <TableRow>
                 <TableHead>Email</TableHead>
                 <TableHead className="text-center">Role</TableHead>
-                <TableHead className="text-center">Status</TableHead>
-                <TableHead className="text-center">Date Added</TableHead>
+                <TableHead className="hidden sm:table-cell text-center">Status</TableHead>
+                <TableHead className="hidden md:table-cell text-center">Date Added</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -75,17 +75,17 @@ export default function UsersPage() {
                       {user.role.replace('_', ' ')}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="hidden sm:table-cell text-center">
                     <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
                       {user.isActive ? "Active" : "Inactive"}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="hidden md:table-cell text-center">
                     {format(new Date(user.createdAt), "PP")}
                   </TableCell>
                   <TableCell>
                      <TooltipProvider>
-                      <div className="flex items-center justify-start gap-2">
+                      <div className="flex items-center justify-start gap-1 sm:gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button size="icon" variant="ghost">

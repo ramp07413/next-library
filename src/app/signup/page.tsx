@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
-import { createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
+import { signInAnonymously } from "firebase/auth";
 import { BookOpen, Github } from "lucide-react";
 
 const signupFormSchema = z.object({
@@ -50,6 +50,14 @@ export default function SignupPage() {
   });
 
   async function onSubmit(data: SignupFormValues) {
+    if (!auth) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Firebase Auth is not initialized. Please try again later.",
+        });
+        return;
+    }
     try {
       await signInAnonymously(auth);
       toast({

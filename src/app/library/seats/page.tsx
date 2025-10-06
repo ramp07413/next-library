@@ -98,7 +98,7 @@ export default function SeatsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Seat Management
@@ -138,24 +138,24 @@ export default function SeatsPage() {
       </div>
 
       <Tabs defaultValue="grid">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <TabsList>
                 <TabsTrigger value="grid">Grid View</TabsTrigger>
                 <TabsTrigger value="list">List View</TabsTrigger>
             </TabsList>
-             <div className="flex items-center gap-2">
-                <div className="relative flex-1 md:grow-0">
+             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
+                <div className="relative flex-1 md:grow-0 w-full sm:w-auto">
                     <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input
                     type="search"
                     placeholder="Search..."
-                    className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                    className="w-full rounded-lg bg-background pl-8"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-full sm:w-[180px]">
                     <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -176,7 +176,7 @@ export default function SeatsPage() {
                     <CardDescription>Visual representation of all library seats.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-center gap-6 mb-8 text-sm">
+                    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 text-sm">
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-primary" fill="currentColor"/> Available</div>
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-yellow-500" fill="currentColor"/> Half Occupied</div>
                         <div className="flex items-center gap-2"><Circle className="w-3 h-3 text-foreground/50" fill="currentColor"/> Full Occupied</div>
@@ -224,8 +224,8 @@ export default function SeatsPage() {
                     <TableRow>
                         <TableHead>Seat Number</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead>Occupied By</TableHead>
-                        <TableHead>Date Assigned</TableHead>
+                        <TableHead className="hidden sm:table-cell">Occupied By</TableHead>
+                        <TableHead className="hidden md:table-cell">Date Assigned</TableHead>
                         <TableHead>
                         <span className="sr-only">Actions</span>
                         </TableHead>
@@ -244,14 +244,14 @@ export default function SeatsPage() {
                             {seat.status}
                             </Badge>
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="hidden sm:table-cell">
                             {seat.studentName ? (
                             <div className="font-medium">{seat.studentName}</div>
                             ) : (
                             <span className="text-muted-foreground">N/A</span>
                             )}
                         </TableCell>
-                        <TableCell>
+                        <TableCell className="hidden md:table-cell">
                             {seat.dateAssigned ? (
                             format(new Date(seat.dateAssigned), "PP")
                             ) : (

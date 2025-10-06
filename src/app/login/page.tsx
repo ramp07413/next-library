@@ -48,6 +48,14 @@ export default function LoginPage() {
   });
 
   async function onSubmit(data: LoginFormValues) {
+    if (!auth) {
+        toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Firebase Auth is not initialized. Please try again later.",
+        });
+        return;
+    }
     try {
       await signInAnonymously(auth);
       toast({

@@ -26,7 +26,7 @@ import { Button } from "@/components/ui/button";
 export default function CompanyDashboard() {
   return (
     <div className="space-y-8">
-       <div className="flex items-center justify-between">
+       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Company Dashboard
@@ -83,8 +83,8 @@ export default function CompanyDashboard() {
               <TableRow>
                 <TableHead>Library</TableHead>
                 <TableHead className="text-right">Revenue</TableHead>
-                <TableHead className="text-right">Students</TableHead>
-                <TableHead className="text-right">Revenue Growth</TableHead>
+                <TableHead className="hidden sm:table-cell text-right">Students</TableHead>
+                <TableHead className="hidden md:table-cell text-right">Revenue Growth</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -93,8 +93,8 @@ export default function CompanyDashboard() {
                 <TableRow key={library.id}>
                   <TableCell className="font-medium">{library.name}</TableCell>
                   <TableCell className="text-right">${library.revenue.toLocaleString()}</TableCell>
-                  <TableCell className="text-right">{library.students}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="hidden sm:table-cell text-right">{library.students}</TableCell>
+                  <TableCell className="hidden md:table-cell text-right">
                     <div className="flex items-center justify-end">
                       <span className="mr-2">{library.growth}%</span>
                       <Progress value={library.growth} className="w-24" />

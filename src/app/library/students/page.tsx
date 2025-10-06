@@ -59,7 +59,7 @@ export default function ManageStudentsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Manage Students
@@ -77,19 +77,19 @@ export default function ManageStudentsPage() {
         <CardHeader>
           <CardTitle>Student List</CardTitle>
           <CardDescription>A comprehensive list of all students in the library.</CardDescription>
-          <div className="flex items-center gap-2 pt-4">
-             <div className="relative flex-1 md:grow-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
+             <div className="relative flex-1 md:grow-0 w-full">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                 type="search"
                 placeholder="Search by name or email..."
-                className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
+                className="w-full rounded-lg bg-background pl-8"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -99,7 +99,7 @@ export default function ManageStudentsPage() {
               </SelectContent>
             </Select>
              <Select value={shiftFilter} onValueChange={setShiftFilter}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder="Filter by shift" />
               </SelectTrigger>
               <SelectContent>
@@ -116,9 +116,9 @@ export default function ManageStudentsPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Student</TableHead>
-                <TableHead>Contact</TableHead>
-                <TableHead>Join Date</TableHead>
-                <TableHead>Shift</TableHead>
+                <TableHead className="hidden sm:table-cell">Contact</TableHead>
+                <TableHead className="hidden md:table-cell">Join Date</TableHead>
+                <TableHead className="hidden sm:table-cell">Shift</TableHead>
                 <TableHead>Fee</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>
@@ -140,14 +140,14 @@ export default function ManageStudentsPage() {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     <div className="font-medium">{student.email}</div>
                     <div className="text-sm text-muted-foreground">{student.phone}</div>
                   </TableCell>
-                   <TableCell>
+                   <TableCell className="hidden md:table-cell">
                     {format(new Date(student.joinDate), "PP")}
                   </TableCell>
-                   <TableCell className="capitalize">
+                   <TableCell className="hidden sm:table-cell capitalize">
                       {student.shift}
                   </TableCell>
                   <TableCell>

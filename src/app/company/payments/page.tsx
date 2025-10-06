@@ -57,10 +57,10 @@ export default function PaymentsPage() {
         <CardHeader>
           <CardTitle>Transaction History</CardTitle>
           <CardDescription>A list of all payments from libraries.</CardDescription>
-           <div className="flex items-center gap-2 pt-4">
+           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
             <Input placeholder="Filter by library..." className="max-w-sm" />
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -77,8 +77,8 @@ export default function PaymentsPage() {
               <TableRow>
                 <TableHead>Library</TableHead>
                 <TableHead>Amount</TableHead>
-                <TableHead>Subscription</TableHead>
-                <TableHead>Due Date</TableHead>
+                <TableHead className="hidden sm:table-cell">Subscription</TableHead>
+                <TableHead className="hidden md:table-cell">Due Date</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>
                   Actions
@@ -94,10 +94,10 @@ export default function PaymentsPage() {
                   <TableCell>
                     ${payment.amount.toFixed(2)}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     <Badge variant="outline">{payment.subscriptionPlan}</Badge>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">
                     {format(new Date(payment.dueDate), "PP")}
                   </TableCell>
                    <TableCell>
@@ -107,7 +107,7 @@ export default function PaymentsPage() {
                   </TableCell>
                   <TableCell>
                      <TooltipProvider>
-                      <div className="flex items-center justify-start gap-2">
+                      <div className="flex items-center justify-start gap-1 sm:gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button size="icon" variant="ghost">

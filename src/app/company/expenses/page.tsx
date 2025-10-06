@@ -50,7 +50,7 @@ export default function ExpensesPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             Expenses
@@ -66,10 +66,10 @@ export default function ExpensesPage() {
         <CardHeader>
           <CardTitle>Expense History</CardTitle>
           <CardDescription>A list of all recorded expenses.</CardDescription>
-           <div className="flex items-center gap-2 pt-4">
+           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
             <Input placeholder="Filter by description..." className="max-w-sm" />
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
               <SelectContent>
@@ -88,10 +88,10 @@ export default function ExpensesPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Description</TableHead>
-                <TableHead>Category</TableHead>
+                <TableHead className="hidden sm:table-cell">Category</TableHead>
                 <TableHead>Amount</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead className="text-center">Type</TableHead>
+                <TableHead className="hidden md:table-cell">Date</TableHead>
+                <TableHead className="hidden sm:table-cell text-center">Type</TableHead>
                 <TableHead>
                   <span className="sr-only">Actions</span>
                 </TableHead>
@@ -103,7 +103,7 @@ export default function ExpensesPage() {
                   <TableCell className="font-medium">
                     {expense.description}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden sm:table-cell">
                     <Badge variant={getCategoryBadgeVariant(expense.category)} className="capitalize">
                       {expense.category}
                     </Badge>
@@ -111,17 +111,17 @@ export default function ExpensesPage() {
                   <TableCell>
                     ${expense.amount.toFixed(2)}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="hidden md:table-cell">
                     {format(new Date(expense.date), "PP")}
                   </TableCell>
-                   <TableCell className="text-center">
+                   <TableCell className="hidden sm:table-cell text-center">
                     <Badge variant={expense.type === 'recurring' ? "secondary" : "outline"} className="capitalize whitespace-nowrap">
                       {expense.type}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     <TooltipProvider>
-                      <div className="flex items-center justify-start gap-2">
+                      <div className="flex items-center justify-start gap-1 sm:gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button aria-haspopup="true" size="icon" variant="ghost">

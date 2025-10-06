@@ -1,3 +1,4 @@
+
 import {
   Card,
   CardContent,
@@ -26,8 +27,8 @@ export default function StudentDashboard() {
       <h1 className="text-3xl font-bold tracking-tight font-headline">
         My Dashboard
       </h1>
-      <div className="grid gap-8 md:grid-cols-3">
-        <div className="md:col-span-2 space-y-8">
+      <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-8">
           <Card>
             <CardHeader>
               <CardTitle>Upcoming Due</CardTitle>
@@ -41,11 +42,11 @@ export default function StudentDashboard() {
                 .
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex items-center justify-between">
+            <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="text-4xl font-bold">
                 ${upcomingDues.amount.toFixed(2)}
               </div>
-              <Button>Pay Now</Button>
+              <Button className="w-full sm:w-auto">Pay Now</Button>
             </CardContent>
           </Card>
 
@@ -90,7 +91,7 @@ export default function StudentDashboard() {
           </Card>
         </div>
 
-        <div className="md:col-span-1">
+        <div className="lg:col-span-1">
           <Card className="sticky top-20">
             <CardHeader>
               <CardTitle>My Seat Details</CardTitle>
