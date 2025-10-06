@@ -12,14 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PlusCircle, Search, Armchair, Circle } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { PlusCircle, Search, Armchair, Circle, UserPlus, UserMinus, Wrench, CheckCircle, History } from "lucide-react";
 import { seats, type Seat } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -52,6 +45,8 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 
 export default function SeatsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -219,6 +214,7 @@ export default function SeatsPage() {
                 </CardDescription>
                 </CardHeader>
                 <CardContent>
+                <TooltipProvider>
                 <Table>
                     <TableHeader>
                     <TableRow>
@@ -226,14 +222,12 @@ export default function SeatsPage() {
                         <TableHead>Status</TableHead>
                         <TableHead className="hidden sm:table-cell">Occupied By</TableHead>
                         <TableHead className="hidden md:table-cell">Date Assigned</TableHead>
-                        <TableHead>
-                        <span className="sr-only">Actions</span>
-                        </TableHead>
+                        <TableHead className="text-center">Actions</TableHead>
                     </TableRow>
                     </TableHeader>
                     <TableBody>
                     {filteredSeats.map((seat) => (
-                        <TableRow key={seat.id} onClick={() => setSelectedSeat(seat)} className="cursor-pointer">
+                        <TableRow key={seat.id} >
                         <TableCell>
                             <div className="w-fit rounded-md border bg-muted px-2 py-1 font-mono text-sm font-medium">
                                 {seat.seatNumber}
@@ -259,27 +253,52 @@ export default function SeatsPage() {
                             )}
                         </TableCell>
                         <TableCell>
-                            <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button aria-haspopup="true" size="icon" variant="ghost">
-                                <MoreHorizontal className="h-4 w-4" />
-                                <span className="sr-only">Toggle menu</span>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                {seat.status === 'available' && <DropdownMenuItem>Assign Student</DropdownMenuItem>}
-                                {(seat.status === 'full occupied' || seat.status === 'half occupied') && <DropdownMenuItem>Vacate Seat</DropdownMenuItem>}
-                                <DropdownMenuItem>View History</DropdownMenuItem>
-                                {seat.status !== 'maintenance' && <DropdownMenuItem>Mark for Maintenance</DropdownMenuItem>}
-                                {seat.status === 'maintenance' && <DropdownMenuItem>Mark as Available</DropdownMenuItem>}
-                            </DropdownMenuContent>
-                            </DropdownMenu>
+                          <div className="flex items-center justify-center gap-2">
+                            {seat.status === 'available' && (
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="ghost" size="icon"><UserPlus className="h-4 w-4" /></Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Assign Student</TooltipContent>
+                              </Tooltip>
+                            )}
+                            {(seat.status === 'full occupied' || seat.status === 'half occupied') && (
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="ghost" size="icon"><UserMinus className="h-4 w-4" /></Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Vacate Seat</TooltipContent>
+                              </Tooltip>
+                            )}
+                             <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="ghost" size="icon"><History className="h-4 w-4" /></Button>
+                                </TooltipTrigger>
+                                <TooltipContent>View History</TooltipContent>
+                              </Tooltip>
+                            {seat.status !== 'maintenance' && (
+                               <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="ghost" size="icon"><Wrench className="h-4 w-4" /></Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Mark for Maintenance</TooltipContent>
+                              </Tooltip>
+                            )}
+                            {seat.status === 'maintenance' && (
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button variant="ghost" size="icon"><CheckCircle className="h-4 w-4 text-green-600" /></Button>
+                                </TooltipTrigger>
+                                <TooltipContent>Mark as Available</TooltipContent>
+                              </Tooltip>
+                            )}
+                          </div>
                         </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
                 </Table>
+                </TooltipProvider>
                 </CardContent>
             </Card>
         </TabsContent>
@@ -328,6 +347,3 @@ export default function SeatsPage() {
     </div>
   );
 }
-
-// Add Tooltip components as they were missing from the previous response
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
