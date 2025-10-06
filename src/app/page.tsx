@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Building, Library, User, CheckCircle } from "lucide-react";
+import { ArrowRight, BookOpen, Building, Library, User, CheckCircle, Twitter, Facebook, Instagram } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -123,9 +123,41 @@ export default function Home() {
             </div>
         </section>
       </main>
-      <footer className="py-6 border-t">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
+      <footer className="bg-secondary text-secondary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2">
+                <BookOpen className="w-8 h-8 text-primary" />
+                <h3 className="text-2xl font-bold font-headline">LibMan</h3>
+              </div>
+              <p className="mt-4 text-sm text-secondary-foreground/80">
+                The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold uppercase tracking-wider">Quick Links</h4>
+              <ul className="mt-4 space-y-2 text-sm">
+                <li><Link href="#" className="hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="/login" className="hover:text-primary transition-colors">Login</Link></li>
+                <li><Link href="/signup" className="hover:text-primary transition-colors">Sign Up</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold uppercase tracking-wider">Follow Us</h4>
+              <div className="flex mt-4 space-x-4">
+                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Twitter /></Link>
+                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Facebook /></Link>
+                <Link href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors"><Instagram /></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="py-6 border-t border-secondary-foreground/10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-secondary-foreground/60">
+            <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
+            </div>
         </div>
       </footer>
     </div>
@@ -143,7 +175,7 @@ function DashboardCard({ title, description, icon, href }: DashboardCardProps) {
   return (
     <Card className="flex flex-col text-center items-center hover:shadow-lg transition-shadow duration-300">
       <CardHeader className="flex flex-col items-center gap-4 space-y-0 pb-2">
-        <div className="bg-secondary p-4 rounded-full">
+        <div className="bg-primary/10 p-4 rounded-full">
           {icon}
         </div>
         <CardTitle className="text-xl font-bold">{title}</CardTitle>
@@ -168,3 +200,5 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
         </div>
     )
 }
+
+    
