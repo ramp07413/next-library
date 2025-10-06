@@ -139,30 +139,30 @@ export default function Home() {
         </section>
         <Separator className="my-0 bg-white/10" />
       </main>
-      <footer className="bg-muted text-primary-foreground">
+      <footer className="bg-zinc-800 text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-8 h-8 text-primary" />
-                <h3 className="text-2xl font-bold font-headline">LibMan</h3>
+                <h3 className="text-2xl font-bold font-headline text-primary-foreground">LibMan</h3>
               </div>
-              <p className="mt-4 text-sm">
+              <p className="mt-4 text-sm text-muted-foreground">
                 The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider">Quick Links</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm">
-                <li><Link href="#" className="hover:text-primary transition-colors">Features</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
-                <li><Link href="/login" className="hover:text-primary transition-colors">Login</Link></li>
-                <li><Link href="/signup" className="hover:text-primary transition-colors">Sign Up</Link></li>
+                <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="/login" className="text-muted-foreground hover:text-primary transition-colors">Login</Link></li>
+                <li><Link href="/signup" className="text-muted-foreground hover:text-primary transition-colors">Sign Up</Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider">Follow Us</h4>
-              <div className="flex mt-4 space-x-4">
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Follow Us</h4>
+              <div className="flex mt-4 space-x-4 text-muted-foreground">
                 <Link href="#" className="hover:text-primary transition-colors"><Twitter /></Link>
                 <Link href="#" className="hover:text-primary transition-colors"><Facebook /></Link>
                 <Link href="#" className="hover:text-primary transition-colors"><Instagram /></Link>
@@ -171,7 +171,7 @@ export default function Home() {
           </div>
         </div>
         <div className="py-6 border-t border-border">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>
         </div>
