@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -6,12 +5,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import { paymentHistory } from "../data";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+} from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+import { paymentHistory } from '../data';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 export default function MyPaymentsPage() {
   return (
@@ -25,45 +30,45 @@ export default function MyPaymentsPage() {
         </p>
       </div>
 
-       <Card>
+      <Card>
         <CardHeader>
-            <CardTitle>Payment History</CardTitle>
-            <CardDescription>
+          <CardTitle>Payment History</CardTitle>
+          <CardDescription>
             Review your past transactions and download receipts.
-            </CardDescription>
+          </CardDescription>
         </CardHeader>
         <CardContent>
-            <Table>
+          <Table>
             <TableHeader>
-                <TableRow>
+              <TableRow>
                 <TableHead>Date</TableHead>
                 <TableHead>Amount</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Receipt</TableHead>
-                </TableRow>
+              </TableRow>
             </TableHeader>
             <TableBody>
-                {paymentHistory.map((payment) => (
+              {paymentHistory.map((payment) => (
                 <TableRow key={payment.id}>
-                    <TableCell>
+                  <TableCell>
                     {new Date(payment.date).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>${payment.amount.toFixed(2)}</TableCell>
-                    <TableCell>
+                  </TableCell>
+                  <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                  <TableCell>
                     <Badge variant="secondary">{payment.status}</Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
+                  </TableCell>
+                  <TableCell className="text-right">
                     <Button variant="ghost" size="icon">
-                        <Download className="h-4 w-4" />
-                        <span className="sr-only">Download receipt</span>
+                      <Download className="h-4 w-4" />
+                      <span className="sr-only">Download receipt</span>
                     </Button>
-                    </TableCell>
+                  </TableCell>
                 </TableRow>
-                ))}
+              ))}
             </TableBody>
-            </Table>
+          </Table>
         </CardContent>
-        </Card>
+      </Card>
     </div>
   );
 }
