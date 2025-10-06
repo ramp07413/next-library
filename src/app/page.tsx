@@ -139,7 +139,7 @@ export default function Home() {
         </section>
         <Separator className="my-0 bg-white/10" />
       </main>
-      <footer className="bg-slate-100 dark:bg-muted border-t">
+      <footer className="bg-black border-t">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
@@ -170,7 +170,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="py-6 border-t">
+        <div className="py-6 border-t border-t-white/10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>
