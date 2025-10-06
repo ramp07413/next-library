@@ -22,16 +22,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
-import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -120,7 +110,9 @@ export default function UsersPage() {
                                 <span className="sr-only">Edit User</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>Edit User</TooltipContent>
+                            <TooltipContent>
+                              <p>Edit User</p>
+                            </TooltipContent>
                           </Tooltip>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -129,7 +121,9 @@ export default function UsersPage() {
                                 <span className="sr-only">View Permissions</span>
                               </Button>
                             </TooltipTrigger>
-                            <TooltipContent>View Permissions</TooltipContent>
+                            <TooltipContent>
+                              <p>View Permissions</p>
+                            </TooltipContent>
                           </Tooltip>
                           <AlertDialog>
                             <Tooltip>
@@ -141,7 +135,9 @@ export default function UsersPage() {
                                     </Button>
                                 </AlertDialogTrigger>
                               </TooltipTrigger>
-                              <TooltipContent>{user.isActive ? 'Deactivate User' : 'Activate User'}</TooltipContent>
+                              <TooltipContent>
+                                <p>{user.isActive ? 'Deactivate User' : 'Activate User'}</p>
+                              </TooltipContent>
                             </Tooltip>
                             <AlertDialogContent>
                               <AlertDialogHeader>
