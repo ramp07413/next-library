@@ -1,4 +1,6 @@
 
+"use client";
+
 import {
   Table,
   TableBody,
@@ -19,7 +21,29 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import Link from "next/link";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function LibrariesPage() {
   return (
@@ -55,58 +79,111 @@ export default function LibrariesPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {libraries.map((library) => (
-                <TableRow key={library.id}>
-                  <TableCell className="font-medium">
-                    {library.libraryName}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    <div>{library.libraryEmail}</div>
-                    <div className="text-muted-foreground text-sm">{library.libraryContact}</div>
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={library.isActive ? "secondary" : "outline"}>
-                      {library.isActive ? "Active" : "Inactive"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <TooltipProvider>
+              <TooltipProvider>
+                {libraries.map((library) => (
+                  <TableRow key={library.id}>
+                    <TableCell className="font-medium">
+                      {library.libraryName}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      <div>{library.libraryEmail}</div>
+                      <div className="text-muted-foreground text-sm">{library.libraryContact}</div>
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell">
+                      {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={library.isActive ? "secondary" : "outline"}>
+                        {library.isActive ? "Active" : "Inactive"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
                       <div className="flex items-center justify-start gap-1 sm:gap-2">
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost">
-                              <FilePenLine className="h-4 w-4" />
-                              <span className="sr-only">Edit Library</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Edit Library</TooltipContent>
-                        </Tooltip>
-                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost">
-                              <Eye className="h-4 w-4" />
-                              <span className="sr-only">View Details</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>View Details</TooltipContent>
-                        </Tooltip>
-                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost" className="text-destructive">
-                              <Trash2 className="h-4 w-4" />
-                              <span className="sr-only">Delete Library</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Delete Library</TooltipContent>
-                        </Tooltip>
+                        <Dialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <DialogTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <FilePenLine className="h-4 w-4" />
+                                </Button>
+                              </DialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>Edit Library</TooltipContent>
+                          </Tooltip>
+                           <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Edit {library.libraryName}</DialogTitle>
+                              </DialogHeader>
+                              <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="name" className="text-right">Name</Label>
+                                  <Input id="name" defaultValue={library.libraryName} className="col-span-3" />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="email" className="text-right">Email</Label>
+                                  <Input id="email" defaultValue={library.libraryEmail} className="col-span-3" />
+                                </div>
+                              </div>
+                              <DialogFooter>
+                                <DialogClose asChild>
+                                  <Button type="submit">Save changes</Button>
+                                </DialogClose>
+                              </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                        <Dialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                               <DialogTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </DialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                           <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>{library.libraryName}</DialogTitle>
+                                <DialogDescription>ID: {library.id}</DialogDescription>
+                              </DialogHeader>
+                              <div className="py-4">
+                                <p><strong>Email:</strong> {library.libraryEmail}</p>
+                                <p><strong>Contact:</strong> {library.libraryContact}</p>
+                                <p><strong>Address:</strong> {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}</p>
+                                <p><strong>Status:</strong> {library.isActive ? "Active" : "Inactive"}</p>
+                              </div>
+                            </DialogContent>
+                        </Dialog>
+                        <AlertDialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                               <AlertDialogTrigger asChild>
+                                <Button size="icon" variant="ghost" className="text-destructive">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>Delete Library</TooltipContent>
+                          </Tooltip>
+                          <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete the library "{library.libraryName}".
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction>Delete</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                       </div>
-                    </TooltipProvider>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TooltipProvider>
             </TableBody>
           </Table>
         </CardContent>

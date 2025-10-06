@@ -1,4 +1,6 @@
 
+"use client";
+
 import {
   Table,
   TableBody,
@@ -27,6 +29,25 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function PaymentsPage() {
   const getStatusBadgeVariant = (status: string) => {
@@ -86,60 +107,104 @@ export default function PaymentsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {payments.map((payment) => (
-                <TableRow key={payment.id}>
-                  <TableCell className="font-medium">
-                    {payment.libraryName}
-                  </TableCell>
-                  <TableCell>
-                    ${payment.amount.toFixed(2)}
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <Badge variant="outline">{payment.subscriptionPlan}</Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {format(new Date(payment.dueDate), "PP")}
-                  </TableCell>
-                   <TableCell>
-                    <Badge variant={getStatusBadgeVariant(payment.status)}>
-                      {payment.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                     <TooltipProvider>
+              <TooltipProvider>
+                {payments.map((payment) => (
+                  <TableRow key={payment.id}>
+                    <TableCell className="font-medium">
+                      {payment.libraryName}
+                    </TableCell>
+                    <TableCell>
+                      ${payment.amount.toFixed(2)}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge variant="outline">{payment.subscriptionPlan}</Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {format(new Date(payment.dueDate), "PP")}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={getStatusBadgeVariant(payment.status)}>
+                        {payment.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
                       <div className="flex items-center justify-start gap-1 sm:gap-2">
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost">
-                              <Eye className="h-4 w-4" />
-                              <span className="sr-only">View Details</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>View Details</TooltipContent>
-                        </Tooltip>
-                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost">
-                              <Mail className="h-4 w-4" />
-                              <span className="sr-only">Send Reminder</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Send Reminder</TooltipContent>
-                        </Tooltip>
-                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost" className="text-green-600">
-                              <CheckCircle className="h-4 w-4" />
-                              <span className="sr-only">Mark as Paid</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Mark as Paid</TooltipContent>
-                        </Tooltip>
+                        <Dialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <DialogTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </DialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                          <DialogContent>
+                            <DialogHeader>
+                              <DialogTitle>Payment Details</DialogTitle>
+                              <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
+                            </DialogHeader>
+                            <div className="py-4">
+                               <p><strong>Library:</strong> {payment.libraryName}</p>
+                               <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
+                               <p><strong>Status:</strong> {payment.status}</p>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        <AlertDialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                               <AlertDialogTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Mail className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>Send Reminder</TooltipContent>
+                          </Tooltip>
+                           <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Send Reminder</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Are you sure you want to send a payment reminder to {payment.libraryName}?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>Send</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
+                        <AlertDialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                               <AlertDialogTrigger asChild>
+                                <Button size="icon" variant="ghost" className="text-green-600">
+                                  <CheckCircle className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>Mark as Paid</TooltipContent>
+                          </Tooltip>
+                           <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Confirm Payment</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Are you sure you want to mark this payment as paid?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>Confirm</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
-                    </TooltipProvider>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TooltipProvider>
             </TableBody>
           </Table>
         </CardContent>

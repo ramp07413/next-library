@@ -1,4 +1,6 @@
 
+"use client";
+
 import {
   Table,
   TableBody,
@@ -9,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FilePenLine, ShieldCheck, UserCheck, UserX } from "lucide-react";
+import { FilePenLine, ShieldCheck, UserCheck, UserX, UserPlus } from "lucide-react";
 import { users } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
@@ -19,6 +21,29 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import Link from "next/link";
+
 
 export default function UsersPage() {
   const getRoleBadgeVariant = (role: string) => {
@@ -45,7 +70,9 @@ export default function UsersPage() {
             Manage all users and their permissions.
           </p>
         </div>
-        <Button>Add New User</Button>
+        <Button asChild>
+          <Link href="/company/users/register"><UserPlus className="mr-2" />Add New User</Link>
+        </Button>
       </div>
 
       <Card>
@@ -65,26 +92,26 @@ export default function UsersPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell className="font-medium">
-                    {user.email}
-                  </TableCell>
-                  <TableCell className="text-center">
-                     <Badge variant={getRoleBadgeVariant(user.role)} className="whitespace-nowrap">
-                      {user.role.replace('_', ' ')}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell text-center">
-                    <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
-                      {user.isActive ? "Active" : "Inactive"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell text-center">
-                    {format(new Date(user.createdAt), "PP")}
-                  </TableCell>
-                  <TableCell>
-                     <TooltipProvider>
+              <TooltipProvider>
+                {users.map((user) => (
+                  <TableRow key={user.id}>
+                    <TableCell className="font-medium">
+                      {user.email}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <Badge variant={getRoleBadgeVariant(user.role)} className="whitespace-nowrap capitalize">
+                        {user.role.replace('_', ' ')}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell text-center">
+                      <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
+                        {user.isActive ? "Active" : "Inactive"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-center">
+                      {format(new Date(user.createdAt), "PP")}
+                    </TableCell>
+                    <TableCell>
                       <div className="flex items-center justify-start gap-1 sm:gap-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -95,29 +122,47 @@ export default function UsersPage() {
                           </TooltipTrigger>
                           <TooltipContent>Edit User</TooltipContent>
                         </Tooltip>
-                         <Tooltip>
+                        <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost">
+                             <Button size="icon" variant="ghost">
                               <ShieldCheck className="h-4 w-4" />
                               <span className="sr-only">View Permissions</span>
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent>View Permissions</TooltipContent>
                         </Tooltip>
-                         <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button size="icon" variant="ghost" className={user.isActive ? "text-destructive" : "text-green-600"}>
-                              {user.isActive ? <UserX className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
-                              <span className="sr-only">{user.isActive ? 'Deactivate User' : 'Activate User'}</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>{user.isActive ? 'Deactivate User' : 'Activate User'}</TooltipContent>
-                        </Tooltip>
+                        <AlertDialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <AlertDialogTrigger asChild>
+                                  <Button size="icon" variant="ghost" className={user.isActive ? "text-destructive" : "text-green-600"}>
+                                    {user.isActive ? <UserX className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
+                                    <span className="sr-only">{user.isActive ? 'Deactivate User' : 'Activate User'}</span>
+                                  </Button>
+                              </AlertDialogTrigger>
+                            </TooltipTrigger>
+                            <TooltipContent>{user.isActive ? 'Deactivate User' : 'Activate User'}</TooltipContent>
+                          </Tooltip>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action will {user.isActive ? 'deactivate' : 'activate'} the user account for {user.email}.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>
+                                {user.isActive ? 'Deactivate' : 'Activate'}
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
-                    </TooltipProvider>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TooltipProvider>
             </TableBody>
           </Table>
         </CardContent>
