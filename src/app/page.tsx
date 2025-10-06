@@ -19,14 +19,14 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="px-4 sm:px-6 lg:px-8 py-4 bg-zinc-900 border-b border-border">
+      <header className="px-4 sm:px-6 lg:px-8 py-4 border-b border-border">
         <div className="container mx-auto flex flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
                 <BookOpen className="w-8 h-8 text-primary" />
-                <h1 className="text-2xl font-bold text-white font-headline">LibMan</h1>
+                <h1 className="text-2xl font-bold font-headline">LibMan</h1>
             </div>
             <div className="flex items-center gap-2">
-                <Button variant="ghost" asChild className="text-white hover:bg-zinc-700 hover:text-white">
+                <Button variant="ghost" asChild>
                     <Link href="/login">Log In</Link>
                 </Button>
                 <Button asChild>
