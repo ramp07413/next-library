@@ -8,6 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+<<<<<<< HEAD
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,15 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+=======
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, Search, Armchair, Circle, UserPlus, UserMinus, Wrench, CheckCircle, History, Trash2 } from "lucide-react";
+import { seats, type Seat } from "./data";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+>>>>>>> 9937a40a1d0091efaad24244a654de5f728d9d5f
 import {
   Select,
   SelectContent,
@@ -75,6 +85,7 @@ export default function SeatsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [selectedSeat, setSelectedSeat] = useState<Seat | null>(null);
+  const [seatToDelete, setSeatToDelete] = useState("");
 
   const getStatusBadgeVariant = (status: Seat['status']) => {
     switch (status) {
@@ -125,6 +136,7 @@ export default function SeatsPage() {
             View, manage, and assign library seats.
           </p>
         </div>
+<<<<<<< HEAD
         <Dialog>
           <DialogTrigger asChild>
             <Button>
@@ -159,6 +171,86 @@ export default function SeatsPage() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+=======
+        <div className="flex items-center gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                  <Button>
+                      <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+                  </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                  <DialogTitle>Add New Seat</DialogTitle>
+                  <DialogDescription>
+                      Enter the details for the new seat.
+                  </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="seatNumber" className="text-right">
+                      Seat Number
+                      </Label>
+                      <Input id="seatNumber" placeholder="e.g., 101" className="col-span-3" />
+                  </div>
+                  </div>
+                  <DialogFooter>
+                  <DialogClose asChild>
+                      <Button type="submit">Save Seat</Button>
+                  </DialogClose>
+                  </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="destructive">
+                  <Trash2 className="mr-2 h-4 w-4" /> Delete Seat
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Delete Seat</DialogTitle>
+                  <DialogDescription>
+                    Enter the seat number you want to permanently delete.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="seat-to-delete" className="text-right">
+                      Seat Number
+                    </Label>
+                    <Input
+                      id="seat-to-delete"
+                      placeholder="e.g., 102"
+                      className="col-span-3"
+                      value={seatToDelete}
+                      onChange={(e) => setSeatToDelete(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <DialogFooter>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="destructive" disabled={!seatToDelete}>Delete Seat</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This action cannot be undone. This will permanently delete seat <strong>{seatToDelete}</strong>.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction>Confirm Delete</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+        </div>
+>>>>>>> 9937a40a1d0091efaad24244a654de5f728d9d5f
       </div>
 
       <Tabs defaultValue="grid">

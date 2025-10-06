@@ -56,48 +56,52 @@ export default function RefundedPaymentsPage() {
                   <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                {refundedPayments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell className="font-medium">
-                      {payment.libraryName}
-                    </TableCell>
-                    <TableCell>
-                      ${payment.amount.toFixed(2)}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="outline">{payment.subscriptionPlan}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      {payment.refundedDate ? format(new Date(payment.refundedDate), "PP") : "N/A"}
-                    </TableCell>
-                    <TableCell>
-                       <TooltipProvider>
-                        <div className="flex items-center justify-center gap-2">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Details</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Download className="h-4 w-4" />
-                                <span className="sr-only">Download Credit Note</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Download Credit Note</TooltipContent>
-                          </Tooltip>
-                        </div>
-                      </TooltipProvider>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+              <TooltipProvider>
+                <TableBody>
+                  {refundedPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell className="font-medium">
+                        {payment.libraryName}
+                      </TableCell>
+                      <TableCell>
+                        ${payment.amount.toFixed(2)}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline">{payment.subscriptionPlan}</Badge>
+                      </TableCell>
+                      <TableCell>
+                        {payment.refundedDate ? format(new Date(payment.refundedDate), "PP") : "N/A"}
+                      </TableCell>
+                      <TableCell>
+                          <div className="flex items-center justify-center gap-2">
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
+                                  <span className="sr-only">View Details</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>View Details</p>
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Download className="h-4 w-4" />
+                                  <span className="sr-only">Download Credit Note</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Download Credit Note</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </TooltipProvider>
             </Table>
           ) : (
             <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">

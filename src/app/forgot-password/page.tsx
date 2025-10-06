@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { BookOpen } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const forgotPasswordFormSchema = z.object({
   email: z.string().email({
@@ -82,49 +83,53 @@ export default function ForgotPasswordPage() {
         />
       </div>
       <div className="flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
-           <div className="grid gap-2 text-center">
+        <Card className="mx-auto w-full max-w-md shadow-lg">
+           <CardHeader className="text-center">
              <Link href="/" className="flex items-center gap-2 justify-center text-primary font-headline font-bold text-2xl">
                 <BookOpen className="w-8 h-8" />
                 <span>LibMan</span>
             </Link>
-            <h1 className="text-3xl font-bold mt-4">Forgot Password?</h1>
-            <p className="text-balance text-muted-foreground">
+            <CardTitle className="text-3xl font-bold mt-4">Forgot Password?</CardTitle>
+            <CardDescription className="text-balance text-muted-foreground">
               Enter your email and we'll send you a link to reset your password.
-            </p>
-          </div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder="m@example.com"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? "Sending..." : "Send Reset Link"}
-              </Button>
-            </form>
-          </Form>
-          <div className="mt-4 text-center text-sm">
-            Remember your password?{" "}
-            <Link href="/login" className="underline">
-              Log in
-            </Link>
-          </div>
-        </div>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="m@example.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? "Sending..." : "Send Reset Link"}
+                </Button>
+              </form>
+            </Form>
+            <div className="mt-4 text-center text-sm">
+              Remember your password?{" "}
+              <Link href="/login" className="underline">
+                Log in
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
 }
+
+    

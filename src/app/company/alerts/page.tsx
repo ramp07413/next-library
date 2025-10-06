@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const SEVERITY_STYLES = {
   high: {
@@ -112,59 +113,68 @@ export default function AlertsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {loading ? (
-            <div className="space-y-4">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="flex items-center space-x-4">
-                  <Skeleton className="h-12 w-12 rounded-lg" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-[250px]" />
-                    <Skeleton className="h-4 w-[200px]" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : filteredAlerts.length > 0 ? (
-            <div className="space-y-4">
-              {filteredAlerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className={cn(
-                    "flex items-start gap-4 rounded-lg border p-4",
-                    SEVERITY_STYLES[alert.severity].bg,
-                    SEVERITY_STYLES[alert.severity].border
-                  )}
-                >
-                  <div className="flex-shrink-0">
-                    {SEVERITY_STYLES[alert.severity].icon}
-                  </div>
-                  <div className="flex-grow">
-                    <div className="flex items-center justify-between">
-                      <p className="font-semibold">{alert.message}</p>
-                       <div className="flex items-center gap-2">
-                         <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
-                          {alert.severity}
-                        </Badge>
-                         <Button variant="ghost" size="icon" onClick={() => toggleStar(alert.id)}>
-                            <Star className={cn("h-4 w-4", alert.starred ? "fill-primary text-primary" : "text-muted-foreground")} />
-                        </Button>
-                       </div>
+          <TooltipProvider>
+            {loading ? (
+              <div className="space-y-4">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div key={i} className="flex items-center space-x-4">
+                    <Skeleton className="h-12 w-12 rounded-lg" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {new Date(alert.timestamp).toLocaleString()} -{" "}
-                      <span className="capitalize">{alert.category}</span>
-                    </p>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-              <BellRing className="h-12 w-12 mb-4" />
-              <h3 className="text-lg font-semibold">No Alerts Found</h3>
-              <p>There are no alerts matching the selected filter.</p>
-            </div>
-          )}
+                ))}
+              </div>
+            ) : filteredAlerts.length > 0 ? (
+              <div className="space-y-4">
+                {filteredAlerts.map((alert) => (
+                  <div
+                    key={alert.id}
+                    className={cn(
+                      "flex items-start gap-4 rounded-lg border p-4",
+                      SEVERITY_STYLES[alert.severity].bg,
+                      SEVERITY_STYLES[alert.severity].border
+                    )}
+                  >
+                    <div className="flex-shrink-0">
+                      {SEVERITY_STYLES[alert.severity].icon}
+                    </div>
+                    <div className="flex-grow">
+                      <div className="flex items-center justify-between">
+                        <p className="font-semibold">{alert.message}</p>
+                         <div className="flex items-center gap-2">
+                           <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
+                            {alert.severity}
+                          </Badge>
+                           <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button variant="ghost" size="icon" onClick={() => toggleStar(alert.id)}>
+                                    <Star className={cn("h-4 w-4", alert.starred ? "fill-primary text-primary" : "text-muted-foreground")} />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{alert.starred ? "Unstar" : "Star"} alert</p>
+                              </TooltipContent>
+                            </Tooltip>
+                         </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {new Date(alert.timestamp).toLocaleString()} -{" "}
+                        <span className="capitalize">{alert.category}</span>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
+                <BellRing className="h-12 w-12 mb-4" />
+                <h3 className="text-lg font-semibold">No Alerts Found</h3>
+                <p>There are no alerts matching the selected filter.</p>
+              </div>
+            )}
+          </TooltipProvider>
         </CardContent>
       </Card>
     </div>

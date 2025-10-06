@@ -67,59 +67,65 @@ export default function PendingPaymentsPage() {
                   <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                {pendingPayments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell className="font-medium">
-                      {payment.libraryName}
-                    </TableCell>
-                    <TableCell>
-                      ${payment.amount.toFixed(2)}
-                    </TableCell>
-                    <TableCell>
-                      {format(new Date(payment.dueDate), "PP")}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={getStatusBadgeVariant(payment.status)}>
-                        {payment.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <TooltipProvider>
-                        <div className="flex items-center justify-center gap-2">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Details</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Mail className="h-4 w-4" />
-                                <span className="sr-only">Send Reminder</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Send Reminder</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost" className="text-green-600">
-                                <CheckCircle className="h-4 w-4" />
-                                <span className="sr-only">Mark as Paid</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Mark as Paid</TooltipContent>
-                          </Tooltip>
-                        </div>
-                      </TooltipProvider>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+              <TooltipProvider>
+                <TableBody>
+                  {pendingPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell className="font-medium">
+                        {payment.libraryName}
+                      </TableCell>
+                      <TableCell>
+                        ${payment.amount.toFixed(2)}
+                      </TableCell>
+                      <TableCell>
+                        {format(new Date(payment.dueDate), "PP")}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={getStatusBadgeVariant(payment.status)}>
+                          {payment.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                          <div className="flex items-center justify-center gap-2">
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
+                                  <span className="sr-only">View Details</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>View Details</p>
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Mail className="h-4 w-4" />
+                                  <span className="sr-only">Send Reminder</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Send Reminder</p>
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost" className="text-green-600">
+                                  <CheckCircle className="h-4 w-4" />
+                                  <span className="sr-only">Mark as Paid</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Mark as Paid</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </TooltipProvider>
             </Table>
           ) : (
              <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">

@@ -56,48 +56,52 @@ export default function RecentPaymentsPage() {
                   <TableHead className="text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
-                {recentPayments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell className="font-medium">
-                      {payment.libraryName}
-                    </TableCell>
-                    <TableCell>
-                      ${payment.amount.toFixed(2)}
-                    </TableCell>
-                    <TableCell>
-                      {payment.paidDate ? format(new Date(payment.paidDate), "PP") : "N/A"}
-                    </TableCell>
-                     <TableCell>
-                       <Badge variant="outline">{payment.subscriptionPlan}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      <TooltipProvider>
-                        <div className="flex items-center justify-center gap-2">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Details</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <Download className="h-4 w-4" />
-                                <span className="sr-only">Download Receipt</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Download Receipt</TooltipContent>
-                          </Tooltip>
-                        </div>
-                      </TooltipProvider>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+              <TooltipProvider>
+                <TableBody>
+                  {recentPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell className="font-medium">
+                        {payment.libraryName}
+                      </TableCell>
+                      <TableCell>
+                        ${payment.amount.toFixed(2)}
+                      </TableCell>
+                      <TableCell>
+                        {payment.paidDate ? format(new Date(payment.paidDate), "PP") : "N/A"}
+                      </TableCell>
+                       <TableCell>
+                         <Badge variant="outline">{payment.subscriptionPlan}</Badge>
+                      </TableCell>
+                      <TableCell>
+                          <div className="flex items-center justify-center gap-2">
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Eye className="h-4 w-4" />
+                                  <span className="sr-only">View Details</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>View Details</p>
+                              </TooltipContent>
+                            </Tooltip>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button size="icon" variant="ghost">
+                                  <Download className="h-4 w-4" />
+                                  <span className="sr-only">Download Receipt</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Download Receipt</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </TooltipProvider>
             </Table>
           ) : (
              <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
