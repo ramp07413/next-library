@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { PlusCircle, Search, FilePenLine, UserCheck, UserX, ShieldCheck } from "lucide-react";
+import { PlusCircle, Search, FilePenLine, UserCheck, UserX, ShieldCheck, Eye } from "lucide-react";
 import { admins, LibraryAdmin } from "./data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
@@ -42,6 +42,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { libraryModules, libraryRolePermissions } from "./permissions-data";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 
 export default function AdminManagementPage() {
@@ -185,12 +187,45 @@ export default function AdminManagementPage() {
                                 </DialogFooter>
                             </DialogContent>
                            </Dialog>
-                           <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost"><ShieldCheck className="h-4 w-4" /></Button>
-                              </TooltipTrigger>
-                              <TooltipContent>View Permissions</TooltipContent>
-                           </Tooltip>
+                           <Dialog>
+                                <Tooltip>
+                                    <DialogTrigger asChild>
+                                        <TooltipTrigger asChild>
+                                            <Button size="icon" variant="ghost"><ShieldCheck className="h-4 w-4" /></Button>
+                                        </TooltipTrigger>
+                                    </DialogTrigger>
+                                    <TooltipContent>View Permissions</TooltipContent>
+                                </Tooltip>
+                                <DialogContent className="max-h-[80vh] overflow-y-auto">
+                                    <DialogHeader>
+                                        <DialogTitle>Permissions for <span className="capitalize">{admin.role}</span></DialogTitle>
+                                        <DialogDescription>
+                                            These are the permissions granted to the "{admin.name}" role.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <Accordion type="multiple" defaultValue={libraryModules.map(m => m.name)} className="w-full">
+                                    {libraryModules.map((module) => (
+                                        <AccordionItem key={module.name} value={module.name}>
+                                            <AccordionTrigger>{module.name}</AccordionTrigger>
+                                            <AccordionContent>
+                                            <div className="grid gap-2 pl-4">
+                                                {module.permissions.map((permission) => (
+                                                    <div key={permission.id} className="flex items-center gap-2">
+                                                        <span className={libraryRolePermissions[admin.role].includes(permission.id) ? "text-green-500" : "text-destructive"}>
+                                                            {libraryRolePermissions[admin.role].includes(permission.id) ? <UserCheck className="h-4 w-4"/> : <UserX className="h-4 w-4"/>}
+                                                        </span>
+                                                        <Label htmlFor={permission.id} className="cursor-pointer font-normal">
+                                                            {permission.description}
+                                                        </Label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    ))}
+                                    </Accordion>
+                                </DialogContent>
+                            </Dialog>
                             <AlertDialog>
                                 <Tooltip>
                                 <AlertDialogTrigger asChild>
