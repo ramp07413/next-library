@@ -1,10 +1,21 @@
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BookOpen, Building, Library, User, CheckCircle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { PlaceHolderImages } from "@/lib/placeholder-images";
+
 
 export default function Home() {
+
+  const facilityImages = [
+    PlaceHolderImages.find(p => p.id === 'facility-1'),
+    PlaceHolderImages.find(p => p.id === 'facility-2'),
+    PlaceHolderImages.find(p => p.id === 'facility-3'),
+    PlaceHolderImages.find(p => p.id === 'facility-4'),
+  ].filter(Boolean);
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -71,10 +82,35 @@ export default function Home() {
         </section>
 
         <section className="py-20 lg:py-24">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                    <h3 className="text-3xl font-bold font-headline">Explore Our World-Class Facilities</h3>
+                    <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+                        A modern, clean, and professional environment designed for focus and collaboration.
+                    </p>
+                </div>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    {facilityImages.map((img, index) => img && (
+                        <div key={index} className="overflow-hidden rounded-lg shadow-lg group">
+                            <Image
+                                src={img.imageUrl}
+                                alt={img.description}
+                                width={800}
+                                height={600}
+                                className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                                data-ai-hint={img.imageHint}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <section className="bg-muted py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                  <h3 className="text-3xl font-bold font-headline">Features at a Glance</h3>
                  <p className="mt-2 text-muted-foreground max-w-2xl mx-auto mb-12">Everything you need to run a modern library, and more.</p>
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left">
+                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-left max-w-5xl mx-auto">
                     <FeatureItem>Multi-library Management</FeatureItem>
                     <FeatureItem>Student & Seat Administration</FeatureItem>
                     <FeatureItem>Billing & Payment Processing</FeatureItem>

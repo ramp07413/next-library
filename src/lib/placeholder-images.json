@@ -29,6 +29,30 @@
       "description": "User avatar 5",
       "imageUrl": "https://images.unsplash.com/photo-1650630729397-810915b32ac9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtYW4lMjBmYWNlfGVufDB8fHx8MTc1OTIyMjkwMXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "man face"
+    },
+    {
+      "id": "facility-1",
+      "description": "A modern library interior",
+      "imageUrl": "https://images.unsplash.com/photo-1674653760708-f521366e5cde?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaWJyYXJ5JTIwaW50ZXJpb3J8ZW58MHx8fHwxNzU5NzM3ODkzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "library interior"
+    },
+    {
+      "id": "facility-2",
+      "description": "Students studying in a library",
+      "imageUrl": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzdHVkZW50cyUyMHN0dWR5aW5nfGVufDB8fHx8MTc1OTYzNTE5NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "students studying"
+    },
+    {
+      "id": "facility-3",
+      "description": "A wall of bookshelves",
+      "imageUrl": "https://images.unsplash.com/photo-1688110395685-ce24e1949bca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsaWJyYXJ5JTIwYm9va3NoZWx2ZXN8ZW58MHx8fHwxNzU5NjQ4MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "library bookshelves"
+    },
+    {
+      "id": "facility-4",
+      "description": "A comfortable reading area in a library",
+      "imageUrl": "https://images.unsplash.com/photo-1549439548-22601048c6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWFkaW5nJTIwYXJlYXxlbnwwfHx8fDE3NTk3NDYyNDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "reading area"
     }
   ]
 }
