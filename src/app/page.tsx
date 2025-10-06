@@ -35,7 +35,7 @@ export default function Home() {
       <main className="flex-grow">
         <section className="relative h-[60vh] flex items-center justify-center text-center text-white">
           <Image
-            src="https://images.unsplash.com/photo-1529142893173-6659d1a21a86?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaWJyYXJ5JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3NTk3NDYzMjR8MA&ixlib=rb-4.1.0&q=80&w=1920"
+            src="https://images.pexels.com/photos/12064/pexels-photo-12064.jpeg"
             alt="Library background"
             fill
             className="object-cover"
