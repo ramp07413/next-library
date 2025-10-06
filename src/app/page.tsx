@@ -19,18 +19,20 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-row justify-between items-center gap-4 bg-muted border-b border-b-white/10">
-        <div className="flex items-center gap-2">
-            <BookOpen className="w-8 h-8 text-primary" />
-            <h1 className="text-2xl font-bold text-primary font-headline">LibMan</h1>
-        </div>
-        <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild>
-                <Link href="/login">Log In</Link>
-            </Button>
-            <Button asChild>
-                <Link href="/signup">Sign Up</Link>
-            </Button>
+      <header className="px-4 sm:px-6 lg:px-8 py-4 bg-muted border-b border-border">
+        <div className="container mx-auto flex flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-2">
+                <BookOpen className="w-8 h-8 text-primary" />
+                <h1 className="text-2xl font-bold text-primary font-headline">LibMan</h1>
+            </div>
+            <div className="flex items-center gap-2">
+                <Button variant="ghost" asChild>
+                    <Link href="/login">Log In</Link>
+                </Button>
+                <Button asChild>
+                    <Link href="/signup">Sign Up</Link>
+                </Button>
+            </div>
         </div>
       </header>
       <main className="flex-grow">
