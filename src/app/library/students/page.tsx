@@ -122,9 +122,7 @@ export default function ManageStudentsPage() {
                 <TableHead className="hidden sm:table-cell">Shift</TableHead>
                 <TableHead>Fee</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>
-                  <span className="sr-only">Actions</span>
-                </TableHead>
+                <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
