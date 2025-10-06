@@ -23,10 +23,10 @@ interface AlertsDropdownProps {
   role: "company" | "library" | "student";
 }
 
-const SEVERITY_ICONS = {
+const SEVERITY_ICONS: { [key: string]: React.ReactNode } = {
   high: <BellRing className="h-4 w-4 text-destructive" />,
-  medium: <Bell className="h-4 w-4 text-yellow-500" />,
-  low: <Bell className="h-4 w-4 text-blue-500" />,
+  medium: <Bell className="h-4 w-4 text-primary" />,
+  low: <Bell className="h-4 w-4 text-secondary-foreground" />,
 };
 
 export function AlertsDropdown({ role }: AlertsDropdownProps) {

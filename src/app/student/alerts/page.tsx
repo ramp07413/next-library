@@ -25,15 +25,15 @@ const SEVERITY_STYLES = {
     badge: "destructive" as const,
   },
   medium: {
-    bg: "bg-yellow-500/10",
-    border: "border-yellow-500",
-    icon: <Bell className="h-5 w-5 text-yellow-500" />,
+    bg: "bg-primary/10",
+    border: "border-primary",
+    icon: <Bell className="h-5 w-5 text-primary" />,
     badge: "default" as const,
   },
   low: {
-    bg: "bg-blue-500/10",
-    border: "border-blue-500",
-    icon: <Bell className="h-5 w-5 text-blue-500" />,
+    bg: "bg-secondary/10",
+    border: "border-secondary",
+    icon: <Bell className="h-5 w-5 text-secondary-foreground" />,
     badge: "secondary" as const,
   },
 };
