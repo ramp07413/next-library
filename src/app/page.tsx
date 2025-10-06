@@ -145,14 +145,14 @@ export default function Home() {
             <div className="md:col-span-2">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-8 h-8 text-primary" />
-                <h3 className="text-2xl font-bold font-headline">LibMan</h3>
+                <h3 className="text-2xl font-bold font-headline text-primary-foreground">LibMan</h3>
               </div>
               <p className="mt-4 text-sm text-muted-foreground">
                 The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider text-foreground">Quick Links</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li><Link href="#" className="hover:text-primary transition-colors">Features</Link></li>
                 <li><Link href="#" className="hover:text-primary transition-colors">Pricing</Link></li>
@@ -161,7 +161,7 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold uppercase tracking-wider text-foreground">Follow Us</h4>
+              <h4 className="font-semibold uppercase tracking-wider text-primary-foreground">Follow Us</h4>
               <div className="flex mt-4 space-x-4">
                 <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter /></Link>
                 <Link href="#" className="text-muted-foreground hover:text-primary transition-colors"><Facebook /></Link>
