@@ -129,6 +129,12 @@ export default function UsersPage() {
               <TableBody>
                   {filteredUsers.map((user) => {
                     const library = user.libraryId ? libraries.find(lib => lib.id === user.libraryId) : null;
+                    const getLibraryText = () => {
+                      if (user.role === 'student') return 'Student';
+                      if (user.role === 'owner' || user.role === 'super_admin') return 'LibMan Company';
+                      return library ? library.libraryName : 'N/A';
+                    };
+
                     return (
                     <TableRow key={user.id}>
                       <TableCell className="font-medium">
@@ -140,7 +146,7 @@ export default function UsersPage() {
                         </Badge>
                       </TableCell>
                       <TableCell className="hidden sm:table-cell">
-                        {user.role === 'student' ? 'Student' : library ? library.libraryName : 'N/A'}
+                        {getLibraryText()}
                       </TableCell>
                       <TableCell className="hidden sm:table-cell text-center">
                         <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
