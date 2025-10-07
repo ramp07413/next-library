@@ -22,6 +22,25 @@ import { payments } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function PendingPaymentsPage() {
   const [pendingPayments] = useState(
@@ -87,39 +106,87 @@ export default function PendingPaymentsPage() {
                       </TableCell>
                       <TableCell>
                           <div className="flex items-center justify-center gap-2">
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Eye className="h-4 w-4" />
-                                  <span className="sr-only">View Details</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>View Details</p>
-                              </TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Mail className="h-4 w-4" />
-                                  <span className="sr-only">Send Reminder</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Send Reminder</p>
-                              </TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost" className="text-green-600">
-                                  <CheckCircle className="h-4 w-4" />
-                                  <span className="sr-only">Mark as Paid</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Mark as Paid</p>
-                              </TooltipContent>
-                            </Tooltip>
+                             <Dialog>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <DialogTrigger asChild>
+                                    <Button size="icon" variant="ghost">
+                                      <Eye className="h-4 w-4" />
+                                      <span className="sr-only">View Details</span>
+                                    </Button>
+                                  </DialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>View Details</p>
+                                </TooltipContent>
+                              </Tooltip>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>Payment Details</DialogTitle>
+                                  <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
+                                </DialogHeader>
+                                <div className="py-4 space-y-2">
+                                  <p><strong>Library:</strong> {payment.libraryName}</p>
+                                  <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
+                                  <p><strong>Due Date:</strong> {format(new Date(payment.dueDate), "PPP")}</p>
+                                  <p><strong>Status:</strong> <Badge variant={getStatusBadgeVariant(payment.status)}>{payment.status}</Badge></p>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                            <AlertDialog>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <AlertDialogTrigger asChild>
+                                    <Button size="icon" variant="ghost">
+                                      <Mail className="h-4 w-4" />
+                                      <span className="sr-only">Send Reminder</span>
+                                    </Button>
+                                  </AlertDialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>Send Reminder</p>
+                                </TooltipContent>
+                              </Tooltip>
+                              <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Send Reminder?</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    This will send a payment reminder to {payment.libraryName}.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction>Send</AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                             <AlertDialog>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <AlertDialogTrigger asChild>
+                                    <Button size="icon" variant="ghost" className="text-green-600">
+                                      <CheckCircle className="h-4 w-4" />
+                                      <span className="sr-only">Mark as Paid</span>
+                                    </Button>
+                                  </AlertDialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>Mark as Paid</p>
+                                </TooltipContent>
+                              </Tooltip>
+                               <AlertDialogContent>
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Confirm Payment</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to mark this payment from {payment.libraryName} as paid?
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction>Confirm</AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                       </TableCell>
                     </TableRow>
