@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FilePenLine, ShieldCheck, UserCheck, UserX, UserPlus } from "lucide-react";
+import { FilePenLine, ShieldCheck, UserCheck, UserX, UserPlus, Search } from "lucide-react";
 import { users } from "./data";
 import { libraries } from "@/app/company/libraries/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,9 +34,21 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 
 export default function UsersPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("all");
+
   const getRoleBadgeVariant = (role: string) => {
     switch (role) {
       case 'owner':
@@ -49,6 +61,12 @@ export default function UsersPage() {
         return 'outline';
     }
   };
+
+  const filteredUsers = users
+    .filter((user) => roleFilter === 'all' || user.role === roleFilter)
+    .filter((user) =>
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   return (
     <div className="space-y-8">
@@ -70,6 +88,30 @@ export default function UsersPage() {
         <CardHeader>
           <CardTitle>User List</CardTitle>
           <CardDescription>A list of all users in the system.</CardDescription>
+           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
+            <div className="relative flex-1 md:grow-0 w-full">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search by email..."
+                className="w-full rounded-lg bg-background pl-8"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <Select value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger className="w-full sm:w-[180px]">
+                <SelectValue placeholder="Filter by role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Roles</SelectItem>
+                <SelectItem value="owner">Owner</SelectItem>
+                <SelectItem value="super_admin">Super Admin</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="student">Student</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </CardHeader>
         <CardContent>
           <TooltipProvider>
@@ -85,7 +127,7 @@ export default function UsersPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                  {users.map((user) => {
+                  {filteredUsers.map((user) => {
                     const library = user.libraryId ? libraries.find(lib => lib.id === user.libraryId) : null;
                     return (
                     <TableRow key={user.id}>
