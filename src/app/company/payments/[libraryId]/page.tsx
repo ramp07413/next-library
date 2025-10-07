@@ -14,19 +14,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { payments, type Payment } from "../data";
-import { libraries } from '@/app/company/libraries/data';
+import { libraries, type Library } from '@/app/company/libraries/data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import Link from "next/link";
 
-export default function LibraryPaymentsPage({ params }: { params: { libraryId: string } }) {
-  const library = libraries.find((lib) => lib.id === params.libraryId);
-  const libraryPayments = payments.filter((p) => p.libraryId === params.libraryId);
+interface LibraryPaymentsClientPageProps {
+  library: Library;
+  libraryPayments: Payment[];
+}
 
-  if (!library) {
-    notFound();
-  }
-
+function LibraryPaymentsClientPage({ library, libraryPayments }: LibraryPaymentsClientPageProps) {
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
       case 'Paid':
@@ -115,4 +113,15 @@ export default function LibraryPaymentsPage({ params }: { params: { libraryId: s
       </Card>
     </div>
   );
+}
+
+export default function LibraryPaymentsPage({ params }: { params: { libraryId: string } }) {
+  const library = libraries.find((lib) => lib.id === params.libraryId);
+  const libraryPayments = payments.filter((p) => p.libraryId === params.libraryId);
+
+  if (!library) {
+    notFound();
+  }
+
+  return <LibraryPaymentsClientPage library={library} libraryPayments={libraryPayments} />;
 }
