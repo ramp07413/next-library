@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FilePenLine, ShieldCheck, UserCheck, UserX, UserPlus } from "lucide-react";
 import { users } from "./data";
+import { libraries } from "@/app/company/libraries/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import {
@@ -77,13 +78,16 @@ export default function UsersPage() {
                 <TableRow>
                   <TableHead>Email</TableHead>
                   <TableHead className="text-center">Role</TableHead>
+                  <TableHead className="hidden sm:table-cell">Library</TableHead>
                   <TableHead className="hidden sm:table-cell text-center">Status</TableHead>
                   <TableHead className="hidden md:table-cell text-center">Date Added</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                  {users.map((user) => (
+                  {users.map((user) => {
+                    const library = user.libraryId ? libraries.find(lib => lib.id === user.libraryId) : null;
+                    return (
                     <TableRow key={user.id}>
                       <TableCell className="font-medium">
                         {user.email}
@@ -92,6 +96,9 @@ export default function UsersPage() {
                         <Badge variant={getRoleBadgeVariant(user.role)} className="whitespace-nowrap capitalize">
                           {user.role.replace('_', ' ')}
                         </Badge>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">
+                        {user.role === 'student' ? 'Student' : library ? library.libraryName : 'N/A'}
                       </TableCell>
                       <TableCell className="hidden sm:table-cell text-center">
                         <Badge variant={user.isActive ? "secondary" : "outline"} className="whitespace-nowrap">
@@ -157,7 +164,7 @@ export default function UsersPage() {
                         </div>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  )})}
               </TableBody>
             </Table>
           </TooltipProvider>
