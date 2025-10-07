@@ -232,28 +232,64 @@ export default function UsersPage() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-start gap-1 sm:gap-2">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button size="icon" variant="ghost">
-                                <FilePenLine className="h-4 w-4" />
-                                <span className="sr-only">Edit User</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>Edit User</p>
-                            </TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                               <Button size="icon" variant="ghost">
-                                <ShieldCheck className="h-4 w-4" />
-                                <span className="sr-only">View Permissions</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <p>View Permissions</p>
-                            </TooltipContent>
-                          </Tooltip>
+                           <Dialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <DialogTrigger asChild>
+                                  <Button size="icon" variant="ghost">
+                                    <FilePenLine className="h-4 w-4" />
+                                    <span className="sr-only">Edit User</span>
+                                  </Button>
+                                </DialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Edit User</p>
+                              </TooltipContent>
+                            </Tooltip>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Edit User</DialogTitle>
+                                <DialogDescription>Update user information.</DialogDescription>
+                              </DialogHeader>
+                              <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="email-edit" className="text-right">Email</Label>
+                                  <Input id="email-edit" defaultValue={user.email} className="col-span-3" />
+                                </div>
+                              </div>
+                              <DialogFooter>
+                                <DialogClose asChild>
+                                  <Button type="submit">Save Changes</Button>
+                                </DialogClose>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          <Dialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <DialogTrigger asChild>
+                                  <Button size="icon" variant="ghost">
+                                    <ShieldCheck className="h-4 w-4" />
+                                    <span className="sr-only">View Permissions</span>
+                                  </Button>
+                                </DialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>View Permissions</p>
+                              </TooltipContent>
+                            </Tooltip>
+                             <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>Permissions for {user.email}</DialogTitle>
+                                    <DialogDescription>
+                                        Role: <span className="capitalize font-medium">{user.role.replace('_', ' ')}</span>
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="py-4">
+                                    <p>Permissions are managed at the <Link href="/company/users/permissions" className="underline text-primary">Permissions</Link> page.</p>
+                                </div>
+                            </DialogContent>
+                          </Dialog>
                           <AlertDialog>
                             <Tooltip>
                               <TooltipTrigger asChild>
