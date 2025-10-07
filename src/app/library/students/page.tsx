@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -105,9 +106,70 @@ export default function ManageStudentsPage() {
             View, edit, and manage all student profiles.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" /> Add New Student
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" /> Add New Student
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-[95vw] sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Add New Student</DialogTitle>
+              <DialogDescription>
+                Fill out the form below to add a new student to the library.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-name" className="text-right">
+                  Name
+                </Label>
+                <Input id="new-name" placeholder="John Doe" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-email" className="text-right">
+                  Email
+                </Label>
+                <Input id="new-email" type="email" placeholder="john.d@example.com" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-phone" className="text-right">
+                  Phone
+                </Label>
+                <Input id="new-phone" placeholder="123-456-7890" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-shift" className="text-right">
+                  Shift
+                </Label>
+                <Select>
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Select a shift" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="morning">Morning</SelectItem>
+                    <SelectItem value="afternoon">Afternoon</SelectItem>
+                    <SelectItem value="evening">Evening</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-fee" className="text-right">
+                  Fee
+                </Label>
+                <Input id="new-fee" type="number" placeholder="150" className="col-span-3" />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">Cancel</Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button type="submit">Add Student</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Card className="overflow-hidden">
