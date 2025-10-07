@@ -22,6 +22,14 @@ import { payments } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function RecentPaymentsPage() {
   const [recentPayments] = useState(
@@ -74,28 +82,61 @@ export default function RecentPaymentsPage() {
                       </TableCell>
                       <TableCell>
                           <div className="flex items-center justify-center gap-2">
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Eye className="h-4 w-4" />
-                                  <span className="sr-only">View Details</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>View Details</p>
-                              </TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Download className="h-4 w-4" />
-                                  <span className="sr-only">Download Receipt</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Download Receipt</p>
-                              </TooltipContent>
-                            </Tooltip>
+                             <Dialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <DialogTrigger asChild>
+                                      <Button size="icon" variant="ghost">
+                                        <Eye className="h-4 w-4" />
+                                        <span className="sr-only">View Details</span>
+                                      </Button>
+                                    </DialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>View Details</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Payment Details</DialogTitle>
+                                    <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
+                                  </DialogHeader>
+                                  <div className="py-4 space-y-2">
+                                      <p><strong>Library:</strong> {payment.libraryName}</p>
+                                      <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
+                                      <p><strong>Paid On:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</p>
+                                      <p><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></p>
+                                      <p><strong>Status:</strong> <Badge variant="secondary">{payment.status}</Badge></p>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <Dialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <DialogTrigger asChild>
+                                      <Button size="icon" variant="ghost">
+                                        <Download className="h-4 w-4" />
+                                        <span className="sr-only">Download Receipt</span>
+                                      </Button>
+                                    </DialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>Download Receipt</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <DialogContent>
+                                  <DialogHeader>
+                                    <DialogTitle>Receipt</DialogTitle>
+                                    <DialogDescription>Receipt for transaction {payment.id}</DialogDescription>
+                                  </DialogHeader>
+                                  <div className="py-4 space-y-2">
+                                    <p><strong>Receipt ID:</strong> REC-{payment.id}</p>
+                                    <p><strong>Library:</strong> {payment.libraryName}</p>
+                                    <p><strong>Amount Paid:</strong> ${payment.amount.toFixed(2)}</p>
+                                    <p><strong>Date:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</p>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
                           </div>
                       </TableCell>
                     </TableRow>
