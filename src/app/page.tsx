@@ -122,7 +122,7 @@ export default function Home() {
                   title="For Libraries"
                   description="Manage seats, students, payments, and expenses for your specific library branch."
                   icon={<Library className="w-10 h-10 text-primary" />}
-                  href="/library"
+                  href="/library/1"
                   />
                   <DashboardCard
                   title="For Students"
