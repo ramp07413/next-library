@@ -1,4 +1,6 @@
 
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BookOpen, Building, Library, User, CheckCircle, Twitter, Facebook, Instagram } from "lucide-react";
@@ -8,6 +10,9 @@ import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ScrollAnimation from "@/components/shared/scroll-animation";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 
 
 export default function Home() {
@@ -37,8 +42,18 @@ export default function Home() {
       name: "Alice Johnson",
       role: "Student, Tech Park Library",
       avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
+    },
+    {
+      quote: "The analytics features are top-notch. We've been able to optimize our resource allocation and improve student satisfaction significantly.",
+      name: "Samuel Lee",
+      role: "Director of Operations",
+      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl || ''
     }
   ];
+
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -129,25 +144,36 @@ export default function Home() {
                       Hear from companies and libraries that have transformed their operations with LibMan.
                   </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {testimonials.map((testimonial, index) => (
-                      <Card key={index} className="flex flex-col">
-                          <CardContent className="pt-6 flex-grow">
-                              <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
-                          </CardContent>
-                          <CardHeader className="flex-row items-center gap-4">
-                              <Avatar className="h-12 w-12">
-                                  <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person portrait" />
-                                  <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                              </Avatar>
-                              <div>
-                                  <p className="font-semibold">{testimonial.name}</p>
-                                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                              </div>
-                          </CardHeader>
-                      </Card>
-                  ))}
-              </div>
+              <Carousel 
+                plugins={[plugin.current]}
+                className="w-full max-w-4xl mx-auto"
+                onMouseEnter={plugin.current.stop}
+                onMouseLeave={plugin.current.reset}
+              >
+                  <CarouselContent>
+                      {testimonials.map((testimonial, index) => (
+                          <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                            <div className="p-1 h-full">
+                              <Card className="flex flex-col h-full">
+                                  <CardContent className="pt-6 flex-grow">
+                                      <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                                  </CardContent>
+                                  <CardHeader className="flex-row items-center gap-4">
+                                      <Avatar className="h-12 w-12">
+                                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person portrait" />
+                                          <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                      </Avatar>
+                                      <div>
+                                          <p className="font-semibold">{testimonial.name}</p>
+                                          <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                                      </div>
+                                  </CardHeader>
+                              </Card>
+                            </div>
+                          </CarouselItem>
+                      ))}
+                  </CarouselContent>
+              </Carousel>
           </ScrollAnimation>
         </section>
 
