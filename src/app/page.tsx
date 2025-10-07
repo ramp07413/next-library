@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 
 export default function Home() {
@@ -16,6 +17,27 @@ export default function Home() {
     PlaceHolderImages.find(p => p.id === 'facility-3'),
     PlaceHolderImages.find(p => p.id === 'facility-4'),
   ].filter(Boolean);
+
+  const testimonials = [
+    {
+      quote: "LibMan has completely transformed how we manage our library network. The insights we get from the company dashboard are invaluable.",
+      name: "Jane Doe",
+      role: "COO, Global Libraries Inc.",
+      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-2')?.imageUrl || ''
+    },
+    {
+      quote: "As a library admin, my job is so much easier now. Seat and student management is a breeze, and tracking payments is effortless.",
+      name: "John Smith",
+      role: "Admin, City Central Library",
+      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-1')?.imageUrl || ''
+    },
+    {
+      quote: "I love how easy it is to see my seat details and payment dues. The platform is super user-friendly for students!",
+      name: "Alice Johnson",
+      role: "Student, Tech Park Library",
+      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
+    }
+  ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -95,6 +117,37 @@ export default function Home() {
         </section>
 
         <Separator className="my-0" />
+        
+        <section className="py-20 lg:py-24 bg-muted">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-12">
+                    <h3 className="text-3xl font-bold font-headline">What Our Users Say</h3>
+                    <p className="mt-2 text-muted-foreground max-w-2xl mx-auto">
+                        Hear from companies and libraries that have transformed their operations with LibMan.
+                    </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {testimonials.map((testimonial, index) => (
+                        <Card key={index} className="flex flex-col">
+                            <CardContent className="pt-6 flex-grow">
+                                <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                            </CardContent>
+                            <CardHeader className="flex-row items-center gap-4">
+                                <Avatar className="h-12 w-12">
+                                    <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person portrait" />
+                                    <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div>
+                                    <p className="font-semibold">{testimonial.name}</p>
+                                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                                </div>
+                            </CardHeader>
+                        </Card>
+                    ))}
+                </div>
+            </div>
+        </section>
+
 
         <section className="py-20 lg:py-24">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
