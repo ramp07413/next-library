@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FilePenLine, ShieldCheck, UserCheck, UserX, UserPlus, Search } from "lucide-react";
+import { FilePenLine, UserCheck, UserX, UserPlus, Search } from "lucide-react";
 import { users } from "./data";
 import { libraries } from "@/app/company/libraries/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,7 +33,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import Link from "next/link";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
@@ -204,8 +203,8 @@ export default function UsersPage() {
                   {filteredUsers.map((user) => {
                     const library = user.libraryId ? libraries.find(lib => lib.id === user.libraryId) : null;
                     const getLibraryText = () => {
-                      if (user.role === 'student') return 'Student';
                       if (user.role === 'owner' || user.role === 'super_admin') return 'LibMan Company';
+                      if (user.role === 'student') return 'Student';
                       return library ? library.libraryName : 'N/A';
                     };
 
@@ -262,32 +261,6 @@ export default function UsersPage() {
                                   <Button type="submit">Save Changes</Button>
                                 </DialogClose>
                               </DialogFooter>
-                            </DialogContent>
-                          </Dialog>
-                          <Dialog>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <DialogTrigger asChild>
-                                  <Button size="icon" variant="ghost">
-                                    <ShieldCheck className="h-4 w-4" />
-                                    <span className="sr-only">View Permissions</span>
-                                  </Button>
-                                </DialogTrigger>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>View Permissions</p>
-                              </TooltipContent>
-                            </Tooltip>
-                             <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle>Permissions for {user.email}</DialogTitle>
-                                    <DialogDescription>
-                                        Role: <span className="capitalize font-medium">{user.role.replace('_', ' ')}</span>
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="py-4">
-                                    <p>Permissions are managed at the <Link href="/company/users/permissions" className="underline text-primary">Permissions</Link> page.</p>
-                                </div>
                             </DialogContent>
                           </Dialog>
                           <AlertDialog>
