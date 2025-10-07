@@ -100,18 +100,32 @@ export default function StudentDetailsPage({ params }: { params: { id: string } 
               <CardTitle>Student Dues</CardTitle>
               <CardDescription>Upcoming and outstanding payments.</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                 <div className="text-4xl font-bold text-destructive">
-                    ${studentDues.amount.toFixed(2)}
-                </div>
-                 <div className="flex-1">
-                    <p className="font-semibold text-destructive">{studentDues.status}</p>
-                    <p className="text-sm text-muted-foreground">Due on {format(new Date(studentDues.dueDate), "PPP")}</p>
-                </div>
-                <Button>
-                    <Receipt className="mr-2 h-4 w-4" />
-                    Pay Now
-                </Button>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Due Date</TableHead>
+                    <TableHead>Amount</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Action</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>{format(new Date(studentDues.dueDate), "PP")}</TableCell>
+                    <TableCell>${studentDues.amount.toFixed(2)}</TableCell>
+                    <TableCell>
+                      <Badge variant={getPaymentStatusBadgeVariant(studentDues.status)}>{studentDues.status}</Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                       <Button>
+                          <Receipt className="mr-2 h-4 w-4" />
+                          Pay Now
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
 
