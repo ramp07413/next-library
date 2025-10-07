@@ -18,11 +18,10 @@ import { libraries } from '@/app/company/libraries/data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import Link from "next/link";
-import { useMemo } from 'react';
 
 export default function LibraryPaymentsPage({ params }: { params: { libraryId: string } }) {
-  const library = useMemo(() => libraries.find((lib) => lib.id === params.libraryId), [params.libraryId]);
-  const libraryPayments = useMemo(() => payments.filter((p) => p.libraryId === params.libraryId), [params.libraryId]);
+  const library = libraries.find((lib) => lib.id === params.libraryId);
+  const libraryPayments = payments.filter((p) => p.libraryId === params.libraryId);
 
   if (!library) {
     notFound();
@@ -117,4 +116,3 @@ export default function LibraryPaymentsPage({ params }: { params: { libraryId: s
     </div>
   );
 }
-
