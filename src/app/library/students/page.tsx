@@ -338,7 +338,6 @@ export default function ManageStudentsPage() {
                                     />
                                   </div>
                                 </div>
-<<<<<<< HEAD
                                 <DialogFooter>
                                   <DialogClose asChild>
                                     <Button type="submit">Save Changes</Button>
@@ -346,132 +345,16 @@ export default function ManageStudentsPage() {
                                 </DialogFooter>
                               </DialogContent>
                             </Dialog>
-                            <Dialog>
-                              <Tooltip>
-                                <DialogTrigger asChild>
-                                  <TooltipTrigger asChild>
-                                    <Button
-                                      size="icon"
-                                      variant="ghost"
-                                      className="h-8 w-8 md:h-9 md:w-9"
-                                    >
-                                      <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                    </Button>
-                                  </TooltipTrigger>
-                                </DialogTrigger>
-                                <TooltipContent>View Details</TooltipContent>
-                              </Tooltip>
-                              <DialogContent className="max-w-[95vw] sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
-                                <DialogHeader className="space-y-2">
-                                  <DialogTitle className="text-base md:text-lg">
-                                    {student.name}
-                                  </DialogTitle>
-                                  <DialogDescription className="text-xs md:text-sm break-all">
-                                    Student ID: {student.id}
-                                  </DialogDescription>
-                                </DialogHeader>
-                                <div className="space-y-3 py-4 text-xs md:text-sm">
-                                  <p>
-                                    <span className="font-semibold">Email:</span>{' '}
-                                    {student.email}
-                                  </p>
-                                  <p>
-                                    <span className="font-semibold">Phone:</span>{' '}
-                                    {student.phone}
-                                  </p>
-                                  <p>
-                                    <span className="font-semibold">
-                                      Join Date:
-                                    </span>{' '}
-                                    {format(new Date(student.joinDate), 'PPP')}
-                                  </p>
-                                  <p>
-                                    <span className="font-semibold">Shift:</span>{' '}
-                                    <span className="capitalize">
-                                      {student.shift}
-=======
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="email" className="text-right">
-                                    Email
-                                  </Label>
-                                  <Input
-                                    id="email"
-                                    type="email"
-                                    defaultValue={student.email}
-                                    className="col-span-3"
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="phone" className="text-right">
-                                    Phone
-                                  </Label>
-                                  <Input
-                                    id="phone"
-                                    defaultValue={student.phone}
-                                    className="col-span-3"
-                                  />
-                                </div>
-                              </div>
-                              <DialogFooter>
-                                <DialogClose asChild>
-                                  <Button type="submit">Save Changes</Button>
-                                </DialogClose>
-                              </DialogFooter>
-                            </DialogContent>
-                          </Dialog>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button asChild size="icon" variant="ghost" className="h-8 w-8 md:h-9 md:w-9">
-                                <Link href={`/library/students/${student.id}`}>
-                                  <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                </Link>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <AlertDialog>
                             <Tooltip>
-                              <AlertDialogTrigger asChild>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className={
-                                      student.status === 'active'
-                                        ? 'text-destructive h-8 w-8 md:h-9 md:w-9'
-                                        : 'text-green-600 h-8 w-8 md:h-9 md:w-9'
-                                    }
-                                  >
-                                    {student.status === 'active' ? (
-                                      <UserX className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                    ) : (
-                                      <UserCheck className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                    )}
-                                    <span className="sr-only">
-                                      {student.status === 'active'
-                                        ? 'Deactivate Student'
-                                        : 'Activate Student'}
->>>>>>> d0578d23ca5d5b37331fb2242b1f501c04914228
-                                    </span>
-                                  </p>
-                                  <p>
-                                    <span className="font-semibold">Fee:</span> $
-                                    {student.fee.toFixed(2)}
-                                  </p>
-                                  <p>
-                                    <span className="font-semibold">Status:</span>{' '}
-                                    <Badge
-                                      variant={getStatusBadgeVariant(
-                                        student.status
-                                      )}
-                                      className="capitalize"
-                                    >
-                                      {student.status}
-                                    </Badge>
-                                  </p>
-                                </div>
-                              </DialogContent>
-                            </Dialog>
+                              <TooltipTrigger asChild>
+                                <Button asChild size="icon" variant="ghost" className="h-8 w-8 md:h-9 md:w-9">
+                                  <Link href={`/library/students/${student.id}`}>
+                                    <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                  </Link>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                            </Tooltip>
                             <AlertDialog>
                               <Tooltip>
                                 <AlertDialogTrigger asChild>
