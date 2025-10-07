@@ -209,31 +209,31 @@ export default function LibraryPaymentsPage() {
                                 </DialogDescription>
                               </DialogHeader>
                               <div className="space-y-3 py-4 text-xs md:text-sm">
-                                <p className="break-words">
+                                <div className="break-words">
                                   <span className="font-semibold">
                                     Student:
                                   </span>{' '}
                                   {payment.studentName}
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                   <span className="font-semibold">Amount:</span>{' '}
                                   ${payment.amount.toFixed(2)}
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                   <span className="font-semibold">
                                     Due Date:
                                   </span>{' '}
                                   {format(new Date(payment.dueDate), 'PPP')}
-                                </p>
-                                <p>
+                                </div>
+                                <div>
                                   <span className="font-semibold">
                                     Paid On:
                                   </span>{' '}
                                   {payment.paidDate
                                     ? format(new Date(payment.paidDate), 'PPP')
                                     : 'N/A'}
-                                </p>
-                                <p className="flex items-center gap-2 flex-wrap">
+                                </div>
+                                <div className="flex items-center gap-2 flex-wrap">
                                   <span className="font-semibold">Status:</span>{' '}
                                   <Badge
                                     variant={getStatusBadgeVariant(
@@ -243,7 +243,7 @@ export default function LibraryPaymentsPage() {
                                   >
                                     {payment.status}
                                   </Badge>
-                                </p>
+                                </div>
                               </div>
                             </DialogContent>
                           </Dialog>

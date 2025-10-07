@@ -120,11 +120,11 @@ export default function OpenReportsPage() {
                                 </DialogDescription>
                               </DialogHeader>
                               <div className="py-4 space-y-2">
-                                <p><strong>Library:</strong> {report.libraryName}</p>
-                                <p><strong>Submitted By:</strong> {report.submittedBy}</p>
-                                <p><strong>Date:</strong> {format(new Date(report.date), "PPP")}</p>
-                                <p><strong>Status:</strong> <Badge variant="destructive" className="capitalize">{report.status}</Badge></p>
-                                <p><strong>Category:</strong> <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge></p>
+                                <div><strong>Library:</strong> {report.libraryName}</div>
+                                <div><strong>Submitted By:</strong> {report.submittedBy}</div>
+                                <div><strong>Date:</strong> {format(new Date(report.date), "PPP")}</div>
+                                <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant="destructive" className="capitalize">{report.status}</Badge></div>
+                                <div className="flex items-center gap-2"><strong>Category:</strong> <Badge variant={getCategoryBadgeVariant(report.category)} className="capitalize">{report.category}</Badge></div>
                               </div>
                             </DialogContent>
                           </Dialog>

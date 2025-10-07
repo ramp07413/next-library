@@ -126,10 +126,10 @@ export default function PendingPaymentsPage() {
                                   <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
                                 </DialogHeader>
                                 <div className="py-4 space-y-2">
-                                  <p><strong>Library:</strong> {payment.libraryName}</p>
-                                  <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
-                                  <p><strong>Due Date:</strong> {format(new Date(payment.dueDate), "PPP")}</p>
-                                  <p><strong>Status:</strong> <Badge variant={getStatusBadgeVariant(payment.status)}>{payment.status}</Badge></p>
+                                  <div><strong>Library:</strong> {payment.libraryName}</div>
+                                  <div><strong>Amount:</strong> ${payment.amount.toFixed(2)}</div>
+                                  <div><strong>Due Date:</strong> {format(new Date(payment.dueDate), "PPP")}</div>
+                                  <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant={getStatusBadgeVariant(payment.status)}>{payment.status}</Badge></div>
                                 </div>
                               </DialogContent>
                             </Dialog>

@@ -102,11 +102,11 @@ export default function RecentPaymentsPage() {
                                     <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
                                   </DialogHeader>
                                   <div className="py-4 space-y-2">
-                                      <p><strong>Library:</strong> {payment.libraryName}</p>
-                                      <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
-                                      <p><strong>Paid On:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</p>
-                                      <p><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></p>
-                                      <p><strong>Status:</strong> <Badge variant="secondary">{payment.status}</Badge></p>
+                                      <div><strong>Library:</strong> {payment.libraryName}</div>
+                                      <div><strong>Amount:</strong> ${payment.amount.toFixed(2)}</div>
+                                      <div><strong>Paid On:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</div>
+                                      <div className="flex items-center gap-2"><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></div>
+                                      <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant="secondary">{payment.status}</Badge></div>
                                   </div>
                                 </DialogContent>
                               </Dialog>
@@ -130,10 +130,10 @@ export default function RecentPaymentsPage() {
                                     <DialogDescription>Receipt for transaction {payment.id}</DialogDescription>
                                   </DialogHeader>
                                   <div className="py-4 space-y-2">
-                                    <p><strong>Receipt ID:</strong> REC-{payment.id}</p>
-                                    <p><strong>Library:</strong> {payment.libraryName}</p>
-                                    <p><strong>Amount Paid:</strong> ${payment.amount.toFixed(2)}</p>
-                                    <p><strong>Date:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</p>
+                                    <div><strong>Receipt ID:</strong> REC-{payment.id}</div>
+                                    <div><strong>Library:</strong> {payment.libraryName}</div>
+                                    <div><strong>Amount Paid:</strong> ${payment.amount.toFixed(2)}</div>
+                                    <div><strong>Date:</strong> {payment.paidDate ? format(new Date(payment.paidDate), "PPP") : 'N/A'}</div>
                                   </div>
                                 </DialogContent>
                               </Dialog>

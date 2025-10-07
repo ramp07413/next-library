@@ -103,11 +103,11 @@ export default function RefundedPaymentsPage() {
                                   <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
                                 </DialogHeader>
                                 <div className="py-4 space-y-2">
-                                  <p><strong>Library:</strong> {payment.libraryName}</p>
-                                  <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
-                                  <p><strong>Refunded On:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</p>
-                                  <p><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></p>
-                                  <p><strong>Status:</strong> <Badge variant="outline">{payment.status}</Badge></p>
+                                  <div><strong>Library:</strong> {payment.libraryName}</div>
+                                  <div><strong>Amount:</strong> ${payment.amount.toFixed(2)}</div>
+                                  <div><strong>Refunded On:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</div>
+                                  <div className="flex items-center gap-2"><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></div>
+                                  <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant="outline">{payment.status}</Badge></div>
                                 </div>
                               </DialogContent>
                             </Dialog>
@@ -131,10 +131,10 @@ export default function RefundedPaymentsPage() {
                                   <DialogDescription>Credit note for transaction {payment.id}</DialogDescription>
                                 </DialogHeader>
                                 <div className="py-4 space-y-2">
-                                  <p><strong>Credit Note ID:</strong> CN-{payment.id}</p>
-                                  <p><strong>Library:</strong> {payment.libraryName}</p>
-                                  <p><strong>Amount Refunded:</strong> ${payment.amount.toFixed(2)}</p>
-                                  <p><strong>Date:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</p>
+                                  <div><strong>Credit Note ID:</strong> CN-{payment.id}</div>
+                                  <div><strong>Library:</strong> {payment.libraryName}</div>
+                                  <div><strong>Amount Refunded:</strong> ${payment.amount.toFixed(2)}</div>
+                                  <div><strong>Date:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</div>
                                 </div>
                               </DialogContent>
                             </Dialog>
