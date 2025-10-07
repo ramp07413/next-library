@@ -1,4 +1,6 @@
 
+"use client";
+
 import {
   Card,
   CardContent,
@@ -38,7 +40,29 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { studentSeatDetails, studentSeatHistory, studentDues, studentPaymentHistory } from './data';
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function StudentDetailsPage({ params }: { params: { id: string } }) {
   const student = students.find((s) => s.id === params.id);
@@ -116,10 +140,26 @@ export default function StudentDetailsPage({ params }: { params: { id: string } 
                       <Badge variant={getPaymentStatusBadgeVariant(studentDues.status)}>{studentDues.status}</Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                       <Button>
-                          <Receipt className="mr-2 h-4 w-4" />
-                          Pay Now
-                      </Button>
+                       <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button>
+                                <Receipt className="mr-2 h-4 w-4" />
+                                Pay Now
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>Confirm Payment</AlertDialogTitle>
+                              <AlertDialogDescription>
+                                Are you sure you want to process a payment of ${studentDues.amount.toFixed(2)} for {student.name}?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction>Confirm Payment</AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -152,10 +192,26 @@ export default function StudentDetailsPage({ params }: { params: { id: string } 
                         <Badge variant={getPaymentStatusBadgeVariant(payment.status)}>{payment.status}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon">
-                          <Download className="h-4 w-4" />
-                          <span className="sr-only">Download receipt for {payment.receipt}</span>
-                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <Download className="h-4 w-4" />
+                              <span className="sr-only">Download receipt for {payment.receipt}</span>
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Receipt Details</DialogTitle>
+                                <DialogDescription>Receipt ID: {payment.receipt}</DialogDescription>
+                            </DialogHeader>
+                            <div className="py-4">
+                                <p><strong>Student:</strong> {student.name}</p>
+                                <p><strong>Date:</strong> {format(new Date(payment.date), "PPP")}</p>
+                                <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
+                                <p><strong>Status:</strong> {payment.status}</p>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -225,7 +281,36 @@ export default function StudentDetailsPage({ params }: { params: { id: string } 
                 </InfoItem>
             </CardContent>
             <CardFooter className="gap-2">
-                <Button>Edit Profile</Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Edit Profile</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Edit Profile</DialogTitle>
+                      <DialogDescription>Update student information.</DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">Name</Label>
+                        <Input id="name" defaultValue={student.name} className="col-span-3" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="email" className="text-right">Email</Label>
+                        <Input id="email" defaultValue={student.email} className="col-span-3" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="phone" className="text-right">Phone</Label>
+                        <Input id="phone" defaultValue={student.phone} className="col-span-3" />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button type="submit">Save Changes</Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
             </CardFooter>
         </Card>
 
@@ -249,7 +334,28 @@ export default function StudentDetailsPage({ params }: { params: { id: string } 
               </InfoItem>
             </CardContent>
              <CardFooter>
-                 <Button variant="outline" className="w-full">Change Seat</Button>
+                 <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="outline" className="w-full">Change Seat</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Change Seat</DialogTitle>
+                            <DialogDescription>Assign a new seat for {student.name}.</DialogDescription>
+                        </DialogHeader>
+                        <div className="grid gap-4 py-4">
+                            <div className="grid grid-cols-4 items-center gap-4">
+                                <Label htmlFor="new-seat" className="text-right">New Seat #</Label>
+                                <Input id="new-seat" placeholder="e.g., 205" className="col-span-3" />
+                            </div>
+                        </div>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button type="submit">Assign New Seat</Button>
+                            </DialogClose>
+                        </DialogFooter>
+                    </DialogContent>
+                 </Dialog>
              </CardFooter>
           </Card>
       </div>
