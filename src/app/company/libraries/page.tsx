@@ -131,30 +131,16 @@ export default function LibrariesPage() {
                               </DialogFooter>
                             </DialogContent>
                         </Dialog>
-                        <Dialog>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                               <DialogTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Eye className="h-4 w-4" />
-                                </Button>
-                              </DialogTrigger>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                           <DialogContent>
-                              <DialogHeader>
-                                <DialogTitle>{library.libraryName}</DialogTitle>
-                                <DialogDescription>ID: {library.id}</DialogDescription>
-                              </DialogHeader>
-                              <div className="py-4">
-                                <p><strong>Email:</strong> {library.libraryEmail}</p>
-                                <p><strong>Contact:</strong> {library.libraryContact}</p>
-                                <p><strong>Address:</strong> {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}</p>
-                                <p><strong>Status:</strong> {library.isActive ? "Active" : "Inactive"}</p>
-                              </div>
-                            </DialogContent>
-                        </Dialog>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button asChild size="icon" variant="ghost">
+                              <Link href={`/company/libraries/${library.id}`}>
+                                <Eye className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>View Details</TooltipContent>
+                        </Tooltip>
                         <AlertDialog>
                           <Tooltip>
                             <TooltipTrigger asChild>

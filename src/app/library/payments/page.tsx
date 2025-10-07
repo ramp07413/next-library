@@ -161,6 +161,7 @@ export default function LibraryPaymentsPage() {
                               </p>
                             </div>
                           </div>
+<<<<<<< HEAD
                         </TableCell>
                         <TableCell className="text-sm md:text-base font-medium">
                           ${payment.amount.toFixed(2)}
@@ -173,6 +174,171 @@ export default function LibraryPaymentsPage() {
                             format(new Date(payment.paidDate), 'PP')
                           ) : (
                             <span className="text-muted-foreground">N/A</span>
+=======
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-sm md:text-base font-medium">
+                        ${payment.amount.toFixed(2)}
+                      </TableCell>
+                      <TableCell className="text-sm md:text-base">
+                        {format(new Date(payment.dueDate), 'PP')}
+                      </TableCell>
+                      <TableCell className="text-sm md:text-base">
+                        {payment.paidDate ? (
+                          format(new Date(payment.paidDate), 'PP')
+                        ) : (
+                          <span className="text-muted-foreground">N/A</span>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={getStatusBadgeVariant(payment.status)}
+                          className="text-xs md:text-sm"
+                        >
+                          {payment.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center justify-start gap-1">
+                          <Dialog>
+                            <Tooltip>
+                              <DialogTrigger asChild>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    className="h-8 w-8 md:h-9 md:w-9"
+                                  >
+                                    <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                              </DialogTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                            </Tooltip>
+                            <DialogContent className="max-w-[95vw] sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+                              <DialogHeader className="space-y-2">
+                                <DialogTitle className="text-base md:text-lg">
+                                  Payment Details
+                                </DialogTitle>
+                                <DialogDescription className="text-xs md:text-sm break-all">
+                                  Transaction ID: {payment.id}
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="space-y-3 py-4 text-xs md:text-sm">
+                                <div className="break-words">
+                                  <span className="font-semibold">
+                                    Student:
+                                  </span>{' '}
+                                  {payment.studentName}
+                                </div>
+                                <div>
+                                  <span className="font-semibold">Amount:</span>{' '}
+                                  ${payment.amount.toFixed(2)}
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Due Date:
+                                  </span>{' '}
+                                  {format(new Date(payment.dueDate), 'PPP')}
+                                </div>
+                                <div>
+                                  <span className="font-semibold">
+                                    Paid On:
+                                  </span>{' '}
+                                  {payment.paidDate
+                                    ? format(new Date(payment.paidDate), 'PPP')
+                                    : 'N/A'}
+                                </div>
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="font-semibold">Status:</span>{' '}
+                                  <Badge
+                                    variant={getStatusBadgeVariant(
+                                      payment.status
+                                    )}
+                                    className="text-xs"
+                                  >
+                                    {payment.status}
+                                  </Badge>
+                                </div>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          {payment.status !== 'Paid' && (
+                            <>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <AlertDialogTrigger asChild>
+                                    <TooltipTrigger asChild>
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="h-8 w-8 md:h-9 md:w-9"
+                                      >
+                                        <Mail className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                      </Button>
+                                    </TooltipTrigger>
+                                  </AlertDialogTrigger>
+                                  <TooltipContent>Send Reminder</TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                  <AlertDialogHeader className="space-y-2">
+                                    <AlertDialogTitle className="text-base md:text-lg">
+                                      Send Payment Reminder?
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription className="text-xs md:text-sm">
+                                      This will send an email reminder to{' '}
+                                      {payment.studentName} for the payment of $
+                                      {payment.amount.toFixed(2)}.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                    <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                      Cancel
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction className="w-full sm:w-auto">
+                                      Send Reminder
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <AlertDialogTrigger asChild>
+                                    <TooltipTrigger asChild>
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="text-green-600 h-8 w-8 md:h-9 md:w-9"
+                                      >
+                                        <CheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                      </Button>
+                                    </TooltipTrigger>
+                                  </AlertDialogTrigger>
+                                  <TooltipContent>Mark as Paid</TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                  <AlertDialogHeader className="space-y-2">
+                                    <AlertDialogTitle className="text-base md:text-lg">
+                                      Mark as Paid?
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription className="text-xs md:text-sm">
+                                      Are you sure you want to mark this payment
+                                      of ${payment.amount.toFixed(2)} from{' '}
+                                      {payment.studentName} as paid?
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                    <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                      Cancel
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction className="w-full sm:w-auto">
+                                      Confirm
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </>
+>>>>>>> d0578d23ca5d5b37331fb2242b1f501c04914228
                           )}
                         </TableCell>
                         <TableCell>

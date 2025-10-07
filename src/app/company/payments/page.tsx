@@ -29,14 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -129,29 +122,16 @@ export default function PaymentsPage() {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-start gap-1 sm:gap-2">
-                        <Dialog>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <DialogTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Eye className="h-4 w-4" />
-                                </Button>
-                              </DialogTrigger>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>Payment Details</DialogTitle>
-                              <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
-                            </DialogHeader>
-                            <div className="py-4">
-                               <p><strong>Library:</strong> {payment.libraryName}</p>
-                               <p><strong>Amount:</strong> ${payment.amount.toFixed(2)}</p>
-                               <p><strong>Status:</strong> {payment.status}</p>
-                            </div>
-                          </DialogContent>
-                        </Dialog>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                             <Button asChild size="icon" variant="ghost">
+                              <Link href={`/company/payments/${payment.libraryId}`}>
+                                <Eye className="h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>View All Payments</TooltipContent>
+                        </Tooltip>
                         <AlertDialog>
                           <Tooltip>
                             <TooltipTrigger asChild>

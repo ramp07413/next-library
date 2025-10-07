@@ -22,6 +22,15 @@ import { payments } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 
 export default function RefundedPaymentsPage() {
   const [refundedPayments] = useState(
@@ -74,28 +83,61 @@ export default function RefundedPaymentsPage() {
                       </TableCell>
                       <TableCell>
                           <div className="flex items-center justify-center gap-2">
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Eye className="h-4 w-4" />
-                                  <span className="sr-only">View Details</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>View Details</p>
-                              </TooltipContent>
-                            </Tooltip>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button size="icon" variant="ghost">
-                                  <Download className="h-4 w-4" />
-                                  <span className="sr-only">Download Credit Note</span>
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Download Credit Note</p>
-                              </TooltipContent>
-                            </Tooltip>
+                             <Dialog>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <DialogTrigger asChild>
+                                    <Button size="icon" variant="ghost">
+                                      <Eye className="h-4 w-4" />
+                                      <span className="sr-only">View Details</span>
+                                    </Button>
+                                  </DialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>View Details</p>
+                                </TooltipContent>
+                              </Tooltip>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>Refund Details</DialogTitle>
+                                  <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
+                                </DialogHeader>
+                                <div className="py-4 space-y-2">
+                                  <div><strong>Library:</strong> {payment.libraryName}</div>
+                                  <div><strong>Amount:</strong> ${payment.amount.toFixed(2)}</div>
+                                  <div><strong>Refunded On:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</div>
+                                  <div className="flex items-center gap-2"><strong>Subscription:</strong> <Badge variant="outline">{payment.subscriptionPlan}</Badge></div>
+                                  <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant="outline">{payment.status}</Badge></div>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                             <Dialog>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <DialogTrigger asChild>
+                                    <Button size="icon" variant="ghost">
+                                      <Download className="h-4 w-4" />
+                                      <span className="sr-only">Download Credit Note</span>
+                                    </Button>
+                                  </DialogTrigger>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>Download Credit Note</p>
+                                </TooltipContent>
+                              </Tooltip>
+                              <DialogContent>
+                                <DialogHeader>
+                                  <DialogTitle>Credit Note</DialogTitle>
+                                  <DialogDescription>Credit note for transaction {payment.id}</DialogDescription>
+                                </DialogHeader>
+                                <div className="py-4 space-y-2">
+                                  <div><strong>Credit Note ID:</strong> CN-{payment.id}</div>
+                                  <div><strong>Library:</strong> {payment.libraryName}</div>
+                                  <div><strong>Amount Refunded:</strong> ${payment.amount.toFixed(2)}</div>
+                                  <div><strong>Date:</strong> {payment.refundedDate ? format(new Date(payment.refundedDate), "PPP") : 'N/A'}</div>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
                           </div>
                       </TableCell>
                     </TableRow>

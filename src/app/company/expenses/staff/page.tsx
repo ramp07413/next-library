@@ -11,14 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Eye, FilePenLine, MoreHorizontal, Users } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Eye, FilePenLine, Trash2, Users } from "lucide-react";
 import { expenses } from "../data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
@@ -29,6 +22,29 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function StaffExpensesPage() {
   const [staffExpenses] = useState(
@@ -83,24 +99,87 @@ export default function StaffExpensesPage() {
                     <TableCell>
                        <TooltipProvider>
                         <div className="flex items-center justify-center gap-2">
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button aria-haspopup="true" size="icon" variant="ghost">
-                                <FilePenLine className="h-4 w-4" />
-                                <span className="sr-only">Edit Expense</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>Edit Expense</TooltipContent>
-                          </Tooltip>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button aria-haspopup="true" size="icon" variant="ghost">
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Details</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>View Details</TooltipContent>
-                          </Tooltip>
+                           <Dialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <DialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                                    <FilePenLine className="h-4 w-4" />
+                                    <span className="sr-only">Edit Expense</span>
+                                  </Button>
+                                </DialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>Edit Expense</TooltipContent>
+                            </Tooltip>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Edit Expense</DialogTitle>
+                              </DialogHeader>
+                              <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="edit-description" className="text-right">Description</Label>
+                                  <Input id="edit-description" defaultValue={expense.description} className="col-span-3" />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="edit-amount" className="text-right">Amount</Label>
+                                  <Input id="edit-amount" type="number" defaultValue={expense.amount} className="col-span-3" />
+                                </div>
+                              </div>
+                               <DialogFooter>
+                                  <DialogClose asChild>
+                                  <Button type="submit">Save Changes</Button>
+                                  </DialogClose>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          <Dialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <DialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                                    <Eye className="h-4 w-4" />
+                                    <span className="sr-only">View Details</span>
+                                  </Button>
+                                </DialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>View Details</TooltipContent>
+                            </Tooltip>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Expense Details</DialogTitle>
+                                <DialogDescription>{expense.description}</DialogDescription>
+                              </DialogHeader>
+                              <div className="py-4">
+                                 <p><strong>ID:</strong> {expense.id}</p>
+                                 <p><strong>Amount:</strong> ${expense.amount.toFixed(2)}</p>
+                                 <p><strong>Date:</strong> {format(new Date(expense.date), "PP")}</p>
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                          <AlertDialog>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <AlertDialogTrigger asChild>
+                                  <Button aria-haspopup="true" size="icon" variant="ghost" className="text-destructive">
+                                    <Trash2 className="h-4 w-4" />
+                                  </Button>
+                                </AlertDialogTrigger>
+                              </TooltipTrigger>
+                              <TooltipContent>Delete</TooltipContent>
+                            </Tooltip>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  This will permanently delete the expense: "{expense.description}".
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction>Delete</AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </div>
                       </TooltipProvider>
                     </TableCell>

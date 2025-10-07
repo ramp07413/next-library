@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -65,12 +66,12 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 
 export default function ManageStudentsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [shiftFilter, setShiftFilter] = useState('all');
-  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
@@ -105,9 +106,70 @@ export default function ManageStudentsPage() {
             View, edit, and manage all student profiles.
           </p>
         </div>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" /> Add New Student
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" /> Add New Student
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-w-[95vw] sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Add New Student</DialogTitle>
+              <DialogDescription>
+                Fill out the form below to add a new student to the library.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-name" className="text-right">
+                  Name
+                </Label>
+                <Input id="new-name" placeholder="John Doe" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-email" className="text-right">
+                  Email
+                </Label>
+                <Input id="new-email" type="email" placeholder="john.d@example.com" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-phone" className="text-right">
+                  Phone
+                </Label>
+                <Input id="new-phone" placeholder="123-456-7890" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-shift" className="text-right">
+                  Shift
+                </Label>
+                <Select>
+                  <SelectTrigger className="col-span-3">
+                    <SelectValue placeholder="Select a shift" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="morning">Morning</SelectItem>
+                    <SelectItem value="afternoon">Afternoon</SelectItem>
+                    <SelectItem value="evening">Evening</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="new-fee" className="text-right">
+                  Fee
+                </Label>
+                <Input id="new-fee" type="number" placeholder="150" className="col-span-3" />
+              </div>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button type="button" variant="secondary">Cancel</Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button type="submit">Add Student</Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid lg:block gap-4 lg:grid-cols-7">
@@ -276,6 +338,7 @@ export default function ManageStudentsPage() {
                                     />
                                   </div>
                                 </div>
+<<<<<<< HEAD
                                 <DialogFooter>
                                   <DialogClose asChild>
                                     <Button type="submit">Save Changes</Button>
@@ -326,6 +389,69 @@ export default function ManageStudentsPage() {
                                     <span className="font-semibold">Shift:</span>{' '}
                                     <span className="capitalize">
                                       {student.shift}
+=======
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="email" className="text-right">
+                                    Email
+                                  </Label>
+                                  <Input
+                                    id="email"
+                                    type="email"
+                                    defaultValue={student.email}
+                                    className="col-span-3"
+                                  />
+                                </div>
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                  <Label htmlFor="phone" className="text-right">
+                                    Phone
+                                  </Label>
+                                  <Input
+                                    id="phone"
+                                    defaultValue={student.phone}
+                                    className="col-span-3"
+                                  />
+                                </div>
+                              </div>
+                              <DialogFooter>
+                                <DialogClose asChild>
+                                  <Button type="submit">Save Changes</Button>
+                                </DialogClose>
+                              </DialogFooter>
+                            </DialogContent>
+                          </Dialog>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button asChild size="icon" variant="ghost" className="h-8 w-8 md:h-9 md:w-9">
+                                <Link href={`/library/students/${student.id}`}>
+                                  <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                </Link>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>View Details</TooltipContent>
+                          </Tooltip>
+                          <AlertDialog>
+                            <Tooltip>
+                              <AlertDialogTrigger asChild>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    className={
+                                      student.status === 'active'
+                                        ? 'text-destructive h-8 w-8 md:h-9 md:w-9'
+                                        : 'text-green-600 h-8 w-8 md:h-9 md:w-9'
+                                    }
+                                  >
+                                    {student.status === 'active' ? (
+                                      <UserX className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                    ) : (
+                                      <UserCheck className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                    )}
+                                    <span className="sr-only">
+                                      {student.status === 'active'
+                                        ? 'Deactivate Student'
+                                        : 'Activate Student'}
+>>>>>>> d0578d23ca5d5b37331fb2242b1f501c04914228
                                     </span>
                                   </p>
                                   <p>

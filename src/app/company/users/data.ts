@@ -5,6 +5,7 @@ export type User = {
   role: 'student' | 'admin' | 'super_admin' | 'owner';
   isActive: boolean;
   createdAt: string;
+  libraryId?: string;
 };
 
 export const users: User[] = [
@@ -28,6 +29,7 @@ export const users: User[] = [
     role: "admin",
     isActive: true,
     createdAt: new Date("2023-03-01T09:00:00Z").toISOString(),
+    libraryId: "1",
   },
     {
     id: "4",
@@ -35,6 +37,7 @@ export const users: User[] = [
     role: "admin",
     isActive: false,
     createdAt: new Date("2023-04-10T14:20:00Z").toISOString(),
+    libraryId: "2",
   },
   {
     id: "5",
@@ -42,6 +45,7 @@ export const users: User[] = [
     role: "student",
     isActive: true,
     createdAt: new Date("2024-05-25T18:00:00Z").toISOString(),
+    libraryId: "1",
   },
   {
     id: "6",
@@ -49,5 +53,6 @@ export const users: User[] = [
     role: "student",
     isActive: true,
     createdAt: new Date("2024-06-01T12:00:00Z").toISOString(),
+    libraryId: "2",
   },
 ];
