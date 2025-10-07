@@ -134,7 +134,7 @@ export default function LibrariesPage() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button asChild size="icon" variant="ghost">
-                              <Link href={`/library/${library.id}`}>
+                              <Link href={`/company/libraries/${library.id}`}>
                                 <Eye className="h-4 w-4" />
                               </Link>
                             </Button>
