@@ -51,7 +51,7 @@ export default function LibraryDashboard() {
         />
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-4 lg:grid-cols-7">
         <Card className="lg:col-span-4 overflow-hidden">
           <CardHeader className="p-4 md:p-6">
             <CardTitle className="text-lg md:text-xl">

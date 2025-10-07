@@ -96,7 +96,7 @@ export default function ManageStudentsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 p-4 md:p-6 lg:p-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between  gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight font-headline">
             Manage Students
@@ -110,308 +110,310 @@ export default function ManageStudentsPage() {
         </Button>
       </div>
 
-      <Card className="overflow-hidden">
-        <CardHeader className="p-4 md:p-6">
-          <CardTitle className="text-lg md:text-xl">Student List</CardTitle>
-          <CardDescription className="text-sm">
-            A comprehensive list of all students in the library.
-          </CardDescription>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
-            <div className="relative flex-1 md:grow-0 w-full">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search by name or email..."
-                className="w-full rounded-lg bg-background pl-8"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+      <div className="grid lg:block gap-4 lg:grid-cols-7">
+        <Card className="lg:col-span-4 overflow-hidden">
+          <CardHeader className="p-4 md:p-6">
+            <CardTitle className="text-lg md:text-xl">Student List</CardTitle>
+            <CardDescription className="text-sm">
+              A comprehensive list of all students in the library.
+            </CardDescription>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 pt-4">
+              <div className="relative flex-1 md:grow-0 w-full">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Search by name or email..."
+                  className="w-full rounded-lg bg-background pl-8"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectValue placeholder="Filter by status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="inactive">Inactive</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={shiftFilter} onValueChange={setShiftFilter}>
+                <SelectTrigger className="w-full sm:w-[180px]">
+                  <SelectValue placeholder="Filter by shift" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Shifts</SelectItem>
+                  <SelectItem value="morning">Morning</SelectItem>
+                  <SelectItem value="afternoon">Afternoon</SelectItem>
+                  <SelectItem value="evening">Evening</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Filter by status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Statuses</SelectItem>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="inactive">Inactive</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select value={shiftFilter} onValueChange={setShiftFilter}>
-              <SelectTrigger className="w-full sm:w-[180px]">
-                <SelectValue placeholder="Filter by shift" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Shifts</SelectItem>
-                <SelectItem value="morning">Morning</SelectItem>
-                <SelectItem value="afternoon">Afternoon</SelectItem>
-                <SelectItem value="evening">Evening</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0 md:p-6 md:pt-0">
-          <div className="overflow-x-auto">
-            <Table className="min-w-[900px]">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="min-w-[180px]">Student</TableHead>
-                  <TableHead className="hidden sm:table-cell min-w-[200px]">
-                    Contact
-                  </TableHead>
-                  <TableHead className="hidden md:table-cell min-w-[120px]">
-                    Join Date
-                  </TableHead>
-                  <TableHead className="hidden sm:table-cell min-w-[100px]">
-                    Shift
-                  </TableHead>
-                  <TableHead className="min-w-[80px]">Fee</TableHead>
-                  <TableHead className="min-w-[100px]">Status</TableHead>
-                  <TableHead className="min-w-[140px]">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TooltipProvider>
-                  {filteredStudents.map((student) => (
-                    <TableRow key={student.id}>
-                      <TableCell className="font-medium">
-                        <div className="flex items-center gap-2 md:gap-3">
-                          <Avatar className="h-8 w-8 md:h-9 md:w-9 flex-shrink-0">
-                            <AvatarImage
-                              src={student.avatar}
-                              alt={student.name}
-                              data-ai-hint="person portrait"
-                            />
-                            <AvatarFallback>
-                              {student.name.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="min-w-0">
-                            <p className="font-medium text-sm md:text-base truncate">
-                              {student.name}
-                            </p>
+          </CardHeader>
+          <CardContent className="p-0 md:p-6 md:pt-0">
+            <div className="overflow-x-auto">
+              <Table className="min-w-[900px] md:min-w-[950px]">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className='min-w-[25%]'>Student</TableHead>
+                    <TableHead className='min-w-[25%]'>
+                      Contact
+                    </TableHead>
+                    <TableHead className='min-w-[25%]'>
+                      Join Date
+                    </TableHead>
+                    <TableHead className='min-w-[25%]'>
+                      Shift
+                    </TableHead>
+                    <TableHead className='min-w-[25%]'>Fee</TableHead>
+                    <TableHead className='min-w-[25%]'>Status</TableHead>
+                    <TableHead className='min-w-[25%]'>Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TooltipProvider>
+                    {filteredStudents.map((student) => (
+                      <TableRow key={student.id}>
+                        <TableCell className="font-medium">
+                          <div className="flex items-center gap-2 md:gap-3">
+                            <Avatar className="h-8 w-8 md:h-9 md:w-9 flex-shrink-0">
+                              <AvatarImage
+                                src={student.avatar}
+                                alt={student.name}
+                                data-ai-hint="person portrait"
+                              />
+                              <AvatarFallback>
+                                {student.name.charAt(0)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="min-w-0">
+                              <p className="font-medium text-sm md:text-base truncate">
+                                {student.name}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell">
-                        <div className="font-medium">{student.email}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {student.phone}
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        {format(new Date(student.joinDate), 'PP')}
-                      </TableCell>
-                      <TableCell className="hidden sm:table-cell capitalize text-sm md:text-base">
-                        {student.shift}
-                      </TableCell>
-                      <TableCell className="text-sm md:text-base font-medium">
-                        ${student.fee.toFixed(2)}
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={getStatusBadgeVariant(student.status)}
-                          className="capitalize text-xs md:text-sm"
-                        >
-                          {student.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-start gap-1">
-                          <Dialog>
-                            <Tooltip>
-                              <DialogTrigger asChild>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className="h-8 w-8 md:h-9 md:w-9"
-                                  >
-                                    <FilePenLine className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                  </Button>
-                                </TooltipTrigger>
-                              </DialogTrigger>
-                              <TooltipContent>Edit Student</TooltipContent>
-                            </Tooltip>
-                            <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                              <DialogHeader className="space-y-2">
-                                <DialogTitle className="text-base md:text-lg">
-                                  Edit {student.name}
-                                </DialogTitle>
-                                <DialogDescription className="text-xs md:text-sm">
-                                  Update the student's information.
-                                </DialogDescription>
-                              </DialogHeader>
-                              <div className="grid gap-4 py-4">
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="name" className="text-right">
-                                    Name
-                                  </Label>
-                                  <Input
-                                    id="name"
-                                    defaultValue={student.name}
-                                    className="col-span-3"
-                                  />
+                        </TableCell>
+                        <TableCell className="table-cell">
+                          <div className="font-medium">{student.email}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {student.phone}
+                          </div>
+                        </TableCell>
+                        <TableCell className="table-cell">
+                          {format(new Date(student.joinDate), 'PP')}
+                        </TableCell>
+                        <TableCell className="table-cell capitalize text-sm md:text-base">
+                          {student.shift}
+                        </TableCell>
+                        <TableCell className="text-sm md:text-base font-medium">
+                          ${student.fee.toFixed(2)}
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={getStatusBadgeVariant(student.status)}
+                            className="capitalize text-xs md:text-sm"
+                          >
+                            {student.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-start gap-1">
+                            <Dialog>
+                              <Tooltip>
+                                <DialogTrigger asChild>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      size="icon"
+                                      variant="ghost"
+                                      className="h-8 w-8 md:h-9 md:w-9"
+                                    >
+                                      <FilePenLine className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                </DialogTrigger>
+                                <TooltipContent>Edit Student</TooltipContent>
+                              </Tooltip>
+                              <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                <DialogHeader className="space-y-2">
+                                  <DialogTitle className="text-base md:text-lg">
+                                    Edit {student.name}
+                                  </DialogTitle>
+                                  <DialogDescription className="text-xs md:text-sm">
+                                    Update the student's information.
+                                  </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid gap-4 py-4">
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="name" className="text-right">
+                                      Name
+                                    </Label>
+                                    <Input
+                                      id="name"
+                                      defaultValue={student.name}
+                                      className="col-span-3"
+                                    />
+                                  </div>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="email" className="text-right">
+                                      Email
+                                    </Label>
+                                    <Input
+                                      id="email"
+                                      type="email"
+                                      defaultValue={student.email}
+                                      className="col-span-3"
+                                    />
+                                  </div>
+                                  <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="phone" className="text-right">
+                                      Phone
+                                    </Label>
+                                    <Input
+                                      id="phone"
+                                      defaultValue={student.phone}
+                                      className="col-span-3"
+                                    />
+                                  </div>
                                 </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="email" className="text-right">
-                                    Email
-                                  </Label>
-                                  <Input
-                                    id="email"
-                                    type="email"
-                                    defaultValue={student.email}
-                                    className="col-span-3"
-                                  />
-                                </div>
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                  <Label htmlFor="phone" className="text-right">
-                                    Phone
-                                  </Label>
-                                  <Input
-                                    id="phone"
-                                    defaultValue={student.phone}
-                                    className="col-span-3"
-                                  />
-                                </div>
-                              </div>
-                              <DialogFooter>
-                                <DialogClose asChild>
-                                  <Button type="submit">Save Changes</Button>
-                                </DialogClose>
-                              </DialogFooter>
-                            </DialogContent>
-                          </Dialog>
-                          <Dialog>
-                            <Tooltip>
-                              <DialogTrigger asChild>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className="h-8 w-8 md:h-9 md:w-9"
-                                  >
-                                    <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                  </Button>
-                                </TooltipTrigger>
-                              </DialogTrigger>
-                              <TooltipContent>View Details</TooltipContent>
-                            </Tooltip>
-                            <DialogContent className="max-w-[95vw] sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
-                              <DialogHeader className="space-y-2">
-                                <DialogTitle className="text-base md:text-lg">
-                                  {student.name}
-                                </DialogTitle>
-                                <DialogDescription className="text-xs md:text-sm break-all">
-                                  Student ID: {student.id}
-                                </DialogDescription>
-                              </DialogHeader>
-                              <div className="space-y-3 py-4 text-xs md:text-sm">
-                                <p>
-                                  <span className="font-semibold">Email:</span>{' '}
-                                  {student.email}
-                                </p>
-                                <p>
-                                  <span className="font-semibold">Phone:</span>{' '}
-                                  {student.phone}
-                                </p>
-                                <p>
-                                  <span className="font-semibold">
-                                    Join Date:
-                                  </span>{' '}
-                                  {format(new Date(student.joinDate), 'PPP')}
-                                </p>
-                                <p>
-                                  <span className="font-semibold">Shift:</span>{' '}
-                                  <span className="capitalize">
-                                    {student.shift}
-                                  </span>
-                                </p>
-                                <p>
-                                  <span className="font-semibold">Fee:</span> $
-                                  {student.fee.toFixed(2)}
-                                </p>
-                                <p>
-                                  <span className="font-semibold">Status:</span>{' '}
-                                  <Badge
-                                    variant={getStatusBadgeVariant(
-                                      student.status
-                                    )}
-                                    className="capitalize"
-                                  >
-                                    {student.status}
-                                  </Badge>
-                                </p>
-                              </div>
-                            </DialogContent>
-                          </Dialog>
-                          <AlertDialog>
-                            <Tooltip>
-                              <AlertDialogTrigger asChild>
-                                <TooltipTrigger asChild>
-                                  <Button
-                                    size="icon"
-                                    variant="ghost"
-                                    className={
-                                      student.status === 'active'
-                                        ? 'text-destructive h-8 w-8 md:h-9 md:w-9'
-                                        : 'text-green-600 h-8 w-8 md:h-9 md:w-9'
-                                    }
-                                  >
-                                    {student.status === 'active' ? (
-                                      <UserX className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                    ) : (
-                                      <UserCheck className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                    )}
-                                    <span className="sr-only">
-                                      {student.status === 'active'
-                                        ? 'Deactivate Student'
-                                        : 'Activate Student'}
+                                <DialogFooter>
+                                  <DialogClose asChild>
+                                    <Button type="submit">Save Changes</Button>
+                                  </DialogClose>
+                                </DialogFooter>
+                              </DialogContent>
+                            </Dialog>
+                            <Dialog>
+                              <Tooltip>
+                                <DialogTrigger asChild>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      size="icon"
+                                      variant="ghost"
+                                      className="h-8 w-8 md:h-9 md:w-9"
+                                    >
+                                      <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                    </Button>
+                                  </TooltipTrigger>
+                                </DialogTrigger>
+                                <TooltipContent>View Details</TooltipContent>
+                              </Tooltip>
+                              <DialogContent className="max-w-[95vw] sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
+                                <DialogHeader className="space-y-2">
+                                  <DialogTitle className="text-base md:text-lg">
+                                    {student.name}
+                                  </DialogTitle>
+                                  <DialogDescription className="text-xs md:text-sm break-all">
+                                    Student ID: {student.id}
+                                  </DialogDescription>
+                                </DialogHeader>
+                                <div className="space-y-3 py-4 text-xs md:text-sm">
+                                  <p>
+                                    <span className="font-semibold">Email:</span>{' '}
+                                    {student.email}
+                                  </p>
+                                  <p>
+                                    <span className="font-semibold">Phone:</span>{' '}
+                                    {student.phone}
+                                  </p>
+                                  <p>
+                                    <span className="font-semibold">
+                                      Join Date:
+                                    </span>{' '}
+                                    {format(new Date(student.joinDate), 'PPP')}
+                                  </p>
+                                  <p>
+                                    <span className="font-semibold">Shift:</span>{' '}
+                                    <span className="capitalize">
+                                      {student.shift}
                                     </span>
-                                  </Button>
-                                </TooltipTrigger>
-                              </AlertDialogTrigger>
-                              <TooltipContent>
-                                {student.status === 'active'
-                                  ? 'Deactivate Student'
-                                  : 'Activate Student'}
-                              </TooltipContent>
-                            </Tooltip>
-                            <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                              <AlertDialogHeader className="space-y-2">
-                                <AlertDialogTitle className="text-base md:text-lg">
-                                  Are you sure?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription className="text-xs md:text-sm">
-                                  This action will{' '}
+                                  </p>
+                                  <p>
+                                    <span className="font-semibold">Fee:</span> $
+                                    {student.fee.toFixed(2)}
+                                  </p>
+                                  <p>
+                                    <span className="font-semibold">Status:</span>{' '}
+                                    <Badge
+                                      variant={getStatusBadgeVariant(
+                                        student.status
+                                      )}
+                                      className="capitalize"
+                                    >
+                                      {student.status}
+                                    </Badge>
+                                  </p>
+                                </div>
+                              </DialogContent>
+                            </Dialog>
+                            <AlertDialog>
+                              <Tooltip>
+                                <AlertDialogTrigger asChild>
+                                  <TooltipTrigger asChild>
+                                    <Button
+                                      size="icon"
+                                      variant="ghost"
+                                      className={
+                                        student.status === 'active'
+                                          ? 'text-destructive h-8 w-8 md:h-9 md:w-9'
+                                          : 'text-green-600 h-8 w-8 md:h-9 md:w-9'
+                                      }
+                                    >
+                                      {student.status === 'active' ? (
+                                        <UserX className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                      ) : (
+                                        <UserCheck className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                      )}
+                                      <span className="sr-only">
+                                        {student.status === 'active'
+                                          ? 'Deactivate Student'
+                                          : 'Activate Student'}
+                                      </span>
+                                    </Button>
+                                  </TooltipTrigger>
+                                </AlertDialogTrigger>
+                                <TooltipContent>
                                   {student.status === 'active'
-                                    ? 'deactivate'
-                                    : 'activate'}{' '}
-                                  the account for {student.name}.
-                                </AlertDialogDescription>
-                              </AlertDialogHeader>
-                              <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                                <AlertDialogCancel className="mt-0 w-full sm:w-auto">
-                                  Cancel
-                                </AlertDialogCancel>
-                                <AlertDialogAction className="w-full sm:w-auto">
-                                  {student.status === 'active'
-                                    ? 'Deactivate'
-                                    : 'Activate'}
-                                </AlertDialogAction>
-                              </AlertDialogFooter>
-                            </AlertDialogContent>
-                          </AlertDialog>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TooltipProvider>
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                                    ? 'Deactivate Student'
+                                    : 'Activate Student'}
+                                </TooltipContent>
+                              </Tooltip>
+                              <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                <AlertDialogHeader className="space-y-2">
+                                  <AlertDialogTitle className="text-base md:text-lg">
+                                    Are you sure?
+                                  </AlertDialogTitle>
+                                  <AlertDialogDescription className="text-xs md:text-sm">
+                                    This action will{' '}
+                                    {student.status === 'active'
+                                      ? 'deactivate'
+                                      : 'activate'}{' '}
+                                    the account for {student.name}.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                  <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                    Cancel
+                                  </AlertDialogCancel>
+                                  <AlertDialogAction className="w-full sm:w-auto">
+                                    {student.status === 'active'
+                                      ? 'Deactivate'
+                                      : 'Activate'}
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TooltipProvider>
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

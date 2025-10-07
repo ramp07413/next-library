@@ -65,7 +65,7 @@ export default function AlertsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 p-4 md:p-6 lg:p-8">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight font-headline">
             Library Alerts
@@ -109,10 +109,7 @@ export default function AlertsPage() {
           {loading ? (
             <div className="space-y-3 md:space-y-4">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="flex items-center space-x-3 md:space-x-4"
-                >
+                <div key={i} className="flex items-center space-x-3 md:space-x-4">
                   <Skeleton className="h-10 w-10 md:h-12 md:w-12 rounded-lg flex-shrink-0" />
                   <div className="space-y-2 flex-1 min-w-0">
                     <Skeleton className="h-3 md:h-4 w-full max-w-[250px]" />

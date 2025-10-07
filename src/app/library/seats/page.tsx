@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -119,7 +118,7 @@ export default function SeatsPage() {
 
   return (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 p-4 md:p-6 lg:p-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between  gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight font-headline">
             Seat Management
@@ -253,7 +252,8 @@ export default function SeatsPage() {
         </div>
 
         <TabsContent value="grid">
-          <Card>
+          <div className="grid lg:block gap-4 lg:grid-cols-7">
+          <Card className="lg:col-span-4 overflow-hidden">
             <CardHeader className="p-4 md:p-6">
               <CardTitle className="text-lg md:text-xl">Seat Layout</CardTitle>
               <CardDescription className="text-sm">
@@ -328,74 +328,153 @@ export default function SeatsPage() {
               </div>
             </CardContent>
           </Card>
+          </div>
         </TabsContent>
 
         <TabsContent value="list">
-          <Card className="overflow-hidden">
-            <CardHeader className="p-4 md:p-6">
-              <CardTitle className="text-lg md:text-xl">All Seats</CardTitle>
-              <CardDescription className="text-sm">
-                A comprehensive list of all seats in the library.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-0 md:p-6 md:pt-0">
-              <TooltipProvider>
-                <div>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="min-w-[120px]">
-                          Seat Number
-                        </TableHead>
-                        <TableHead className="min-w-[140px]">Status</TableHead>
-                        <TableHead className="hidden sm:table-cell min-w-[150px]">
-                          Occupied By
-                        </TableHead>
-                        <TableHead className="hidden md:table-cell min-w-[120px]">
-                          Date Assigned
-                        </TableHead>
-                        <TableHead className="text-center min-w-[180px]">
-                          Actions
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {filteredSeats.map((seat) => (
-                        <TableRow key={seat.id}>
-                          <TableCell>
-                            <div className="w-fit rounded-md border bg-muted px-2 py-1 font-mono text-xs md:text-sm font-medium">
-                              {seat.seatNumber}
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={getStatusBadgeVariant(seat.status)}
-                              className="capitalize text-xs md:text-sm"
-                            >
-                              {seat.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            {seat.studentName ? (
-                              <div className="font-medium text-sm md:text-base">
-                                {seat.studentName}
+          <div className="grid lg:block gap-4 lg:grid-cols-7">
+            <Card className="lg:col-span-4 overflow-hidden">
+              <CardHeader className="p-4 md:p-6">
+                <CardTitle className="text-lg md:text-xl">All Seats</CardTitle>
+                <CardDescription className="text-sm">
+                  A comprehensive list of all seats in the library.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-0 md:p-6 md:pt-0">
+                <TooltipProvider>
+                  <div className="overflow-x-auto">
+                    <Table className="min-w-[900px] md:min-w-[950px]">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className='min-w-[25%]'>Seat Number</TableHead>
+                          <TableHead className='min-w-[25%]'>Status</TableHead>
+                          <TableHead className='min-w-[25%]'>
+                            Occupied By
+                          </TableHead>
+                          <TableHead className='min-w-[25%]'>
+                            Date Assigned
+                          </TableHead>
+                          <TableHead className='min-w-[25%]'>
+                            Actions
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {filteredSeats.map((seat) => (
+                          <TableRow key={seat.id}>
+                            <TableCell>
+                              <div className="w-fit rounded-md border bg-muted px-2 py-1 font-mono text-xs md:text-sm font-medium">
+                                {seat.seatNumber}
                               </div>
-                            ) : (
-                              <span className="text-muted-foreground text-sm md:text-base">
-                                N/A
-                              </span>
-                            )}
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell text-sm md:text-base">
-                            {seat.dateAssigned ? (
-                              format(new Date(seat.dateAssigned), 'PP')
-                            ) : (
-                              <span className="text-muted-foreground">N/A</span>
-                            )}
-                          </TableCell>
-                          <TableCell>
-                            <div className="flex items-center justify-center gap-1">
-                              {seat.status === 'available' && (
+                            </TableCell>
+                            <TableCell>
+                              <Badge
+                                variant={getStatusBadgeVariant(seat.status)}
+                                className="capitalize text-xs md:text-sm"
+                              >
+                                {seat.status}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="table-cell">
+                              {seat.studentName ? (
+                                <div className="font-medium text-sm md:text-base">
+                                  {seat.studentName}
+                                </div>
+                              ) : (
+                                <span className="text-muted-foreground text-sm md:text-base">
+                                  N/A
+                                </span>
+                              )}
+                            </TableCell>
+                            <TableCell className="table-cell text-sm md:text-base">
+                              {seat.dateAssigned ? (
+                                format(new Date(seat.dateAssigned), 'PP')
+                              ) : (
+                                <span className="text-muted-foreground">N/A</span>
+                              )}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center justify-start gap-1">
+                                {seat.status === 'available' && (
+                                  <Dialog>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <DialogTrigger asChild>
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8 md:h-9 md:w-9"
+                                          >
+                                            <UserPlus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          </Button>
+                                        </DialogTrigger>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        Assign Student
+                                      </TooltipContent>
+                                    </Tooltip>
+                                    <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                      <DialogHeader className="space-y-2">
+                                        <DialogTitle className="text-base md:text-lg">
+                                          Assign Seat {seat.seatNumber}
+                                        </DialogTitle>
+                                      </DialogHeader>
+                                      <div className="grid gap-4 py-4">
+                                        <Label htmlFor="student-id">
+                                          Student ID
+                                        </Label>
+                                        <Input
+                                          id="student-id"
+                                          placeholder="Enter student ID"
+                                        />
+                                      </div>
+                                      <DialogFooter>
+                                        <DialogClose asChild>
+                                          <Button type="submit">Assign</Button>
+                                        </DialogClose>
+                                      </DialogFooter>
+                                    </DialogContent>
+                                  </Dialog>
+                                )}
+                                {(seat.status === 'full occupied' ||
+                                  seat.status === 'half occupied') && (
+                                    <AlertDialog>
+                                      <Tooltip>
+                                        <TooltipTrigger asChild>
+                                          <AlertDialogTrigger asChild>
+                                            <Button
+                                              variant="ghost"
+                                              size="icon"
+                                              className="h-8 w-8 md:h-9 md:w-9"
+                                            >
+                                              <UserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                            </Button>
+                                          </AlertDialogTrigger>
+                                        </TooltipTrigger>
+                                        <TooltipContent>Vacate Seat</TooltipContent>
+                                      </Tooltip>
+                                      <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                        <AlertDialogHeader className="space-y-2">
+                                          <AlertDialogTitle className="text-base md:text-lg">
+                                            Vacate Seat?
+                                          </AlertDialogTitle>
+                                          <AlertDialogDescription className="text-xs md:text-sm">
+                                            Are you sure you want to vacate seat{' '}
+                                            {seat.seatNumber} occupied by{' '}
+                                            {seat.studentName}?
+                                          </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                          <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                            Cancel
+                                          </AlertDialogCancel>
+                                          <AlertDialogAction className="w-full sm:w-auto">
+                                            Vacate
+                                          </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                      </AlertDialogContent>
+                                    </AlertDialog>
+                                  )}
                                 <Dialog>
                                   <Tooltip>
                                     <TooltipTrigger asChild>
@@ -405,190 +484,112 @@ export default function SeatsPage() {
                                           size="icon"
                                           className="h-8 w-8 md:h-9 md:w-9"
                                         >
-                                          <UserPlus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          <History className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                         </Button>
                                       </DialogTrigger>
                                     </TooltipTrigger>
-                                    <TooltipContent>
-                                      Assign Student
-                                    </TooltipContent>
+                                    <TooltipContent>View History</TooltipContent>
                                   </Tooltip>
                                   <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
                                     <DialogHeader className="space-y-2">
                                       <DialogTitle className="text-base md:text-lg">
-                                        Assign Seat {seat.seatNumber}
+                                        History for Seat {seat.seatNumber}
                                       </DialogTitle>
                                     </DialogHeader>
-                                    <div className="grid gap-4 py-4">
-                                      <Label htmlFor="student-id">
-                                        Student ID
-                                      </Label>
-                                      <Input
-                                        id="student-id"
-                                        placeholder="Enter student ID"
-                                      />
-                                    </div>
-                                    <DialogFooter>
-                                      <DialogClose asChild>
-                                        <Button type="submit">Assign</Button>
-                                      </DialogClose>
-                                    </DialogFooter>
+                                    <p className="text-center p-4">
+                                      No history available.
+                                    </p>
                                   </DialogContent>
                                 </Dialog>
-                              )}
-                              {(seat.status === 'full occupied' ||
-                                seat.status === 'half occupied') && (
-                                <AlertDialog>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <AlertDialogTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          className="h-8 w-8 md:h-9 md:w-9"
-                                        >
-                                          <UserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                        </Button>
-                                      </AlertDialogTrigger>
-                                    </TooltipTrigger>
-                                    <TooltipContent>Vacate Seat</TooltipContent>
-                                  </Tooltip>
-                                  <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                                    <AlertDialogHeader className="space-y-2">
-                                      <AlertDialogTitle className="text-base md:text-lg">
-                                        Vacate Seat?
-                                      </AlertDialogTitle>
-                                      <AlertDialogDescription className="text-xs md:text-sm">
-                                        Are you sure you want to vacate seat{' '}
-                                        {seat.seatNumber} occupied by{' '}
-                                        {seat.studentName}?
-                                      </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                                      <AlertDialogCancel className="mt-0 w-full sm:w-auto">
-                                        Cancel
-                                      </AlertDialogCancel>
-                                      <AlertDialogAction className="w-full sm:w-auto">
-                                        Vacate
-                                      </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                  </AlertDialogContent>
-                                </AlertDialog>
-                              )}
-                              <Dialog>
-                                <Tooltip>
-                                  <TooltipTrigger asChild>
-                                    <DialogTrigger asChild>
-                                      <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        className="h-8 w-8 md:h-9 md:w-9"
-                                      >
-                                        <History className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                      </Button>
-                                    </DialogTrigger>
-                                  </TooltipTrigger>
-                                  <TooltipContent>View History</TooltipContent>
-                                </Tooltip>
-                                <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                                  <DialogHeader className="space-y-2">
-                                    <DialogTitle className="text-base md:text-lg">
-                                      History for Seat {seat.seatNumber}
-                                    </DialogTitle>
-                                  </DialogHeader>
-                                  <p className="text-center p-4">
-                                    No history available.
-                                  </p>
-                                </DialogContent>
-                              </Dialog>
-                              {seat.status !== 'maintenance' && (
-                                <AlertDialog>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <AlertDialogTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          className="h-8 w-8 md:h-9 md:w-9"
-                                        >
-                                          <Wrench className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                        </Button>
-                                      </AlertDialogTrigger>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      Mark for Maintenance
-                                    </TooltipContent>
-                                  </Tooltip>
-                                  <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                                    <AlertDialogHeader className="space-y-2">
-                                      <AlertDialogTitle className="text-base md:text-lg">
-                                        Mark for Maintenance?
-                                      </AlertDialogTitle>
-                                      <AlertDialogDescription className="text-xs md:text-sm">
-                                        This will mark seat {seat.seatNumber} as
-                                        unavailable for students.
-                                      </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                                      <AlertDialogCancel className="mt-0 w-full sm:w-auto">
-                                        Cancel
-                                      </AlertDialogCancel>
-                                      <AlertDialogAction className="w-full sm:w-auto">
-                                        Confirm
-                                      </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                  </AlertDialogContent>
-                                </AlertDialog>
-                              )}
-                              {seat.status === 'maintenance' && (
-                                <AlertDialog>
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <AlertDialogTrigger asChild>
-                                        <Button
-                                          variant="ghost"
-                                          size="icon"
-                                          className="h-8 w-8 md:h-9 md:w-9"
-                                        >
-                                          <CheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-600" />
-                                        </Button>
-                                      </AlertDialogTrigger>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      Mark as Available
-                                    </TooltipContent>
-                                  </Tooltip>
-                                  <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                                    <AlertDialogHeader className="space-y-2">
-                                      <AlertDialogTitle className="text-base md:text-lg">
-                                        Mark as Available?
-                                      </AlertDialogTitle>
-                                      <AlertDialogDescription className="text-xs md:text-sm">
-                                        This will make seat {seat.seatNumber}{' '}
-                                        available for assignment.
-                                      </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                                      <AlertDialogCancel className="mt-0 w-full sm:w-auto">
-                                        Cancel
-                                      </AlertDialogCancel>
-                                      <AlertDialogAction className="w-full sm:w-auto">
+                                {seat.status !== 'maintenance' && (
+                                  <AlertDialog>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <AlertDialogTrigger asChild>
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8 md:h-9 md:w-9"
+                                          >
+                                            <Wrench className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          </Button>
+                                        </AlertDialogTrigger>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        Mark for Maintenance
+                                      </TooltipContent>
+                                    </Tooltip>
+                                    <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                      <AlertDialogHeader className="space-y-2">
+                                        <AlertDialogTitle className="text-base md:text-lg">
+                                          Mark for Maintenance?
+                                        </AlertDialogTitle>
+                                        <AlertDialogDescription className="text-xs md:text-sm">
+                                          This will mark seat {seat.seatNumber} as
+                                          unavailable for students.
+                                        </AlertDialogDescription>
+                                      </AlertDialogHeader>
+                                      <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                        <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                          Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction className="w-full sm:w-auto">
+                                          Confirm
+                                        </AlertDialogAction>
+                                      </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                  </AlertDialog>
+                                )}
+                                {seat.status === 'maintenance' && (
+                                  <AlertDialog>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <AlertDialogTrigger asChild>
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8 md:h-9 md:w-9"
+                                          >
+                                            <CheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-600" />
+                                          </Button>
+                                        </AlertDialogTrigger>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
                                         Mark as Available
-                                      </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                  </AlertDialogContent>
-                                </AlertDialog>
-                              )}
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </TooltipProvider>
-            </CardContent>
-          </Card>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                    <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                      <AlertDialogHeader className="space-y-2">
+                                        <AlertDialogTitle className="text-base md:text-lg">
+                                          Mark as Available?
+                                        </AlertDialogTitle>
+                                        <AlertDialogDescription className="text-xs md:text-sm">
+                                          This will make seat {seat.seatNumber}{' '}
+                                          available for assignment.
+                                        </AlertDialogDescription>
+                                      </AlertDialogHeader>
+                                      <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                        <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                          Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction className="w-full sm:w-auto">
+                                          Mark as Available
+                                        </AlertDialogAction>
+                                      </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                  </AlertDialog>
+                                )}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </TooltipProvider>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
 
@@ -639,10 +640,10 @@ export default function SeatsPage() {
                 )}
                 {(selectedSeat.status === 'full occupied' ||
                   selectedSeat.status === 'half occupied') && (
-                  <Button variant="destructive" className="w-full">
-                    Vacate Seat
-                  </Button>
-                )}
+                    <Button variant="destructive" className="w-full">
+                      Vacate Seat
+                    </Button>
+                  )}
                 {selectedSeat.status !== 'maintenance' && (
                   <Button variant="outline" className="w-full">
                     Mark for Maintenance
@@ -665,4 +666,3 @@ export default function SeatsPage() {
   );
 }
 
-    
