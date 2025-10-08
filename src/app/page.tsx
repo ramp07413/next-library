@@ -14,43 +14,48 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 
+const facilityImages = [
+  PlaceHolderImages.find(p => p.id === 'facility-1'),
+  PlaceHolderImages.find(p => p.id === 'facility-2'),
+  PlaceHolderImages.find(p => p.id === 'facility-3'),
+  PlaceHolderImages.find(p => p.id === 'facility-4'),
+].filter(Boolean);
+
+const testimonials = [
+  {
+    quote: "LibMan has completely transformed how we manage our library network. The insights we get from the company dashboard are invaluable.",
+    name: "Jane Doe",
+    role: "COO, Global Libraries Inc.",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-2')?.imageUrl || ''
+  },
+  {
+    quote: "As a library admin, my job is so much easier now. Seat and student management is a breeze, and tracking payments is effortless.",
+    name: "John Smith",
+    role: "Admin, City Central Library",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-1')?.imageUrl || ''
+  },
+  {
+    quote: "I love how easy it is to see my seat details and payment dues. The platform is super user-friendly for students!",
+    name: "Alice Johnson",
+    role: "Student, Tech Park Library",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
+  },
+  {
+    quote: "The analytics features are top-notch. We've been able to optimize our resource allocation and improve student satisfaction significantly.",
+    name: "Samuel Lee",
+    role: "Director of Operations",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl || ''
+  },
+  {
+    quote: "An incredible tool that has saved us countless hours. The UI is intuitive and the support has been fantastic.",
+    name: "Maria Garcia",
+    role: "Head Librarian, Westside Branch",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-3')?.imageUrl || ''
+  }
+];
+
 
 export default function Home() {
-
-  const facilityImages = [
-    PlaceHolderImages.find(p => p.id === 'facility-1'),
-    PlaceHolderImages.find(p => p.id === 'facility-2'),
-    PlaceHolderImages.find(p => p.id === 'facility-3'),
-    PlaceHolderImages.find(p => p.id === 'facility-4'),
-  ].filter(Boolean);
-
-  const testimonials = [
-    {
-      quote: "LibMan has completely transformed how we manage our library network. The insights we get from the company dashboard are invaluable.",
-      name: "Jane Doe",
-      role: "COO, Global Libraries Inc.",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-2')?.imageUrl || ''
-    },
-    {
-      quote: "As a library admin, my job is so much easier now. Seat and student management is a breeze, and tracking payments is effortless.",
-      name: "John Smith",
-      role: "Admin, City Central Library",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-1')?.imageUrl || ''
-    },
-    {
-      quote: "I love how easy it is to see my seat details and payment dues. The platform is super user-friendly for students!",
-      name: "Alice Johnson",
-      role: "Student, Tech Park Library",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
-    },
-    {
-      quote: "The analytics features are top-notch. We've been able to optimize our resource allocation and improve student satisfaction significantly.",
-      name: "Samuel Lee",
-      role: "Director of Operations",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl || ''
-    }
-  ];
-
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
