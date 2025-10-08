@@ -245,7 +245,7 @@ export default function Home() {
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="#" className="text-white hover:text-primary transition-colors">Pricing</Link></li>
+                <li><Link href="/faq" className="text-white hover:text-primary transition-colors">Help / FAQ</Link></li>
                 <li><Link href="/terms" className="text-white hover:text-primary transition-colors">Terms & Conditions</Link></li>
                 <li><Link href="/privacy" className="text-white hover:text-primary transition-colors">Privacy Policy</Link></li>
               </ul>
