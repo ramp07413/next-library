@@ -244,6 +244,7 @@ export default function Home() {
               <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
+                <li><Link href="/membership" className="text-white hover:text-primary transition-colors">Membership</Link></li>
                 <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link href="/faq" className="text-white hover:text-primary transition-colors">Help / FAQ</Link></li>
                 <li><Link href="/rules" className="text-white hover:text-primary transition-colors">Rules & Regulations</Link></li>
