@@ -144,8 +144,8 @@ export default function SeatsPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="seatNumber" className="text-right">
+                <div className="flex flex-col sm:items-center gap-4">
+                  <Label htmlFor="seatNumber" className="text-left w-full">
                     Seat Number
                   </Label>
                   <Input
@@ -168,7 +168,7 @@ export default function SeatsPage() {
                 <Trash2 className="mr-2 h-4 w-4" /> Delete Seat
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
               <DialogHeader>
                 <DialogTitle>Delete Seat</DialogTitle>
                 <DialogDescription>
@@ -176,8 +176,8 @@ export default function SeatsPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="seat-to-delete" className="text-right">
+                <div className="flex flex-col sm:items-center gap-4">
+                  <Label htmlFor="seat-to-delete" className="text-left w-full">
                     Seat Number
                   </Label>
                   <Input
@@ -253,81 +253,83 @@ export default function SeatsPage() {
 
         <TabsContent value="grid">
           <div className="grid lg:block gap-4 lg:grid-cols-7">
-          <Card className="lg:col-span-4 overflow-hidden">
-            <CardHeader className="p-4 md:p-6">
-              <CardTitle className="text-lg md:text-xl">Seat Layout</CardTitle>
-              <CardDescription className="text-sm">
-                Visual representation of all library seats.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-4 md:p-6">
-              <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8 text-xs md:text-sm">
-                <div className="flex items-center gap-2">
-                  <Circle
-                    className="w-3 h-3 text-primary"
-                    fill="currentColor"
-                  />{' '}
-                  Available
-                </div>
-                <div className="flex items-center gap-2">
-                  <Circle
-                    className="w-3 h-3 text-yellow-500"
-                    fill="currentColor"
-                  />{' '}
-                  Half Occupied
-                </div>
-                <div className="flex items-center gap-2">
-                  <Circle
-                    className="w-3 h-3 text-foreground/50"
-                    fill="currentColor"
-                  />{' '}
-                  Full Occupied
-                </div>
-                <div className="flex items-center gap-2">
-                  <Circle
-                    className="w-3 h-3 text-destructive"
-                    fill="currentColor"
-                  />{' '}
-                  Maintenance
-                </div>
-              </div>
-              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2 md:gap-3">
-                {filteredSeats.map((seat) => (
-                  <TooltipProvider key={seat.id}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          onClick={() => setSelectedSeat(seat)}
-                          className={cn(
-                            'flex flex-col items-center justify-center p-1.5 md:p-2 rounded-md aspect-square transition-colors',
-                            getStatusSeatColor(seat.status),
-                            'hover:bg-accent'
-                          )}
-                        >
-                          <Armchair className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
-                          <span className="text-xs md:text-sm font-mono">
-                            {seat.seatNumber}
-                          </span>
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{seat.seatNumber}</p>
-                        <p className="capitalize">Status: {seat.status}</p>
-                        {seat.studentName && (
-                          <p>Occupied by: {seat.studentName}</p>
-                        )}
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                ))}
-                {filteredSeats.length === 0 && (
-                  <div className="col-span-full text-center text-muted-foreground py-10">
-                    No seats match the current filter.
+            <Card className="lg:col-span-4 overflow-hidden">
+              <CardHeader className="p-4 md:p-6">
+                <CardTitle className="text-lg md:text-xl">
+                  Seat Layout
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  Visual representation of all library seats.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-4 md:p-6">
+                <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8 text-xs md:text-sm">
+                  <div className="flex items-center gap-2">
+                    <Circle
+                      className="w-3 h-3 text-primary"
+                      fill="currentColor"
+                    />{' '}
+                    Available
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="flex items-center gap-2">
+                    <Circle
+                      className="w-3 h-3 text-yellow-500"
+                      fill="currentColor"
+                    />{' '}
+                    Half Occupied
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Circle
+                      className="w-3 h-3 text-foreground/50"
+                      fill="currentColor"
+                    />{' '}
+                    Full Occupied
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Circle
+                      className="w-3 h-3 text-destructive"
+                      fill="currentColor"
+                    />{' '}
+                    Maintenance
+                  </div>
+                </div>
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2 md:gap-3">
+                  {filteredSeats.map((seat) => (
+                    <TooltipProvider key={seat.id}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            onClick={() => setSelectedSeat(seat)}
+                            className={cn(
+                              'flex flex-col items-center justify-center p-1.5 md:p-2 rounded-md aspect-square transition-colors',
+                              getStatusSeatColor(seat.status),
+                              'hover:bg-accent'
+                            )}
+                          >
+                            <Armchair className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                            <span className="text-xs md:text-sm font-mono">
+                              {seat.seatNumber}
+                            </span>
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{seat.seatNumber}</p>
+                          <p className="capitalize">Status: {seat.status}</p>
+                          {seat.studentName && (
+                            <p>Occupied by: {seat.studentName}</p>
+                          )}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ))}
+                  {filteredSeats.length === 0 && (
+                    <div className="col-span-full text-center text-muted-foreground py-10">
+                      No seats match the current filter.
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
 
@@ -346,17 +348,17 @@ export default function SeatsPage() {
                     <Table className="min-w-[900px] md:min-w-[950px]">
                       <TableHeader>
                         <TableRow>
-                          <TableHead className='min-w-[25%]'>Seat Number</TableHead>
-                          <TableHead className='min-w-[25%]'>Status</TableHead>
-                          <TableHead className='min-w-[25%]'>
+                          <TableHead className="min-w-[25%]">
+                            Seat Number
+                          </TableHead>
+                          <TableHead className="min-w-[25%]">Status</TableHead>
+                          <TableHead className="min-w-[25%]">
                             Occupied By
                           </TableHead>
-                          <TableHead className='min-w-[25%]'>
+                          <TableHead className="min-w-[25%]">
                             Date Assigned
                           </TableHead>
-                          <TableHead className='min-w-[25%]'>
-                            Actions
-                          </TableHead>
+                          <TableHead className="min-w-[25%]">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -390,7 +392,9 @@ export default function SeatsPage() {
                               {seat.dateAssigned ? (
                                 format(new Date(seat.dateAssigned), 'PP')
                               ) : (
-                                <span className="text-muted-foreground">N/A</span>
+                                <span className="text-muted-foreground">
+                                  N/A
+                                </span>
                               )}
                             </TableCell>
                             <TableCell>
@@ -438,43 +442,45 @@ export default function SeatsPage() {
                                 )}
                                 {(seat.status === 'full occupied' ||
                                   seat.status === 'half occupied') && (
-                                    <AlertDialog>
-                                      <Tooltip>
-                                        <TooltipTrigger asChild>
-                                          <AlertDialogTrigger asChild>
-                                            <Button
-                                              variant="ghost"
-                                              size="icon"
-                                              className="h-8 w-8 md:h-9 md:w-9"
-                                            >
-                                              <UserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                                            </Button>
-                                          </AlertDialogTrigger>
-                                        </TooltipTrigger>
-                                        <TooltipContent>Vacate Seat</TooltipContent>
-                                      </Tooltip>
-                                      <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
-                                        <AlertDialogHeader className="space-y-2">
-                                          <AlertDialogTitle className="text-base md:text-lg">
-                                            Vacate Seat?
-                                          </AlertDialogTitle>
-                                          <AlertDialogDescription className="text-xs md:text-sm">
-                                            Are you sure you want to vacate seat{' '}
-                                            {seat.seatNumber} occupied by{' '}
-                                            {seat.studentName}?
-                                          </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter className="flex-col sm:flex-row gap-2">
-                                          <AlertDialogCancel className="mt-0 w-full sm:w-auto">
-                                            Cancel
-                                          </AlertDialogCancel>
-                                          <AlertDialogAction className="w-full sm:w-auto">
-                                            Vacate
-                                          </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                      </AlertDialogContent>
-                                    </AlertDialog>
-                                  )}
+                                  <AlertDialog>
+                                    <Tooltip>
+                                      <TooltipTrigger asChild>
+                                        <AlertDialogTrigger asChild>
+                                          <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-8 w-8 md:h-9 md:w-9"
+                                          >
+                                            <UserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          </Button>
+                                        </AlertDialogTrigger>
+                                      </TooltipTrigger>
+                                      <TooltipContent>
+                                        Vacate Seat
+                                      </TooltipContent>
+                                    </Tooltip>
+                                    <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
+                                      <AlertDialogHeader className="space-y-2">
+                                        <AlertDialogTitle className="text-base md:text-lg">
+                                          Vacate Seat?
+                                        </AlertDialogTitle>
+                                        <AlertDialogDescription className="text-xs md:text-sm">
+                                          Are you sure you want to vacate seat{' '}
+                                          {seat.seatNumber} occupied by{' '}
+                                          {seat.studentName}?
+                                        </AlertDialogDescription>
+                                      </AlertDialogHeader>
+                                      <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+                                        <AlertDialogCancel className="mt-0 w-full sm:w-auto">
+                                          Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction className="w-full sm:w-auto">
+                                          Vacate
+                                        </AlertDialogAction>
+                                      </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                  </AlertDialog>
+                                )}
                                 <Dialog>
                                   <Tooltip>
                                     <TooltipTrigger asChild>
@@ -488,7 +494,9 @@ export default function SeatsPage() {
                                         </Button>
                                       </DialogTrigger>
                                     </TooltipTrigger>
-                                    <TooltipContent>View History</TooltipContent>
+                                    <TooltipContent>
+                                      View History
+                                    </TooltipContent>
                                   </Tooltip>
                                   <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
                                     <DialogHeader className="space-y-2">
@@ -525,8 +533,8 @@ export default function SeatsPage() {
                                           Mark for Maintenance?
                                         </AlertDialogTitle>
                                         <AlertDialogDescription className="text-xs md:text-sm">
-                                          This will mark seat {seat.seatNumber} as
-                                          unavailable for students.
+                                          This will mark seat {seat.seatNumber}{' '}
+                                          as unavailable for students.
                                         </AlertDialogDescription>
                                       </AlertDialogHeader>
                                       <AlertDialogFooter className="flex-col sm:flex-row gap-2">
@@ -640,10 +648,10 @@ export default function SeatsPage() {
                 )}
                 {(selectedSeat.status === 'full occupied' ||
                   selectedSeat.status === 'half occupied') && (
-                    <Button variant="destructive" className="w-full">
-                      Vacate Seat
-                    </Button>
-                  )}
+                  <Button variant="destructive" className="w-full">
+                    Vacate Seat
+                  </Button>
+                )}
                 {selectedSeat.status !== 'maintenance' && (
                   <Button variant="outline" className="w-full">
                     Mark for Maintenance
@@ -665,4 +673,3 @@ export default function SeatsPage() {
     </div>
   );
 }
-

@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -124,19 +123,32 @@ export default function ManageStudentsPage() {
                 <Label htmlFor="new-name" className="text-right">
                   Name
                 </Label>
-                <Input id="new-name" placeholder="John Doe" className="col-span-3" />
+                <Input
+                  id="new-name"
+                  placeholder="John Doe"
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="new-email" className="text-right">
                   Email
                 </Label>
-                <Input id="new-email" type="email" placeholder="john.d@example.com" className="col-span-3" />
+                <Input
+                  id="new-email"
+                  type="email"
+                  placeholder="john.d@example.com"
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="new-phone" className="text-right">
                   Phone
                 </Label>
-                <Input id="new-phone" placeholder="123-456-7890" className="col-span-3" />
+                <Input
+                  id="new-phone"
+                  placeholder="123-456-7890"
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="new-shift" className="text-right">
@@ -157,12 +169,19 @@ export default function ManageStudentsPage() {
                 <Label htmlFor="new-fee" className="text-right">
                   Fee
                 </Label>
-                <Input id="new-fee" type="number" placeholder="150" className="col-span-3" />
+                <Input
+                  id="new-fee"
+                  type="number"
+                  placeholder="150"
+                  className="col-span-3"
+                />
               </div>
             </div>
-            <DialogFooter>
+            <DialogFooter className="flex gap-2">
               <DialogClose asChild>
-                <Button type="button" variant="secondary">Cancel</Button>
+                <Button type="button" variant="secondary">
+                  Cancel
+                </Button>
               </DialogClose>
               <DialogClose asChild>
                 <Button type="submit">Add Student</Button>
@@ -218,19 +237,13 @@ export default function ManageStudentsPage() {
               <Table className="min-w-[900px] md:min-w-[950px]">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className='min-w-[25%]'>Student</TableHead>
-                    <TableHead className='min-w-[25%]'>
-                      Contact
-                    </TableHead>
-                    <TableHead className='min-w-[25%]'>
-                      Join Date
-                    </TableHead>
-                    <TableHead className='min-w-[25%]'>
-                      Shift
-                    </TableHead>
-                    <TableHead className='min-w-[25%]'>Fee</TableHead>
-                    <TableHead className='min-w-[25%]'>Status</TableHead>
-                    <TableHead className='min-w-[25%]'>Actions</TableHead>
+                    <TableHead className="min-w-[25%]">Student</TableHead>
+                    <TableHead className="min-w-[25%]">Contact</TableHead>
+                    <TableHead className="min-w-[25%]">Join Date</TableHead>
+                    <TableHead className="min-w-[25%]">Shift</TableHead>
+                    <TableHead className="min-w-[25%]">Fee</TableHead>
+                    <TableHead className="min-w-[25%]">Status</TableHead>
+                    <TableHead className="min-w-[25%]">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -307,7 +320,10 @@ export default function ManageStudentsPage() {
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right">
+                                    <Label
+                                      htmlFor="name"
+                                      className="text-right"
+                                    >
                                       Name
                                     </Label>
                                     <Input
@@ -317,7 +333,10 @@ export default function ManageStudentsPage() {
                                     />
                                   </div>
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">
+                                    <Label
+                                      htmlFor="email"
+                                      className="text-right"
+                                    >
                                       Email
                                     </Label>
                                     <Input
@@ -328,7 +347,10 @@ export default function ManageStudentsPage() {
                                     />
                                   </div>
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="phone" className="text-right">
+                                    <Label
+                                      htmlFor="phone"
+                                      className="text-right"
+                                    >
                                       Phone
                                     </Label>
                                     <Input
@@ -347,8 +369,15 @@ export default function ManageStudentsPage() {
                             </Dialog>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <Button asChild size="icon" variant="ghost" className="h-8 w-8 md:h-9 md:w-9">
-                                  <Link href={`/library/students/${student.id}`}>
+                                <Button
+                                  asChild
+                                  size="icon"
+                                  variant="ghost"
+                                  className="h-8 w-8 md:h-9 md:w-9"
+                                >
+                                  <Link
+                                    href={`/library/students/${student.id}`}
+                                  >
                                     <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                   </Link>
                                 </Button>
