@@ -92,12 +92,8 @@ export default function CompanyDashboard() {
                   <TableRow>
                     <TableHead>Library</TableHead>
                     <TableHead className="text-right">Revenue</TableHead>
-                    <TableHead className="hidden sm:table-cell text-right">
-                      Students
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell text-right">
-                      Revenue Growth
-                    </TableHead>
+                    <TableHead className="text-right">Students</TableHead>
+                    <TableHead className="text-right">Revenue Growth</TableHead>
                     {/* <TableHead className="text-right">Actions</TableHead> */}
                   </TableRow>
                 </TableHeader>
@@ -110,10 +106,10 @@ export default function CompanyDashboard() {
                       <TableCell className="text-right">
                         ${library.revenue.toLocaleString()}
                       </TableCell>
-                      <TableCell className="hidden sm:table-cell text-right">
+                      <TableCell className="text-right">
                         {library.students}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-right">
+                      <TableCell className="text-right">
                         <div className="flex items-center justify-end">
                           <span className="mr-2">{library.growth}%</span>
                           <Progress value={library.growth} className="w-24" />
