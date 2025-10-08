@@ -1,62 +1,66 @@
-
 // @/app/company/alerts/page.tsx
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import type { Alert } from "@/ai/flows/prioritize-alerts";
-import { getPrioritizedAlerts } from "@/app/actions";
+import { useEffect, useState } from 'react';
+import type { Alert } from '@/ai/flows/prioritize-alerts';
+import { getPrioritizedAlerts } from '@/app/actions';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { BellRing, Check, Bell, Star } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { BellRing, Check, Bell, Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 const SEVERITY_STYLES = {
   high: {
-    bg: "bg-destructive/10",
-    border: "border-destructive",
+    bg: 'bg-destructive/10',
+    border: 'border-destructive',
     icon: <BellRing className="h-5 w-5 text-destructive" />,
-    badge: "destructive" as const,
+    badge: 'destructive' as const,
   },
   medium: {
-    bg: "bg-primary/10",
-    border: "border-primary",
+    bg: 'bg-primary/10',
+    border: 'border-primary',
     icon: <Bell className="h-5 w-5 text-primary" />,
-    badge: "default" as const,
+    badge: 'default' as const,
   },
   low: {
-    bg: "bg-secondary/10",
-    border: "border-secondary",
+    bg: 'bg-secondary/10',
+    border: 'border-secondary',
     icon: <Bell className="h-5 w-5 text-secondary-foreground" />,
-    badge: "secondary" as const,
+    badge: 'secondary' as const,
   },
 };
 
 export default function AlertsPage() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     async function fetchAlerts() {
       setLoading(true);
-      const prioritizedAlerts = await getPrioritizedAlerts("company");
+      const prioritizedAlerts = await getPrioritizedAlerts('company');
       setAlerts(prioritizedAlerts);
       setLoading(false);
     }
@@ -64,30 +68,31 @@ export default function AlertsPage() {
   }, []);
 
   const toggleStar = (id: string) => {
-    setAlerts(alerts.map(alert => 
-      alert.id === id ? { ...alert, starred: !alert.starred } : alert
-    ));
+    setAlerts(
+      alerts.map((alert) =>
+        alert.id === id ? { ...alert, starred: !alert.starred } : alert
+      )
+    );
   };
 
-
   const filteredAlerts = alerts.filter(
-    (alert) => filter === "all" || alert.severity === filter
+    (alert) => filter === 'all' || alert.severity === filter
   );
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+      <div className="flex flex-col items-start sm:flex-row gap-4 sm:items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight font-headline">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-headline">
             System Alerts
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             View and manage all system-wide notifications.
           </p>
         </div>
-        <div className="flex items-center gap-2">
-           <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="w-[180px]">
+        <div className="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-2">
+          <Select value={filter} onValueChange={setFilter}>
+            <SelectTrigger className="w-full sm:w-[180px]">
               <SelectValue placeholder="Filter by severity" />
             </SelectTrigger>
             <SelectContent>
@@ -97,8 +102,10 @@ export default function AlertsPage() {
               <SelectItem value="low">Low</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline">
-            <Check className="mr-2 h-4 w-4" /> Mark all as read
+          <Button variant="outline" className="w-full sm:w-auto">
+            <Check className="mr-2 h-4 w-4" />{' '}
+            <span className="hidden sm:inline">Mark all as read</span>
+            <span className="sm:hidden">Mark all</span>
           </Button>
         </div>
       </div>
@@ -108,7 +115,7 @@ export default function AlertsPage() {
           <CardTitle>All Alerts</CardTitle>
           <CardDescription>
             {loading
-              ? "Loading alerts..."
+              ? 'Loading alerts...'
               : `Showing ${filteredAlerts.length} of ${alerts.length} alerts.`}
           </CardDescription>
         </CardHeader>
@@ -132,7 +139,7 @@ export default function AlertsPage() {
                   <div
                     key={alert.id}
                     className={cn(
-                      "flex items-start gap-4 rounded-lg border p-4",
+                      'flex flex-col sm:flex-row items-start gap-3 sm:gap-4 rounded-lg border p-3 sm:p-4',
                       SEVERITY_STYLES[alert.severity].bg,
                       SEVERITY_STYLES[alert.severity].border
                     )}
@@ -140,27 +147,43 @@ export default function AlertsPage() {
                     <div className="flex-shrink-0">
                       {SEVERITY_STYLES[alert.severity].icon}
                     </div>
-                    <div className="flex-grow">
-                      <div className="flex items-center justify-between">
-                        <p className="font-semibold">{alert.message}</p>
-                         <div className="flex items-center gap-2">
-                           <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
+                    <div className="flex-grow w-full min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <p className="font-semibold text-sm sm:text-base break-words">
+                          {alert.message}
+                        </p>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <Badge
+                            variant={SEVERITY_STYLES[alert.severity].badge}
+                            className="capitalize"
+                          >
                             {alert.severity}
                           </Badge>
-                           <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button variant="ghost" size="icon" onClick={() => toggleStar(alert.id)}>
-                                    <Star className={cn("h-4 w-4", alert.starred ? "fill-primary text-primary" : "text-muted-foreground")} />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>{alert.starred ? "Unstar" : "Star"} alert</p>
-                              </TooltipContent>
-                            </Tooltip>
-                         </div>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => toggleStar(alert.id)}
+                              >
+                                <Star
+                                  className={cn(
+                                    'h-4 w-4',
+                                    alert.starred
+                                      ? 'fill-primary text-primary'
+                                      : 'text-muted-foreground'
+                                  )}
+                                />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{alert.starred ? 'Unstar' : 'Star'} alert</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {new Date(alert.timestamp).toLocaleString()} -{" "}
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                        {new Date(alert.timestamp).toLocaleString()} -{' '}
                         <span className="capitalize">{alert.category}</span>
                       </p>
                     </div>

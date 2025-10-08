@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import {
   Table,
@@ -8,20 +7,26 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Eye, Mail, CheckCircle, Hourglass } from "lucide-react";
+} from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Eye, Mail, CheckCircle, Hourglass } from 'lucide-react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { payments } from "../data";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { format } from "date-fns";
-import { useState } from "react";
+} from '@/components/ui/tooltip';
+import { payments } from '../data';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { format } from 'date-fns';
+import { useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -29,7 +34,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -40,11 +45,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 
 export default function PendingPaymentsPage() {
   const [pendingPayments] = useState(
-    payments.filter((p) => p.status === "Pending" || p.status === "Overdue")
+    payments.filter((p) => p.status === 'Pending' || p.status === 'Overdue')
   );
 
   const getStatusBadgeVariant = (status: string) => {
@@ -69,140 +74,188 @@ export default function PendingPaymentsPage() {
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Pending Payments</CardTitle>
-          <CardDescription>A list of all payments that are not yet paid.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {pendingPayments.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Library</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Due Date</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-center">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TooltipProvider>
-                <TableBody>
-                  {pendingPayments.map((payment) => (
-                    <TableRow key={payment.id}>
-                      <TableCell className="font-medium">
-                        {payment.libraryName}
-                      </TableCell>
-                      <TableCell>
-                        ${payment.amount.toFixed(2)}
-                      </TableCell>
-                      <TableCell>
-                        {format(new Date(payment.dueDate), "PP")}
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant={getStatusBadgeVariant(payment.status)}>
-                          {payment.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                          <div className="flex items-center justify-center gap-2">
-                             <Dialog>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <DialogTrigger asChild>
-                                    <Button size="icon" variant="ghost">
-                                      <Eye className="h-4 w-4" />
-                                      <span className="sr-only">View Details</span>
-                                    </Button>
-                                  </DialogTrigger>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>View Details</p>
-                                </TooltipContent>
-                              </Tooltip>
-                              <DialogContent>
-                                <DialogHeader>
-                                  <DialogTitle>Payment Details</DialogTitle>
-                                  <DialogDescription>Transaction ID: {payment.id}</DialogDescription>
-                                </DialogHeader>
-                                <div className="py-4 space-y-2">
-                                  <div><strong>Library:</strong> {payment.libraryName}</div>
-                                  <div><strong>Amount:</strong> ${payment.amount.toFixed(2)}</div>
-                                  <div><strong>Due Date:</strong> {format(new Date(payment.dueDate), "PPP")}</div>
-                                  <div className="flex items-center gap-2"><strong>Status:</strong> <Badge variant={getStatusBadgeVariant(payment.status)}>{payment.status}</Badge></div>
-                                </div>
-                              </DialogContent>
-                            </Dialog>
-                            <AlertDialog>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <AlertDialogTrigger asChild>
-                                    <Button size="icon" variant="ghost">
-                                      <Mail className="h-4 w-4" />
-                                      <span className="sr-only">Send Reminder</span>
-                                    </Button>
-                                  </AlertDialogTrigger>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>Send Reminder</p>
-                                </TooltipContent>
-                              </Tooltip>
-                              <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  <AlertDialogTitle>Send Reminder?</AlertDialogTitle>
-                                  <AlertDialogDescription>
-                                    This will send a payment reminder to {payment.libraryName}.
-                                  </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction>Send</AlertDialogAction>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
-                             <AlertDialog>
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <AlertDialogTrigger asChild>
-                                    <Button size="icon" variant="ghost" className="text-green-600">
-                                      <CheckCircle className="h-4 w-4" />
-                                      <span className="sr-only">Mark as Paid</span>
-                                    </Button>
-                                  </AlertDialogTrigger>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                  <p>Mark as Paid</p>
-                                </TooltipContent>
-                              </Tooltip>
-                               <AlertDialogContent>
-                                <AlertDialogHeader>
-                                  <AlertDialogTitle>Confirm Payment</AlertDialogTitle>
-                                  <AlertDialogDescription>
-                                    Are you sure you want to mark this payment from {payment.libraryName} as paid?
-                                  </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction>Confirm</AlertDialogAction>
-                                </AlertDialogFooter>
-                              </AlertDialogContent>
-                            </AlertDialog>
-                          </div>
-                      </TableCell>
+      <div className="grid gap-4 lg:grid-cols-7">
+        <Card className="lg:col-span-7 overflow-hidden">
+          <CardHeader>
+            <CardTitle>Pending Payments</CardTitle>
+            <CardDescription>
+              A list of all payments that are not yet paid.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="p-2 md:p-6 md:pt-0">
+            <div className="overflow-x-auto">
+              {pendingPayments.length > 0 ? (
+                <Table className="min-w-[800px]">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Library</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Due Date</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead className="text-center">Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </TooltipProvider>
-            </Table>
-          ) : (
-             <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                <Hourglass className="h-12 w-12 mb-4" />
-                <h3 className="text-lg font-semibold">No Pending Payments</h3>
-                <p>All payments are up to date.</p>
+                  </TableHeader>
+                  <TooltipProvider>
+                    <TableBody>
+                      {pendingPayments.map((payment) => (
+                        <TableRow key={payment.id}>
+                          <TableCell className="font-medium">
+                            {payment.libraryName}
+                          </TableCell>
+                          <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                          <TableCell>
+                            {format(new Date(payment.dueDate), 'PP')}
+                          </TableCell>
+                          <TableCell>
+                            <Badge
+                              variant={getStatusBadgeVariant(payment.status)}
+                            >
+                              {payment.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center justify-center gap-2">
+                              <Dialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <DialogTrigger asChild>
+                                      <Button size="icon" variant="ghost">
+                                        <Eye className="h-4 w-4" />
+                                        <span className="sr-only">
+                                          View Details
+                                        </span>
+                                      </Button>
+                                    </DialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>View Details</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <DialogContent className="max-w-[95vw] sm:max-w-md rounded-md">
+                                  <DialogHeader>
+                                    <DialogTitle>Payment Details</DialogTitle>
+                                    <DialogDescription>
+                                      Transaction ID: {payment.id}
+                                    </DialogDescription>
+                                  </DialogHeader>
+                                  <div className="py-4 space-y-2">
+                                    <div>
+                                      <strong>Library:</strong>{' '}
+                                      {payment.libraryName}
+                                    </div>
+                                    <div>
+                                      <strong>Amount:</strong> $
+                                      {payment.amount.toFixed(2)}
+                                    </div>
+                                    <div>
+                                      <strong>Due Date:</strong>{' '}
+                                      {format(new Date(payment.dueDate), 'PPP')}
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                      <strong>Status:</strong>{' '}
+                                      <Badge
+                                        variant={getStatusBadgeVariant(
+                                          payment.status
+                                        )}
+                                      >
+                                        {payment.status}
+                                      </Badge>
+                                    </div>
+                                  </div>
+                                </DialogContent>
+                              </Dialog>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AlertDialogTrigger asChild>
+                                      <Button size="icon" variant="ghost">
+                                        <Mail className="h-4 w-4" />
+                                        <span className="sr-only">
+                                          Send Reminder
+                                        </span>
+                                      </Button>
+                                    </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>Send Reminder</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent className="max-w-[95vw] sm:max-w-md rounded-md">
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                      Send Reminder?
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      This will send a payment reminder to{' '}
+                                      {payment.libraryName}.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>
+                                      Cancel
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction>Send</AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                              <AlertDialog>
+                                <Tooltip>
+                                  <TooltipTrigger asChild>
+                                    <AlertDialogTrigger asChild>
+                                      <Button
+                                        size="icon"
+                                        variant="ghost"
+                                        className="text-green-600"
+                                      >
+                                        <CheckCircle className="h-4 w-4" />
+                                        <span className="sr-only">
+                                          Mark as Paid
+                                        </span>
+                                      </Button>
+                                    </AlertDialogTrigger>
+                                  </TooltipTrigger>
+                                  <TooltipContent>
+                                    <p>Mark as Paid</p>
+                                  </TooltipContent>
+                                </Tooltip>
+                                <AlertDialogContent className="max-w-[95vw] sm:max-w-md rounded-md">
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                      Confirm Payment
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      Are you sure you want to mark this payment
+                                      from {payment.libraryName} as paid?
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>
+                                      Cancel
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction>
+                                      Confirm
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </TooltipProvider>
+                </Table>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
+                  <Hourglass className="h-12 w-12 mb-4" />
+                  <h3 className="text-lg font-semibold">No Pending Payments</h3>
+                  <p>All payments are up to date.</p>
+                </div>
+              )}
             </div>
-          )}
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,10 @@
+'use client';
 
-"use client";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -13,32 +12,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { Separator } from "@/components/ui/separator";
+} from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import { Separator } from '@/components/ui/separator';
 
 const libraryFormSchema = z.object({
   libraryName: z.string().min(2, {
-    message: "Library name must be at least 2 characters.",
+    message: 'Library name must be at least 2 characters.',
   }),
   libraryEmail: z.string().email({
-    message: "Please enter a valid email address.",
+    message: 'Please enter a valid email address.',
   }),
   libraryContact: z.string().min(10, {
-    message: "Contact number must be at least 10 digits.",
+    message: 'Contact number must be at least 10 digits.',
   }),
-  street: z.string().min(2, { message: "Street is required." }),
-  city: z.string().min(2, { message: "City is required." }),
-  state: z.string().min(2, { message: "State is required." }),
-  zip: z.string().min(5, { message: "ZIP code must be at least 5 digits." }),
+  street: z.string().min(2, { message: 'Street is required.' }),
+  city: z.string().min(2, { message: 'City is required.' }),
+  state: z.string().min(2, { message: 'State is required.' }),
+  zip: z.string().min(5, { message: 'ZIP code must be at least 5 digits.' }),
 });
 
 type LibraryFormValues = z.infer<typeof libraryFormSchema>;
@@ -48,32 +47,32 @@ export default function RegisterLibraryPage() {
   const form = useForm<LibraryFormValues>({
     resolver: zodResolver(libraryFormSchema),
     defaultValues: {
-      libraryName: "",
-      libraryEmail: "",
-      libraryContact: "",
-      street: "",
-      city: "",
-      state: "",
-      zip: "",
+      libraryName: '',
+      libraryEmail: '',
+      libraryContact: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
     },
   });
 
   function onSubmit(data: LibraryFormValues) {
     console.log(data);
     toast({
-      title: "Library Registered",
+      title: 'Library Registered',
       description: `The library "${data.libraryName}" has been successfully registered.`,
     });
     form.reset();
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight font-headline">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight font-headline">
           Register New Library
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Add a new library to your network by filling out the form below.
         </p>
       </div>
@@ -143,12 +142,12 @@ export default function RegisterLibraryPage() {
               <div>
                 <h3 className="text-lg font-medium">Library Address</h3>
                 <p className="text-sm text-muted-foreground">
-                    Enter the physical address of the library.
+                  Enter the physical address of the library.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <FormField
+                <FormField
                   control={form.control}
                   name="street"
                   render={({ field }) => (
@@ -161,7 +160,7 @@ export default function RegisterLibraryPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="city"
                   render={({ field }) => (
@@ -174,7 +173,7 @@ export default function RegisterLibraryPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="state"
                   render={({ field }) => (
@@ -187,7 +186,7 @@ export default function RegisterLibraryPage() {
                     </FormItem>
                   )}
                 />
-                 <FormField
+                <FormField
                   control={form.control}
                   name="zip"
                   render={({ field }) => (
@@ -203,7 +202,9 @@ export default function RegisterLibraryPage() {
               </div>
 
               <div className="flex justify-end">
-                <Button type="submit">Register Library</Button>
+                <Button type="submit" className="w-full sm:w-auto">
+                  Register Library
+                </Button>
               </div>
             </form>
           </Form>

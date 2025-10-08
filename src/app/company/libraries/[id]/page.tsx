@@ -1,4 +1,3 @@
-
 import { notFound } from 'next/navigation';
 import {
   Card,
@@ -93,7 +92,7 @@ export default function LibraryDetailsPage({
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center gap-4">
+      <div className="flex items-start gap-4">
         <Button variant="outline" size="icon" asChild>
           <Link href="/company/libraries">
             <ArrowLeft className="h-4 w-4" />
@@ -146,37 +145,49 @@ export default function LibraryDetailsPage({
             </CardContent>
           </Card>
 
-           <Card>
+          <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><UserCog /> Admin Details</CardTitle>
-                <CardDescription>Personnel managing this library.</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <UserCog /> Admin Details
+              </CardTitle>
+              <CardDescription>
+                Personnel managing this library.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Role</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {libraryAdmins.slice(0, 3).map(admin => (
-                            <TableRow key={admin.id}>
-                                <TableCell>{admin.name}</TableCell>
-                                <TableCell><Badge variant={getRoleBadgeVariant(admin.role)} className="capitalize">{admin.role}</Badge></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Role</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {libraryAdmins.slice(0, 3).map((admin) => (
+                    <TableRow key={admin.id}>
+                      <TableCell>{admin.name}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={getRoleBadgeVariant(admin.role)}
+                          className="capitalize"
+                        >
+                          {admin.role}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
-
         </div>
 
         <div className="lg:col-span-2 space-y-8">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2"><Users /> Student Details</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Users /> Student Details
+              </CardTitle>
               <CardDescription>
                 Students currently enrolled in this library.
               </CardDescription>
@@ -196,18 +207,37 @@ export default function LibraryDetailsPage({
                       <TableCell>
                         <div className="flex items-center gap-3">
                           <Avatar className="h-9 w-9">
-                            <AvatarImage src={student.avatar} alt={student.name} data-ai-hint="person portrait" />
-                            <AvatarFallback>{student.name.charAt(0)}</AvatarFallback>
+                            <AvatarImage
+                              src={student.avatar}
+                              alt={student.name}
+                              data-ai-hint="person portrait"
+                            />
+                            <AvatarFallback>
+                              {student.name.charAt(0)}
+                            </AvatarFallback>
                           </Avatar>
                           <div>
                             <p className="font-medium">{student.name}</p>
-                            <p className="text-sm text-muted-foreground">{student.email}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {student.email}
+                            </p>
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell className="capitalize">{student.shift}</TableCell>
+                      <TableCell className="capitalize">
+                        {student.shift}
+                      </TableCell>
                       <TableCell>
-                        <Badge variant={student.status === 'active' ? 'secondary' : 'outline'} className="capitalize">{student.status}</Badge>
+                        <Badge
+                          variant={
+                            student.status === 'active'
+                              ? 'secondary'
+                              : 'outline'
+                          }
+                          className="capitalize"
+                        >
+                          {student.status}
+                        </Badge>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -215,83 +245,104 @@ export default function LibraryDetailsPage({
               </Table>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><CreditCard /> Student Payment Details</CardTitle>
-                <CardDescription>Recent payment transactions from students.</CardDescription>
+              <CardTitle className="flex items-center gap-2">
+                <CreditCard /> Student Payment Details
+              </CardTitle>
+              <CardDescription>
+                Recent payment transactions from students.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Student</TableHead>
-                            <TableHead>Amount</TableHead>
-                            <TableHead>Status</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {studentPayments.slice(0, 3).map(payment => (
-                             <TableRow key={payment.id}>
-                                <TableCell>{payment.studentName}</TableCell>
-                                <TableCell>${payment.amount.toFixed(2)}</TableCell>
-                                <TableCell><Badge variant={getPaymentStatusBadgeVariant(payment.status)}>{payment.status}</Badge></TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Student</TableHead>
+                    <TableHead>Amount</TableHead>
+                    <TableHead>Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {studentPayments.slice(0, 3).map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell>{payment.studentName}</TableCell>
+                      <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={getPaymentStatusBadgeVariant(payment.status)}
+                        >
+                          {payment.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Armchair /> Seat Details</CardTitle>
-                    <CardDescription>Current seat occupancy.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Seat</TableHead>
-                                <TableHead>Status</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {seats.slice(0, 3).map(seat => (
-                                <TableRow key={seat.id}>
-                                    <TableCell>{seat.seatNumber}</TableCell>
-                                    <TableCell><Badge variant={getSeatStatusBadgeVariant(seat.status)} className="capitalize">{seat.status}</Badge></TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-             </Card>
-             <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><Wallet /> Expense Details</CardTitle>
-                    <CardDescription>Recent library expenses.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                     <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Amount</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {libraryExpenses.slice(0, 3).map(expense => (
-                                <TableRow key={expense.id}>
-                                    <TableCell>{expense.description}</TableCell>
-                                    <TableCell>${expense.amount.toFixed(2)}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-             </Card>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Armchair /> Seat Details
+                </CardTitle>
+                <CardDescription>Current seat occupancy.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Seat</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {seats.slice(0, 3).map((seat) => (
+                      <TableRow key={seat.id}>
+                        <TableCell>{seat.seatNumber}</TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={getSeatStatusBadgeVariant(seat.status)}
+                            className="capitalize"
+                          >
+                            {seat.status}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Wallet /> Expense Details
+                </CardTitle>
+                <CardDescription>Recent library expenses.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Description</TableHead>
+                      <TableHead>Amount</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {libraryExpenses.slice(0, 3).map((expense) => (
+                      <TableRow key={expense.id}>
+                        <TableCell>{expense.description}</TableCell>
+                        <TableCell>${expense.amount.toFixed(2)}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

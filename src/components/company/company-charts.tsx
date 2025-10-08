@@ -1,5 +1,5 @@
 // @/components/company/company-charts.tsx
-"use client";
+'use client';
 
 import {
   Bar,
@@ -12,81 +12,85 @@ import {
   Cell,
   XAxis,
   YAxis,
-} from "recharts";
+} from 'recharts';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
-} from "@/components/ui/chart";
-import { revenueData, usersPerLibraryData, expensesVsIncomeData } from "@/app/company/data";
+} from '@/components/ui/chart';
+import {
+  revenueData,
+  usersPerLibraryData,
+  expensesVsIncomeData,
+} from '@/app/company/data';
 
 export function CompanyCharts() {
   const chartConfig = {
     revenue: {
-      label: "Revenue",
-      color: "hsl(var(--primary))",
+      label: 'Revenue',
+      color: 'hsl(var(--primary))',
     },
     users: {
-      label: "Users",
-      color: "hsl(var(--accent))",
+      label: 'Users',
+      color: 'hsl(var(--accent))',
     },
     income: {
-        label: "Income",
-        color: "hsl(var(--chart-2))",
+      label: 'Income',
+      color: 'hsl(var(--chart-2))',
     },
     expenses: {
-        label: "Expenses",
-        color: "hsl(var(--chart-5))",
-    }
+      label: 'Expenses',
+      color: 'hsl(var(--chart-5))',
+    },
   };
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-2">
-            <CardHeader>
-                <CardTitle>Expenses vs. Income</CardTitle>
-                <CardDescription>
-                    A comparison of total income and expenses this month.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                 <ChartContainer
-                    config={chartConfig}
-                    className="mx-auto aspect-square h-[200px]"
-                >
-                    <PieChart>
-                        <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                        />
-                        <Pie
-                            data={expensesVsIncomeData}
-                            dataKey="value"
-                            nameKey="name"
-                            innerRadius={60}
-                            strokeWidth={5}
-                        >
-                            {expensesVsIncomeData.map((entry) => (
-                                <Cell key={entry.name} fill={entry.fill} />
-                            ))}
-                        </Pie>
-                        <ChartLegend
-                            content={<ChartLegendContent nameKey="name" />}
-                            className="-mt-2"
-                        />
-                    </PieChart>
-                </ChartContainer>
-            </CardContent>
-        </Card>
+    <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-7">
+      <Card className="lg:col-span-2">
+        <CardHeader>
+          <CardTitle>Expenses vs. Income</CardTitle>
+          <CardDescription>
+            A comparison of total income and expenses this month.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square h-[200px]"
+          >
+            <PieChart>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={expensesVsIncomeData}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={60}
+                strokeWidth={5}
+              >
+                {expensesVsIncomeData.map((entry) => (
+                  <Cell key={entry.name} fill={entry.fill} />
+                ))}
+              </Pie>
+              <ChartLegend
+                content={<ChartLegendContent nameKey="name" />}
+                className="-mt-2"
+              />
+            </PieChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
       <Card className="lg:col-span-3">
         <CardHeader>
           <CardTitle>Active Users per Library</CardTitle>
@@ -96,7 +100,10 @@ export function CompanyCharts() {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="h-[200px] w-full">
-            <BarChart data={usersPerLibraryData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+            <BarChart
+              data={usersPerLibraryData}
+              margin={{ top: 5, right: 20, left: -10, bottom: 5 }}
+            >
               <CartesianGrid vertical={false} />
               <XAxis
                 dataKey="name"
@@ -110,7 +117,7 @@ export function CompanyCharts() {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                 fontSize={12}
+                fontSize={12}
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Bar dataKey="users" fill="var(--color-users)" radius={4} />

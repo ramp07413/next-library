@@ -124,13 +124,22 @@ export default function AdminManagementPage() {
                 <Label htmlFor="new-name" className="text-right">
                   Name
                 </Label>
-                <Input id="new-name" placeholder="Jane Doe" className="col-span-3" />
+                <Input
+                  id="new-name"
+                  placeholder="Jane Doe"
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="new-email" className="text-right">
                   Email
                 </Label>
-                <Input id="new-email" type="email" placeholder="jane.d@example.com" className="col-span-3" />
+                <Input
+                  id="new-email"
+                  type="email"
+                  placeholder="jane.d@example.com"
+                  className="col-span-3"
+                />
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="new-role" className="text-right">
@@ -148,9 +157,11 @@ export default function AdminManagementPage() {
                 </Select>
               </div>
             </div>
-            <DialogFooter>
+            <DialogFooter className="flex gap-2">
               <DialogClose asChild>
-                <Button type="button" variant="secondary">Cancel</Button>
+                <Button type="button" variant="secondary">
+                  Cancel
+                </Button>
               </DialogClose>
               <DialogClose asChild>
                 <Button type="submit">Add Admin</Button>
@@ -185,12 +196,12 @@ export default function AdminManagementPage() {
               <Table className="min-w-[900px] md:min-w-[950px]">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className='min-w-[25%]'>Admin</TableHead>
-                    <TableHead className='min-w-[25%]'>Email</TableHead>
-                    <TableHead className='min-w-[25%]'>Role</TableHead>
-                    <TableHead className='min-w-[25%]'>Status</TableHead>
-                    <TableHead className='min-w-[25%]'>Date Joined</TableHead>
-                    <TableHead className='min-w-[25%]'>Actions</TableHead>
+                    <TableHead className="min-w-[25%]">Admin</TableHead>
+                    <TableHead className="min-w-[25%]">Email</TableHead>
+                    <TableHead className="min-w-[25%]">Role</TableHead>
+                    <TableHead className="min-w-[25%]">Status</TableHead>
+                    <TableHead className="min-w-[25%]">Date Joined</TableHead>
+                    <TableHead className="min-w-[25%]">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -230,7 +241,9 @@ export default function AdminManagementPage() {
                         <TableCell>
                           <Badge
                             variant={
-                              admin.status === 'active' ? 'secondary' : 'outline'
+                              admin.status === 'active'
+                                ? 'secondary'
+                                : 'outline'
                             }
                             className="capitalize text-xs md:text-sm"
                           >
@@ -268,7 +281,10 @@ export default function AdminManagementPage() {
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="name" className="text-right">
+                                    <Label
+                                      htmlFor="name"
+                                      className="text-right"
+                                    >
                                       Name
                                     </Label>
                                     <Input
@@ -278,7 +294,10 @@ export default function AdminManagementPage() {
                                     />
                                   </div>
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="email" className="text-right">
+                                    <Label
+                                      htmlFor="email"
+                                      className="text-right"
+                                    >
                                       Email
                                     </Label>
                                     <Input
@@ -289,7 +308,10 @@ export default function AdminManagementPage() {
                                     />
                                   </div>
                                   <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="role" className="text-right">
+                                    <Label
+                                      htmlFor="role"
+                                      className="text-right"
+                                    >
                                       Role
                                     </Label>
                                     <Select defaultValue={admin.role}>
@@ -297,7 +319,9 @@ export default function AdminManagementPage() {
                                         <SelectValue placeholder="Select a role" />
                                       </SelectTrigger>
                                       <SelectContent>
-                                        <SelectItem value="head">Head</SelectItem>
+                                        <SelectItem value="head">
+                                          Head
+                                        </SelectItem>
                                         <SelectItem value="librarian">
                                           Librarian
                                         </SelectItem>
@@ -328,7 +352,9 @@ export default function AdminManagementPage() {
                                     </Button>
                                   </TooltipTrigger>
                                 </DialogTrigger>
-                                <TooltipContent>View Permissions</TooltipContent>
+                                <TooltipContent>
+                                  View Permissions
+                                </TooltipContent>
                               </Tooltip>
                               <DialogContent className="max-w-[95vw] sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
                                 <DialogHeader className="space-y-2">
@@ -345,7 +371,9 @@ export default function AdminManagementPage() {
                                 </DialogHeader>
                                 <Accordion
                                   type="multiple"
-                                  defaultValue={libraryModules.map((m) => m.name)}
+                                  defaultValue={libraryModules.map(
+                                    (m) => m.name
+                                  )}
                                   className="w-full"
                                 >
                                   {libraryModules.map((module) => (

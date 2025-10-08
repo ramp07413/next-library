@@ -1,15 +1,14 @@
+'use client';
 
-"use client";
-
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   Table,
   TableBody,
@@ -17,35 +16,35 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Building, CheckCircle, XCircle } from "lucide-react";
-import { libraries, type Library } from "../data";
-import { LibraryStatusChart } from "@/components/company/library-status-chart";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+} from '@/components/ui/select';
+import { Building, CheckCircle, XCircle } from 'lucide-react';
+import { libraries, type Library } from '../data';
+import { LibraryStatusChart } from '@/components/company/library-status-chart';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function LibraryStatusPage() {
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState('all');
 
   const totalLibraries = libraries.length;
   const activeLibraries = libraries.filter((lib) => lib.isActive).length;
   const inactiveLibraries = totalLibraries - activeLibraries;
 
   const statusData = [
-    { name: "Active", value: activeLibraries, fill: "hsl(var(--chart-2))" },
-    { name: "Inactive", value: inactiveLibraries, fill: "hsl(var(--chart-5))" },
+    { name: 'Active', value: activeLibraries, fill: 'hsl(var(--chart-2))' },
+    { name: 'Inactive', value: inactiveLibraries, fill: 'hsl(var(--chart-5))' },
   ];
 
   const filteredLibraries = libraries.filter((library) => {
-    if (statusFilter === "all") return true;
-    return statusFilter === "active" ? library.isActive : !library.isActive;
+    if (statusFilter === 'all') return true;
+    return statusFilter === 'active' ? library.isActive : !library.isActive;
   });
 
   return (
@@ -90,62 +89,68 @@ export default function LibraryStatusPage() {
           </CardContent>
         </Card>
 
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle>Library Status List</CardTitle>
-                <CardDescription>
-                  Detailed status for each library.
-                </CardDescription>
+        <div className="grid gap-4 lg:grid-cols-7">
+          <Card className="lg:col-span-2 overflow-hidden">
+            <CardHeader>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full">
+                <div>
+                  <CardTitle>Library Status List</CardTitle>
+                  <CardDescription>
+                    Detailed status for each library.
+                  </CardDescription>
+                </div>
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Statuses</SelectItem>
+                    <SelectItem value="active">Active</SelectItem>
+                    <SelectItem value="inactive">Inactive</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Filter by status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Statuses</SelectItem>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="inactive">Inactive</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Library Name</TableHead>
-                  <TableHead>Contact</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredLibraries.map((library) => (
-                  <TableRow key={library.id}>
-                    <TableCell className="font-medium">
-                      {library.libraryName}
-                    </TableCell>
-                    <TableCell>{library.libraryEmail}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={library.isActive ? "secondary" : "outline"}
-                      >
-                        {library.isActive ? "Active" : "Inactive"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Button asChild variant="outline" size="sm">
-                        <Link href={`/library/${library.id}`}>View Library</Link>
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent className="p-2 md:p-6 md:pt-0">
+              <div className="overflow-x-auto">
+                <Table className="min-w-[800px]">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Library Name</TableHead>
+                      <TableHead>Contact</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredLibraries.map((library) => (
+                      <TableRow key={library.id}>
+                        <TableCell className="font-medium">
+                          {library.libraryName}
+                        </TableCell>
+                        <TableCell>{library.libraryEmail}</TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={library.isActive ? 'secondary' : 'outline'}
+                          >
+                            {library.isActive ? 'Active' : 'Inactive'}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Button asChild variant="outline" size="sm">
+                            <Link href={`/library/${library.id}`}>
+                              View Library
+                            </Link>
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
