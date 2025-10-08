@@ -3,11 +3,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Check, Award, Users, Star, ArrowRight } from "lucide-react";
+import { BookOpen, Check, Award, Users, Star, ArrowRight, ChevronDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import ScrollAnimation from "@/components/shared/scroll-animation";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const membershipTiers = [
   {
@@ -65,6 +71,19 @@ export default function MembershipPage() {
             <h1 className="text-2xl font-bold font-headline">LibMan</h1>
           </Link>
           <div className="flex items-center gap-2">
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost">Quick Links <ChevronDown className="ml-2 h-4 w-4" /></Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuItem asChild><Link href="/about">About Us</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/membership">Membership</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/events">Events</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/careers">Careers</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/gallery">Gallery</Link></DropdownMenuItem>
+                    <DropdownMenuItem asChild><Link href="/contact">Contact</Link></DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
             <Button variant="ghost" asChild>
               <Link href="/login">Log In</Link>
             </Button>
