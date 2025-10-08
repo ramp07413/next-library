@@ -244,7 +244,7 @@ export default function Home() {
               <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm">
                 <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
-                <li><Link href="#" className="text-white hover:text-primary transition-colors">Features</Link></li>
+                <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
                 <li><Link href="#" className="text-white hover:text-primary transition-colors">Pricing</Link></li>
                 <li><Link href="/login" className="text-white hover:text-primary transition-colors">Login</Link></li>
                 <li><Link href="/signup" className="text-white hover:text-primary transition-colors">Sign Up</Link></li>
@@ -306,3 +306,5 @@ function FeatureItem({ children }: { children: React.ReactNode }) {
         </div>
     )
 }
+
+    
