@@ -244,7 +244,7 @@ export default function Home() {
               <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
                   <div>
                       <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
-                      <ul className="mt-4 space-y-2 text-sm">
+                      <ul className="mt-4 space-y-2 text-sm md:columns-2">
                         <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
                         <li><Link href="/membership" className="text-white hover:text-primary transition-colors">Membership</Link></li>
                         <li><Link href="/events" className="text-white hover:text-primary transition-colors">Events</Link></li>
@@ -275,8 +275,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="py-6">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-white">
+        <div className="py-6 border-t border-zinc-800">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-left text-sm text-white">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>
         </div>

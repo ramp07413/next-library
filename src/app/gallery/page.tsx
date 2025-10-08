@@ -88,8 +88,8 @@ export default function GalleryPage() {
         </section>
       </main>
       <footer className="bg-zinc-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <p className="text-center text-sm text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-zinc-800">
+          <p className="text-left text-sm text-white">
             &copy; {new Date().getFullYear()} LibMan Platform. All rights
             reserved.
           </p>
