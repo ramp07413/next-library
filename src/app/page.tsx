@@ -56,7 +56,7 @@ const testimonials = [
 
 
 export default function Home() {
-  const plugin = React.useRef(
+   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
@@ -243,6 +243,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
               <ul className="mt-4 space-y-2 text-sm">
+                <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="#" className="text-white hover:text-primary transition-colors">Features</Link></li>
                 <li><Link href="#" className="text-white hover:text-primary transition-colors">Pricing</Link></li>
                 <li><Link href="/login" className="text-white hover:text-primary transition-colors">Login</Link></li>
