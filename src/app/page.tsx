@@ -276,7 +276,7 @@ export default function Home() {
           </div>
         </div>
         <div className="py-6 border-t border-zinc-800">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left text-sm text-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-white">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>
         </div>

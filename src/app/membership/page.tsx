@@ -82,7 +82,7 @@ export default function MembershipPage() {
               alt={membershipHeroImage.description}
               fill
               className="object-cover"
-              data-ai-hint={membershipHeroeImage.imageHint}
+              data-ai-hint={membershipHeroImage.imageHint}
             />
           )}
           <div className="absolute inset-0 bg-black/60" />
@@ -188,8 +188,8 @@ export default function MembershipPage() {
         </section>
       </main>
       <footer className="bg-zinc-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-zinc-800">
-          <p className="text-center sm:text-left text-sm text-white">&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-zinc-800 text-center">
+          <p className="text-sm text-white">&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -4,7 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { BookOpen, Calendar, MapPin, Tag } from "lucide-react";
+import { BookOpen, Calendar, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,15 +21,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { events, type LibraryEvent } from "./data";
+import { news, type NewsArticle } from "./data";
 import { format } from "date-fns";
 import ScrollAnimation from "@/components/shared/scroll-animation";
 
-export default function EventsPage() {
+export default function NewsPage() {
   const [filter, setFilter] = useState("all");
 
-  const filteredEvents = events.filter(
-    (event) => filter === "all" || event.category === filter
+  const filteredNews = news.filter(
+    (article) => filter === "all" || article.category === filter
   );
 
   return (
@@ -54,11 +54,10 @@ export default function EventsPage() {
         <section className="py-20 lg:py-24 bg-muted">
           <ScrollAnimation className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight font-headline">
-              Upcoming Events
+              News & Announcements
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-              Discover workshops, author talks, and community gatherings at your
-              library.
+              Stay up-to-date with the latest news, events, and new arrivals from our libraries.
             </p>
           </ScrollAnimation>
         </section>
@@ -72,45 +71,43 @@ export default function EventsPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Workshop">Workshop</SelectItem>
-                  <SelectItem value="Book Reading">Book Reading</SelectItem>
-                  <SelectItem value="Author Talk">Author Talk</SelectItem>
-                  <SelectItem value="Community Event">Community Event</SelectItem>
+                  <SelectItem value="Library News">Library News</SelectItem>
+                  <SelectItem value="New Arrivals">New Arrivals</SelectItem>
+                  <SelectItem value="Community">Community</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {filteredEvents.length > 0 ? (
+            {filteredNews.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredEvents.map((event) => (
-                  <Card key={event.id} className="flex flex-col">
+                {filteredNews.map((article) => (
+                  <Card key={article.id} className="flex flex-col">
                     <CardHeader className="p-0">
                       <div className="relative h-48 w-full">
                         <Image
-                          src={event.imageUrl}
-                          alt={event.title}
+                          src={article.imageUrl}
+                          alt={article.title}
                           fill
                           className="object-cover rounded-t-lg"
-                          data-ai-hint={event.imageHint}
+                          data-ai-hint={article.imageHint}
                         />
                       </div>
                       <div className="p-6">
-                        <CardTitle>{event.title}</CardTitle>
+                        <CardTitle>{article.title}</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow">
                       <p className="text-muted-foreground text-sm">
-                        {event.description}
+                        {article.description}
                       </p>
                       <div className="mt-4 space-y-2 text-sm">
-                        <InfoItem icon={<Calendar />} text={format(new Date(event.date), "PPP p")} />
-                        <InfoItem icon={<MapPin />} text={event.location} />
-                        <InfoItem icon={<Tag />} text={event.category} />
+                        <InfoItem icon={<Calendar />} text={format(new Date(article.date), "PPP")} />
+                        <InfoItem icon={<Tag />} text={article.category} />
                       </div>
                     </CardContent>
                     <CardFooter>
-                      <Button variant="secondary" className="w-full">
-                        Register Now
+                      <Button variant="outline" className="w-full">
+                        Read More
                       </Button>
                     </CardFooter>
                   </Card>
@@ -118,7 +115,7 @@ export default function EventsPage() {
               </div>
             ) : (
                 <div className="text-center py-16">
-                    <p className="text-muted-foreground">No events found for the selected category.</p>
+                    <p className="text-muted-foreground">No news found for the selected category.</p>
                 </div>
             )}
           </ScrollAnimation>
