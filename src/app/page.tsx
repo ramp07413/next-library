@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Building, Library, User, CheckCircle, Twitter, Facebook, Instagram, ChevronDown } from "lucide-react";
+import { ArrowRight, BookOpen, Building, Library, User, CheckCircle, Twitter, Facebook, Instagram } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -13,12 +13,6 @@ import ScrollAnimation from "@/components/shared/scroll-animation";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const facilityImages = [
   PlaceHolderImages.find(p => p.id === 'facility-1'),
@@ -75,19 +69,10 @@ export default function Home() {
                 <h1 className="text-2xl font-bold font-headline">LibMan</h1>
             </div>
             <div className="flex items-center gap-2">
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost">Quick Links <ChevronDown className="ml-2 h-4 w-4" /></Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem asChild><Link href="/about">About Us</Link></DropdownMenuItem>
-                        <DropdownMenuItem asChild><Link href="/membership">Membership</Link></DropdownMenuItem>
-                        <DropdownMenuItem asChild><Link href="/events">Events</Link></DropdownMenuItem>
-                        <DropdownMenuItem asChild><Link href="/careers">Careers</Link></DropdownMenuItem>
-                        <DropdownMenuItem asChild><Link href="/gallery">Gallery</Link></DropdownMenuItem>
-                        <DropdownMenuItem asChild><Link href="/contact">Contact</Link></DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Button variant="ghost" asChild><Link href="/about">About</Link></Button>
+                <Button variant="ghost" asChild><Link href="/membership">Membership</Link></Button>
+                <Button variant="ghost" asChild><Link href="/events">Events</Link></Button>
+                <Button variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
                 <Button variant="ghost" asChild>
                     <Link href="/login">Log In</Link>
                 </Button>
