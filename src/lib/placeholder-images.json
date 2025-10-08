@@ -83,6 +83,18 @@
       "description": "Children listening during a story time",
       "imageUrl": "https://images.unsplash.com/photo-1533591410196-85618f3a388a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9yeSUyMHRpbWV8ZW58MHx8fHwxNzYwMTE0MzE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "story time"
+    },
+    {
+      "id": "careers-hero",
+      "description": "A diverse team collaborating in a modern office",
+      "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwwfHx8fDE3NjAxOTQyMDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "team collaboration"
+    },
+    {
+      "id": "volunteer-1",
+      "description": "Volunteers working together at an event",
+      "imageUrl": "https://images.unsplash.com/photo-1618477388954-7852f32655ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzfGVufDB8fHx8MTc2MDE5NDI1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "volunteers working"
     }
   ]
 }

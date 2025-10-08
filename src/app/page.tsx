@@ -253,6 +253,7 @@ export default function Home() {
                 <li><Link href="/terms" className="text-white hover:text-primary transition-colors">Terms & Conditions</Link></li>
                 <li><Link href="/privacy" className="text-white hover:text-primary transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/feedback" className="text-white hover:text-primary transition-colors">Feedback</Link></li>
+                <li><Link href="/careers" className="text-white hover:text-primary transition-colors">Careers</Link></li>
               </ul>
             </div>
             <div>
