@@ -230,8 +230,8 @@ export default function Home() {
       </main>
       <footer className="bg-zinc-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-span-1">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-bold font-headline text-white">LibMan</h3>
@@ -240,28 +240,37 @@ export default function Home() {
                 The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
               </p>
             </div>
-            <div>
-              <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
-                <li><Link href="/membership" className="text-white hover:text-primary transition-colors">Membership</Link></li>
-                <li><Link href="/events" className="text-white hover:text-primary transition-colors">Events</Link></li>
-                <li><Link href="/gallery" className="text-white hover:text-primary transition-colors">Gallery</Link></li>
-                <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="/faq" className="text-white hover:text-primary transition-colors">Help / FAQ</Link></li>
-                <li><Link href="/rules" className="text-white hover:text-primary transition-colors">Rules & Regulations</Link></li>
-                <li><Link href="/terms" className="text-white hover:text-primary transition-colors">Terms & Conditions</Link></li>
-                <li><Link href="/privacy" className="text-white hover:text-primary transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/feedback" className="text-white hover:text-primary transition-colors">Feedback</Link></li>
-                <li><Link href="/careers" className="text-white hover:text-primary transition-colors">Careers</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold uppercase tracking-wider text-white">Follow Us</h4>
-              <div className="flex mt-4 space-x-4 text-white">
-                <Link href="#" className="hover:text-primary transition-colors"><Twitter /></Link>
-                <Link href="#" className="hover:text-primary transition-colors"><Facebook /></Link>
-                <Link href="#" className="hover:text-primary transition-colors"><Instagram /></Link>
+            <div className="md:col-span-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
+                      <ul className="mt-4 space-y-2 text-sm">
+                        <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
+                        <li><Link href="/membership" className="text-white hover:text-primary transition-colors">Membership</Link></li>
+                        <li><Link href="/events" className="text-white hover:text-primary transition-colors">Events</Link></li>
+                         <li><Link href="/careers" className="text-white hover:text-primary transition-colors">Careers</Link></li>
+                        <li><Link href="/gallery" className="text-white hover:text-primary transition-colors">Gallery</Link></li>
+                        <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Resources</h4>
+                      <ul className="mt-4 space-y-2 text-sm">
+                        <li><Link href="/faq" className="text-white hover:text-primary transition-colors">Help / FAQ</Link></li>
+                        <li><Link href="/rules" className="text-white hover:text-primary transition-colors">Rules & Regulations</Link></li>
+                        <li><Link href="/terms" className="text-white hover:text-primary transition-colors">Terms & Conditions</Link></li>
+                        <li><Link href="/privacy" className="text-white hover:text-primary transition-colors">Privacy Policy</Link></li>
+                        <li><Link href="/feedback" className="text-white hover:text-primary transition-colors">Feedback</Link></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Follow Us</h4>
+                      <div className="flex mt-4 space-x-4 text-white">
+                        <Link href="#" className="hover:text-primary transition-colors"><Twitter /></Link>
+                        <Link href="#" className="hover:text-primary transition-colors"><Facebook /></Link>
+                        <Link href="#" className="hover:text-primary transition-colors"><Instagram /></Link>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
