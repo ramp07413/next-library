@@ -14,56 +14,71 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Autoplay from "embla-carousel-autoplay";
 import React from "react";
 
+const facilityImages = [
+  PlaceHolderImages.find(p => p.id === 'facility-1'),
+  PlaceHolderImages.find(p => p.id === 'facility-2'),
+  PlaceHolderImages.find(p => p.id === 'facility-3'),
+  PlaceHolderImages.find(p => p.id === 'facility-4'),
+].filter(Boolean);
+
+const testimonials = [
+  {
+    quote: "LibMan has completely transformed how we manage our library network. The insights we get from the company dashboard are invaluable.",
+    name: "Jane Doe",
+    role: "COO, Global Libraries Inc.",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-2')?.imageUrl || ''
+  },
+  {
+    quote: "As a library admin, my job is so much easier now. Seat and student management is a breeze, and tracking payments is effortless.",
+    name: "John Smith",
+    role: "Admin, City Central Library",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-1')?.imageUrl || ''
+  },
+  {
+    quote: "I love how easy it is to see my seat details and payment dues. The platform is super user-friendly for students!",
+    name: "Alice Johnson",
+    role: "Student, Tech Park Library",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
+  },
+  {
+    quote: "The analytics features are top-notch. We've been able to optimize our resource allocation and improve student satisfaction significantly.",
+    name: "Samuel Lee",
+    role: "Director of Operations",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl || ''
+  },
+  {
+    quote: "An incredible tool that has saved us countless hours. The UI is intuitive and the support has been fantastic.",
+    name: "Maria Garcia",
+    role: "Head Librarian, Westside Branch",
+    avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-3')?.imageUrl || ''
+  }
+];
+
 
 export default function Home() {
-
-  const facilityImages = [
-    PlaceHolderImages.find(p => p.id === 'facility-1'),
-    PlaceHolderImages.find(p => p.id === 'facility-2'),
-    PlaceHolderImages.find(p => p.id === 'facility-3'),
-    PlaceHolderImages.find(p => p.id === 'facility-4'),
-  ].filter(Boolean);
-
-  const testimonials = [
-    {
-      quote: "LibMan has completely transformed how we manage our library network. The insights we get from the company dashboard are invaluable.",
-      name: "Jane Doe",
-      role: "COO, Global Libraries Inc.",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-2')?.imageUrl || ''
-    },
-    {
-      quote: "As a library admin, my job is so much easier now. Seat and student management is a breeze, and tracking payments is effortless.",
-      name: "John Smith",
-      role: "Admin, City Central Library",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-1')?.imageUrl || ''
-    },
-    {
-      quote: "I love how easy it is to see my seat details and payment dues. The platform is super user-friendly for students!",
-      name: "Alice Johnson",
-      role: "Student, Tech Park Library",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-4')?.imageUrl || ''
-    },
-    {
-      quote: "The analytics features are top-notch. We've been able to optimize our resource allocation and improve student satisfaction significantly.",
-      name: "Samuel Lee",
-      role: "Director of Operations",
-      avatar: PlaceHolderImages.find(p => p.id === 'user-avatar-5')?.imageUrl || ''
-    }
-  ];
-
-  const plugin = React.useRef(
+   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
   );
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="px-4 sm:px-6 lg:px-8 py-4 border-b border-border">
-        <div className="container mx-auto flex flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
+        <div className="container mx-auto flex items-center justify-between gap-4">
+            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h1 className="text-2xl font-bold font-headline">LibMan</h1>
-            </div>
-            <div className="flex items-center gap-2">
+            </Link>
+            <nav className="hidden md:flex justify-center flex-grow">
+                <div className="flex items-center gap-2">
+                    <Button variant="ghost" asChild><Link href="/about">About</Link></Button>
+                    <Button variant="ghost" asChild><Link href="/membership">Membership</Link></Button>
+                    <Button variant="ghost" asChild><Link href="/events">Events</Link></Button>
+                    <Button variant="ghost" asChild><Link href="/careers">Careers</Link></Button>
+                    <Button variant="ghost" asChild><Link href="/gallery">Gallery</Link></Button>
+                    <Button variant="ghost" asChild><Link href="/contact">Contact</Link></Button>
+                </div>
+            </nav>
+            <div className="flex items-center gap-2 flex-shrink-0">
                 <Button variant="ghost" asChild>
                     <Link href="/login">Log In</Link>
                 </Button>
@@ -225,8 +240,8 @@ export default function Home() {
       </main>
       <footer className="bg-zinc-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-span-1">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-8 h-8 text-primary" />
                 <h3 className="text-2xl font-bold font-headline text-white">LibMan</h3>
@@ -235,26 +250,42 @@ export default function Home() {
                 The ultimate SaaS platform for modern library management. Streamline your operations and provide a better experience for everyone.
               </p>
             </div>
-            <div>
-              <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
-              <ul className="mt-4 space-y-2 text-sm">
-                <li><Link href="#" className="text-white hover:text-primary transition-colors">Features</Link></li>
-                <li><Link href="#" className="text-white hover:text-primary transition-colors">Pricing</Link></li>
-                <li><Link href="/login" className="text-white hover:text-primary transition-colors">Login</Link></li>
-                <li><Link href="/signup" className="text-white hover:text-primary transition-colors">Sign Up</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold uppercase tracking-wider text-white">Follow Us</h4>
-              <div className="flex mt-4 space-x-4 text-white">
-                <Link href="#" className="hover:text-primary transition-colors"><Twitter /></Link>
-                <Link href="#" className="hover:text-primary transition-colors"><Facebook /></Link>
-                <Link href="#" className="hover:text-primary transition-colors"><Instagram /></Link>
+            <div className="md:col-span-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Quick Links</h4>
+                      <ul className="mt-4 space-y-2 text-sm md:columns-2">
+                        <li><Link href="/about" className="text-white hover:text-primary transition-colors">About Us</Link></li>
+                        <li><Link href="/membership" className="text-white hover:text-primary transition-colors">Membership</Link></li>
+                        <li><Link href="/events" className="text-white hover:text-primary transition-colors">Events</Link></li>
+                         <li><Link href="/careers" className="text-white hover:text-primary transition-colors">Careers</Link></li>
+                        <li><Link href="/gallery" className="text-white hover:text-primary transition-colors">Gallery</Link></li>
+                        <li><Link href="/contact" className="text-white hover:text-primary transition-colors">Contact</Link></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Resources</h4>
+                      <ul className="mt-4 space-y-2 text-sm">
+                        <li><Link href="/faq" className="text-white hover:text-primary transition-colors">Help / FAQ</Link></li>
+                        <li><Link href="/rules" className="text-white hover:text-primary transition-colors">Rules & Regulations</Link></li>
+                        <li><Link href="/terms" className="text-white hover:text-primary transition-colors">Terms & Conditions</Link></li>
+                        <li><Link href="/privacy" className="text-white hover:text-primary transition-colors">Privacy Policy</Link></li>
+                        <li><Link href="/feedback" className="text-white hover:text-primary transition-colors">Feedback</Link></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h4 className="font-semibold uppercase tracking-wider text-white">Follow Us</h4>
+                      <div className="flex mt-4 space-x-4 text-white">
+                        <Link href="#" className="hover:text-primary transition-colors"><Twitter /></Link>
+                        <Link href="#" className="hover:text-primary transition-colors"><Facebook /></Link>
+                        <Link href="#" className="hover:text-primary transition-colors"><Instagram /></Link>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="py-6">
+        <div className="py-6 border-t border-zinc-800">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-white">
             <p>&copy; {new Date().getFullYear()} LibMan Platform. All rights reserved.</p>
             </div>

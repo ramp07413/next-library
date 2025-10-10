@@ -53,6 +53,48 @@
       "description": "A comfortable reading area in a library",
       "imageUrl": "https://images.unsplash.com/photo-1549439548-22601048c6b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWFkaW5nJTIwYXJlYXxlbnwwfHx8fDE3NTk3NDYyNDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "reading area"
+    },
+    {
+      "id": "about-hero",
+      "description": "Modern building exterior, could be a library",
+      "imageUrl": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxsaWJyYXJ5fGVufDB8fHx8MTc1OTQ4NDY2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "modern library"
+    },
+    {
+      "id": "event-community-1",
+      "description": "People gathered at a community event",
+      "imageUrl": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb21tdW5pdHklMjBldmVudHxlbnwwfHx8fDE3NjAxMTQxOTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community event"
+    },
+    {
+      "id": "event-author-1",
+      "description": "An author speaking at a book signing event",
+      "imageUrl": "https://images.unsplash.com/photo-1583321500539-2e97a331904a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhdXRob3IlMjBzcGVha2luZ3xlbnwwfHx8fDE3NjAxMTQyMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "author speaking"
+    },
+    {
+      "id": "event-workshop-1",
+      "description": "People participating in a creative workshop",
+      "imageUrl": "https://images.unsplash.com/photo-1589139174139-64c865103c81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3b3Jrc2hvcHxlbnwwfHx8fDE3NjAxMTQyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "creative workshop"
+    },
+    {
+      "id": "event-reading-1",
+      "description": "Children listening during a story time",
+      "imageUrl": "https://images.unsplash.com/photo-1533591410196-85618f3a388a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9yeSUyMHRpbWV8ZW58MHx8fHwxNzYwMTE0MzE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "story time"
+    },
+    {
+      "id": "careers-hero",
+      "description": "A diverse team collaborating in a modern office",
+      "imageUrl": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwwfHx8fDE3NjAxOTQyMDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "team collaboration"
+    },
+    {
+      "id": "volunteer-1",
+      "description": "Volunteers working together at an event",
+      "imageUrl": "https://images.unsplash.com/photo-1618477388954-7852f32655ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx2b2x1bnRlZXJzfGVufDB8fHx8MTc2MDE5NDI1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "volunteers working"
     }
   ]
 }
