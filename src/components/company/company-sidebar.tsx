@@ -16,7 +16,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-import { BookOpen, ChevronRight } from 'lucide-react';
+import { FaBookOpen, FaChevronRight } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import { COMPANY_NAV_LINKS } from '@/app/lib/constants';
 import { cn } from '@/lib/utils';
@@ -42,7 +42,7 @@ export default function CompanySidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
-          <BookOpen className="w-6 h-6 text-primary" />
+          <FaBookOpen className="w-6 h-6 text-primary" />
           <h1 className="text-lg font-semibold font-headline">LibMan</h1>
         </div>
       </SidebarHeader>
@@ -69,7 +69,7 @@ export default function CompanySidebar() {
                 >
                   <link.icon />
                   <span>{link.label}</span>
-                  <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-90" />
+                  <FaChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>

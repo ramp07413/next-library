@@ -5,15 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  Building,
-  Users,
-  DollarSign,
-  Clock,
-  ArrowUp,
-  TrendingUp,
-  AlertTriangle,
-} from 'lucide-react';
+import { FaBuilding, FaUsers, FaClock } from 'react-icons/fa';
+import { BiDollar } from 'react-icons/bi';
 import { kpiData, topLibraries } from './data';
 import { Badge } from '@/components/ui/badge';
 import { CompanyCharts } from '@/components/company/company-charts';
@@ -29,6 +22,7 @@ import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { AlertTriangle, TrendingUp } from 'lucide-react';
 
 export default function CompanyDashboard() {
   return (
@@ -48,28 +42,28 @@ export default function CompanyDashboard() {
         <KpiCard
           title="Total Libraries"
           value={kpiData.totalLibraries.toString()}
-          icon={<Building className="h-4 w-4 text-muted-foreground" />}
+          icon={<FaBuilding className="h-4 w-4 text-muted-foreground" />}
           change="+2 this month"
           changeType="increase"
         />
         <KpiCard
           title="Active Students"
           value={kpiData.activeStudents.toLocaleString()}
-          icon={<Users className="h-4 w-4 text-muted-foreground" />}
+          icon={<FaUsers className="h-4 w-4 text-muted-foreground" />}
           change="+150 this month"
           changeType="increase"
         />
         <KpiCard
           title="Monthly Revenue"
           value={`$${kpiData.monthlyRevenue.toLocaleString()}`}
-          icon={<DollarSign className="h-4 w-4 text-muted-foreground" />}
+          icon={<BiDollar className="h-4 w-4 text-muted-foreground" />}
           change="+8.2% vs last month"
           changeType="increase"
         />
         <KpiCard
           title="Pending Payments"
           value={`$${kpiData.pendingPayments.toLocaleString()}`}
-          icon={<Clock className="h-4 w-4 text-muted-foreground" />}
+          icon={<FaClock className="h-4 w-4 text-muted-foreground" />}
           change="Action Required"
           changeType="warning"
         />

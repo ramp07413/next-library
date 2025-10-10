@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, FilePenLine, Trash2, Users } from 'lucide-react';
+import { FaUsers } from 'react-icons/fa';
 import { expenses } from '../data';
 import {
   Card,
@@ -258,7 +258,7 @@ export default function StaffExpensesPage() {
                 </Table>
               ) : (
                 <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                  <Users className="h-12 w-12 mb-4" />
+                  <FaUsers className="h-12 w-12 mb-4" />
                   <h3 className="text-lg font-semibold">No Staff Expenses</h3>
                   <p>There are no staff expenses recorded yet.</p>
                 </div>

@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { FaArrowLeft } from 'react-icons/fa';
 import { payments, type Payment } from '../data';
 import { libraries, type Library } from '@/app/company/libraries/data';
 import {
@@ -53,7 +53,7 @@ function LibraryPaymentsClientPage({
       <div className="flex items-start lg:items-center gap-4">
         <Button variant="outline" size="icon" asChild>
           <Link href="/company/payments">
-            <ArrowLeft className="h-4 w-4" />
+            <FaArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div>

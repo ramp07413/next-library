@@ -1,7 +1,6 @@
-
-import CompanySidebar from "@/components/company/company-sidebar";
-import MainNav from "@/components/shared/main-nav";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import CompanySidebar from '@/components/company/company-sidebar';
+import MainNav from '@/components/shared/main-nav';
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 
 export default function CompanyLayout({
   children,

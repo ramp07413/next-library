@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Search, LifeBuoy, Eye, CheckCircle } from 'lucide-react';
+import { FaCheckCircle } from 'react-icons/fa';
 import { messages, type Message } from './data';
 import {
   Card,
@@ -196,7 +196,7 @@ export default function AllMessagesPage() {
                                           variant="ghost"
                                           className="text-green-600"
                                         >
-                                          <CheckCircle className="h-4 w-4" />
+                                          <FaCheckCircle className="h-4 w-4" />
                                         </Button>
                                       </AlertDialogTrigger>
                                     </TooltipTrigger>

@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { BookOpen } from "lucide-react";
+import { FaBookOpen } from 'react-icons/fa';
 import { usePathname } from "next/navigation";
 import { STUDENT_NAV_LINKS } from "@/app/lib/constants";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export default function StudentSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
-          <BookOpen className="w-6 h-6 text-primary" />
+          <FaBookOpen className="w-6 h-6 text-primary" />
           <h1 className="text-lg font-semibold font-headline">LibMan</h1>
         </div>
       </SidebarHeader>

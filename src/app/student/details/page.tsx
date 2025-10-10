@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { studentProfile } from "../data";
 import { Separator } from "@/components/ui/separator";
-import { User, Mail, Phone, Calendar as CalendarIcon } from "lucide-react";
+import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
 
 export default function StudentDetailsPage() {
@@ -41,11 +41,11 @@ export default function StudentDetailsPage() {
           </div>
         </CardHeader>
         <CardContent className="space-y-6 pt-6">
-            <InfoItem icon={<User />} label="Name" value={studentProfile.name} />
+            <InfoItem icon={<FaUser />} label="Name" value={studentProfile.name} />
             <Separator />
-            <InfoItem icon={<Mail />} label="Email" value={studentProfile.email} />
+            <InfoItem icon={<FaEnvelope />} label="Email" value={studentProfile.email} />
             <Separator />
-            <InfoItem icon={<Phone />} label="Phone" value={studentProfile.phone} />
+            <InfoItem icon={<FaPhone />} label="FaPhone" value={studentProfile.phone} />
             <Separator />
             <InfoItem icon={<CalendarIcon />} label="Join Date" value={studentProfile.joinDate} />
         </CardContent>

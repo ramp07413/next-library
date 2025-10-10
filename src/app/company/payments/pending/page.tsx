@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, Mail, CheckCircle, Hourglass } from 'lucide-react';
+import { FaEnvelope, FaCheckCircle } from 'react-icons/fa';
 import {
   Tooltip,
   TooltipContent,
@@ -169,7 +169,7 @@ export default function PendingPaymentsPage() {
                                   <TooltipTrigger asChild>
                                     <AlertDialogTrigger asChild>
                                       <Button size="icon" variant="ghost">
-                                        <Mail className="h-4 w-4" />
+                                        <FaEnvelope className="h-4 w-4" />
                                         <span className="sr-only">
                                           Send Reminder
                                         </span>
@@ -207,7 +207,7 @@ export default function PendingPaymentsPage() {
                                         variant="ghost"
                                         className="text-green-600"
                                       >
-                                        <CheckCircle className="h-4 w-4" />
+                                        <FaCheckCircle className="h-4 w-4" />
                                         <span className="sr-only">
                                           Mark as Paid
                                         </span>

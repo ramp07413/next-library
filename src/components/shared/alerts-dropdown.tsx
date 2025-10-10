@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Bell, BellRing, Check, Star } from "lucide-react";
+import { FaBell, FaCheck, FaStar } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 
 import type { Alert } from "@/ai/flows/prioritize-alerts";
@@ -24,9 +24,9 @@ interface AlertsDropdownProps {
 }
 
 const SEVERITY_ICONS: { [key: string]: React.ReactNode } = {
-  high: <BellRing className="h-4 w-4 text-destructive" />,
-  medium: <Bell className="h-4 w-4 text-primary" />,
-  low: <Bell className="h-4 w-4 text-secondary-foreground" />,
+  high: <FaBell className="h-4 w-4 text-destructive" />,
+  medium: <FaBell className="h-4 w-4 text-primary" />,
+  low: <FaBell className="h-4 w-4 text-secondary-foreground" />,
 };
 
 export function AlertsDropdown({ role }: AlertsDropdownProps) {
@@ -49,7 +49,7 @@ export function AlertsDropdown({ role }: AlertsDropdownProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-[1.2rem] w-[1.2rem]" />
+          <FaBell className="h-[1.2rem] w-[1.2rem]" />
           {hasUnread && !loading && (
             <span className="absolute top-1.5 right-1.5 flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive opacity-75"></span>
@@ -90,13 +90,13 @@ export function AlertsDropdown({ role }: AlertsDropdownProps) {
                        {formatDistanceToNow(new Date(alert.timestamp), { addSuffix: true })}
                     </p>
                   </div>
-                   {alert.starred && <Star className="h-4 w-4 text-primary fill-primary" />}
+                   {alert.starred && <FaStar className="h-4 w-4 text-primary fill-primary" />}
                 </div>
               </DropdownMenuItem>
             ))
           ) : (
             <div className="flex flex-col items-center justify-center p-4 text-center text-muted-foreground">
-              <BellRing className="h-8 w-8 mb-2" />
+              <FaBell className="h-8 w-8 mb-2" />
               <p>No new alerts</p>
             </div>
           )}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { Alert } from "@/ai/flows/prioritize-alerts";
 import { getPrioritizedAlerts } from "@/app/actions";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mailbox, Bell, BellRing } from "lucide-react";
+import { FaBell } from 'react-icons/fa';
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -14,19 +14,19 @@ const SEVERITY_STYLES = {
   high: {
     bg: "bg-destructive/10",
     border: "border-destructive",
-    icon: <BellRing className="h-5 w-5 text-destructive" />,
+    icon: <FaBell className="h-5 w-5 text-destructive" />,
     badge: "destructive" as const,
   },
   medium: {
     bg: "bg-primary/10",
     border: "border-primary",
-    icon: <Bell className="h-5 w-5 text-primary" />,
+    icon: <FaBell className="h-5 w-5 text-primary" />,
     badge: "default" as const,
   },
   low: {
     bg: "bg-secondary/10",
     border: "border-secondary",
-    icon: <Bell className="h-5 w-5 text-secondary-foreground" />,
+    icon: <FaBell className="h-5 w-5 text-secondary-foreground" />,
     badge: "secondary" as const,
   },
 };

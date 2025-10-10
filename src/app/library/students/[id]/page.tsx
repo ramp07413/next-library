@@ -10,20 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  User,
-  Mail,
-  Phone,
-  Calendar as CalendarIcon,
-  Clock,
-  DollarSign,
-  ArrowLeft,
-  Armchair,
-  Hash,
-  RefreshCw,
-  Download,
-  Receipt,
-} from 'lucide-react';
+import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt, FaClock, FaDollar, FaArrowLeft, FaChair, FaHashtag, FaDownload } from 'react-icons/fa';
 import { students } from '../data';
 import {
   Table,
@@ -108,7 +95,7 @@ export default function StudentDetailsPage({
       <div className="flex items-start md:items-center gap-4">
         <Button variant="outline" size="icon" asChild>
           <Link href="/library/students">
-            <ArrowLeft className="h-4 w-4" />
+            <FaArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div>
@@ -234,9 +221,8 @@ export default function StudentDetailsPage({
                             <Dialog>
                               <DialogTrigger asChild>
                                 <Button variant="ghost" size="icon">
-                                  <Download className="h-4 w-4" />
-                                  <span className="sr-only">
-                                    Download receipt for {payment.receipt}
+                                  <FaDownload className="h-4 w-4" />
+                                  <span className="sr-only">FaDownload receipt for {payment.receipt}
                                   </span>
                                 </Button>
                               </DialogTrigger>
@@ -337,24 +323,24 @@ export default function StudentDetailsPage({
               </div>
             </CardHeader>
             <CardContent className="space-y-6 pt-6">
-              <InfoItem icon={<Mail />} label="Email" value={student.email} />
+              <InfoItem icon={<FaEnvelope />} label="Email" value={student.email} />
               <Separator />
-              <InfoItem icon={<Phone />} label="Phone" value={student.phone} />
+              <InfoItem icon={<FaPhone />} label="FaPhone" value={student.phone} />
               <Separator />
               <InfoItem
-                icon={<Clock />}
+                icon={<FaClock />}
                 label="Shift"
                 value={student.shift}
                 className="capitalize"
               />
               <Separator />
               <InfoItem
-                icon={<DollarSign />}
+                icon={<FaDollar />}
                 label="Fee"
                 value={`$${student.fee.toFixed(2)}`}
               />
               <Separator />
-              <InfoItem icon={<User />} label="Status">
+              <InfoItem icon={<FaUser />} label="Status">
                 <Badge
                   variant={getStatusBadgeVariant(student.status)}
                   className="capitalize"
@@ -397,8 +383,7 @@ export default function StudentDetailsPage({
                       />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="phone" className="text-right">
-                        Phone
+                      <Label htmlFor="phone" className="text-right">FaPhone
                       </Label>
                       <Input
                         id="phone"
@@ -427,19 +412,19 @@ export default function StudentDetailsPage({
             </CardHeader>
             <CardContent className="space-y-4">
               <InfoItem
-                icon={<Hash />}
+                icon={<FaHashtag />}
                 label="Seat Number"
                 value={studentSeatDetails.seatNumber}
               />
               <Separator />
               <InfoItem
-                icon={<Armchair />}
+                icon={<FaChair />}
                 label="Seat Type"
                 value={studentSeatDetails.seatType}
               />
               <Separator />
               <InfoItem
-                icon={<Clock />}
+                icon={<FaClock />}
                 label="Library Timing"
                 value={studentSeatDetails.libraryTiming}
               />

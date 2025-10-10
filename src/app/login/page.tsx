@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/firebase";
 import { signInAnonymously } from "firebase/auth";
-import { BookOpen, Github } from "lucide-react";
+import { FaBookOpen, FaGithub } from 'react-icons/fa';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 const loginFormSchema = z.object({
@@ -95,7 +95,7 @@ export default function LoginPage() {
         <Card className="mx-auto w-full max-w-md shadow-lg">
            <CardHeader className="text-center">
              <Link href="/" className="flex items-center gap-2 justify-center text-primary font-headline font-bold text-2xl">
-                <BookOpen className="w-8 h-8" />
+                <FaBookOpen className="w-8 h-8" />
                 <span>LibMan</span>
             </Link>
             <CardTitle className="text-3xl font-bold mt-4">Welcome Back</CardTitle>
@@ -174,7 +174,7 @@ export default function LoginPage() {
                 Google
               </Button>
               <Button variant="outline">
-                <Github className="mr-2 h-4 w-4" />
+                <FaGithub className="mr-2 h-4 w-4" />
                 GitHub
               </Button>
             </div>

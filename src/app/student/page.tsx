@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Armchair, Calendar, Clock, Download, Hash } from "lucide-react";
+import { FaChair, FaCalendarAlt, FaClock, FaDownload, FaHashtag } from 'react-icons/fa';
 import { seatDetails, paymentHistory, upcomingDues } from "./data";
 import { Separator } from "@/components/ui/separator";
 
@@ -79,8 +79,8 @@ export default function StudentDashboard() {
                       </TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="icon">
-                          <Download className="h-4 w-4" />
-                          <span className="sr-only">Download receipt</span>
+                          <FaDownload className="h-4 w-4" />
+                          <span className="sr-only">FaDownload receipt</span>
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -97,13 +97,13 @@ export default function StudentDashboard() {
               <CardTitle>My Seat Details</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <InfoItem icon={<Hash />} label="Seat Number" value={seatDetails.seatNumber} />
+              <InfoItem icon={<FaHashtag />} label="Seat Number" value={seatDetails.seatNumber} />
               <Separator />
-              <InfoItem icon={<Armchair />} label="Seat Type" value={seatDetails.seatType} />
+              <InfoItem icon={<FaChair />} label="Seat Type" value={seatDetails.seatType} />
               <Separator />
-              <InfoItem icon={<Clock />} label="Library Timing" value={seatDetails.libraryTiming} />
+              <InfoItem icon={<FaClock />} label="Library Timing" value={seatDetails.libraryTiming} />
               <Separator />
-              <InfoItem icon={<Calendar />} label="Status">
+              <InfoItem icon={<FaCalendarAlt />} label="Status">
                 <Badge>{seatDetails.status}</Badge>
               </InfoItem>
             </CardContent>

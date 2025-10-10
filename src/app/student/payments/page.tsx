@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { FaDownload } from 'react-icons/fa';
 import { paymentHistory } from '../data';
 import {
   Card,
@@ -59,8 +59,8 @@ export default function MyPaymentsPage() {
                   </TableCell>
                   <TableCell className="text-right">
                     <Button variant="ghost" size="icon">
-                      <Download className="h-4 w-4" />
-                      <span className="sr-only">Download receipt</span>
+                      <FaDownload className="h-4 w-4" />
+                      <span className="sr-only">FaDownload receipt</span>
                     </Button>
                   </TableCell>
                 </TableRow>

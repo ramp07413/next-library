@@ -1,15 +1,15 @@
-
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { upcomingDues } from "../data";
-import { Calendar, DollarSign } from "lucide-react";
+  CardFooter,
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { upcomingDues } from '../data';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { BiDollar } from 'react-icons/bi';
 
 export default function MyDuesPage() {
   return (
@@ -27,29 +27,33 @@ export default function MyDuesPage() {
         <CardHeader>
           <CardTitle>Upcoming Due</CardTitle>
           <CardDescription>
-            Your next payment is scheduled for{" "}
-            {new Date(upcomingDues.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+            Your next payment is scheduled for{' '}
+            {new Date(upcomingDues.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
             })}
             .
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-           <div className="flex items-center gap-3 text-muted-foreground">
-              <DollarSign className="h-5 w-5" />
-              <span className="text-sm font-medium">Amount</span>
-              <span className="ml-auto font-bold text-foreground text-2xl">${upcomingDues.amount.toFixed(2)}</span>
-            </div>
-             <div className="flex items-center gap-3 text-muted-foreground">
-                <Calendar className="h-5 w-5" />
-                <span className="text-sm font-medium">Due Date</span>
-                <span className="ml-auto font-semibold text-foreground">{new Date(upcomingDues.date).toLocaleDateString()}</span>
-            </div>
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <BiDollar className="h-5 w-5" />
+            <span className="text-sm font-medium">Amount</span>
+            <span className="ml-auto font-bold text-foreground text-2xl">
+              ${upcomingDues.amount.toFixed(2)}
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <FaCalendarAlt className="h-5 w-5" />
+            <span className="text-sm font-medium">Due Date</span>
+            <span className="ml-auto font-semibold text-foreground">
+              {new Date(upcomingDues.date).toLocaleDateString()}
+            </span>
+          </div>
         </CardContent>
         <CardFooter>
-            <Button className="w-full">Pay Now</Button>
+          <Button className="w-full">Pay Now</Button>
         </CardFooter>
       </Card>
     </div>

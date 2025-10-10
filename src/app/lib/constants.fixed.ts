@@ -31,11 +31,8 @@ import {
   FaComments,
   FaChair,
   FaReceipt,
-  FaClipboardCheck,
+  FaClipboardCheck
 } from 'react-icons/fa';
-import { IoSettings } from 'react-icons/io5';
-import { MdChair } from 'react-icons/md';
-import { RiLockPasswordFill } from 'react-icons/ri';
 
 export const COMPANY_NAV_LINKS = [
   {
@@ -49,12 +46,12 @@ export const COMPANY_NAV_LINKS = [
     sub: [
       {
         href: '/company/libraries',
-        label: 'Library List',
+        label: 'FaUniversity List',
         icon: FaList,
       },
       {
         href: '/company/libraries/register',
-        label: 'Register Library',
+        label: 'Register FaUniversity',
         icon: FaPlusSquare,
       },
       {
@@ -65,13 +62,13 @@ export const COMPANY_NAV_LINKS = [
     ],
   },
   {
-    label: 'Users',
+    label: 'FaUsers',
     icon: FaUsersCog,
     sub: [
-      { href: '/company/users', label: 'User List', icon: FaUsersGroup },
+      { href: '/company/users', label: 'FaUser List', icon: FaUsersGroup },
       {
         href: '/company/users/register',
-        label: 'Register User',
+        label: 'Register FaUser',
         icon: FaUserPlus,
       },
       { href: '/company/users/roles', label: 'Roles', icon: FaShieldAlt },
@@ -139,14 +136,14 @@ export const COMPANY_NAV_LINKS = [
     ],
   },
   {
-    label: 'Settings',
-    icon: IoSettings,
+    label: 'Messages',
+    icon: FaComments,
     sub: [
       { href: '/company/settings?tab=profile', label: 'Profile', icon: FaUser },
       {
         href: '/company/settings?tab=security',
-        label: 'Change Password',
-        icon: RiLockPasswordFill,
+        label: 'Security',
+        icon: FaShieldAlt,
       },
       {
         href: '/company/settings?tab=appearance',
@@ -159,7 +156,7 @@ export const COMPANY_NAV_LINKS = [
 
 export const LIBRARY_NAV_LINKS = [
   { href: '/library', label: 'Dashboard', icon: FaTh },
-  { href: '/library/seats', label: 'Seats', icon: MdChair },
+  { href: '/library/seats', label: 'Seats', icon: FaChair },
   { href: '/library/students', label: 'Manage Students', icon: FaUsers },
   { href: '/library/payments', label: 'Payments', icon: FaCreditCard },
   { href: '/library/expenses', label: 'Expenses', icon: FaWallet },
@@ -170,7 +167,7 @@ export const LIBRARY_NAV_LINKS = [
 export const STUDENT_NAV_LINKS = [
   { href: '/student', label: 'My Dashboard', icon: FaTh },
   { href: '/student/details', label: 'My Details', icon: FaUser },
-  { href: '/student/seat', label: 'My Seat Detail', icon: MdChair },
+  { href: '/student/seat', label: 'My Seat Detail', icon: FaChair },
   { href: '/student/payments', label: 'My Payments', icon: FaCreditCard },
   { href: '/student/dues', label: 'My Dues', icon: FaReceipt },
   { href: '/student/alerts', label: 'My Alerts', icon: FaBell },

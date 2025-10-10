@@ -16,7 +16,7 @@ import {
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
-import { Palette } from "lucide-react";
+import { FaPalette } from 'react-icons/fa';
 import { ThemeSwitcher } from "./theme-switcher";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
@@ -45,7 +45,7 @@ export function UserNav() {
         <DropdownMenuGroup>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
-              <Palette className="mr-2 h-4 w-4" />
+              <FaPalette className="mr-2 h-4 w-4" />
               <span>Theme</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>

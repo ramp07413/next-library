@@ -10,17 +10,7 @@ import { libraries } from '../data';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import {
-  ArrowLeft,
-  Mail,
-  Phone,
-  MapPin,
-  Users,
-  Armchair,
-  Wallet,
-  UserCog,
-  CreditCard,
-} from 'lucide-react';
+import { FaArrowLeft, FaEnvelope, FaPhone, FaUsers, FaChair } from 'react-icons/fa';
 import { Separator } from '@/components/ui/separator';
 import {
   Table,
@@ -95,7 +85,7 @@ export default function LibraryDetailsPage({
       <div className="flex items-start gap-4">
         <Button variant="outline" size="icon" asChild>
           <Link href="/company/libraries">
-            <ArrowLeft className="h-4 w-4" />
+            <FaArrowLeft className="h-4 w-4" />
           </Link>
         </Button>
         <div>
@@ -126,13 +116,13 @@ export default function LibraryDetailsPage({
               </div>
               <Separator />
               <InfoItem
-                icon={<Mail />}
+                icon={<FaEnvelope />}
                 label="Email"
                 value={library.libraryEmail}
               />
               <Separator />
               <InfoItem
-                icon={<Phone />}
+                icon={<FaPhone />}
                 label="Contact"
                 value={library.libraryContact}
               />
@@ -186,7 +176,7 @@ export default function LibraryDetailsPage({
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Users /> Student Details
+                <FaUsers /> Student Details
               </CardTitle>
               <CardDescription>
                 Students currently enrolled in this library.
@@ -287,7 +277,7 @@ export default function LibraryDetailsPage({
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Armchair /> Seat Details
+                  <FaChair /> Seat Details
                 </CardTitle>
                 <CardDescription>Current seat occupancy.</CardDescription>
               </CardHeader>

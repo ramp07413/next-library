@@ -1,7 +1,7 @@
 
 "use client";
 
-import { Settings } from "lucide-react";
+import { FaCog } from 'react-icons/fa';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,12 +20,12 @@ export function SettingsDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Settings className="h-[1.2rem] w-[1.2rem]" />
+          <FaCog className="h-[1.2rem] w-[1.2rem]" />
           <span className="sr-only">Toggle settings</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>Settings</DropdownMenuLabel>
+        <DropdownMenuLabel>FaCog</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
             <Link href="/company/settings?tab=profile">Profile</Link>

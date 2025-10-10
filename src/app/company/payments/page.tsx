@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, Mail, CheckCircle } from 'lucide-react';
+import { FaEnvelope, FaCheckCircle } from 'react-icons/fa';
 import {
   Tooltip,
   TooltipContent,
@@ -148,7 +148,7 @@ export default function PaymentsPage() {
                                 <TooltipTrigger asChild>
                                   <AlertDialogTrigger asChild>
                                     <Button size="icon" variant="ghost">
-                                      <Mail className="h-4 w-4" />
+                                      <FaEnvelope className="h-4 w-4" />
                                     </Button>
                                   </AlertDialogTrigger>
                                 </TooltipTrigger>
@@ -179,7 +179,7 @@ export default function PaymentsPage() {
                                       variant="ghost"
                                       className="text-green-600"
                                     >
-                                      <CheckCircle className="h-4 w-4" />
+                                      <FaCheckCircle className="h-4 w-4" />
                                     </Button>
                                   </AlertDialogTrigger>
                                 </TooltipTrigger>

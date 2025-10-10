@@ -15,7 +15,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Armchair, DollarSign, Users } from 'lucide-react';
+import { FaChair, FaUsers } from 'react-icons/fa';
+import { BiDollar } from 'react-icons/bi';
 import { kpiData, studentData } from '../data';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -41,22 +42,22 @@ export default function LibraryDashboard({
         <KpiCard
           title="Total Seats"
           value={kpiData.totalSeats.toString()}
-          icon={<Armchair />}
+          icon={<FaChair />}
         />
         <KpiCard
           title="Occupied Seats"
           value={kpiData.occupiedSeats.toString()}
-          icon={<Users />}
+          icon={<FaUsers />}
         />
         <KpiCard
           title="Free Seats"
           value={kpiData.freeSeats.toString()}
-          icon={<Armchair className="text-green-500" />}
+          icon={<FaChair className="text-green-500" />}
         />
         <KpiCard
           title="Monthly Income"
           value={`$${kpiData.monthlyIncome.toLocaleString()}`}
-          icon={<DollarSign />}
+          icon={<BiDollar />}
         />
       </div>
 

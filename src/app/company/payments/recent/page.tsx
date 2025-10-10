@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, Download } from 'lucide-react';
+import { FaDownload } from 'react-icons/fa';
 import {
   Tooltip,
   TooltipContent,
@@ -153,15 +153,14 @@ export default function RecentPaymentsPage() {
                                 <TooltipTrigger asChild>
                                   <DialogTrigger asChild>
                                     <Button size="icon" variant="ghost">
-                                      <Download className="h-4 w-4" />
-                                      <span className="sr-only">
-                                        Download Receipt
+                                      <FaDownload className="h-4 w-4" />
+                                      <span className="sr-only">FaDownload Receipt
                                       </span>
                                     </Button>
                                   </DialogTrigger>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                  <p>Download Receipt</p>
+                                  <p>FaDownload Receipt</p>
                                 </TooltipContent>
                               </Tooltip>
                               <DialogContent className="max-w-[95vw] sm:max-w-md rounded-md">
@@ -205,7 +204,7 @@ export default function RecentPaymentsPage() {
               </Table>
             ) : (
               <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                <Download className="h-12 w-12 mb-4" />
+                <FaDownload className="h-12 w-12 mb-4" />
                 <h3 className="text-lg font-semibold">No Recent Payments</h3>
                 <p>There are no recently paid transactions to show.</p>
               </div>

@@ -12,17 +12,16 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
-  PlusCircle,
-  Search,
-  Armchair,
-  Circle,
-  UserPlus,
-  UserMinus,
-  Wrench,
-  CheckCircle,
-  History,
-  Trash2,
-} from 'lucide-react';
+  FaCircle,
+  FaCheckCircle,
+  FaTrash,
+  FaUserMinus,
+  FaUserPlus,
+  FaHistory,
+  FaWrench,
+} from 'react-icons/fa';
+import { MdChair } from 'react-icons/md';
+import { IoSearchSharp } from 'react-icons/io5';
 import { seats, type Seat } from './data';
 import {
   Card,
@@ -71,6 +70,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { LuCirclePlus } from 'react-icons/lu';
 
 export default function SeatsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,18 +93,20 @@ export default function SeatsPage() {
     }
   };
 
+  // We use status colors directly on seats
+
   const getStatusSeatColor = (status: Seat['status']) => {
     switch (status) {
       case 'full occupied':
-        return 'text-foreground/50';
+        return 'bg-gray-300 text-foreground border-gray-400';
       case 'half occupied':
-        return 'text-yellow-500';
+        return 'bg-yellow-100 text-yellow-800 border-yellow-300';
       case 'available':
-        return 'text-primary';
+        return 'bg-green-100 text-green-800 border-green-300';
       case 'maintenance':
-        return 'text-destructive';
+        return 'bg-red-100 text-red-800 border-red-300';
       default:
-        return 'text-muted-foreground';
+        return 'bg-gray-100 text-muted-foreground border-gray-300';
     }
   };
 
@@ -115,6 +117,8 @@ export default function SeatsPage() {
         seat.seatNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
         seat.studentName?.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+  // We don't need grouping by tables anymore
 
   return (
     <div className="space-y-4 md:space-y-6 lg:space-y-8 p-4 md:p-6 lg:p-8">
@@ -131,7 +135,7 @@ export default function SeatsPage() {
           <Dialog>
             <DialogTrigger asChild>
               <Button>
-                <PlusCircle className="mr-2 h-4 w-4" /> Add New Seat
+                <LuCirclePlus className="mr-2 h-4 w-4" /> Add New Seat
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
@@ -165,7 +169,7 @@ export default function SeatsPage() {
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="destructive">
-                <Trash2 className="mr-2 h-4 w-4" /> Delete Seat
+                <FaTrash className="mr-2 h-4 w-4" /> Delete Seat
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-[95vw] sm:max-w-[425px]">
@@ -227,7 +231,7 @@ export default function SeatsPage() {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto">
             <div className="relative flex-1 md:grow-0 w-full sm:w-auto">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <IoSearchSharp className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search..."
@@ -265,35 +269,35 @@ export default function SeatsPage() {
               <CardContent className="p-4 md:p-6">
                 <div className="flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 mb-6 md:mb-8 text-xs md:text-sm">
                   <div className="flex items-center gap-2">
-                    <Circle
+                    <FaCircle
                       className="w-3 h-3 text-primary"
                       fill="currentColor"
                     />{' '}
                     Available
                   </div>
                   <div className="flex items-center gap-2">
-                    <Circle
+                    <FaCircle
                       className="w-3 h-3 text-yellow-500"
                       fill="currentColor"
                     />{' '}
                     Half Occupied
                   </div>
                   <div className="flex items-center gap-2">
-                    <Circle
+                    <FaCircle
                       className="w-3 h-3 text-foreground/50"
                       fill="currentColor"
                     />{' '}
                     Full Occupied
                   </div>
                   <div className="flex items-center gap-2">
-                    <Circle
+                    <FaCircle
                       className="w-3 h-3 text-destructive"
                       fill="currentColor"
                     />{' '}
                     Maintenance
                   </div>
                 </div>
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2 md:gap-3">
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-3 md:gap-4">
                   {filteredSeats.map((seat) => (
                     <TooltipProvider key={seat.id}>
                       <Tooltip>
@@ -301,13 +305,13 @@ export default function SeatsPage() {
                           <button
                             onClick={() => setSelectedSeat(seat)}
                             className={cn(
-                              'flex flex-col items-center justify-center p-1.5 md:p-2 rounded-md aspect-square transition-colors',
+                              'flex flex-col items-center justify-center p-2 md:p-3 rounded-md aspect-square transition-colors w-full border',
                               getStatusSeatColor(seat.status),
-                              'hover:bg-accent'
+                              'hover:opacity-80'
                             )}
                           >
-                            <Armchair className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
-                            <span className="text-xs md:text-sm font-mono">
+                            <MdChair className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+                            <span className="text-xs md:text-sm font-mono mt-1">
                               {seat.seatNumber}
                             </span>
                           </button>
@@ -348,14 +352,14 @@ export default function SeatsPage() {
                     <Table className="min-w-[900px] md:min-w-[950px]">
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="min-w-[25%]">
+                          <TableHead className="min-w-[15%]">
                             Seat Number
                           </TableHead>
-                          <TableHead className="min-w-[25%]">Status</TableHead>
+                          <TableHead className="min-w-[15%]">Status</TableHead>
                           <TableHead className="min-w-[25%]">
                             Occupied By
                           </TableHead>
-                          <TableHead className="min-w-[25%]">
+                          <TableHead className="min-w-[20%]">
                             Date Assigned
                           </TableHead>
                           <TableHead className="min-w-[25%]">Actions</TableHead>
@@ -365,7 +369,12 @@ export default function SeatsPage() {
                         {filteredSeats.map((seat) => (
                           <TableRow key={seat.id}>
                             <TableCell>
-                              <div className="w-fit rounded-md border bg-muted px-2 py-1 font-mono text-xs md:text-sm font-medium">
+                              <div
+                                className={cn(
+                                  'w-fit rounded-md border px-3 py-2 font-mono text-sm md:text-base font-medium',
+                                  getStatusSeatColor(seat.status)
+                                )}
+                              >
                                 {seat.seatNumber}
                               </div>
                             </TableCell>
@@ -409,7 +418,7 @@ export default function SeatsPage() {
                                             size="icon"
                                             className="h-8 w-8 md:h-9 md:w-9"
                                           >
-                                            <UserPlus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                            <FaUserPlus className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                           </Button>
                                         </DialogTrigger>
                                       </TooltipTrigger>
@@ -451,7 +460,7 @@ export default function SeatsPage() {
                                             size="icon"
                                             className="h-8 w-8 md:h-9 md:w-9"
                                           >
-                                            <UserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                            <FaUserMinus className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                           </Button>
                                         </AlertDialogTrigger>
                                       </TooltipTrigger>
@@ -490,7 +499,7 @@ export default function SeatsPage() {
                                           size="icon"
                                           className="h-8 w-8 md:h-9 md:w-9"
                                         >
-                                          <History className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          <FaHistory className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                         </Button>
                                       </DialogTrigger>
                                     </TooltipTrigger>
@@ -519,7 +528,7 @@ export default function SeatsPage() {
                                             size="icon"
                                             className="h-8 w-8 md:h-9 md:w-9"
                                           >
-                                            <Wrench className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                            <FaWrench className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                           </Button>
                                         </AlertDialogTrigger>
                                       </TooltipTrigger>
@@ -558,7 +567,7 @@ export default function SeatsPage() {
                                             size="icon"
                                             className="h-8 w-8 md:h-9 md:w-9"
                                           >
-                                            <CheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-600" />
+                                            <FaCheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4 text-green-600" />
                                           </Button>
                                         </AlertDialogTrigger>
                                       </TooltipTrigger>
@@ -617,6 +626,18 @@ export default function SeatsPage() {
                 </DialogDescription>
               </DialogHeader>
               <div className="py-4 space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Seat Number</span>
+                  <div
+                    className={cn(
+                      'rounded-md border px-3 py-2 font-mono text-sm font-medium',
+                      getStatusSeatColor(selectedSeat.status)
+                    )}
+                  >
+                    {selectedSeat.seatNumber}
+                  </div>
+                </div>
+                <Separator />
                 <div className="flex justify-between items-center">
                   <span className="text-muted-foreground">Status</span>
                   <Badge

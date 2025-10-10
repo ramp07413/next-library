@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Armchair, Calendar, Clock, Hash } from "lucide-react";
+import { FaChair, FaCalendarAlt, FaClock, FaHashtag } from 'react-icons/fa';
 import { seatDetails } from "../data";
 import { Separator } from "@/components/ui/separator";
 
@@ -29,13 +29,13 @@ export default function MySeatDetailPage() {
             <CardTitle>Seat {seatDetails.seatNumber}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-            <InfoItem icon={<Hash />} label="Seat Number" value={seatDetails.seatNumber} />
+            <InfoItem icon={<FaHashtag />} label="Seat Number" value={seatDetails.seatNumber} />
             <Separator />
-            <InfoItem icon={<Armchair />} label="Seat Type" value={seatDetails.seatType} />
+            <InfoItem icon={<FaChair />} label="Seat Type" value={seatDetails.seatType} />
             <Separator />
-            <InfoItem icon={<Clock />} label="Library Timing" value={seatDetails.libraryTiming} />
+            <InfoItem icon={<FaClock />} label="Library Timing" value={seatDetails.libraryTiming} />
             <Separator />
-            <InfoItem icon={<Calendar />} label="Status">
+            <InfoItem icon={<FaCalendarAlt />} label="Status">
             <Badge>{seatDetails.status}</Badge>
             </InfoItem>
         </CardContent>

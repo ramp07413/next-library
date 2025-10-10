@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { themes } from "@/app/lib/themes";
 import { cn } from "@/lib/utils";
-import { Check } from "lucide-react";
+import { FaCheck } from 'react-icons/fa';
 
 export function ThemeSwitcher() {
   const { theme: activeTheme, setTheme, themes: availableThemes } = useTheme();
@@ -56,7 +56,7 @@ export function ThemeSwitcher() {
               </div>
               {isActive && (
                 <div className="absolute top-0.5 right-0.5 bg-primary text-primary-foreground rounded-full p-px">
-                  <Check className="w-2.5 h-2.5" />
+                  <FaCheck className="w-2.5 h-2.5" />
                 </div>
               )}
             </button>

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Eye, Download, Undo2 } from 'lucide-react';
+import { FaDownload } from 'react-icons/fa';
 import {
   Tooltip,
   TooltipContent,
@@ -150,15 +150,14 @@ export default function RefundedPaymentsPage() {
                                   <TooltipTrigger asChild>
                                     <DialogTrigger asChild>
                                       <Button size="icon" variant="ghost">
-                                        <Download className="h-4 w-4" />
-                                        <span className="sr-only">
-                                          Download Credit Note
+                                        <FaDownload className="h-4 w-4" />
+                                        <span className="sr-only">FaDownload Credit Note
                                         </span>
                                       </Button>
                                     </DialogTrigger>
                                   </TooltipTrigger>
                                   <TooltipContent>
-                                    <p>Download Credit Note</p>
+                                    <p>FaDownload Credit Note</p>
                                   </TooltipContent>
                                 </Tooltip>
                                 <DialogContent className="max-w-[95vw] sm:max-w-md rounded-md">

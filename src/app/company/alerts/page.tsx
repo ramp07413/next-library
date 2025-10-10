@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BellRing, Check, Bell, Star } from 'lucide-react';
+import { FaBell, FaCheck, FaStar } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -35,19 +35,19 @@ const SEVERITY_STYLES = {
   high: {
     bg: 'bg-destructive/10',
     border: 'border-destructive',
-    icon: <BellRing className="h-5 w-5 text-destructive" />,
+    icon: <FaBell className="h-5 w-5 text-destructive" />,
     badge: 'destructive' as const,
   },
   medium: {
     bg: 'bg-primary/10',
     border: 'border-primary',
-    icon: <Bell className="h-5 w-5 text-primary" />,
+    icon: <FaBell className="h-5 w-5 text-primary" />,
     badge: 'default' as const,
   },
   low: {
     bg: 'bg-secondary/10',
     border: 'border-secondary',
-    icon: <Bell className="h-5 w-5 text-secondary-foreground" />,
+    icon: <FaBell className="h-5 w-5 text-secondary-foreground" />,
     badge: 'secondary' as const,
   },
 };
@@ -103,7 +103,7 @@ export default function AlertsPage() {
             </SelectContent>
           </Select>
           <Button variant="outline" className="w-full sm:w-auto">
-            <Check className="mr-2 h-4 w-4" />{' '}
+            <FaCheck className="mr-2 h-4 w-4" />{' '}
             <span className="hidden sm:inline">Mark all as read</span>
             <span className="sm:hidden">Mark all</span>
           </Button>
@@ -166,7 +166,7 @@ export default function AlertsPage() {
                                 size="icon"
                                 onClick={() => toggleStar(alert.id)}
                               >
-                                <Star
+                                <FaStar
                                   className={cn(
                                     'h-4 w-4',
                                     alert.starred
@@ -177,7 +177,7 @@ export default function AlertsPage() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>{alert.starred ? 'Unstar' : 'Star'} alert</p>
+                              <p>{alert.starred ? 'Unstar' : 'FaStar'} alert</p>
                             </TooltipContent>
                           </Tooltip>
                         </div>
@@ -192,7 +192,7 @@ export default function AlertsPage() {
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-                <BellRing className="h-12 w-12 mb-4" />
+                <FaBell className="h-12 w-12 mb-4" />
                 <h3 className="text-lg font-semibold">No Alerts Found</h3>
                 <p>There are no alerts matching the selected filter.</p>
               </div>

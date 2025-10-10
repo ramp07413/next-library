@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Search, Eye, Mail, CheckCircle } from 'lucide-react';
+import { FaEnvelope, FaCheckCircle } from 'react-icons/fa';
 import { payments, LibraryPayment } from './data';
 import {
   Card,
@@ -55,6 +55,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { IoSearchSharp } from 'react-icons/io5';
+import { FaEye } from 'react-icons/fa';
 
 export default function LibraryPaymentsPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -95,13 +97,15 @@ export default function LibraryPaymentsPage() {
       <div className="grid lg:block gap-4 lg:grid-cols-7">
         <Card className="lg:col-span-4 overflow-hidden">
           <CardHeader className="p-4 md:p-6">
-            <CardTitle className="text-lg md:text-xl">Payment History</CardTitle>
+            <CardTitle className="text-lg md:text-xl">
+              Payment History
+            </CardTitle>
             <CardDescription className="text-sm">
               A list of all payments from students.
             </CardDescription>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-4">
               <div className="relative flex-1 sm:flex-initial sm:min-w-[200px] lg:min-w-[320px]">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                <IoSearchSharp className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
                   placeholder="Search by student..."
@@ -125,15 +129,15 @@ export default function LibraryPaymentsPage() {
           </CardHeader>
           <CardContent className="p-0 md:p-6 md:pt-0">
             <div className="overflow-x-auto">
-              <Table className='min-w-[900px] md:min-w-[950px]'>
+              <Table className="min-w-[900px] md:min-w-[950px]">
                 <TableHeader>
                   <TableRow>
-                    <TableHead className='min-w-[15%]'>Student</TableHead>
-                    <TableHead className='min-w-[15%]'>Amount</TableHead>
-                    <TableHead className='min-w-[15%]'>Due Date</TableHead>
-                    <TableHead className='min-w-[15%]'>Paid On</TableHead>
-                    <TableHead className='min-w-[15%]'>Status</TableHead>
-                    <TableHead className='min-w-[15%]'>Actions</TableHead>
+                    <TableHead className="min-w-[15%]">Student</TableHead>
+                    <TableHead className="min-w-[15%]">Amount</TableHead>
+                    <TableHead className="min-w-[15%]">Due Date</TableHead>
+                    <TableHead className="min-w-[15%]">Paid On</TableHead>
+                    <TableHead className="min-w-[15%]">Status</TableHead>
+                    <TableHead className="min-w-[15%]">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -194,7 +198,7 @@ export default function LibraryPaymentsPage() {
                                       variant="ghost"
                                       className="h-8 w-8 md:h-9 md:w-9"
                                     >
-                                      <Eye className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                      <FaEye className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                     </Button>
                                   </TooltipTrigger>
                                 </DialogTrigger>
@@ -217,7 +221,9 @@ export default function LibraryPaymentsPage() {
                                     {payment.studentName}
                                   </div>
                                   <div>
-                                    <span className="font-semibold">Amount:</span>{' '}
+                                    <span className="font-semibold">
+                                      Amount:
+                                    </span>{' '}
                                     ${payment.amount.toFixed(2)}
                                   </div>
                                   <div>
@@ -231,11 +237,16 @@ export default function LibraryPaymentsPage() {
                                       Paid On:
                                     </span>{' '}
                                     {payment.paidDate
-                                      ? format(new Date(payment.paidDate), 'PPP')
+                                      ? format(
+                                          new Date(payment.paidDate),
+                                          'PPP'
+                                        )
                                       : 'N/A'}
                                   </div>
                                   <div className="flex items-center gap-2 flex-wrap">
-                                    <span className="font-semibold">Status:</span>{' '}
+                                    <span className="font-semibold">
+                                      Status:
+                                    </span>{' '}
                                     <Badge
                                       variant={getStatusBadgeVariant(
                                         payment.status
@@ -259,11 +270,13 @@ export default function LibraryPaymentsPage() {
                                           variant="ghost"
                                           className="h-8 w-8 md:h-9 md:w-9"
                                         >
-                                          <Mail className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          <FaEnvelope className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                         </Button>
                                       </TooltipTrigger>
                                     </AlertDialogTrigger>
-                                    <TooltipContent>Send Reminder</TooltipContent>
+                                    <TooltipContent>
+                                      Send Reminder
+                                    </TooltipContent>
                                   </Tooltip>
                                   <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
                                     <AlertDialogHeader className="space-y-2">
@@ -272,8 +285,8 @@ export default function LibraryPaymentsPage() {
                                       </AlertDialogTitle>
                                       <AlertDialogDescription className="text-xs md:text-sm">
                                         This will send an email reminder to{' '}
-                                        {payment.studentName} for the payment of $
-                                        {payment.amount.toFixed(2)}.
+                                        {payment.studentName} for the payment of
+                                        ${payment.amount.toFixed(2)}.
                                       </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter className="flex-col sm:flex-row gap-2">
@@ -295,11 +308,13 @@ export default function LibraryPaymentsPage() {
                                           variant="ghost"
                                           className="text-green-600 h-8 w-8 md:h-9 md:w-9"
                                         >
-                                          <CheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                          <FaCheckCircle className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                         </Button>
                                       </TooltipTrigger>
                                     </AlertDialogTrigger>
-                                    <TooltipContent>Mark as Paid</TooltipContent>
+                                    <TooltipContent>
+                                      Mark as Paid
+                                    </TooltipContent>
                                   </Tooltip>
                                   <AlertDialogContent className="max-w-[95vw] sm:max-w-[425px]">
                                     <AlertDialogHeader className="space-y-2">
@@ -307,9 +322,9 @@ export default function LibraryPaymentsPage() {
                                         Mark as Paid?
                                       </AlertDialogTitle>
                                       <AlertDialogDescription className="text-xs md:text-sm">
-                                        Are you sure you want to mark this payment
-                                        of ${payment.amount.toFixed(2)} from{' '}
-                                        {payment.studentName} as paid?
+                                        Are you sure you want to mark this
+                                        payment of ${payment.amount.toFixed(2)}{' '}
+                                        from {payment.studentName} as paid?
                                       </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter className="flex-col sm:flex-row gap-2">

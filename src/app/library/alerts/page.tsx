@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { BellRing, Check, Bell } from 'lucide-react';
+import { FaBell, FaCheck } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -27,19 +27,19 @@ const SEVERITY_STYLES = {
   high: {
     bg: 'bg-destructive/10',
     border: 'border-destructive',
-    icon: <BellRing className="h-4 w-4 md:h-5 md:w-5 text-destructive" />,
+    icon: <FaBell className="h-4 w-4 md:h-5 md:w-5 text-destructive" />,
     badge: 'destructive' as const,
   },
   medium: {
     bg: 'bg-primary/10',
     border: 'border-primary',
-    icon: <Bell className="h-4 w-4 md:h-5 md:w-5 text-primary" />,
+    icon: <FaBell className="h-4 w-4 md:h-5 md:w-5 text-primary" />,
     badge: 'default' as const,
   },
   low: {
     bg: 'bg-secondary/10',
     border: 'border-secondary',
-    icon: <Bell className="h-4 w-4 md:h-5 md:w-5 text-secondary-foreground" />,
+    icon: <FaBell className="h-4 w-4 md:h-5 md:w-5 text-secondary-foreground" />,
     badge: 'secondary' as const,
   },
 };
@@ -87,7 +87,7 @@ export default function AlertsPage() {
             </SelectContent>
           </Select>
           <Button variant="outline" className="w-full sm:w-auto">
-            <Check className="mr-2 h-4 w-4" />{' '}
+            <FaCheck className="mr-2 h-4 w-4" />{' '}
             <span className="hidden sm:inline">Mark all as read</span>
             <span className="sm:hidden">Mark read</span>
           </Button>
@@ -154,7 +154,7 @@ export default function AlertsPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center p-8 md:p-10 text-center text-muted-foreground border-2 border-dashed rounded-lg">
-              <BellRing className="h-10 w-10 md:h-12 md:w-12 mb-3 md:mb-4" />
+              <FaBell className="h-10 w-10 md:h-12 md:w-12 mb-3 md:mb-4" />
               <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">
                 No Alerts Found
               </h3>

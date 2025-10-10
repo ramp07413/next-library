@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Building, CheckCircle, XCircle } from 'lucide-react';
+import { FaBuilding, FaCheckCircle } from 'react-icons/fa';
 import { libraries, type Library } from '../data';
 import { LibraryStatusChart } from '@/components/company/library-status-chart';
 import { Button } from '@/components/ui/button';
@@ -62,12 +62,12 @@ export default function LibraryStatusPage() {
         <KpiCard
           title="Total Libraries"
           value={totalLibraries.toString()}
-          icon={<Building className="h-6 w-6 text-muted-foreground" />}
+          icon={<FaBuilding className="h-6 w-6 text-muted-foreground" />}
         />
         <KpiCard
           title="Active Libraries"
           value={activeLibraries.toString()}
-          icon={<CheckCircle className="h-6 w-6 text-green-500" />}
+          icon={<FaCheckCircle className="h-6 w-6 text-green-500" />}
         />
         <KpiCard
           title="Inactive Libraries"

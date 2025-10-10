@@ -15,7 +15,7 @@ export default function MainNav({ role }: MainNavProps) {
       <div className="ml-auto flex items-center gap-2">
         <AlertsDropdown role={role} />
         <ThemeToggle />
-        <SettingsDropdown />
+        {/* <SettingsDropdown /> */}
         <UserNav />
       </div>
     </header>
