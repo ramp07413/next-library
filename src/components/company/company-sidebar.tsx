@@ -1,6 +1,5 @@
-
 // @/components/company/company-sidebar.tsx
-"use client";
+'use client';
 import {
   Sidebar,
   SidebarContent,
@@ -11,25 +10,25 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { BookOpen, ChevronRight } from "lucide-react";
-import { usePathname } from "next/navigation";
-import { COMPANY_NAV_LINKS } from "@/app/lib/constants";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import React from "react";
+} from '@/components/ui/collapsible';
+import { BookOpen, ChevronRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { COMPANY_NAV_LINKS } from '@/app/lib/constants';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import React from 'react';
 
 export default function CompanySidebar() {
   const pathname = usePathname();
 
   const isLinkActive = (href: string) => {
     // Exact match for dashboard, partial for others
-    if (href === "/company") {
+    if (href === '/company') {
       return pathname === href;
     }
     return pathname.startsWith(href);
@@ -37,7 +36,7 @@ export default function CompanySidebar() {
 
   const isSubGroupActive = (subLinks: any[]) => {
     return subLinks.some((subLink) => isLinkActive(subLink.href));
-  }
+  };
 
   return (
     <Sidebar>
@@ -59,7 +58,14 @@ export default function CompanySidebar() {
                 <SidebarMenuButton
                   variant="ghost"
                   className="w-full justify-start group"
-                  isActive={isSubGroupActive(link.sub) && !link.sub.some(l => pathname.startsWith(l.href) && l.href !== '/company')}
+                  isActive={
+                    isSubGroupActive(link.sub) &&
+                    !link.sub.some(
+                      (l) =>
+                        pathname.startsWith(l.href) && l.href !== '/company'
+                    )
+                  }
+                  hasSubmenu={true}
                 >
                   <link.icon />
                   <span>{link.label}</span>
@@ -70,7 +76,7 @@ export default function CompanySidebar() {
                 <SidebarMenuSub>
                   {link.sub.map((subLink) => (
                     <SidebarMenuSubItem key={subLink.href}>
-                       <Link href={subLink.href}>
+                      <Link href={subLink.href}>
                         <SidebarMenuSubButton
                           isActive={isLinkActive(subLink.href)}
                         >

@@ -89,8 +89,8 @@ export default function LibraryStatusPage() {
           </CardContent>
         </Card>
 
-        <div className="grid gap-4 lg:grid-cols-7">
-          <Card className="lg:col-span-2 overflow-hidden">
+        <div className="grid gap-4 lg:grid-cols-7 lg:col-span-2">
+          <Card className="lg:col-span-7 overflow-hidden">
             <CardHeader>
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 w-full">
                 <div>
@@ -138,8 +138,8 @@ export default function LibraryStatusPage() {
                         </TableCell>
                         <TableCell>
                           <Button asChild variant="outline" size="sm">
-                            <Link href={`/library/${library.id}`}>
-                              View Library
+                            <Link href={`/company/libraries/${library.id}`}>
+                              View Details
                             </Link>
                           </Button>
                         </TableCell>

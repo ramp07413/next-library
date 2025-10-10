@@ -81,12 +81,8 @@ export default function LibrariesPage() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Library Name</TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      Contact
-                    </TableHead>
-                    <TableHead className="hidden lg:table-cell">
-                      Address
-                    </TableHead>
+                    <TableHead className="">Contact</TableHead>
+                    <TableHead className="">Address</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
@@ -98,13 +94,13 @@ export default function LibrariesPage() {
                         <TableCell className="font-medium">
                           {library.libraryName}
                         </TableCell>
-                        <TableCell className="hidden md:table-cell">
+                        <TableCell className="">
                           <div>{library.libraryEmail}</div>
                           <div className="text-muted-foreground text-sm">
                             {library.libraryContact}
                           </div>
                         </TableCell>
-                        <TableCell className="hidden lg:table-cell">
+                        <TableCell className="">
                           {`${library.libraryAddress.street}, ${library.libraryAddress.city}, ${library.libraryAddress.state} ${library.libraryAddress.zip}`}
                         </TableCell>
                         <TableCell>

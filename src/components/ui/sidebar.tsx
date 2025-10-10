@@ -539,6 +539,7 @@ const SidebarMenuButton = React.forwardRef<
     asChild?: boolean;
     isActive?: boolean;
     tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+    hasSubmenu?: boolean;
   } & VariantProps<typeof sidebarMenuButtonVariants>
 >(
   (
@@ -550,6 +551,7 @@ const SidebarMenuButton = React.forwardRef<
       tooltip,
       className,
       onClick,
+      hasSubmenu = false,
       ...props
     },
     ref
@@ -560,6 +562,11 @@ const SidebarMenuButton = React.forwardRef<
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       // Call the original onClick if provided
       onClick?.(event);
+
+      // Close sidebar on mobile when clicked, but only if it doesn't have submenu
+      if (isMobile && !hasSubmenu) {
+        setOpenMobile(false);
+      }
     };
 
     const button = (

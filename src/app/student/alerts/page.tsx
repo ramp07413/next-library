@@ -1,40 +1,39 @@
+'use client';
 
-"use client";
-
-import { useEffect, useState } from "react";
-import type { Alert } from "@/ai/flows/prioritize-alerts";
-import { getPrioritizedAlerts } from "@/app/actions";
+import { useEffect, useState } from 'react';
+import type { Alert } from '@/ai/flows/prioritize-alerts';
+import { getPrioritizedAlerts } from '@/app/actions';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { BellRing, Check, Bell } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { BellRing, Check, Bell } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const SEVERITY_STYLES = {
   high: {
-    bg: "bg-destructive/10",
-    border: "border-destructive",
+    bg: 'bg-destructive/10',
+    border: 'border-destructive',
     icon: <BellRing className="h-5 w-5 text-destructive" />,
-    badge: "destructive" as const,
+    badge: 'destructive' as const,
   },
   medium: {
-    bg: "bg-primary/10",
-    border: "border-primary",
+    bg: 'bg-primary/10',
+    border: 'border-primary',
     icon: <Bell className="h-5 w-5 text-primary" />,
-    badge: "default" as const,
+    badge: 'default' as const,
   },
   low: {
-    bg: "bg-secondary/10",
-    border: "border-secondary",
+    bg: 'bg-secondary/10',
+    border: 'border-secondary',
     icon: <Bell className="h-5 w-5 text-secondary-foreground" />,
-    badge: "secondary" as const,
+    badge: 'secondary' as const,
   },
 };
 
@@ -45,7 +44,7 @@ export default function StudentAlertsPage() {
   useEffect(() => {
     async function fetchAlerts() {
       setLoading(true);
-      const prioritizedAlerts = await getPrioritizedAlerts("student");
+      const prioritizedAlerts = await getPrioritizedAlerts('student');
       setAlerts(prioritizedAlerts);
       setLoading(false);
     }
@@ -54,7 +53,7 @@ export default function StudentAlertsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start gap-4 sm:items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight font-headline">
             My Alerts
@@ -72,7 +71,7 @@ export default function StudentAlertsPage() {
         <CardHeader>
           <CardTitle>Prioritized Alerts</CardTitle>
           <CardDescription>
-            {loading ? "Loading alerts..." : `Showing ${alerts.length} alerts.`}
+            {loading ? 'Loading alerts...' : `Showing ${alerts.length} alerts.`}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -94,7 +93,7 @@ export default function StudentAlertsPage() {
                 <div
                   key={alert.id}
                   className={cn(
-                    "flex items-start gap-4 rounded-lg border p-4",
+                    'flex items-start gap-4 rounded-lg border p-4',
                     SEVERITY_STYLES[alert.severity].bg,
                     SEVERITY_STYLES[alert.severity].border
                   )}
@@ -105,12 +104,15 @@ export default function StudentAlertsPage() {
                   <div className="flex-grow">
                     <div className="flex items-center justify-between">
                       <p className="font-semibold">{alert.message}</p>
-                      <Badge variant={SEVERITY_STYLES[alert.severity].badge} className="capitalize">
+                      <Badge
+                        variant={SEVERITY_STYLES[alert.severity].badge}
+                        className="capitalize"
+                      >
                         {alert.severity}
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {new Date(alert.timestamp).toLocaleString()} -{" "}
+                      {new Date(alert.timestamp).toLocaleString()} -{' '}
                       <span className="capitalize">{alert.category}</span>
                     </p>
                   </div>

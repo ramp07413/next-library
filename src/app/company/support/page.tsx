@@ -72,7 +72,7 @@ export default function AllMessagesPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-7">
+      <div className="grid gap-4 lg:grid-cols-7 lg:col-span-2">
         <Card className="lg:col-span-7 overflow-hidden">
           <CardHeader>
             <CardTitle>Active Tickets</CardTitle>

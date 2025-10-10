@@ -67,8 +67,8 @@ export default function StaffExpensesPage() {
         </p>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-7">
-        <Card className="lg:col-span-4 overflow-hidden">
+      <div className="grid gap-4 lg:grid-cols-7 lg:col-span-2">
+        <Card className="lg:col-span-7 overflow-hidden">
           <CardHeader>
             <CardTitle>Staff Expense History</CardTitle>
             <CardDescription>
