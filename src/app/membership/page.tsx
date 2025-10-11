@@ -414,7 +414,7 @@ function Step({
         <CardHeader className="text-center pb-4">
           {icon && (
             <div
-              className={`mx-auto ${gradient} text-white p-3 rounded-xl w-fit mb-4 opacity-80`}
+              className={`mx-auto bg-primary/20 text-primary/80 p-3 rounded-xl w-fit mb-4`}
             >
               {icon}
             </div>

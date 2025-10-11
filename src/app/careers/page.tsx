@@ -176,46 +176,6 @@ export default function CareersPage() {
               </Card>
             ))}
           </div>
-
-          {/* Enhanced Call to Action */}
-          <div className="relative">
-            <div className="absolute inset-0 bg-slate-600 rounded-2xl" />
-            <div className="relative rounded-3xl p-12 text-center text-white overflow-hidden">
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                  <FaLightbulb className="w-4 h-4 text-yellow-400" />
-                  <span>Don't see your ideal role?</span>
-                </div>
-
-                <h3 className="text-3xl md:text-4xl font-bold mb-4">
-                  We Want to Hear From You
-                </h3>
-
-                <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-                  Exceptional talent comes in many forms. Share your story with
-                  us, and let's explore how you can contribute to our mission.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    className="bg-white text-slate-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    Submit Your Profile
-                    <FaRocket className="ml-2 w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-white/30 text-white hover:bg-white/10 backdrop-blur-md font-semibold px-8 py-4 rounded-xl transition-all duration-300"
-                  >
-                    Join Talent Network
-                    <FaGlobe className="ml-2 w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
         </ScrollAnimation>
 
         {/* Custom CSS for animations */}
@@ -234,7 +194,7 @@ export default function CareersPage() {
       </section>
 
       {/* Volunteer Section - Modern Community Focus */}
-      <section className="py-24 lg:py-32 relative overflow-hidden bg-slate-100">
+      <section className="py-24 lg:py-32 relative overflow-hidden bg-zinc-100">
         <ScrollAnimation className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Content Side */}
@@ -242,7 +202,7 @@ export default function CareersPage() {
               <h3 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 <span className="">Volunteer</span>
                 <br />
-                <span className="text-gray-500">With Purpose</span>
+                <span className="text-gray-400">With Purpose</span>
               </h3>
 
               <p className="text-xl text-gray-700 mb-10 leading-relaxed">
@@ -264,13 +224,13 @@ export default function CareersPage() {
                     }}
                   >
                     <div className="flex items-start gap-4">
-                      <div className="p-3 bg-primary rounded-xl group-hover:scale-110 transition-transform duration-300">
+                      <div className="p-3 bg-primary/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
                         {opp.title.includes('Event') ? (
-                          <FaRocket className="w-5 h-5 text-white" />
+                          <FaRocket className="w-5 h-5 text-primary" />
                         ) : opp.title.includes('Shelving') ? (
-                          <FaBookOpen className="w-5 h-5 text-white" />
+                          <FaBookOpen className="w-5 h-5 text-primary" />
                         ) : (
-                          <FaUsers className="w-5 h-5 text-white" />
+                          <FaUsers className="w-5 h-5 text-primary" />
                         )}
                       </div>
 
@@ -304,7 +264,7 @@ export default function CareersPage() {
                   </Link>
                 </Button>
 
-                <Button variant="outline" size="lg">
+                <Button variant="secondary" size="lg">
                   Learn More
                   <FaArrowRight className="ml-2 w-4 h-4" />
                 </Button>
