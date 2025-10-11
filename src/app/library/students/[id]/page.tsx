@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -54,6 +55,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Receipt, CalendarIcon, RefreshCw } from 'lucide-react';
 
 export default function StudentDetailsPage({
   params,
@@ -325,7 +327,7 @@ export default function StudentDetailsPage({
             <CardContent className="space-y-6 pt-6">
               <InfoItem icon={<FaEnvelope />} label="Email" value={student.email} />
               <Separator />
-              <InfoItem icon={<FaPhone />} label="FaPhone" value={student.phone} />
+              <InfoItem icon={<FaPhone />} label="Phone" value={student.phone} />
               <Separator />
               <InfoItem
                 icon={<FaClock />}
@@ -383,7 +385,7 @@ export default function StudentDetailsPage({
                       />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="phone" className="text-right">FaPhone
+                      <Label htmlFor="phone" className="text-right">Phone
                       </Label>
                       <Input
                         id="phone"

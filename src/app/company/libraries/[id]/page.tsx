@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import {
   Card,
@@ -22,6 +23,7 @@ import {
 } from '@/components/ui/table';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { format } from 'date-fns';
+import { MapPin, UserCog, CreditCard, Wallet } from 'lucide-react';
 
 // Importing mock data
 import { students } from '@/app/library/students/data';

@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -50,6 +51,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { FilePenLine, Eye, Trash2 } from 'lucide-react';
 
 export default function StaffExpensesPage() {
   const [staffExpenses] = useState(

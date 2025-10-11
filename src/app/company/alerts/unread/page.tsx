@@ -9,6 +9,7 @@ import { FaBell } from 'react-icons/fa';
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Mailbox } from "lucide-react";
 
 const SEVERITY_STYLES = {
   high: {

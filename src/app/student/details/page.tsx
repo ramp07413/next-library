@@ -1,4 +1,5 @@
 
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Card,
@@ -11,6 +12,7 @@ import { studentProfile } from "../data";
 import { Separator } from "@/components/ui/separator";
 import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from 'react-icons/fa';
 import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "lucide-react";
 
 export default function StudentDetailsPage() {
   return (
@@ -45,7 +47,7 @@ export default function StudentDetailsPage() {
             <Separator />
             <InfoItem icon={<FaEnvelope />} label="Email" value={studentProfile.email} />
             <Separator />
-            <InfoItem icon={<FaPhone />} label="FaPhone" value={studentProfile.phone} />
+            <InfoItem icon={<FaPhone />} label="Phone" value={studentProfile.phone} />
             <Separator />
             <InfoItem icon={<CalendarIcon />} label="Join Date" value={studentProfile.joinDate} />
         </CardContent>

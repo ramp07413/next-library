@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -46,6 +47,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Eye } from 'lucide-react';
 
 export default function PaymentsPage() {
   const getStatusBadgeVariant = (status: string) => {

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -29,6 +30,7 @@ import { libraries, type Library } from '../data';
 import { LibraryStatusChart } from '@/components/company/library-status-chart';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { XCircle } from 'lucide-react';
 
 export default function LibraryStatusPage() {
   const [statusFilter, setStatusFilter] = useState('all');
