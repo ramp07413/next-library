@@ -9,10 +9,8 @@ import {
   FaUniversity,
   FaUser,
   FaCheckCircle,
-  FaTwitter,
-  FaFacebook,
-  FaInstagram,
 } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa6';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -26,8 +24,7 @@ import {
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import React from 'react';
-import MainLayout from '@/components/shared/main-layout';
-import { Header } from '@radix-ui/react-accordion';
+import Header from '@/components/ui/header';
 import Footer from '@/components/ui/footer';
 
 const facilityImages = [
