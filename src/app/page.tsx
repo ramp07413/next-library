@@ -12,7 +12,7 @@ import {
   FaTwitter,
   FaFacebook,
   FaInstagram,
-} from 'react-icons/fa6';
+} from 'react-icons/fa';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';

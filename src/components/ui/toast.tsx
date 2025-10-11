@@ -1,9 +1,10 @@
+
 "use client"
 
 import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa6';
 
 import { cn } from "@/lib/utils"
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { FaBookOpen } from 'react-icons/fa';
+import { FaBookOpen } from 'react-icons/fa6';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
