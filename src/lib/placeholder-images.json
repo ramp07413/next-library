@@ -69,19 +69,19 @@
     {
       "id": "event-author-1",
       "description": "An author speaking at a book signing event",
-      "imageUrl": "https://images.unsplash.com/photo-1583321500539-2e97a331904a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhdXRob3IlMjBzcGVha2luZ3xlbnwwfHx8fDE3NjAxMTQyMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
       "imageHint": "author speaking"
     },
     {
       "id": "event-workshop-1",
       "description": "People participating in a creative workshop",
-      "imageUrl": "https://images.unsplash.com/photo-1589139174139-64c865103c81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3b3Jrc2hvcHxlbnwwfHx8fDE3NjAxMTQyNjl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1517971129774-8e3f298d0647?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       "imageHint": "creative workshop"
     },
     {
       "id": "event-reading-1",
       "description": "Children listening during a story time",
-      "imageUrl": "https://images.unsplash.com/photo-1533591410196-85618f3a388a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9yeSUyMHRpbWV8ZW58MHx8fHwxNzYwMTE0MzE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1122&q=80",
       "imageHint": "story time"
     },
     {

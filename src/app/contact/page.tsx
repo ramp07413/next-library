@@ -99,14 +99,14 @@ export default function ContactUsPage() {
                 <InfoItem icon={<FaPhone />}>(123) 456-7890</InfoItem>
               </div>
               <div className="h-80 w-full rounded-lg overflow-hidden shadow-md">
-                <Image
-                  src="https://images.unsplash.com/photo-1541692349887-131ea6a4a1a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYXAlMjBvZiUyMG5ldyUyMHlvcmt8ZW58MHx8fHwxNzU5Mjc2MzAyfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                  alt="Map"
-                  width={600}
-                  height={400}
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.1606841752646!2d75.75299057543894!3d26.898395076655657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db5dee53548b5%3A0x66d9679054b4bcbd!2sATS%20GLOBAL%20TECH!5e0!3m2!1sen!2sin!4v1760163959926!5m2!1sen!2sin"
+                  width="600"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full object-cover"
                   data-ai-hint="map new york"
-                />
+                ></iframe>
               </div>
             </div>
 
