@@ -7,9 +7,8 @@ import {
   FaUsers,
   FaBullseye,
   FaBolt,
-  FaGithub,
 } from 'react-icons/fa';
-import { FaXTwitter, FaLinkedinIn } from 'react-icons/fa6';
+import { FaXTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa6';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
